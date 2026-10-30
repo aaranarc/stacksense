@@ -5,6 +5,8 @@ import { featuresOf, likelihoods, type Feature } from "./tables/likelihoods";
 import { createGraph } from "./building/graph";
 import { safetyOf } from "./safety";
 import { rankChecks } from "./voi";
+import { stopRule } from "./stop";
+import { traceStep } from "./trace";
 
 export type ObservationContext = { rain?: RainSeries; forecast?: RainSeries; photoLabels?: PhotoLabel[] };
 
@@ -46,6 +48,7 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   const stackIds = new Set(graph.sameStack(victimId).map(f => f.id));
   const seen = new Set<string>();
   const warnings: string[] = [];
+  const trace: EngineState["trace"] = [];
   for (const obs of state.observations) {
     // Complaints at distinct victims are separate cases, never pooled evidence.
     const relevant = obs.flatId === victimId || (obs.kind !== "complaint" && obs.flatId !== null && (
@@ -56,11 +59,16 @@ function forVictim(state: EngineState, victimId: string): EngineState {
     const labels = state.photoLabels.filter(p => obs.photoIds.includes(p.photoId));
     const label = labels.find(p => p.quality === "ok") ?? labels[0];
     if (label && label.quality !== "ok") warnings.push(`Photo ${label.photoId}: ${label.quality}; retake photo, no evidence applied`);
-    posterior = updatePosterior(posterior, group.hypotheses, featuresOf(obs, state.building, label));
+    const features = featuresOf(obs, state.building, label);
+    if (!features.length) continue;
+    const updated = updatePosterior(posterior, group.hypotheses, features);
+    trace.push(traceStep(posterior, updated, group.hypotheses, obs.id, features, trace.length + 1));
+    posterior = updated;
   }
-  const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior,
+  const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
-  return { ...next, nextChecks: next.safety.status === "ok" ? rankChecks(next) : [] };
+  const ranked = { ...next, nextChecks: next.safety.status === "ok" ? rankChecks(next) : [] };
+  return { ...ranked, stop: stopRule(ranked) };
 }
 
 export function splitCases(state: EngineState): EngineState[] {

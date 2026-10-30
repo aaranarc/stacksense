@@ -1,0 +1,34 @@
+import { describe, expect, it } from "vitest";
+import { applyObservations, createCase } from "../src/index";
+import { stopRule } from "../src/stop";
+import { traceStep } from "../src/trace";
+import { blockA } from "../src/building/blockA";
+import { observation } from "./helpers";
+
+describe("A-T10 stop and trace", () => {
+  it("stops at 80% unless the reviewer objects", () => {
+    const s = applyObservations(createCase(blockA), [observation()]);
+    const high = { ...s, posterior: { "402:upper_wet_area@502": .8, "402:upper_supply@502": .2 } };
+    expect(stopRule(high).stopped).toBe(true);
+    const objection = { verdict: "objection" as const, allowedLevel: "area" as const, claim: "Probable area", supports: [], challenges: [], unknown: [], wouldChange: [], source: "fallback" as const };
+    expect(stopRule({ ...high, secondOpinion: objection }).stopped).toBe(false);
+  });
+  it("requests inspection for low-value checks, without declaring a source", () => {
+    const s = applyObservations(createCase(blockA), [observation()]);
+    const low = { ...s, nextChecks: s.nextChecks.map(c => ({ ...c, score: .049 })) };
+    expect(stopRule(low)).toEqual({ stopped: true, reason: "Remote evidence can't decide — inspect 502" });
+    expect(stopRule({ ...low, safety: { status: "incomplete", reasons: [], actions: [] } }).stopped).toBe(false);
+    expect(stopRule({ ...low, safety: { status: "emergency", reasons: [], actions: [] } })).toEqual({ stopped: true, reason: "emergency" });
+    expect(stopRule(createCase(blockA)).stopped).toBe(false);
+  });
+  it("records only changes over one percentage point with evidence reasons", () => {
+    const s = applyObservations(createCase(blockA), [observation()]);
+    expect(s.trace.length).toBeGreaterThan(0);
+    expect(s.trace[0]?.observationId).toBe("o1");
+    expect(s.trace.flatMap(t => t.changes).every(c => Math.abs(c.after - c.before) > .01 && c.why.includes("ceiling under wet area"))).toBe(true);
+    expect(applyObservations(s, [observation({ id: "duplicate" })]).trace).toEqual(s.trace);
+    const h = s.hypotheses.find(x => x.family === "upper_supply")!;
+    const step = traceStep({ [h.id]: .2 }, { [h.id]: .205 }, [h], "o", ["meter_still"], 1);
+    expect(step.changes).toEqual([]);
+  });
+});

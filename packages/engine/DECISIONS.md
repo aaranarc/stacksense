@@ -34,3 +34,7 @@
 - VOI marginalizes each check outcome over the current posterior and recomputes Shannon entropy in bits. Trade choice sums mutually exclusive source mass by trade; the minimal mapping here is required for action-change exclusion, with Job Sheet reasoning deferred to A-T16.
 - Completed informative checks remain in the Why drawer, excluded as already checked. A dark/unclear photo does not complete a check. Unsafe descriptors are available from `rankChecks`, but `applyObservations` offers no active checks when safety is not okay.
 - Locked access uses Infinity internally. RankedCheck serializes that as Number.MAX_VALUE with explicit `flat locked` exclusion, since JSON converts Infinity to null and the unchanged contract requires a number. Rain delay multiplies the access penalty in the prescribed score denominator.
+
+## A-T10
+- Safety overrides stopping: emergency stops; incomplete cannot reach a source decision. A null Second Opinion is not an objection, matching A-T10; actual review caps arrive in A-T15. Low-value remote checks request an inspection without producing a Job Sheet.
+- Trace is replayed deterministically from unique events and current labels, appending a step for each informative event and including only changes greater than 0.01. Duplicate reports add no trace step. Correcting a photo recomputes the derived trace rather than treating the old and corrected labels as independent evidence.
