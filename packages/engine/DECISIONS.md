@@ -15,3 +15,8 @@
 ## A-T05
 - Each feature row is a Bernoulli likelihood across families, not a distribution summing across families. The numerical tables are prototype assumptions. Complementary check outcomes use complementary rows.
 - Text locates a duct corner or records explicit dye/flood outcomes; it never fabricates a meter reading. Rain/weather joining stays in A-T19. Poor-quality photos provide no feature evidence; a good label overrides surface/zone.
+
+## A-T06
+- `createCase` without `now` uses the Unix epoch, never the system clock. Callers supply real case time. States are rebuilt from evidence in log space so delayed or human-corrected labels replace earlier labels without double-counting.
+- The unchanged contract has no warnings or child-case fields: photo warnings use `recovery.flags`; `splitCases(state)` returns independent, contract-valid states linked by building/case prefix. The first complaint is the primary returned case; every case retains the evidence ledger for case splitting. Each posterior sums to one independently.
+- Evidence is counted once per eventKey; IDs retain the audit ledger. Complaints at other victims never update this victim. Upper-flat checks/denials and same-stack duct checks can inform the primary case. A-T07 adds safety before inference; no active checks are offered before the gate exists.

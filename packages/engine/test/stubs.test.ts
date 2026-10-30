@@ -6,8 +6,6 @@ describe("A-T01 engine skeleton", () => {
   const building = {} as Building;
   const state = {} as EngineState;
   it.each([
-    ["createCase", () => createCase(building)],
-    ["applyObservations", () => applyObservations(state, [])],
     ["applySecondOpinion", () => applySecondOpinion(state, null)],
     ["whatIf", () => whatIf(state, [])],
     ["simulateBuilding", () => simulateBuilding(1)],
