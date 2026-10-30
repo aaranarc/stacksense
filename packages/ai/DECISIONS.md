@@ -21,3 +21,10 @@
 
 ## B2 final verification
 - Added regressions for an English full name mentioned only in text and for ceiling complaints that mention a nearby duct. Capitalized multiword names are conservatively masked in addition to known senders and titled names; this remains a prototype recognizer, not a guarantee of detecting every name in every language.
+
+## A-T23
+- The link route accepts an optional validated state snapshot in addition to LinkRequest, because cases originate in B's browser engine. B supplies the latest state when creating a link; otherwise an existing stored case is required. No shared contract file is changed. Only available checks on safety-okay snapshots can issue links.
+- HMAC-SHA256 tokens expire after 48 hours, bind case/check/flat/language and carry a random nonce. Only their SHA-256 hash is stored. A conditional PostgreSQL update claims the one-use token atomically before upload; competing submissions lose with HTTP 410. Failed uploads attempt private-object cleanup before releasing the claim; failed cleanup leaves it consumed.
+- Multipart uploads require consent and all four negative safety answers, at most 4 MiB per image and 10 MiB total streamed bytes. Photos are re-encoded before any model/storage call and stored in a private bucket. Ghost URLs last 600 seconds and match case/flat/zone. Meter digits require two readable numeric strings and a valid interval; otherwise the surface is unclear and a retake is requested.
+- A fresh local MAGIC_LINK_SECRET was generated in the ignored .env.local without printing it. Supabase remains unconfigured: routes return explicit HTTP 503 until server credentials and migration are supplied. Integration tests use an in-memory repository and synthetic images, not real resident photos.
+- Migration was applied twice in local PGlite PostgreSQL with Supabase role/storage stubs: six tables have RLS, anonymous table access is denied and repeated memory events increment only once. This is not a remote Supabase or real-photo preview test.
