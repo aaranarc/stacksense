@@ -1,6 +1,8 @@
-import type { EngineState, Observation, PhotoLabel, SecondOpinion } from "@stacksense/contracts";
+import type { EngineState, Observation, PhotoLabel, SecondOpinion, RainSeries } from "@stacksense/contracts";
 import { createCase, applyObservations } from "../bayes";
 import { applySecondOpinion } from "../secondOpinion";
+import rainFixture from "../../../../fixtures-ai/weather/hero-rain.simulated.json";
+import forecastFixture from "../../../../fixtures-ai/weather/hero-forecast.simulated.json";
 import { blockA } from "../building/blockA";
 
 const at = "2026-10-30T16:30:00.000Z";
@@ -24,7 +26,7 @@ export function heroSnapshots(): EngineState[] {
     label("hero-ceiling-402", "ceiling", "damp_stain"),
     label("hero-window-202", "window_perimeter", "efflorescence"),
   ] });
-  const s3 = s2; // Weather join is A-T19, not a fabricated result here.
+  const s3 = applyObservations(s2, [], { rain: rainFixture as RainSeries, forecast: forecastFixture as RainSeries });
   const s4 = applyObservations(s3, [report("hero-502-denial", {
     flatId: "502", kind: "denial", zone: "floor", surface: "dry", rawText: "Our floor is dry",
   })]);
@@ -49,6 +51,6 @@ export function heroSnapshots(): EngineState[] {
     report("hero-repair",{flatId:"502",kind:"repair_done",at:"2026-10-31T16:30:00.000Z",zone:"trap_grout",surface:"unclear",rawText:"repair completed"}),
     report("hero-day14",{kind:"recapture",at:"2026-11-14T16:30:00.000Z",zone:"ceiling",surface:"dry",photoIds:["hero-day14-402"],rawText:"Looks better on day 14"}),
   ],{photoLabels:[label("hero-day14-402","ceiling","dry")]});
-  const s11=s10; // Predict/prevent remains A-T21; no predictions are fabricated.
+  const s11=applyObservations(s10,[report("hero-professional-finding",{flatId:"502",kind:"professional_finding",at:s10.now,zone:"trap_grout",surface:"unclear",finding:{family:"upper_wet_area",component:"tile grout"},rawText:"Simulated professional finding of the repaired wet-area defect"})]);
   return structuredClone([s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11]);
 }
