@@ -1,3 +1,3 @@
-// Browser-only preprocessing entry point. Implemented in A-T12.
-// Never import server-side code or secrets here.
-export {};
+// Browser-only modules: no server imports or credentials.
+export { parseWhatsAppExport, pseudonymise } from "./chat";
+export { stripExif, qualityCheck, makeCrops, edgeContrast } from "./photos";
