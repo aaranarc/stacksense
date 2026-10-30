@@ -25,12 +25,7 @@ export { createGraph } from "./building/graph";
 
 export { applySecondOpinion } from "./secondOpinion";
 
-export function whatIf(
-  _state: EngineState,
-  _patches: { observationId: string; patch: Partial<Observation> }[],
-): EngineState {
-  throw new Error("not implemented");
-}
+export { whatIf } from "./whatIf";
 
 export function simulateBuilding(
   _seed: number,

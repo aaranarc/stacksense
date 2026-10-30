@@ -1,5 +1,6 @@
-import type { EngineState, Observation, PhotoLabel } from "@stacksense/contracts";
+import type { EngineState, Observation, PhotoLabel, SecondOpinion } from "@stacksense/contracts";
 import { createCase, applyObservations } from "../bayes";
+import { applySecondOpinion } from "../secondOpinion";
 import { blockA } from "../building/blockA";
 
 const at = "2026-10-30T16:30:00.000Z";
@@ -12,7 +13,7 @@ const label = (photoId: string, zone: PhotoLabel["zone"], surface: PhotoLabel["s
   photoId, zone, surface, quality: "ok", boxes: [], meterDigits: null, humanCorrected: false,
 });
 
-// A9 numbering is preserved; later-task steps intentionally reuse the last implemented state.
+// Simulated fixture: scripted reviewer drafts are labelled fallback, never live AI.
 export function heroSnapshots(): EngineState[] {
   const s0 = createCase(blockA, { now: at });
   const s1 = applyObservations(s0, [
@@ -35,5 +36,19 @@ export function heroSnapshots(): EngineState[] {
     flatId: "502", kind: "meter_reading", zone: "meter", surface: "unclear", room: null,
     checkId: "meter_check@502", meter: { start: 42, end: 42, minutes: 10 }, rawText: "Meter did not move during ten minutes with taps off",
   })]);
-  return structuredClone([s0, s1, s2, s3, s4, s5, s6, s6, s6, s6, s6, s6]);
+  const draft: SecondOpinion = {verdict:"needs_evidence",allowedLevel:"component",claim:"Probable bathroom component",
+    supports:["hero-302-duct","hero-502-meter"],challenges:[],unknown:["Simulated scripted reviewer for demo; not a live model response"],
+    wouldChange:["trap_grout_photo@502"],source:"fallback"};
+  const s7=applySecondOpinion(s6,draft);
+  const trap=applyObservations(s7,[report("hero-trap",{flatId:"502",kind:"check_result",zone:"trap_grout",surface:"crack",
+    photoIds:["hero-trap-502"],checkId:"trap_grout_photo@502",rawText:"Cracked grout at the floor trap"})],
+    {photoLabels:[label("hero-trap-502","trap_grout","crack")]});
+  const s8=applySecondOpinion(trap,{...draft,verdict:"no_objection",wouldChange:[]});
+  const s9=s8; // The deterministic Job Sheet is already derived from the stopped state.
+  const s10=applyObservations({...s9,now:"2026-11-14T16:30:00.000Z"},[
+    report("hero-repair",{flatId:"502",kind:"repair_done",at:"2026-10-31T16:30:00.000Z",zone:"trap_grout",surface:"unclear",rawText:"repair completed"}),
+    report("hero-day14",{kind:"recapture",at:"2026-11-14T16:30:00.000Z",zone:"ceiling",surface:"dry",photoIds:["hero-day14-402"],rawText:"Looks better on day 14"}),
+  ],{photoLabels:[label("hero-day14-402","ceiling","dry")]});
+  const s11=s10; // Predict/prevent remains A-T21; no predictions are fabricated.
+  return structuredClone([s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11]);
 }

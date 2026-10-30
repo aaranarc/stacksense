@@ -1,6 +1,6 @@
 {
   "caseId": "block-a:402",
-  "now": "2026-10-30T16:30:00.000Z",
+  "now": "2026-11-14T16:30:00.000Z",
   "building": {
     "id": "block-a",
     "name": "Block A",
@@ -329,6 +329,70 @@
       "sourceMessageIds": [],
       "provenance": "simulated",
       "rawText": "Meter did not move during ten minutes with taps off"
+    },
+    {
+      "id": "hero-trap",
+      "flatId": "502",
+      "eventKey": "hero-trap",
+      "at": "2026-10-30T16:30:00.000Z",
+      "kind": "check_result",
+      "zone": "trap_grout",
+      "surface": "crack",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": "trap_grout_photo@502",
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "hero-trap-502"
+      ],
+      "sourceMessageIds": [],
+      "provenance": "simulated",
+      "rawText": "Cracked grout at the floor trap"
+    },
+    {
+      "id": "hero-repair",
+      "flatId": "502",
+      "eventKey": "hero-repair",
+      "at": "2026-10-31T16:30:00.000Z",
+      "kind": "repair_done",
+      "zone": "trap_grout",
+      "surface": "unclear",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [],
+      "sourceMessageIds": [],
+      "provenance": "simulated",
+      "rawText": "repair completed"
+    },
+    {
+      "id": "hero-day14",
+      "flatId": "402",
+      "eventKey": "hero-day14",
+      "at": "2026-11-14T16:30:00.000Z",
+      "kind": "recapture",
+      "zone": "ceiling",
+      "surface": "dry",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "hero-day14-402"
+      ],
+      "sourceMessageIds": [],
+      "provenance": "simulated",
+      "rawText": "Looks better on day 14"
     }
   ],
   "photoLabels": [
@@ -354,6 +418,24 @@
       "photoId": "hero-duct-302",
       "surface": "dry",
       "zone": "duct_wall",
+      "quality": "ok",
+      "boxes": [],
+      "meterDigits": null,
+      "humanCorrected": false
+    },
+    {
+      "photoId": "hero-trap-502",
+      "surface": "crack",
+      "zone": "trap_grout",
+      "quality": "ok",
+      "boxes": [],
+      "meterDigits": null,
+      "humanCorrected": false
+    },
+    {
+      "photoId": "hero-day14-402",
+      "surface": "dry",
+      "zone": "ceiling",
       "quality": "ok",
       "boxes": [],
       "meterDigits": null,
@@ -473,17 +555,17 @@
     }
   ],
   "posterior": {
-    "402:upper_wet_area@502": 0.9512620018793038,
+    "402:upper_wet_area@502": 0.9669714189457522,
     "402:nahani_trap@502": 0,
     "402:tile_grout@502": 0,
     "402:sunken_slab_membrane@502": 0,
     "402:wc_connection@502": 0,
-    "402:upper_supply@502": 0.01166442001961417,
-    "402:shared_shaft@S-x02": 0.024211420630922215,
-    "402:facade_window@402:W": 0.002131679556032054,
-    "402:roof_terrace": 0.00006528268640348164,
-    "402:condensation@402": 0.006994573543230179,
-    "402:other": 0.00367062168449397
+    "402:upper_supply@502": 0.007904699760432324,
+    "402:shared_shaft@S-x02": 0.01640750337686379,
+    "402:facade_window@402:W": 0.0014445884876874,
+    "402:roof_terrace": 0.0000442405224354266,
+    "402:condensation@402": 0.0047400559752242815,
+    "402:other": 0.0024874929316045786
   },
   "safety": {
     "status": "ok",
@@ -492,28 +574,12 @@
   },
   "nextChecks": [
     {
-      "id": "inspect@402",
-      "type": "inspect",
-      "targetFlatId": "402",
-      "effortMin": 60,
-      "accessPenalty": 1,
-      "expectedBits": 0.22586101878824313,
-      "score": 0.0037643503131373855,
-      "why": "inspect at 402 tests the remaining explanations",
-      "excluded": null,
-      "instructions": {
-        "en": "Arrange a professional inspection only if safe; keep away from hazardous areas.",
-        "hi": "सुरक्षित हो तभी विशेषज्ञ से निरीक्षण करवाएँ; खतरनाक जगहों से दूर रहें।",
-        "mr": "सुरक्षित असेल तरच तज्ज्ञांकडून तपासणी करून घ्या; धोकादायक जागांपासून दूर राहा।"
-      }
-    },
-    {
       "id": "ceiling_photo@402",
       "type": "ceiling_photo",
       "targetFlatId": "402",
       "effortMin": 0.5,
       "accessPenalty": 1,
-      "expectedBits": 1.1102230246251565e-16,
+      "expectedBits": 0,
       "score": 0,
       "why": "ceiling photo at 402 tests the remaining explanations",
       "excluded": "can't change the action",
@@ -529,7 +595,7 @@
       "targetFlatId": "302",
       "effortMin": 0.5,
       "accessPenalty": 1,
-      "expectedBits": 0.06141816390833588,
+      "expectedBits": 0.042240105236753756,
       "score": 0,
       "why": "302 shares the duct; a dry duct would rule against a shaft leak",
       "excluded": "already checked",
@@ -545,7 +611,7 @@
       "targetFlatId": "502",
       "effortMin": 120,
       "accessPenalty": 1,
-      "expectedBits": 0.1566872724250843,
+      "expectedBits": 0.11048241838031159,
       "score": 0,
       "why": "dye test at 502 tests the remaining explanations",
       "excluded": "can't change the action",
@@ -561,7 +627,7 @@
       "targetFlatId": "502",
       "effortMin": 1440,
       "accessPenalty": 1,
-      "expectedBits": 0.1566872724250843,
+      "expectedBits": 0.11048241838031159,
       "score": 0,
       "why": "flood test at 502 tests the remaining explanations",
       "excluded": "can't change the action",
@@ -572,12 +638,28 @@
       }
     },
     {
+      "id": "inspect@402",
+      "type": "inspect",
+      "targetFlatId": "402",
+      "effortMin": 60,
+      "accessPenalty": 1,
+      "expectedBits": 0.15715461083422116,
+      "score": 0,
+      "why": "inspect at 402 tests the remaining explanations",
+      "excluded": "can't change the action",
+      "instructions": {
+        "en": "Arrange a professional inspection only if safe; keep away from hazardous areas.",
+        "hi": "सुरक्षित हो तभी विशेषज्ञ से निरीक्षण करवाएँ; खतरनाक जगहों से दूर रहें।",
+        "mr": "सुरक्षित असेल तरच तज्ज्ञांकडून तपासणी करून घ्या; धोकादायक जागांपासून दूर राहा।"
+      }
+    },
+    {
       "id": "meter_check@502",
       "type": "meter_check",
       "targetFlatId": "502",
       "effortMin": 10,
       "accessPenalty": 1,
-      "expectedBits": 0.05908776421025763,
+      "expectedBits": 0.040888643508826844,
       "score": 0,
       "why": "502 has a meter; still versus moving readings distinguish a supply leak",
       "excluded": "already checked",
@@ -593,7 +675,7 @@
       "targetFlatId": "402",
       "effortMin": 30,
       "accessPenalty": 1,
-      "expectedBits": 1.1102230246251565e-16,
+      "expectedBits": 0,
       "score": 0,
       "why": "moisture reading at 402 tests the remaining explanations",
       "excluded": "can't change the action",
@@ -609,7 +691,7 @@
       "targetFlatId": "402",
       "effortMin": 0,
       "accessPenalty": 2880,
-      "expectedBits": 0.006225105036711642,
+      "expectedBits": 0.004234774672808861,
       "score": 0,
       "why": "rain recheck at 402 tests the remaining explanations",
       "excluded": "can't change the action",
@@ -625,10 +707,10 @@
       "targetFlatId": "502",
       "effortMin": 1,
       "accessPenalty": 1,
-      "expectedBits": 0.0054171511426036045,
+      "expectedBits": 0.0037331808590010396,
       "score": 0,
       "why": "502 bathroom trap/grout may help locate the probable wet-area defect",
-      "excluded": "can't change the action",
+      "excluded": "already checked",
       "instructions": {
         "en": "Photograph the floor trap and grout only if safe; do not remove fittings.",
         "hi": "सुरक्षित हो तभी फ्लोर ट्रैप और ग्राउट की फोटो लें; कुछ खोलें नहीं।",
@@ -640,15 +722,92 @@
     "stopped": true,
     "reason": "Probable source reached 80% with no Second Opinion objection"
   },
-  "secondOpinion": null,
-  "jobSheet": null,
+  "secondOpinion": {
+    "verdict": "no_objection",
+    "allowedLevel": "component",
+    "claim": "Probable 502 tile grout at the floor trap",
+    "supports": [
+      "hero-302-duct",
+      "hero-502-meter"
+    ],
+    "challenges": [],
+    "unknown": [
+      "Simulated scripted reviewer for demo; not a live model response"
+    ],
+    "wouldChange": [],
+    "source": "fallback"
+  },
+  "jobSheet": {
+    "caseId": "block-a:402",
+    "region": "IN",
+    "probableSource": "Probable 502 tile grout at the floor trap",
+    "level": "component",
+    "send": [
+      {
+        "trade": "waterproofer_tiler",
+        "why": "Verify the probable upper wet area source on site before repairs"
+      }
+    ],
+    "dontSend": [
+      {
+        "trade": "plumber",
+        "why": "meter did not move: supply unlikely"
+      }
+    ],
+    "access": "Arrange open access to flat 502",
+    "verifyOnSite": [
+      "Professional supervised 24 h flood test of 502 bathroom"
+    ],
+    "notJustifiedYet": [
+      "breaking 402 ceiling",
+      "riser replacement",
+      "painting before a recorded moisture reading"
+    ],
+    "safetyFlags": [],
+    "evidencePhotoIds": [
+      "hero-ceiling-402",
+      "hero-duct-302",
+      "hero-trap-502",
+      "hero-day14-402"
+    ],
+    "responsibilityLinks": [
+      {
+        "label": "Housing society repair responsibility reference",
+        "url": "https://www.mlfoundation.in/chs-problems-solutions/who-pays-for-repairs-and-how-to-handle-common-area-disputes/535.html"
+      },
+      {
+        "label": "Maharashtra leakage repair responsibility reference",
+        "url": "https://www.mypunepulse.com/neighbours-bathroom-leakage-damages-your-flat-who-pays-for-the-repairs-maharashtra-court-clarifies/"
+      }
+    ],
+    "timestampTrail": [
+      {
+        "label": "report received",
+        "at": "2026-10-30T16:30:00.000Z"
+      },
+      {
+        "label": "first check requested — request time not recorded",
+        "at": "unknown"
+      },
+      {
+        "label": "source probable — evidence as of",
+        "at": "2026-11-14T16:30:00.000Z"
+      },
+      {
+        "label": "job sheet issued — case time",
+        "at": "2026-11-14T16:30:00.000Z"
+      }
+    ]
+  },
   "recovery": {
-    "repair": "not_started",
+    "repair": "done",
     "dry": "unknown",
     "paint": "not_ready",
-    "day14DueAt": null,
+    "day14DueAt": "2026-11-14T16:30:00.000Z",
     "reopened": false,
-    "flags": []
+    "flags": [
+      "looks better ≠ dry"
+    ]
   },
   "prediction": {
     "sameStack": [],
@@ -764,6 +923,18 @@
           "before": 0.36627253237755264,
           "after": 0.01166442001961417,
           "why": "hero-502-meter: meter still changes upper supply"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "observationId": "hero-trap",
+      "changes": [
+        {
+          "hypothesisId": "402:upper_wet_area@502",
+          "before": 0.9512620018793038,
+          "after": 0.9669714189457522,
+          "why": "hero-trap: trap grout cracked changes upper wet area"
         }
       ]
     }

@@ -6,7 +6,6 @@ describe("A-T01 engine skeleton", () => {
   const building = {} as Building;
   const state = {} as EngineState;
   it.each([
-    ["whatIf", () => whatIf(state, [])],
     ["simulateBuilding", () => simulateBuilding(1)],
   ])("%s fails explicitly until implemented", (_name, call) => {
     expect(call).toThrow("not implemented");

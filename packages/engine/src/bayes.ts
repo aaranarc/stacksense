@@ -70,6 +70,7 @@ function forVictim(state: EngineState, victimId: string): EngineState {
     posterior = updated;
   }
   const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,
+    secondOpinion: state.caseId === group.caseId ? state.secondOpinion : null,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
   const recovered = { ...next, recovery: recoveryOf(next) };
   const ranked = { ...recovered, nextChecks: recovered.safety.status === "ok" ? rankChecks(recovered) : [] };

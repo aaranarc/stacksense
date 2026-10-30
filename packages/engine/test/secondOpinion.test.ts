@@ -26,3 +26,9 @@ describe("A-T15 evidence caps",()=>{
    expect(applySecondOpinion(unsafe,draft).nextChecks).toEqual([]);
  });
 });
+
+it("does not reuse a primary case's review for a separate facade case",async()=>{
+ const {splitCases}=await import("../src/index");
+ const primary=applySecondOpinion(heroSnapshots()[6]!,draft);
+ expect(splitCases(primary)[1]?.secondOpinion).toBeNull();
+});

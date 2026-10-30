@@ -65,3 +65,8 @@ describe("A-T12 browser photo preparation", () => {
     expect(drawImage.mock.calls[0]?.slice(1,5)).toEqual([0,0,40,50]);
   });
 });
+
+it("redacts a full name mentioned in text even when it is not a sender",()=>{
+ const m=parseWhatsAppExport("30/10/26, 9:15 pm - S01: Sample Person in flat 402 reported a stain");
+ expect(pseudonymise(m).messages[0]?.text).toBe("[NAME] in flat 402 reported a stain");
+});

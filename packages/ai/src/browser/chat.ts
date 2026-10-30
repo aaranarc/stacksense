@@ -46,7 +46,7 @@ export function pseudonymise(messages: ChatMessage[]): { messages: ChatMessage[]
     let value = ascii(text).replace(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/gi, "[EMAIL]")
       .replace(/(?:\+\d{1,3}[\s-]*)?(?:\d[\s()-]*){7,15}/g, "[PHONE]");
     for (const name of names) value = value.replace(new RegExp(escape(name), "gi"), "[NAME]");
-    return value.replace(/\b(?:Mr|Mrs|Ms|Dr)\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g, "[NAME]");
+    return value.replace(/\b[A-Z][a-z]+(?:[ \t]+[A-Z][a-z]+)+\b/g, "[NAME]").replace(/\b(?:Mr|Mrs|Ms|Dr)\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g, "[NAME]");
   };
   return { messages: messages.map(m => ({ ...m, senderKey: mapping.get(m.senderKey)!, text: redact(m.text), attachmentIds: [...m.attachmentIds] })),
     keyMap: Object.fromEntries([...mapping].map(([name, key]) => [key, name])) };

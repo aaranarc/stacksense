@@ -641,7 +641,63 @@
     "reason": "Probable source reached 80% with no Second Opinion objection"
   },
   "secondOpinion": null,
-  "jobSheet": null,
+  "jobSheet": {
+    "caseId": "block-a:202",
+    "region": "IN",
+    "probableSource": "Probable 202 W facade/window",
+    "level": "area",
+    "send": [
+      {
+        "trade": "facade_sealant",
+        "why": "Verify the probable facade window source on site before repairs"
+      }
+    ],
+    "dontSend": [],
+    "access": "Arrange open access to flat 202",
+    "verifyOnSite": [
+      "Professional inspection of 202; verify the probable mechanism before repairs"
+    ],
+    "notJustifiedYet": [
+      "breaking 202 ceiling",
+      "riser replacement",
+      "painting before a recorded moisture reading"
+    ],
+    "safetyFlags": [
+      "Second Opinion unavailable — unreviewed"
+    ],
+    "evidencePhotoIds": [
+      "hero-window-202",
+      "hero-duct-302"
+    ],
+    "responsibilityLinks": [
+      {
+        "label": "Housing society repair responsibility reference",
+        "url": "https://www.mlfoundation.in/chs-problems-solutions/who-pays-for-repairs-and-how-to-handle-common-area-disputes/535.html"
+      },
+      {
+        "label": "Maharashtra leakage repair responsibility reference",
+        "url": "https://www.mypunepulse.com/neighbours-bathroom-leakage-damages-your-flat-who-pays-for-the-repairs-maharashtra-court-clarifies/"
+      }
+    ],
+    "timestampTrail": [
+      {
+        "label": "report received",
+        "at": "2026-10-30T16:30:00.000Z"
+      },
+      {
+        "label": "first check requested — request time not recorded",
+        "at": "unknown"
+      },
+      {
+        "label": "source probable — evidence as of",
+        "at": "2026-10-30T16:30:00.000Z"
+      },
+      {
+        "label": "job sheet issued — case time",
+        "at": "2026-10-30T16:30:00.000Z"
+      }
+    ]
+  },
   "recovery": {
     "repair": "not_started",
     "dry": "unknown",

@@ -11,7 +11,7 @@ let defaultCache:ReadCache|undefined;
 const damage=/water|damp|leak|stain|crack|mould|mold|peel|meter|repair|dry|paani|pani|सीलन|डाग|ओल|पाणी|छत|गील|नमी/i;
 function fallbackObservation(m:ChatMessage,flatId:string|null):Observation {
   const t=m.text;
-  const zone:Observation["zone"]=/meter/i.test(t)?"meter":/trap|grout/i.test(t)?"trap_grout":/duct/i.test(t)?"duct_wall":/window/i.test(t)?"window_perimeter":/ceiling|छत/i.test(t)?"ceiling":/floor/i.test(t)?"floor":/wall|भिंत/i.test(t)?"external_wall":"unclear";
+  const zone:Observation["zone"]=/meter/i.test(t)?"meter":/trap|grout/i.test(t)?"trap_grout":/ceiling|छत/i.test(t)?"ceiling":/duct/i.test(t)?"duct_wall":/window/i.test(t)?"window_perimeter":/floor/i.test(t)?"floor":/wall|भिंत/i.test(t)?"external_wall":"unclear";
   const surface:Observation["surface"]=/dry|सूख|कोरड/i.test(t)?"dry":/crack/i.test(t)?"crack":/mould|mold/i.test(t)?"mould":/stain|डाग/i.test(t)?"damp_stain":"unclear";
   return {id:`obs-${m.id}`,flatId,eventKey:m.id,at:m.at,kind:surface==="dry"?"denial":"complaint",zone,surface,
     room:/bathroom/i.test(t)?"bathroom":null,hazards:hazardsIn(t),hazardQuestionsAnswered:false,checkId:null,meter:null,moisture:null,finding:null,

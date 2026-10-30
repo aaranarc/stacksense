@@ -31,12 +31,17 @@ describe("A-T11 hero A9 steps 1–6", () => {
     for (const state of snapshots) {
       expect(EngineState.safeParse(JSON.parse(JSON.stringify(state))).success).toBe(true);
       expect(state.observations.every(o => o.provenance === "simulated")).toBe(true);
-      expect(state.secondOpinion).toBeNull();
+      if (!state.observations.some(o => o.id === "hero-trap")) expect(state.secondOpinion?.allowedLevel).not.toBe("component");
       if (!state.stop.stopped) expect(state.jobSheet).toBeNull();
       expect(state.recovery.paint).toBe("not_ready");
       if (state.hypotheses.length) expect(Object.values(state.posterior).reduce((a,b) => a+b, 0)).toBeCloseTo(1, 12);
     }
     expect(snapshots[3]).toEqual(snapshots[2]);
-    for (const state of snapshots.slice(7)) expect(state).toEqual(snapshots[6]);
+    expect(snapshots[7]?.secondOpinion?.allowedLevel).toBe("area");
+    expect(snapshots[8]?.secondOpinion?.allowedLevel).toBe("component");
+    expect(snapshots[9]?.jobSheet?.send.map(t => t.trade)).toContain("waterproofer_tiler");
+    expect(snapshots[10]?.recovery.repair).toBe("done");
+    expect(snapshots[10]?.recovery.flags).toContain("looks better ≠ dry");
+    expect(snapshots[11]?.prediction.sameStack).toEqual([]);
   });
 });

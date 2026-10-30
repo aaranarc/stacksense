@@ -62,3 +62,8 @@ it("validates bundled cache data and survives remote-cache outages", async()=>{
  expect(await remote.get(key)).toBeNull();await remote.set(key,result);expect(await remote.get(key)).toEqual(result);
  expect(await createCache({bundled:{bad:{}}}).get("bad")).toBeNull();
 });
+
+it("keeps a ceiling complaint near a duct corner in the ceiling zone",async()=>{
+ const result=await createReadService({adapter:createAdapter(),cache:createCache()})({...input,messages:[{...messages[0]!,text:"402 here, bathroom ceiling stain near duct corner"}]});
+ expect(result.observations[0]?.zone).toBe("ceiling");
+});

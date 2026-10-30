@@ -641,7 +641,68 @@
     "reason": "Probable source reached 80% with no Second Opinion objection"
   },
   "secondOpinion": null,
-  "jobSheet": null,
+  "jobSheet": {
+    "caseId": "block-a:402",
+    "region": "IN",
+    "probableSource": "Probable 502 bathroom area",
+    "level": "area",
+    "send": [
+      {
+        "trade": "waterproofer_tiler",
+        "why": "Verify the probable upper wet area source on site before repairs"
+      }
+    ],
+    "dontSend": [
+      {
+        "trade": "plumber",
+        "why": "meter did not move: supply unlikely"
+      }
+    ],
+    "access": "Arrange open access to flat 502",
+    "verifyOnSite": [
+      "Professional supervised 24 h flood test of 502 bathroom"
+    ],
+    "notJustifiedYet": [
+      "breaking 402 ceiling",
+      "riser replacement",
+      "painting before a recorded moisture reading"
+    ],
+    "safetyFlags": [
+      "Second Opinion unavailable — unreviewed"
+    ],
+    "evidencePhotoIds": [
+      "hero-ceiling-402",
+      "hero-duct-302"
+    ],
+    "responsibilityLinks": [
+      {
+        "label": "Housing society repair responsibility reference",
+        "url": "https://www.mlfoundation.in/chs-problems-solutions/who-pays-for-repairs-and-how-to-handle-common-area-disputes/535.html"
+      },
+      {
+        "label": "Maharashtra leakage repair responsibility reference",
+        "url": "https://www.mypunepulse.com/neighbours-bathroom-leakage-damages-your-flat-who-pays-for-the-repairs-maharashtra-court-clarifies/"
+      }
+    ],
+    "timestampTrail": [
+      {
+        "label": "report received",
+        "at": "2026-10-30T16:30:00.000Z"
+      },
+      {
+        "label": "first check requested — request time not recorded",
+        "at": "unknown"
+      },
+      {
+        "label": "source probable — evidence as of",
+        "at": "2026-10-30T16:30:00.000Z"
+      },
+      {
+        "label": "job sheet issued — case time",
+        "at": "2026-10-30T16:30:00.000Z"
+      }
+    ]
+  },
   "recovery": {
     "repair": "not_started",
     "dry": "unknown",

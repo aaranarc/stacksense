@@ -18,3 +18,6 @@
 
 ## A-T15
 - The thin Second Opinion route validates the input and output; any parsing/provider failure returns null with HTTP 200 as specified. Invalid methods and rate limits retain HTTP 405/429. The engine, not the route or model, caps the resulting claim.
+
+## B2 final verification
+- Added regressions for an English full name mentioned only in text and for ceiling complaints that mention a nearby duct. Capitalized multiword names are conservatively masked in addition to known senders and titled names; this remains a prototype recognizer, not a guarantee of detecting every name in every language.

@@ -55,3 +55,9 @@
 ## A-T17
 - Recovery is replayed chronologically for the primary victim and spot. Repairs may be reported at the source flat; recaptures/readings must refer to the victim's original zone. A fresh, finite, nonnegative %WME reading after repair is required for paint readiness; relative units, old readings and other spots do not qualify.
 - The 16 %WME region defaults are contractor-configuration prototype values, explicitly awaiting review, not a universal scientific threshold. Better photos reset dryness to unknown. Worse recaptures or renewed same-spot complaints reopen investigation and suppress the Job Sheet until a new repair cycle.
+
+## A-T18
+- whatIf validates patches, replays from createCase with the same case time, memory and photo labels, and never mutates the original. Surface/zone counterfactuals also update the associated good label in the simulated copy; bad photos remain uninformative. Patched evidence is marked simulated.
+- A previous LLM review is invalidated to labelled unreviewed fallback when evidence changes, since a pure engine cannot rerun a model. The deterministic evidence cap, checks, Job Sheet and recovery are recalculated; B may request a fresh review separately.
+- Hero review fixtures are explicitly scripted demo drafts with source fallback and a simulated-review warning. Weather and prediction placeholders remain deferred to A-T19/A-T21; no live AI or prediction is fabricated.
+- Final case-split regression: the primary case's reviewer verdict is not inherited by another victim. A separate facade case starts unreviewed.
