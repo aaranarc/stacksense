@@ -1,5 +1,7 @@
 # App decisions
 
+- B-T07: The neighbour preview is a small, explicitly labelled mock preview until the full phone flow is built. Its button advances one hero-story step; it never claims that a real neighbour answered. WhatsApp opens a draft only. Drawers trap keyboard focus, close with Escape, and restore focus.
+
 - B-T05: The building diagram is an accessible SVG derived from floor count, flat positions, wet areas, external walls and stacks. Flat buttons filter the feed. Source arrows follow the leading engine hypothesis and ceiling complaint; only posterior changes retrigger their 300ms motion. Reduced-motion preferences suppress drawing animation.
 - Verification limitation: the computer-use preview repeatedly timed out attaching or connecting to localhost. Responsive CSS and interaction tests are checked, but a visual browser pass at 1440px / 390px remains unverified in this environment.
 
