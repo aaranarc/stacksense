@@ -47,3 +47,7 @@
 - Evidence caps are deterministic. Root mass includes any component children; a good trap/grout crack photo at the source flat, an explicit positive dye test, or a matching professional component finding can support a component only above 80% parent mass. The reviewer never changes odds.
 - Claims are rewritten from engine evidence at the lower of the requested and supported level; no draft can introduce confirmed/guilty wording. Missing/invalid review is explicitly unreviewed. Existing reviews are re-capped when evidence changes.
 - A safe, available reviewer-requested check can override only the `can't change the action` exclusion to refine claim specificity; locked, unavailable, unsafe and completed checks remain excluded. This is the A-T15 exception to A-T09's trade-only ranking.
+
+## A-T16
+- The shared trade table now drives VOI actions and the Job Sheet. Only stopped, safety-okay cases issue sheets; an inconclusive inspection stop has no repair trade. A missing review remains explicitly unreviewed. Paying responsibility is represented only by the specified links.
+- The contract has no request timestamps, so the trail marks the first request time as unknown, rather than inventing it. Evidence time comes from observations; issue time uses state.now. No wall-clock calls occur in the engine.

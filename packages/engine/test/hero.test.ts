@@ -32,7 +32,7 @@ describe("A-T11 hero A9 steps 1–6", () => {
       expect(EngineState.safeParse(JSON.parse(JSON.stringify(state))).success).toBe(true);
       expect(state.observations.every(o => o.provenance === "simulated")).toBe(true);
       expect(state.secondOpinion).toBeNull();
-      expect(state.jobSheet).toBeNull();
+      if (!state.stop.stopped) expect(state.jobSheet).toBeNull();
       expect(state.recovery.paint).toBe("not_ready");
       if (state.hypotheses.length) expect(Object.values(state.posterior).reduce((a,b) => a+b, 0)).toBeCloseTo(1, 12);
     }

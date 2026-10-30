@@ -3,11 +3,7 @@ import { accessPenalty, candidateChecks, type CheckDefinition, type CheckCandida
 import type { Family } from "./priors/archetypes";
 import { featuresOf } from "./tables/likelihoods";
 
-// Minimal action mapping required by A-T09; Job Sheet reasoning is implemented in A-T16.
-const tradeForFamily: Record<Family, string> = {
-  upper_wet_area: "waterproofer_tiler", upper_supply: "plumber", shared_shaft: "plumber",
-  facade_window: "facade_sealant", roof_terrace: "roofer", condensation: "ventilation", other: "general_inspector",
-};
+import { familyTrade as tradeForFamily } from "./tables/trades";
 export function actionFor(posterior: Record<string, number>, hypotheses: Hypothesis[]): string {
   const trades: Record<string, number> = {};
   for (const h of hypotheses) {

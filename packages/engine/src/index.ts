@@ -38,3 +38,5 @@ export function simulateBuilding(
 ): { building: Building; truth: Hypothesis; answer(check: RankedCheck): Observation } {
   throw new Error("not implemented");
 }
+
+export { buildJobSheet } from "./jobSheet";
