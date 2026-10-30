@@ -11,5 +11,5 @@ export async function readChat(text:string,files:File[]) {
  if(!browser.available) throw new Error('Private browser preparation is unavailable. Use demo mode until it is connected.');
  const prepared=await prepareChat(text,files);
  const result=await api.read(prepared.request);
- return {...result,warnings:[...prepared.warnings,...result.warnings]};
+ return {...result,messages:prepared.request.messages,warnings:[...prepared.warnings,...result.warnings]};
 }
