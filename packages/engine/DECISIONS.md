@@ -42,3 +42,8 @@
 ## A-T11
 - A9's numbering is retained in all twelve fixture files. Weather step 03 reuses 02 (A-T19 pending); steps 07–11 reuse 06 until later tasks regenerate them. No review, trade sheet, repair or prediction is fabricated. Independent 202/402 JSON files expose the case split to B.
 - The hero regression revealed that corrected photo zones must also control same-stack relevance, not just feature extraction. Labels are now applied before that relevance decision, with a regression test.
+
+## A-T15
+- Evidence caps are deterministic. Root mass includes any component children; a good trap/grout crack photo at the source flat, an explicit positive dye test, or a matching professional component finding can support a component only above 80% parent mass. The reviewer never changes odds.
+- Claims are rewritten from engine evidence at the lower of the requested and supported level; no draft can introduce confirmed/guilty wording. Missing/invalid review is explicitly unreviewed. Existing reviews are re-capped when evidence changes.
+- A safe, available reviewer-requested check can override only the `can't change the action` exclusion to refine claim specificity; locked, unavailable, unsafe and completed checks remain excluded. This is the A-T15 exception to A-T09's trade-only ranking.

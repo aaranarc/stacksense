@@ -6,6 +6,7 @@ import { createGraph } from "./building/graph";
 import { safetyOf } from "./safety";
 import { rankChecks } from "./voi";
 import { stopRule } from "./stop";
+import { applySecondOpinion } from "./secondOpinion";
 import { traceStep } from "./trace";
 
 export type ObservationContext = { rain?: RainSeries; forecast?: RainSeries; photoLabels?: PhotoLabel[] };
@@ -69,7 +70,8 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
   const ranked = { ...next, nextChecks: next.safety.status === "ok" ? rankChecks(next) : [] };
-  return { ...ranked, stop: stopRule(ranked) };
+  const stopped = { ...ranked, stop: stopRule(ranked) };
+  return stopped.secondOpinion ? applySecondOpinion(stopped, stopped.secondOpinion) : stopped;
 }
 
 export function splitCases(state: EngineState): EngineState[] {

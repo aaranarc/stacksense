@@ -23,9 +23,7 @@ export { blockA } from "./building/blockA";
 export { ukBlock } from "./building/ukBlock";
 export { createGraph } from "./building/graph";
 
-export function applySecondOpinion(_state: EngineState, _draft: SecondOpinion | null): EngineState {
-  throw new Error("not implemented");
-}
+export { applySecondOpinion } from "./secondOpinion";
 
 export function whatIf(
   _state: EngineState,

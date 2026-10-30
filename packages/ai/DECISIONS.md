@@ -15,3 +15,6 @@
 - Before provider calls, sharp also re-encodes incoming photos to JPEG with no metadata, bounds pixels and scales to 1600. B must still call browser stripExif before uploading. Route limits are 12 photos, 4 MiB decoded per photo, 2000 messages, 20000 characters per message, and 30 requests/minute/IP. The limiter is process-local (not distributed across Vercel instances).
 - Cache keys hash the pseudonymised request, building ID, decoded photo bytes and prompt versions. Only validated live results are cached automatically, in bounded process memory and optional Supabase REST `ai_cache(cache_key, result)`; outages degrade gracefully. Bundled validated entries live in fixtures-ai/cache/bundled.json, initially empty until demo outputs are reviewed. SQL provisioning belongs to A-T23; local cache works without Supabase.
 - Incidents share a key for the same known flat/zone within 72 hours of the first report; unresolved senders remain separate. Fixture chat is synthetic demo data with pseudonymous names; no photo evidence is fabricated.
+
+## A-T15
+- The thin Second Opinion route validates the input and output; any parsing/provider failure returns null with HTTP 200 as specified. Invalid methods and rate limits retain HTTP 405/429. The engine, not the route or model, caps the resulting claim.
