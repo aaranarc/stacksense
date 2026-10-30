@@ -51,3 +51,7 @@
 ## A-T16
 - The shared trade table now drives VOI actions and the Job Sheet. Only stopped, safety-okay cases issue sheets; an inconclusive inspection stop has no repair trade. A missing review remains explicitly unreviewed. Paying responsibility is represented only by the specified links.
 - The contract has no request timestamps, so the trail marks the first request time as unknown, rather than inventing it. Evidence time comes from observations; issue time uses state.now. No wall-clock calls occur in the engine.
+
+## A-T17
+- Recovery is replayed chronologically for the primary victim and spot. Repairs may be reported at the source flat; recaptures/readings must refer to the victim's original zone. A fresh, finite, nonnegative %WME reading after repair is required for paint readiness; relative units, old readings and other spots do not qualify.
+- The 16 %WME region defaults are contractor-configuration prototype values, explicitly awaiting review, not a universal scientific threshold. Better photos reset dryness to unknown. Worse recaptures or renewed same-spot complaints reopen investigation and suppress the Job Sheet until a new repair cycle.

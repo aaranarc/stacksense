@@ -4,7 +4,7 @@ import { tradesFor } from "./tables/trades";
 import { responsibilityLinks } from "./tables/responsibility";
 const levels={mechanism:0,area:1,component:2} as const;
 export function buildJobSheet(state:EngineState):JobSheet|null {
-  if(!state.stop.stopped||state.safety.status!=="ok") return null;
+  if(!state.stop.stopped||state.safety.status!=="ok"||state.recovery.reopened) return null;
   const evidence=claimEvidence(state);if(!evidence.top) return null;
   const victimId=state.hypotheses[0]?.id.split(":")[0] ?? "victim";
   const root=evidence.top;

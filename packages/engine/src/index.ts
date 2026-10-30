@@ -40,3 +40,4 @@ export function simulateBuilding(
 }
 
 export { buildJobSheet } from "./jobSheet";
+export { recoveryOf, moistureThresholds } from "./recovery";

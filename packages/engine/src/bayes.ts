@@ -5,6 +5,7 @@ import { featuresOf, likelihoods, type Feature } from "./tables/likelihoods";
 import { createGraph } from "./building/graph";
 import { safetyOf } from "./safety";
 import { rankChecks } from "./voi";
+import { recoveryOf } from "./recovery";
 import { buildJobSheet } from "./jobSheet";
 import { stopRule } from "./stop";
 import { applySecondOpinion } from "./secondOpinion";
@@ -70,7 +71,8 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   }
   const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
-  const ranked = { ...next, nextChecks: next.safety.status === "ok" ? rankChecks(next) : [] };
+  const recovered = { ...next, recovery: recoveryOf(next) };
+  const ranked = { ...recovered, nextChecks: recovered.safety.status === "ok" ? rankChecks(recovered) : [] };
   const stopped = { ...ranked, stop: stopRule(ranked) };
   return stopped.secondOpinion ? applySecondOpinion(stopped, stopped.secondOpinion) : { ...stopped, jobSheet: buildJobSheet(stopped) };
 }
