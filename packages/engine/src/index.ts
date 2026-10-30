@@ -18,20 +18,10 @@ export type Scenario = {
 // Entries are supplied in A-T20; consumers must handle missing scenarios until then.
 export const scenarios: Partial<Record<ScenarioId, Scenario>> = {};
 
-export function createCase(
-  _building: Building,
-  _opts?: { memory?: Record<SourceFamilyValue, number>; now?: string },
-): EngineState {
-  throw new Error("not implemented");
-}
-
-export function applyObservations(
-  _state: EngineState,
-  _obs: Observation[],
-  _ctx?: { rain?: RainSeries; forecast?: RainSeries; photoLabels?: PhotoLabel[] },
-): EngineState {
-  throw new Error("not implemented");
-}
+export { createCase, applyObservations, splitCases } from "./bayes";
+export { blockA } from "./building/blockA";
+export { ukBlock } from "./building/ukBlock";
+export { createGraph } from "./building/graph";
 
 export function applySecondOpinion(_state: EngineState, _draft: SecondOpinion | null): EngineState {
   throw new Error("not implemented");

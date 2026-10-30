@@ -1,0 +1,218 @@
+{
+  "id": "block-a",
+  "name": "Block A",
+  "region": "IN",
+  "archetype": "MUMBAI_RCC_1990S",
+  "lat": 19.07,
+  "lon": 72.88,
+  "floors": 6,
+  "hasTerrace": true,
+  "flats": [
+    {
+      "id": "101",
+      "floor": 1,
+      "position": "01",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "E"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "102",
+      "floor": 1,
+      "position": "02",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "W"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "201",
+      "floor": 2,
+      "position": "01",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "E"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "202",
+      "floor": 2,
+      "position": "02",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "W"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "301",
+      "floor": 3,
+      "position": "01",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "E"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "302",
+      "floor": 3,
+      "position": "02",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "W"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "401",
+      "floor": 4,
+      "position": "01",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "E"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "402",
+      "floor": 4,
+      "position": "02",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "W"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "501",
+      "floor": 5,
+      "position": "01",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "E"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "502",
+      "floor": 5,
+      "position": "02",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "W"
+      ],
+      "hasWaterMeter": true,
+      "access": "open"
+    },
+    {
+      "id": "601",
+      "floor": 6,
+      "position": "01",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "E"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    },
+    {
+      "id": "602",
+      "floor": 6,
+      "position": "02",
+      "wetAreas": [
+        "bathroom",
+        "kitchen",
+        "wc"
+      ],
+      "externalWalls": [
+        "W"
+      ],
+      "hasWaterMeter": false,
+      "access": "open"
+    }
+  ],
+  "stacks": [
+    {
+      "id": "S-x01",
+      "kind": "duct",
+      "flatIds": [
+        "101",
+        "201",
+        "301",
+        "401",
+        "501",
+        "601"
+      ]
+    },
+    {
+      "id": "S-x02",
+      "kind": "duct",
+      "flatIds": [
+        "102",
+        "202",
+        "302",
+        "402",
+        "502",
+        "602"
+      ]
+    }
+  ]
+}
