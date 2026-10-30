@@ -1,0 +1,3 @@
+photoId,path,person,surface,zone,isClean,hasMeter,humanReviewed
+placeholder-clean,clean.jpg,synthetic-placeholder,dry,ceiling,true,false,false
+placeholder-mark,mark.jpg,synthetic-placeholder,damp_stain,external_wall,false,false,false

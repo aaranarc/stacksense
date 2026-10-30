@@ -19,3 +19,7 @@ The migration was validated locally, not run against your account. Cloud links/u
 A-T24 is not implemented or run, and eval/hard-cases is untouched. AI runner smoke data will be labelled placeholder and must not be used as evaluation-card results.
 
 Case privacy: create browser cases with a unique ID, e.g. createCase(building, {caseId: crypto.randomUUID(), now: new Date().toISOString()}). The link route sets an HttpOnly, Secure, SameSite=Strict owner cookie. Same-origin fetch sends it automatically; a different browser cannot replace an existing case or issue more links for it. Recipients still need only their signed check token. Do not use a single predictable case ID for all visitors. The cookie is an implementation detail, not an extra login step.
+
+## A-T25 runner code
+
+Run `pnpm --filter @stacksense/engine exec tsx ../../eval/runner-ai/run.ts --placeholder` from the repo root. It writes eval/results/ai.placeholder.json: five synthetic cases, no human review and zero provider calls. The label forbids interpreting these values as field accuracy; no public eval-card file is written. The runner code computes field/language F1, surface accuracy, clean-wall false-positive rate, abstentions, latency and token-rate cost estimates (null when unknown). Live runs require an explicitly human-reviewed, non-placeholder dataset and opt-in. See eval/runner-ai/README.md for the schema and command.
