@@ -1,5 +1,6 @@
 import { Observation, type EngineState } from "@stacksense/contracts";
 import { createCase, applyObservations } from "./bayes";
+import type { WeatherState } from "./rain";
 import { applySecondOpinion } from "./secondOpinion";
 export function whatIf(state:EngineState,patches:{observationId:string;patch:Partial<Observation>}[]):EngineState {
   const observations=structuredClone(state.observations),labels=structuredClone(state.photoLabels);
@@ -18,7 +19,7 @@ export function whatIf(state:EngineState,patches:{observationId:string;patch:Par
   const initial=createCase(state.building,{memory:state.prediction.memory,now:state.now});
   const victim=state.hypotheses[0]?.id.split(":")[0];
   initial.caseId=victim&&state.caseId.endsWith(`:${victim}`)?state.caseId.slice(0,-victim.length-1):state.caseId;
-  let replayed=applyObservations(initial,observations,{photoLabels:labels});
+  let replayed=applyObservations(initial,observations,{photoLabels:labels,...(state as WeatherState).weather});
   // A previous LLM review evaluated different evidence and must not be presented as current.
   if(state.secondOpinion) replayed=applySecondOpinion(replayed,patches.length?null:state.secondOpinion);
   if(patches.length) replayed={...replayed,recovery:{...replayed.recovery,flags:[...replayed.recovery.flags,"What-if scenario — simulated evidence"]}};

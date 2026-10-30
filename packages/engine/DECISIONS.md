@@ -61,3 +61,7 @@
 - A previous LLM review is invalidated to labelled unreviewed fallback when evidence changes, since a pure engine cannot rerun a model. The deterministic evidence cap, checks, Job Sheet and recovery are recalculated; B may request a fresh review separately.
 - Hero review fixtures are explicitly scripted demo drafts with source fallback and a simulated-review warning. Weather and prediction placeholders remain deferred to A-T19/A-T21; no live AI or prediction is fabricated.
 - Final case-split regression: the primary case's reviewer verdict is not inherited by another victim. A separate facade case starts unreviewed.
+
+## A-T19
+- Rain uses the previous 72 hours and a 75th-percentile baseline of rolling windows ending no later than the report. Forecast checks compare daily wall-facing totals to the forecast's daily 75th percentile and choose the first exceedance. Zero or uniform rain does not invent a heavy-rain check.
+- Optional engine-only `weather` context is carried on returned state objects and replayed by whatIf without changing the shared contract. Rain joins only exterior/window evidence for that victim. Real July–August data and a current 16-day forecast are cached separately from source=fixture deterministic hero-weather examples.

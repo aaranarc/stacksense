@@ -1,4 +1,5 @@
 import { Building, Observation, PhotoLabel, SourceFamily, type EngineState, type Hypothesis, type RainSeries } from "@stacksense/contracts";
+import { rainFeature, forecastRechecks, type WeatherState } from "./rain";
 import { hypothesesForVictims } from "./hypotheses";
 import { hypothesisPriors, type Memory } from "./priors/archetypes";
 import { featuresOf, likelihoods, type Feature } from "./tables/likelihoods";
@@ -64,6 +65,9 @@ function forVictim(state: EngineState, victimId: string): EngineState {
     seen.add(obs.eventKey);
     if (label && label.quality !== "ok") warnings.push(`Photo ${label.photoId}: ${label.quality}; retake photo, no evidence applied`);
     const features = featuresOf(obs, state.building, label);
+    const rain = (state as WeatherState).weather?.rain;
+    const weatherFeature = rain ? rainFeature({ ...obs, zone: effectiveZone }, state.building, rain) : null;
+    if (weatherFeature) features.push(weatherFeature);
     if (!features.length) continue;
     const updated = updatePosterior(posterior, group.hypotheses, features);
     trace.push(traceStep(posterior, updated, group.hypotheses, obs.id, features, trace.length + 1));
@@ -72,6 +76,8 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,
     secondOpinion: state.caseId === group.caseId ? state.secondOpinion : null,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
+  const forecast = (state as WeatherState).weather?.forecast;
+  if (forecast) next.prediction = { ...next.prediction, forecastRechecks: forecastRechecks(next, forecast) };
   const recovered = { ...next, recovery: recoveryOf(next) };
   const ranked = { ...recovered, nextChecks: recovered.safety.status === "ok" ? rankChecks(recovered) : [] };
   const stopped = { ...ranked, stop: stopRule(ranked) };
@@ -94,7 +100,8 @@ export function applyObservations(state: EngineState, observations: Observation[
   for (const obs of parsed.data) if (!allObs.some(o => JSON.stringify(o) === JSON.stringify(obs))) allObs.push(obs);
   const photoLabels = new Map(state.photoLabels.map(p => [p.photoId, p]));
   for (const label of labels.data) photoLabels.set(label.photoId, label);
-  const next: EngineState = { ...state, observations: allObs, photoLabels: [...photoLabels.values()], safety,
+  const previous = (state as WeatherState).weather;
+  const next: WeatherState = { ...state, weather: { ...previous, ...(ctx.rain ? { rain: ctx.rain } : {}), ...(ctx.forecast ? { forecast: ctx.forecast } : {}) }, observations: allObs, photoLabels: [...photoLabels.values()], safety,
     nextChecks: safety.status === "ok" ? state.nextChecks : [],
     stop: safety.status === "emergency" ? { stopped: true, reason: "emergency" } : { stopped: false, reason: null },
     jobSheet: safety.status === "ok" ? state.jobSheet : null,
