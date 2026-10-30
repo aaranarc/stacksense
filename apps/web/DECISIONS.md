@@ -1,5 +1,7 @@
 # App decisions
 
+- B-T09: A's browser preprocessing entry point currently exports no helpers. The local mock follows parse → pseudonymise → stripExif mock → qualityCheck mock → cached read. Pass-through photos never reach a live endpoint: the import is blocked unless the API mock flag is true. Demo results explicitly state they are not interpretations of uploaded evidence. The live path needs A's privacy helpers before enabling it.
+
 - B-T07: The neighbour preview is a small, explicitly labelled mock preview until the full phone flow is built. Its button advances one hero-story step; it never claims that a real neighbour answered. WhatsApp opens a draft only. Drawers trap keyboard focus, close with Escape, and restore focus.
 
 - B-T05: The building diagram is an accessible SVG derived from floor count, flat positions, wet areas, external walls and stacks. Flat buttons filter the feed. Source arrows follow the leading engine hypothesis and ceiling complaint; only posterior changes retrigger their 300ms motion. Reduced-motion preferences suppress drawing animation.
