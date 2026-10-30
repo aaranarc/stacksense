@@ -1,5 +1,7 @@
 # App decisions
 
+- B-T04: Desktop columns use 22:48:30 fractional widths after gutters. At 800px and below they stack, and detail tabs become native accordions. The single mock scenario is Happy path; the UK option remains disabled until the region-building task. Judge Mode exposes manual story advancement so all mock states are reviewable.
+
 - B-T03: State 00 is the empty case; states 01–11 correspond exactly to A9 steps 1–11. Mock probabilities are illustrative fixtures, never field accuracy. All fixture observations are simulated. The mock API returns the labelled cached hero result, independent of uploaded content. Its WhatsApp URL contains no real recipient.
 - B-T03: Mock flags are enabled only in ignored `.env.local`, as specified by the plan. Adapters switch to real implementations when both flags are false. No environment file is committed.
 
