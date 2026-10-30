@@ -45,7 +45,9 @@ export function createCase(building: Building, opts: { memory?: Memory; now?: st
 function forVictim(state: EngineState, victimId: string): EngineState {
   const baseId = state.caseId.endsWith(`:${victimId}`) ? state.caseId.slice(0, -victimId.length - 1)
     : state.caseId.startsWith(`${state.building.id}:`) ? state.building.id : state.caseId;
-  const group = hypothesesForVictims(state.building, [victimId], { caseId: baseId })[0]!;
+  const victim = state.building.flats.find(f => f.id === victimId)!;
+  const lateral = state.observations.some(o => o.kind === "professional_finding" && o.finding?.family === "upper_wet_area" && state.building.flats.some(f => f.id === o.flatId && f.floor === victim.floor + 1 && f.position !== victim.position));
+  const group = hypothesesForVictims(state.building, [victimId], { caseId: baseId, lateral })[0]!;
   let posterior = hypothesisPriors(state.building, group, state.prediction.memory);
   const graph = createGraph(state.building);
   const aboveId = graph.above(victimId)?.id;
@@ -59,7 +61,7 @@ function forVictim(state: EngineState, victimId: string): EngineState {
     const effectiveZone = label?.quality === "ok" ? label.zone : obs.zone;
     // Complaints at distinct victims are separate cases, never pooled evidence.
     const relevant = obs.flatId === victimId || (obs.kind !== "complaint" && obs.flatId !== null && (
-      obs.flatId === aboveId || (effectiveZone === "duct_wall" && stackIds.has(obs.flatId))
+      group.hypotheses.some(h => h.flatId === obs.flatId && (h.family === "upper_wet_area" || h.family === "upper_supply")) || obs.flatId === aboveId || (effectiveZone === "duct_wall" && stackIds.has(obs.flatId))
     ));
     if (!relevant || seen.has(obs.eventKey)) continue;
     seen.add(obs.eventKey);
@@ -68,9 +70,16 @@ function forVictim(state: EngineState, victimId: string): EngineState {
     const rain = (state as WeatherState).weather?.rain;
     const weatherFeature = rain ? rainFeature({ ...obs, zone: effectiveZone }, state.building, rain) : null;
     if (weatherFeature) features.push(weatherFeature);
-    if (!features.length) continue;
-    const updated = updatePosterior(posterior, group.hypotheses, features);
-    trace.push(traceStep(posterior, updated, group.hypotheses, obs.id, features, trace.length + 1));
+    if (!features.length && !obs.finding) continue;
+    let updated = updatePosterior(posterior, group.hypotheses, features);
+    if (obs.kind === "professional_finding" && obs.finding) {
+      const weights = group.hypotheses.map(h => [h.id, (updated[h.id] ?? 0) * (h.family === obs.finding!.family && (!h.flatId || h.flatId === obs.flatId) ? .999 : .001)] as const);
+      const total = weights.reduce((sum, [, w]) => sum + w, 0);
+      if (total > 0) updated = Object.fromEntries(weights.map(([id, w]) => [id, w / total]));
+    }
+    const step = traceStep(posterior, updated, group.hypotheses, obs.id, features, trace.length + 1);
+    if (obs.finding) step.changes = step.changes.map(c => ({ ...c, why: `${obs.id}: professional finding ${obs.finding!.family} at ${obs.flatId}` }));
+    trace.push(step);
     posterior = updated;
   }
   const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,

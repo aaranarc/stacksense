@@ -65,3 +65,8 @@
 ## A-T19
 - Rain uses the previous 72 hours and a 75th-percentile baseline of rolling windows ending no later than the report. Forecast checks compare daily wall-facing totals to the forecast's daily 75th percentile and choose the first exceedance. Zero or uniform rain does not invent a heavy-rain check.
 - Optional engine-only `weather` context is carried on returned state objects and replayed by whatIf without changing the shared contract. Rain joins only exterior/window evidence for that victim. Real July–August data and a current 16-day forecast are cached separately from source=fixture deterministic hero-weather examples.
+
+## A-T20
+- Scenario entries optionally include photoLabels and a scripted review so the dark-photo and component-evidence scenarios work without changing the shared contract. All scenario observations are simulated and titles disclose demo data.
+- A professional finding in a diagonal upper flat enables lateral candidates and supplies an explicit high-likelihood finding update (prototype .999/.001); generic reports never identify a diagonal flat by guesswork. The hypothesis generator itself keeps its existing optional lateral interface.
+- The break-it entry is a deterministic seed template until A-T22 replaces its building/steps with the simulator. This preserves task order; no simulator implementation is claimed in A-T20.

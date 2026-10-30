@@ -10,7 +10,5 @@ describe("A-T01 engine skeleton", () => {
   ])("%s fails explicitly until implemented", (_name, call) => {
     expect(call).toThrow("not implemented");
   });
-  it("does not pretend scenarios are implemented", () => {
-    expect(scenarios).toEqual({});
-  });
+
 });

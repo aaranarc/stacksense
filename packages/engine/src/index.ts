@@ -6,17 +6,8 @@ import type {
 
 type SourceFamilyValue = z.infer<typeof SourceFamily>;
 
-export type ScenarioId = "happy" | "electrical_hazard" | "locked_502" | "dark_photo" | "beam_travel" | "wrong_trade_rain" | "honest_uncertainty" | "break_it";
-export type Scenario = {
-  title: string;
-  building: Building;
-  steps: Observation[][];
-  rain?: RainSeries;
-  forecast?: RainSeries;
-};
-
-// Entries are supplied in A-T20; consumers must handle missing scenarios until then.
-export const scenarios: Partial<Record<ScenarioId, Scenario>> = {};
+export { scenarios, runScenario } from "./scenarios";
+export type { Scenario, ScenarioId } from "./scenarios";
 
 export { createCase, applyObservations, splitCases } from "./bayes";
 export { blockA } from "./building/blockA";
