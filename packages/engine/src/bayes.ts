@@ -4,6 +4,7 @@ import { hypothesisPriors, type Memory } from "./priors/archetypes";
 import { featuresOf, likelihoods, type Feature } from "./tables/likelihoods";
 import { createGraph } from "./building/graph";
 import { safetyOf } from "./safety";
+import { rankChecks } from "./voi";
 
 export type ObservationContext = { rain?: RainSeries; forecast?: RainSeries; photoLabels?: PhotoLabel[] };
 
@@ -57,8 +58,9 @@ function forVictim(state: EngineState, victimId: string): EngineState {
     if (label && label.quality !== "ok") warnings.push(`Photo ${label.photoId}: ${label.quality}; retake photo, no evidence applied`);
     posterior = updatePosterior(posterior, group.hypotheses, featuresOf(obs, state.building, label));
   }
-  return { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior,
+  const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
+  return { ...next, nextChecks: next.safety.status === "ok" ? rankChecks(next) : [] };
 }
 
 export function splitCases(state: EngineState): EngineState[] {

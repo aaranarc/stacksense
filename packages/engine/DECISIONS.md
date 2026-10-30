@@ -29,3 +29,8 @@
 - Duct check targets the directly lower flat in the same stack; upper wet-area and supply checks target the flat above; ceiling/rain/moisture/inspection target the victim. No targets are invented outside the building.
 - Public candidate generation omits unavailable meters. Ranking can request unavailable descriptors explicitly to explain a no-meter exclusion in the Why drawer (A-T09).
 - Professional moisture/inspection efforts are 30/60 minutes, prototype assumptions. Rain waiting has a multiplicative delay penalty of 2880 (one day at the 0.5-minute denominator floor). Outcomes are normalized per family; inspection has a prototype seven-way source model. Ceiling/moisture do not pretend to identify a source from a photo/reading alone.
+
+## A-T09
+- VOI marginalizes each check outcome over the current posterior and recomputes Shannon entropy in bits. Trade choice sums mutually exclusive source mass by trade; the minimal mapping here is required for action-change exclusion, with Job Sheet reasoning deferred to A-T16.
+- Completed informative checks remain in the Why drawer, excluded as already checked. A dark/unclear photo does not complete a check. Unsafe descriptors are available from `rankChecks`, but `applyObservations` offers no active checks when safety is not okay.
+- Locked access uses Infinity internally. RankedCheck serializes that as Number.MAX_VALUE with explicit `flat locked` exclusion, since JSON converts Infinity to null and the unchanged contract requires a number. Rain delay multiplies the access penalty in the prescribed score denominator.
