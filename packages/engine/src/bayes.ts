@@ -50,14 +50,15 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   const warnings: string[] = [];
   const trace: EngineState["trace"] = [];
   for (const obs of state.observations) {
+    const labels = state.photoLabels.filter(p => obs.photoIds.includes(p.photoId));
+    const label = labels.find(p => p.quality === "ok") ?? labels[0];
+    const effectiveZone = label?.quality === "ok" ? label.zone : obs.zone;
     // Complaints at distinct victims are separate cases, never pooled evidence.
     const relevant = obs.flatId === victimId || (obs.kind !== "complaint" && obs.flatId !== null && (
-      obs.flatId === aboveId || (obs.zone === "duct_wall" && stackIds.has(obs.flatId))
+      obs.flatId === aboveId || (effectiveZone === "duct_wall" && stackIds.has(obs.flatId))
     ));
     if (!relevant || seen.has(obs.eventKey)) continue;
     seen.add(obs.eventKey);
-    const labels = state.photoLabels.filter(p => obs.photoIds.includes(p.photoId));
-    const label = labels.find(p => p.quality === "ok") ?? labels[0];
     if (label && label.quality !== "ok") warnings.push(`Photo ${label.photoId}: ${label.quality}; retake photo, no evidence applied`);
     const features = featuresOf(obs, state.building, label);
     if (!features.length) continue;

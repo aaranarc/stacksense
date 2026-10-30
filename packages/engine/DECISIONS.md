@@ -38,3 +38,7 @@
 ## A-T10
 - Safety overrides stopping: emergency stops; incomplete cannot reach a source decision. A null Second Opinion is not an objection, matching A-T10; actual review caps arrive in A-T15. Low-value remote checks request an inspection without producing a Job Sheet.
 - Trace is replayed deterministically from unique events and current labels, appending a step for each informative event and including only changes greater than 0.01. Duplicate reports add no trace step. Correcting a photo recomputes the derived trace rather than treating the old and corrected labels as independent evidence.
+
+## A-T11
+- A9's numbering is retained in all twelve fixture files. Weather step 03 reuses 02 (A-T19 pending); steps 07–11 reuse 06 until later tasks regenerate them. No review, trade sheet, repair or prediction is fabricated. Independent 202/402 JSON files expose the case split to B.
+- The hero regression revealed that corrected photo zones must also control same-stack relevance, not just feature extraction. Labels are now applied before that relevance decision, with a regression test.

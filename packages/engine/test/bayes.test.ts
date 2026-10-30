@@ -49,3 +49,9 @@ describe("A-T06 deterministic Bayesian updates", () => {
     expect(() => applyObservations(createCase(blockA), [{ ...observation(), at: "bad" }])).toThrow("Invalid observation");
   });
 });
+
+it("uses a corrected photo zone when selecting relevant same-stack evidence", () => {
+  const base = applyObservations(createCase(blockA), [observation()]);
+  const after = applyObservations(base, [observation({ id: "lower", eventKey: "lower", kind: "check_result", flatId: "302", zone: "unclear", surface: "unclear", photoIds: ["p1"], rawText: "" })], { photoLabels: [photo()] });
+  expect(after.posterior["402:shared_shaft@S-x02"]).toBeLessThan(base.posterior["402:shared_shaft@S-x02"]!);
+});
