@@ -1,5 +1,8 @@
 # App decisions
 
+- B-T05: The building diagram is an accessible SVG derived from floor count, flat positions, wet areas, external walls and stacks. Flat buttons filter the feed. Source arrows follow the leading engine hypothesis and ceiling complaint; only posterior changes retrigger their 300ms motion. Reduced-motion preferences suppress drawing animation.
+- Verification limitation: the computer-use preview repeatedly timed out attaching or connecting to localhost. Responsive CSS and interaction tests are checked, but a visual browser pass at 1440px / 390px remains unverified in this environment.
+
 - B-T04: Desktop columns use 22:48:30 fractional widths after gutters. At 800px and below they stack, and detail tabs become native accordions. The single mock scenario is Happy path; the UK option remains disabled until the region-building task. Judge Mode exposes manual story advancement so all mock states are reviewable.
 
 - B-T03: State 00 is the empty case; states 01–11 correspond exactly to A9 steps 1–11. Mock probabilities are illustrative fixtures, never field accuracy. All fixture observations are simulated. The mock API returns the labelled cached hero result, independent of uploaded content. Its WhatsApp URL contains no real recipient.

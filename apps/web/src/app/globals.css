@@ -21,6 +21,7 @@ table { width:100%; border-collapse:collapse; } th,td { text-align:left; padding
 .workspace { display:grid; grid-template-columns:minmax(0,22fr) minmax(0,48fr) minmax(0,30fr); gap:16px; padding:0 32px 32px; align-items:start; } .workspace>* { min-width:0; }
 .analysis-column { display:grid; gap:16px; } .section-heading { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; } .section-heading span { font-size:12px; }
 .building-placeholder { min-height:560px; display:grid; place-items:center; color:var(--color-unassessed); }
+.cross-scroll { overflow-x:auto; } .diagram-key { font-size:11px; margin:16px 0 0; } svg [role=button]:focus { outline:2px solid var(--color-ink); outline-offset:2px; }
 .judge-panel { margin:0 32px 16px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
 [role=tablist] { display:flex; flex-wrap:wrap; gap:8px; } [role=tab] { padding:8px; font-size:12px; } [aria-selected=true] { border-color:var(--color-ink); font-weight:600; }
 .mobile-tabs { display:none; } summary { padding:16px 0; cursor:pointer; } details { border-bottom:1px solid var(--color-border); }
