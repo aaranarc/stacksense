@@ -1,0 +1,6 @@
+# Engine decisions
+
+## A-T02
+- Graph helpers are bound by `createGraph(building)` so `above(flat)` and the other queries stay pure and work for both buildings. Same-stack excludes self; neighbours are flats on the same floor plus directly above/below.
+- UK flats are numbered left-to-right, then bottom-to-top; no UK meters are assumed. Both positions have a shared duct and wet rooms. Windows are represented by the plan's wall orientation and window-zone observations because the unchanged contract has no window field.
+- Building JSON files contain the specified physical topology; observation/state fixtures carry `provenance: simulated`.
