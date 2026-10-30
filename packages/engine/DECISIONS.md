@@ -11,3 +11,7 @@
 ## A-T04
 - Prior ranges are prototype assumptions, not measured field accuracy. Only modes drive decisions; memory adds counts to ten prior pseudo-observations. Invalid counts are rejected.
 - Posterior mass is assigned to mutually exclusive root hypotheses. Component descriptors start at zero until component evidence is implemented in A-T15; this avoids counting an area and its children twice. Multiple roots of the same family share its mass. Roof below the top floor receives weight 0.0001 before normalization.
+
+## A-T05
+- Each feature row is a Bernoulli likelihood across families, not a distribution summing across families. The numerical tables are prototype assumptions. Complementary check outcomes use complementary rows.
+- Text locates a duct corner or records explicit dye/flood outcomes; it never fabricates a meter reading. Rain/weather joining stays in A-T19. Poor-quality photos provide no feature evidence; a good label overrides surface/zone.
