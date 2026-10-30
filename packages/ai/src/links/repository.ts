@@ -3,15 +3,19 @@ import {EngineState,CheckType,type Observation} from "@stacksense/contracts";
 export const LinkRowSchema=z.object({token_hash:z.string(),case_id:z.string(),check_id:z.string(),flat_id:z.string(),lang:z.enum(["en","hi","mr"]),check_type:CheckType,expires_at:z.string(),used_at:z.string().nullable()});
 export type LinkRow=z.infer<typeof LinkRowSchema>;
 export type PhotoRow={photo_id:string;case_id:string;flat_id:string;check_id:string;zone:string;path:string};
-export type LinkRepository={getCase(id:string):Promise<EngineState|null>;putCase(state:EngineState):Promise<void>;insertLink(row:LinkRow):Promise<void>;getLink(hash:string):Promise<LinkRow|null>;claim(hash:string,at:string):Promise<boolean>;release(hash:string,at:string):Promise<void>;savePhoto(row:PhotoRow,bytes:Uint8Array):Promise<void>;removePhoto(path:string):Promise<void>;saveObservation(caseId:string,obs:Observation):Promise<void>;ghost(caseId:string,flatId:string,zone:string):Promise<string|null>;signedUrl(path:string):Promise<string>};
+export type LinkRepository={getCase(id:string):Promise<EngineState|null>;ownerHash(id:string):Promise<string|null>;putCase(state:EngineState,ownerHash?:string,create?:boolean):Promise<void>;insertLink(row:LinkRow):Promise<void>;getLink(hash:string):Promise<LinkRow|null>;claim(hash:string,at:string):Promise<boolean>;release(hash:string,at:string):Promise<void>;savePhoto(row:PhotoRow,bytes:Uint8Array):Promise<void>;removePhoto(path:string):Promise<void>;saveObservation(caseId:string,obs:Observation):Promise<void>;ghost(caseId:string,flatId:string,zone:string):Promise<string|null>;signedUrl(path:string):Promise<string>};
 export function supabaseRepository(url:string,key:string,fetcher:typeof fetch=fetch):LinkRepository {
  if(!url.startsWith("https://")||!key)throw new Error("Supabase server credentials required");const base=url.replace(/\/$/,"");
  const headers={apikey:key,Authorization:`Bearer ${key}`,"Content-Type":"application/json"};
- const call=async(path:string,init:RequestInit={})=>{const response=await fetcher(base+path,{...init,headers:{...headers,...init.headers},signal:AbortSignal.timeout(10000)});if(!response.ok)throw new Error("Supabase operation failed");return response.status===204?null:await response.json() as unknown;};
+ const call=async(path:string,init:RequestInit={})=>{const response=await fetcher(base+path,{...init,headers:{...headers,...init.headers},signal:AbortSignal.timeout(10000)});if(!response.ok)throw new Error("Supabase operation failed");const text=await response.text();return text?JSON.parse(text) as unknown:null;};
  const query=(table:string,params:Record<string,string>)=>`/rest/v1/${table}?${new URLSearchParams(params)}`;
  return {
   async getCase(id){const rows=z.array(z.object({state:EngineState})).parse(await call(query("cases",{id:`eq.${id}`,select:"state",limit:"1"})));return rows[0]?.state??null;},
-  async putCase(state){await call("/rest/v1/cases",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:JSON.stringify({id:state.caseId,building_id:state.building.id,state})});},
+  async ownerHash(id){const rows=z.array(z.object({owner_hash:z.string().nullable()})).parse(await call(query("cases",{id:`eq.${id}`,select:"owner_hash",limit:"1"})));return rows[0]?.owner_hash??null;},
+  async putCase(state,ownerHash,create=true){
+   if(!ownerHash)throw new Error("Case owner required");
+   await call(create?"/rest/v1/cases":query("cases",{id:`eq.${state.caseId}`,owner_hash:`eq.${ownerHash}`}),{method:create?"POST":"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify(create?{id:state.caseId,building_id:state.building.id,state,owner_hash:ownerHash}:{state})});
+  },
   async insertLink(row){await call("/rest/v1/links",{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify(row)});},
   async getLink(hash){return z.array(LinkRowSchema).parse(await call(query("links",{token_hash:`eq.${hash}`,select:"*",limit:"1"})))[0]??null;},
   async claim(hash,at){const result=await call(query("links",{token_hash:`eq.${hash}`,used_at:"is.null",expires_at:`gt.${at}`}),{method:"PATCH",headers:{Prefer:"return=representation"},body:JSON.stringify({used_at:at})});return z.array(LinkRowSchema).parse(result).length===1;},

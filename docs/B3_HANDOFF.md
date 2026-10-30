@@ -17,3 +17,5 @@ Run packages/ai/supabase/migrations/001_init.sql in the Supabase SQL editor. Add
 The migration was validated locally, not run against your account. Cloud links/uploads and real-photo mobile preview verification remain pending Supabase configuration and an actual photo. No real resident photo or deployed preview was available during implementation. The provided unit integration uses explicitly synthetic meter images.
 
 A-T24 is not implemented or run, and eval/hard-cases is untouched. AI runner smoke data will be labelled placeholder and must not be used as evaluation-card results.
+
+Case privacy: create browser cases with a unique ID, e.g. createCase(building, {caseId: crypto.randomUUID(), now: new Date().toISOString()}). The link route sets an HttpOnly, Secure, SameSite=Strict owner cookie. Same-origin fetch sends it automatically; a different browser cannot replace an existing case or issue more links for it. Recipients still need only their signed check token. Do not use a single predictable case ID for all visitors. The cookie is an implementation detail, not an extra login step.

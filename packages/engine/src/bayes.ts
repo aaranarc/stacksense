@@ -27,7 +27,7 @@ export function updatePosterior(prior: Record<string, number>, hypotheses: Hypot
   return Object.fromEntries(weights.map(([id, n]) => [id, n / total]));
 }
 
-export function createCase(building: Building, opts: { memory?: Memory; now?: string } = {}): MemoryState {
+export function createCase(building: Building, opts: { memory?: Memory; now?: string; caseId?: string } = {}): MemoryState {
   const parsed = Building.safeParse(building);
   if (!parsed.success) throw new Error(`Invalid building: ${parsed.error.message}`);
   const now = opts.now ?? "1970-01-01T00:00:00.000Z";
@@ -35,7 +35,7 @@ export function createCase(building: Building, opts: { memory?: Memory; now?: st
   const memory = Object.fromEntries(SourceFamily.options.map(f => [f, opts.memory?.[f] ?? 0]));
   for (const n of Object.values(memory)) if (!Number.isFinite(n) || n < 0) throw new Error("Invalid memory count");
   return {
-    memoryPrior: memory, caseId: building.id, now, building: parsed.data, observations: [], photoLabels: [], hypotheses: [], posterior: {},
+    memoryPrior: memory, caseId: opts.caseId ?? building.id, now, building: parsed.data, observations: [], photoLabels: [], hypotheses: [], posterior: {},
     safety: { status: "incomplete", reasons: ["Hazard questions unanswered"], actions: [] }, nextChecks: [],
     stop: { stopped: false, reason: null }, secondOpinion: null, jobSheet: null,
     recovery: { repair: "not_started", dry: "unknown", paint: "not_ready", day14DueAt: null, reopened: false, flags: [] },

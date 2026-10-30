@@ -11,3 +11,9 @@ it("A-T23 claims atomically and signs private photos for ten minutes",async()=>{
  expect(await repo.signedUrl("c/p.jpg")).toContain("https://storage.example.invalid/storage/v1/object/sign/");
  expect(JSON.stringify(transport.mock.calls.map(c=>c[0]))).not.toContain("test-value");
 });
+
+it("accepts Supabase's empty 201 minimal insert response",async()=>{
+ const {readFileSync}=await import("node:fs");const state=JSON.parse(readFileSync(new URL("../../../fixtures/hero/state-05.json",import.meta.url),"utf8"));
+ const repo=supabaseRepository("https://storage.example.invalid","test-value",(async()=>new Response(null,{status:201})) as typeof fetch);
+ await expect(repo.putCase(state,"a".repeat(64))).resolves.toBeUndefined();
+});

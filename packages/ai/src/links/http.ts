@@ -1,4 +1,4 @@
-import {randomUUID} from "node:crypto";
+import {randomUUID,randomBytes,timingSafeEqual} from "node:crypto";
 import {z} from "zod";
 import {EngineState,LinkRequest,LinkResult,ReadResult,type Observation,type PhotoLabel} from "@stacksense/contracts";
 import {jsonBody,jsonResponse,rateLimiter} from "../http/common";
@@ -18,22 +18,28 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
   async link(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
    try{
-    const p=Input.parse(await jsonBody(request,4*1024*1024));let state=p.state??await repo.getCase(p.caseId);
+    const p=Input.parse(await jsonBody(request,4*1024*1024));
+    const existing=await repo.getCase(p.caseId),cookieName=`stacksense_case_${codec.hash(p.caseId).slice(0,24)}`;
+    let owner=(request.headers.get("cookie")??"").split(";").map(s=>s.trim()).find(s=>s.startsWith(cookieName+"="))?.slice(cookieName.length+1);
+    let ownerHash:string;
+    if(existing){const expected=await repo.ownerHash(p.caseId),actual=owner?codec.hash(owner):"";if(!expected||actual.length!==expected.length||!timingSafeEqual(Buffer.from(actual),Buffer.from(expected)))return jsonResponse({error:"Case owner authorization required"},403);ownerHash=expected;}
+    else{owner=randomBytes(32).toString("base64url");ownerHash=codec.hash(owner);}
+    const state=p.state??existing;
     if(!state||state.caseId!==p.caseId)return jsonResponse({error:"Case snapshot required"},404);
     if(state.safety.status!=="ok")return jsonResponse({error:"Case is not safe for a resident check"},403);
     const check=state.nextChecks.find(c=>c.id===p.checkId&&c.targetFlatId===p.flatId&&c.excluded===null);
     if(!check)return jsonResponse({error:"Check is unavailable"},400);
-    if(p.state)await repo.putCase(state);
+    if(p.state)await repo.putCase(state,ownerHash,!existing);
     const token=codec.issue(p),claims=codec.verify(token);
     const row:LinkRow={token_hash:codec.hash(token),case_id:p.caseId,check_id:p.checkId,flat_id:p.flatId,lang:p.lang,check_type:check.type,expires_at:new Date(claims.expiresAt).toISOString(),used_at:null};await repo.insertLink(row);
     const url=`${opts.origin??new URL(request.url).origin}/c/${token}`;
     const messages={en:`Please help check flat ${p.flatId}: ${check.why}. Takes 30 seconds (meter readings take 10 minutes); only if safe. ${url}`,hi:`कृपया फ्लैट ${p.flatId} की जाँच में मदद करें। फोटो में 30 सेकंड लगते हैं; मीटर जाँच में 10 मिनट। सुरक्षित हो तभी करें। ${check.instructions.hi} ${url}`,mr:`कृपया फ्लॅट ${p.flatId} तपासण्यास मदत करा। फोटोला 30 सेकंद लागतात; मीटरला 10 मिनिटे। सुरक्षित असेल तरच करा। ${check.instructions.mr} ${url}`};
-    return jsonResponse(LinkResult.parse({url,token,waUrl:`https://wa.me/?text=${encodeURIComponent(messages[p.lang])}`}));
+    return jsonResponse(LinkResult.parse({url,token,waUrl:`https://wa.me/?text=${encodeURIComponent(messages[p.lang])}`}),200,{"Set-Cookie":`${cookieName}=${owner}; HttpOnly; Secure; SameSite=Strict; Path=/api/link; Max-Age=172800`});
    }catch{return jsonResponse({error:"Link could not be created"},400);}
   },
   async verify(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
-   try{const row=await resolve(new URL(request.url).searchParams.get("token")??""),state=await repo.getCase(row.case_id);if(!state||state.safety.status!=="ok")return jsonResponse({error:"Resident checks unavailable"},403);const check=state.nextChecks.find(c=>c.id===row.check_id);if(!check)throw new Error();const path=await repo.ghost(row.case_id,row.flat_id,zoneFor(row.check_type));return jsonResponse({caseId:row.case_id,checkId:row.check_id,flatId:row.flat_id,lang:row.lang,checkType:row.check_type,instructions:check.instructions,ghostPhotoUrl:path?await repo.signedUrl(path):null});}catch{return jsonResponse({error:"Invalid, expired or used link"},410);}
+   try{const row=await resolve(new URL(request.url).searchParams.get("token")??""),state=await repo.getCase(row.case_id);if(!state||state.safety.status!=="ok")return jsonResponse({error:"Resident checks unavailable"},403);const check=state.nextChecks.find(c=>c.id===row.check_id);if(!check||check.excluded!==null)throw new Error();const path=await repo.ghost(row.case_id,row.flat_id,zoneFor(row.check_type));return jsonResponse({caseId:row.case_id,checkId:row.check_id,flatId:row.flat_id,lang:row.lang,checkType:row.check_type,instructions:check.instructions,ghostPhotoUrl:path?await repo.signedUrl(path):null});}catch{return jsonResponse({error:"Invalid, expired or used link"},410);}
   },
   async upload(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
@@ -44,7 +50,7 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
     while(true){const item=await reader.read();if(item.done)break;size+=item.value.length;if(size>10*1024*1024){await reader.cancel();return jsonResponse({error:"Upload too large"},413);}chunks.push(item.value);}
     const form=await new Request(request.url,{method:"POST",headers:request.headers,body:Buffer.concat(chunks)}).formData();
     row=await resolve(String(form.get("token")??""));
-    const caseState=await repo.getCase(row.case_id);if(!caseState||caseState.safety.status!=="ok")return jsonResponse({error:"Resident checks unavailable"},403);
+    const caseState=await repo.getCase(row.case_id);if(!caseState||caseState.safety.status!=="ok"||!caseState.nextChecks.some(c=>c.id===row!.check_id&&c.excluded===null))return jsonResponse({error:"Resident checks unavailable"},403);
     const answers=SafetyAnswers.safeParse(JSON.parse(String(form.get("safety")??"null")));
     if(form.get("consent")!=="true"||!answers.success||Object.values(answers.data).some(Boolean))return jsonResponse({error:"Consent and all four negative safety answers are required; keep away from hazards"},400);
     const files=[form.get("photo"),...(row.check_type==="meter_check"?[form.get("photo2")]:[])];

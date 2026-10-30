@@ -8,8 +8,8 @@ import {createAdapter} from "../src/llm/adapter";
 import sharp from "sharp";
 const state=JSON.parse(readFileSync(new URL("../../../fixtures/hero/state-05.json",import.meta.url),"utf8")) as EngineState;
 function memoryRepository():LinkRepository {
- const cases=new Map<string,EngineState>(),links=new Map<string,LinkRow>(),photos:PhotoRow[]=[];
- return {async getCase(id){return cases.get(id)??null;},async putCase(s){cases.set(s.caseId,s);},async insertLink(row){links.set(row.token_hash,row);},async getLink(hash){return links.get(hash)??null;},async claim(hash,at){const row=links.get(hash);if(!row||row.used_at)return false;row.used_at=at;return true;},async release(hash,at){const row=links.get(hash);if(row?.used_at===at)row.used_at=null;},async savePhoto(row,_bytes){photos.push(row);},async removePhoto(path){const i=photos.findIndex(p=>p.path===path);if(i>=0)photos.splice(i,1);},async saveObservation(_caseId,_obs){},async ghost(caseId,flatId,zone){return photos.find(p=>p.case_id===caseId&&p.flat_id===flatId&&p.zone===zone)?.path??null;},async signedUrl(path){return `https://private.example.invalid/${path}?signed=test`;}};
+ const owners=new Map<string,string>();const cases=new Map<string,EngineState>(),links=new Map<string,LinkRow>(),photos:PhotoRow[]=[];
+ return {async getCase(id){return cases.get(id)??null;},async ownerHash(id){return owners.get(id)??null;},async putCase(s,hash){cases.set(s.caseId,s);owners.set(s.caseId,hash!);},async insertLink(row){links.set(row.token_hash,row);},async getLink(hash){return links.get(hash)??null;},async claim(hash,at){const row=links.get(hash);if(!row||row.used_at)return false;row.used_at=at;return true;},async release(hash,at){const row=links.get(hash);if(row?.used_at===at)row.used_at=null;},async savePhoto(row,_bytes){photos.push(row);},async removePhoto(path){const i=photos.findIndex(p=>p.path===path);if(i>=0)photos.splice(i,1);},async saveObservation(_caseId,_obs){},async ghost(caseId,flatId,zone){return photos.find(p=>p.case_id===caseId&&p.flat_id===flatId&&p.zone===zone)?.path??null;},async signedUrl(path){return `https://private.example.invalid/${path}?signed=test`;}};
 }
 const secret="test-only-secret-32-characters-long";
 const request=(body:unknown)=>new Request("https://demo.example.invalid/api/link",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
@@ -43,4 +43,13 @@ it("A-T23 concurrent unreadable meter uploads consume once and return no guessed
  const responses=await Promise.all([handlers.upload(upload()),handlers.upload(upload())]);
  expect(responses.map(r=>r.status).sort()).toEqual([200,410]);
  const result=await responses.find(r=>r.status===200)!.json();expect(result.observations[0].meter).toBeNull();expect(result.observations[0].surface).toBe("unclear");expect(result.warnings.join(" ")).toContain("retake");
+});
+
+it("requires the owner's HttpOnly cookie before replacing an existing case or creating another link",async()=>{
+ const handlers=createLinkHandlers({repository:memoryRepository(),secret});
+ const body={caseId:state.caseId,checkId:"meter_check@502",flatId:"502",lang:"en",state};
+ const first=await handlers.link(request(body));expect(first.status).toBe(200);
+ const rejected=await handlers.link(request(body));expect(rejected.status).toBe(403);
+ const cookie=first.headers.get("set-cookie")!;expect(cookie).toContain("HttpOnly");
+ const own=request(body);own.headers.set("cookie",cookie.split(";")[0]!);expect((await handlers.link(own)).status).toBe(200);
 });

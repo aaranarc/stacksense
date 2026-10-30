@@ -4,9 +4,12 @@ begin;
 create table if not exists public.cases (
   id text primary key,
   building_id text not null,
+  owner_hash text not null check (length(owner_hash) = 64),
   state jsonb not null,
   created_at timestamptz not null default now()
 );
+-- Existing pre-owner deployments stay inaccessible until their operator assigns ownership.
+alter table public.cases add column if not exists owner_hash text;
 create table if not exists public.observations (
   case_id text not null references public.cases(id) on delete cascade,
   id text not null,
