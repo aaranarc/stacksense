@@ -20,3 +20,7 @@
 - `createCase` without `now` uses the Unix epoch, never the system clock. Callers supply real case time. States are rebuilt from evidence in log space so delayed or human-corrected labels replace earlier labels without double-counting.
 - The unchanged contract has no warnings or child-case fields: photo warnings use `recovery.flags`; `splitCases(state)` returns independent, contract-valid states linked by building/case prefix. The first complaint is the primary returned case; every case retains the evidence ledger for case splitting. Each posterior sums to one independently.
 - Evidence is counted once per eventKey; IDs retain the audit ledger. Complaints at other victims never update this victim. Upper-flat checks/denials and same-stack duct checks can inform the primary case. A-T07 adds safety before inference; no active checks are offered before the gate exists.
+
+## A-T07
+- Safety scans the complete ledger and incoming reports before event deduplication; a duplicate ID/event cannot hide a new hazard. Conflicting versions are preserved in the ledger while evidence still counts the event once. Hazards affect the whole building session, including case splits.
+- Emergency removes all checks and the Job Sheet and stops immediately. Unanswered questions retain incomplete status and no active checks. The keyword backstop intentionally follows the conservative literal pattern in the plan.

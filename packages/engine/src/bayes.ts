@@ -3,6 +3,7 @@ import { hypothesesForVictims } from "./hypotheses";
 import { hypothesisPriors, type Memory } from "./priors/archetypes";
 import { featuresOf, likelihoods, type Feature } from "./tables/likelihoods";
 import { createGraph } from "./building/graph";
+import { safetyOf } from "./safety";
 
 export type ObservationContext = { rain?: RainSeries; forecast?: RainSeries; photoLabels?: PhotoLabel[] };
 
@@ -68,12 +69,18 @@ export function splitCases(state: EngineState): EngineState[] {
 export function applyObservations(state: EngineState, observations: Observation[], ctx: ObservationContext = {}): EngineState {
   const parsed = Observation.array().safeParse(observations);
   if (!parsed.success) throw new Error(`Invalid observation: ${parsed.error.message}`);
+  // Safety scans all reports before deduplication or Bayesian inference.
+  const safety = safetyOf([...state.observations, ...parsed.data]);
   const labels = PhotoLabel.array().safeParse(ctx.photoLabels ?? []);
   if (!labels.success) throw new Error(`Invalid photo labels: ${labels.error.message}`);
   const allObs = [...state.observations];
-  for (const obs of parsed.data) if (!allObs.some(o => o.id === obs.id)) allObs.push(obs);
+  for (const obs of parsed.data) if (!allObs.some(o => JSON.stringify(o) === JSON.stringify(obs))) allObs.push(obs);
   const photoLabels = new Map(state.photoLabels.map(p => [p.photoId, p]));
   for (const label of labels.data) photoLabels.set(label.photoId, label);
-  const next = { ...state, observations: allObs, photoLabels: [...photoLabels.values()] };
+  const next: EngineState = { ...state, observations: allObs, photoLabels: [...photoLabels.values()], safety,
+    nextChecks: safety.status === "ok" ? state.nextChecks : [],
+    stop: safety.status === "emergency" ? { stopped: true, reason: "emergency" } : { stopped: false, reason: null },
+    jobSheet: safety.status === "ok" ? state.jobSheet : null,
+  };
   return splitCases(next)[0] ?? next;
 }
