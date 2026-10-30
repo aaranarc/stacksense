@@ -1,0 +1,895 @@
+{
+  "caseId": "hero-11",
+  "now": "2026-10-31T04:30:00.000Z",
+  "building": {
+    "id": "block-a",
+    "name": "Block A",
+    "region": "IN",
+    "archetype": "MUMBAI_RCC_1990S",
+    "lat": 19.076,
+    "lon": 72.8777,
+    "floors": 6,
+    "hasTerrace": true,
+    "flats": [
+      {
+        "id": "101",
+        "floor": 1,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "102",
+        "floor": 1,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "201",
+        "floor": 2,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "202",
+        "floor": 2,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "301",
+        "floor": 3,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "302",
+        "floor": 3,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "401",
+        "floor": 4,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "402",
+        "floor": 4,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "501",
+        "floor": 5,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "502",
+        "floor": 5,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": true,
+        "access": "open"
+      },
+      {
+        "id": "601",
+        "floor": 6,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "602",
+        "floor": 6,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      }
+    ],
+    "stacks": [
+      {
+        "id": "S-x02",
+        "kind": "duct",
+        "flatIds": [
+          "102",
+          "202",
+          "302",
+          "402",
+          "502",
+          "602"
+        ]
+      }
+    ]
+  },
+  "observations": [
+    {
+      "id": "ceiling",
+      "flatId": "402",
+      "eventKey": "ceiling",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "complaint",
+      "zone": "ceiling",
+      "surface": "damp_stain",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P402"
+      ],
+      "sourceMessageIds": [
+        "msg-ceiling"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    },
+    {
+      "id": "window",
+      "flatId": "202",
+      "eventKey": "window",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "complaint",
+      "zone": "window_perimeter",
+      "surface": "efflorescence",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P202"
+      ],
+      "sourceMessageIds": [
+        "msg-window"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo report after heavy rain"
+    },
+    {
+      "id": "denial",
+      "flatId": "502",
+      "eventKey": "denial",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "denial",
+      "zone": "floor",
+      "surface": "dry",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [],
+      "sourceMessageIds": [
+        "msg-denial"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo: our floor is dry"
+    },
+    {
+      "id": "duct",
+      "flatId": "302",
+      "eventKey": "duct",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "check_result",
+      "zone": "duct_wall",
+      "surface": "dry",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": "duct-302",
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P302"
+      ],
+      "sourceMessageIds": [
+        "msg-duct"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    },
+    {
+      "id": "meter",
+      "flatId": "502",
+      "eventKey": "meter",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "meter_reading",
+      "zone": "meter",
+      "surface": "unclear",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": "meter-502",
+      "meter": {
+        "start": 120,
+        "end": 120,
+        "minutes": 10
+      },
+      "moisture": null,
+      "finding": null,
+      "photoIds": [],
+      "sourceMessageIds": [
+        "msg-meter"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    },
+    {
+      "id": "trap",
+      "flatId": "502",
+      "eventKey": "trap",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "check_result",
+      "zone": "trap_grout",
+      "surface": "crack",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": "trap-502",
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P502"
+      ],
+      "sourceMessageIds": [
+        "msg-trap"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    },
+    {
+      "id": "repair",
+      "flatId": "502",
+      "eventKey": "repair",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "repair_done",
+      "zone": "trap_grout",
+      "surface": "dry",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [],
+      "sourceMessageIds": [
+        "msg-repair"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    },
+    {
+      "id": "recapture",
+      "flatId": "402",
+      "eventKey": "recapture",
+      "at": "2026-11-14T04:30:00.000Z",
+      "kind": "recapture",
+      "zone": "ceiling",
+      "surface": "dry",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P402"
+      ],
+      "sourceMessageIds": [
+        "msg-recapture"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    }
+  ],
+  "photoLabels": [
+    {
+      "photoId": "P402",
+      "surface": "damp_stain",
+      "zone": "ceiling",
+      "quality": "ok",
+      "boxes": [
+        {
+          "x": 0.55,
+          "y": 0.1,
+          "w": 0.3,
+          "h": 0.3,
+          "label": "Duct corner stain"
+        }
+      ],
+      "meterDigits": null,
+      "humanCorrected": false
+    },
+    {
+      "photoId": "P202",
+      "surface": "efflorescence",
+      "zone": "external_wall",
+      "quality": "ok",
+      "boxes": [],
+      "meterDigits": null,
+      "humanCorrected": false
+    },
+    {
+      "photoId": "P302",
+      "surface": "dry",
+      "zone": "duct_wall",
+      "quality": "ok",
+      "boxes": [],
+      "meterDigits": null,
+      "humanCorrected": false
+    },
+    {
+      "photoId": "P502",
+      "surface": "crack",
+      "zone": "trap_grout",
+      "quality": "ok",
+      "boxes": [
+        {
+          "x": 0.3,
+          "y": 0.4,
+          "w": 0.4,
+          "h": 0.2,
+          "label": "Cracked grout"
+        }
+      ],
+      "meterDigits": null,
+      "humanCorrected": false
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "upper_wet_area",
+      "family": "upper_wet_area",
+      "level": "component",
+      "label": "502 trap grout (probable)",
+      "flatId": "502",
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "upper_supply",
+      "family": "upper_supply",
+      "level": "area",
+      "label": "502 supply pipe",
+      "flatId": "502",
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "shared_shaft",
+      "family": "shared_shaft",
+      "level": "area",
+      "label": "Shared shaft",
+      "flatId": null,
+      "stackId": "S-x02",
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "facade_window",
+      "family": "facade_window",
+      "level": "area",
+      "label": "202 west window area",
+      "flatId": "202",
+      "stackId": null,
+      "orientation": "W",
+      "parentId": null
+    },
+    {
+      "id": "roof_terrace",
+      "family": "roof_terrace",
+      "level": "area",
+      "label": "Roof / terrace",
+      "flatId": null,
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "condensation",
+      "family": "condensation",
+      "level": "area",
+      "label": "Condensation",
+      "flatId": null,
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "other",
+      "family": "other",
+      "level": "area",
+      "label": "Other",
+      "flatId": null,
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    }
+  ],
+  "posterior": {
+    "upper_wet_area": 0.87,
+    "upper_supply": 0.02,
+    "shared_shaft": 0.04,
+    "facade_window": 0.04,
+    "roof_terrace": 0.01,
+    "condensation": 0.01,
+    "other": 0.01
+  },
+  "safety": {
+    "status": "ok",
+    "reasons": [
+      "All four safety questions answered no in demo data"
+    ],
+    "actions": []
+  },
+  "nextChecks": [],
+  "stop": {
+    "stopped": true,
+    "reason": "Enough evidence to choose the trade; verify the probable source on site."
+  },
+  "secondOpinion": {
+    "verdict": "no_objection",
+    "allowedLevel": "component",
+    "claim": "Probable trap-grout route — verify on site",
+    "supports": [
+      "302 duct dry",
+      "502 meter still"
+    ],
+    "challenges": [
+      "Dry tiles do not rule out a sunken-slab leak"
+    ],
+    "unknown": [
+      "Flood-test confirmation"
+    ],
+    "wouldChange": [
+      "Trap photo and on-site flood test"
+    ],
+    "source": "fallback"
+  },
+  "jobSheet": {
+    "caseId": "hero-08",
+    "region": "IN",
+    "probableSource": "502 trap grout (probable)",
+    "level": "component",
+    "send": [
+      {
+        "trade": "waterproofer_tiler",
+        "why": "Wet-area route; verify with a flood test."
+      }
+    ],
+    "dontSend": [
+      {
+        "trade": "plumber",
+        "why": "Meter still weakens supply leakage."
+      }
+    ],
+    "access": "502 bathroom",
+    "verifyOnSite": [
+      "Controlled flood test by a professional"
+    ],
+    "notJustifiedYet": [
+      "Do not break 402’s ceiling"
+    ],
+    "safetyFlags": [],
+    "evidencePhotoIds": [
+      "P402",
+      "P302",
+      "P502"
+    ],
+    "responsibilityLinks": [],
+    "timestampTrail": []
+  },
+  "recovery": {
+    "repair": "done",
+    "dry": "unknown",
+    "paint": "not_ready",
+    "day14DueAt": "2026-11-14T04:30:00.000Z",
+    "reopened": false,
+    "flags": [
+      "Looks better ≠ dry. Only a moisture reading can mark this ready to paint."
+    ]
+  },
+  "prediction": {
+    "sameStack": [
+      {
+        "flatId": "302",
+        "why": "One-minute inspection photo, not a repair instruction."
+      },
+      {
+        "flatId": "602",
+        "why": "One-minute inspection photo, not a repair instruction."
+      }
+    ],
+    "forecastRechecks": [
+      {
+        "flatId": "202",
+        "orientation": "W",
+        "afterDate": "2026-11-05",
+        "why": "Re-check after forecast heavy west-facing rain."
+      }
+    ],
+    "seasonal": [],
+    "memory": {
+      "upper_wet_area": 1,
+      "upper_supply": 0,
+      "shared_shaft": 0,
+      "facade_window": 0,
+      "roof_terrace": 0,
+      "condensation": 0,
+      "other": 0
+    }
+  },
+  "trace": [
+    {
+      "step": 1,
+      "observationId": "window",
+      "changes": [
+        {
+          "hypothesisId": "upper_wet_area",
+          "before": 0.14285714285714285,
+          "after": 0.32,
+          "why": "Initial reports leave several probable sources."
+        },
+        {
+          "hypothesisId": "upper_supply",
+          "before": 0.14285714285714285,
+          "after": 0.19,
+          "why": "Initial reports leave several probable sources."
+        },
+        {
+          "hypothesisId": "shared_shaft",
+          "before": 0.14285714285714285,
+          "after": 0.31,
+          "why": "Initial reports leave several probable sources."
+        },
+        {
+          "hypothesisId": "facade_window",
+          "before": 0.14285714285714285,
+          "after": 0.1,
+          "why": "Initial reports leave several probable sources."
+        },
+        {
+          "hypothesisId": "roof_terrace",
+          "before": 0.14285714285714285,
+          "after": 0.03,
+          "why": "Initial reports leave several probable sources."
+        },
+        {
+          "hypothesisId": "condensation",
+          "before": 0.14285714285714285,
+          "after": 0.03,
+          "why": "Initial reports leave several probable sources."
+        },
+        {
+          "hypothesisId": "other",
+          "before": 0.14285714285714285,
+          "after": 0.02,
+          "why": "Initial reports leave several probable sources."
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "observationId": "window",
+      "changes": [
+        {
+          "hypothesisId": "upper_wet_area",
+          "before": 0.32,
+          "after": 0.31,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        },
+        {
+          "hypothesisId": "upper_supply",
+          "before": 0.19,
+          "after": 0.18,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        },
+        {
+          "hypothesisId": "shared_shaft",
+          "before": 0.31,
+          "after": 0.31,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        },
+        {
+          "hypothesisId": "facade_window",
+          "before": 0.1,
+          "after": 0.15,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        },
+        {
+          "hypothesisId": "roof_terrace",
+          "before": 0.03,
+          "after": 0.02,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        },
+        {
+          "hypothesisId": "condensation",
+          "before": 0.03,
+          "after": 0.02,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        },
+        {
+          "hypothesisId": "other",
+          "before": 0.02,
+          "after": 0.01,
+          "why": "202 follows west-facing rain; assess the façade separately."
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "observationId": "denial",
+      "changes": [
+        {
+          "hypothesisId": "upper_wet_area",
+          "before": 0.31,
+          "after": 0.3,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        },
+        {
+          "hypothesisId": "upper_supply",
+          "before": 0.18,
+          "after": 0.18,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        },
+        {
+          "hypothesisId": "shared_shaft",
+          "before": 0.31,
+          "after": 0.31,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        },
+        {
+          "hypothesisId": "facade_window",
+          "before": 0.15,
+          "after": 0.16,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        },
+        {
+          "hypothesisId": "roof_terrace",
+          "before": 0.02,
+          "after": 0.02,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        },
+        {
+          "hypothesisId": "condensation",
+          "before": 0.02,
+          "after": 0.02,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        },
+        {
+          "hypothesisId": "other",
+          "before": 0.01,
+          "after": 0.01,
+          "why": "Dry floor tiles barely weaken a sunken-slab leak."
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "observationId": "duct",
+      "changes": [
+        {
+          "hypothesisId": "upper_wet_area",
+          "before": 0.3,
+          "after": 0.6,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        },
+        {
+          "hypothesisId": "upper_supply",
+          "before": 0.18,
+          "after": 0.22,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        },
+        {
+          "hypothesisId": "shared_shaft",
+          "before": 0.31,
+          "after": 0.06,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        },
+        {
+          "hypothesisId": "facade_window",
+          "before": 0.16,
+          "after": 0.08,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        },
+        {
+          "hypothesisId": "roof_terrace",
+          "before": 0.02,
+          "after": 0.02,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        },
+        {
+          "hypothesisId": "condensation",
+          "before": 0.02,
+          "after": 0.01,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        },
+        {
+          "hypothesisId": "other",
+          "before": 0.01,
+          "after": 0.01,
+          "why": "302 duct dry: shared shaft weakens; 202 is a separate façade case."
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "observationId": "meter",
+      "changes": [
+        {
+          "hypothesisId": "upper_wet_area",
+          "before": 0.6,
+          "after": 0.8,
+          "why": "502 meter still weakens supply leakage."
+        },
+        {
+          "hypothesisId": "upper_supply",
+          "before": 0.22,
+          "after": 0.03,
+          "why": "502 meter still weakens supply leakage."
+        },
+        {
+          "hypothesisId": "shared_shaft",
+          "before": 0.06,
+          "after": 0.06,
+          "why": "502 meter still weakens supply leakage."
+        },
+        {
+          "hypothesisId": "facade_window",
+          "before": 0.08,
+          "after": 0.07,
+          "why": "502 meter still weakens supply leakage."
+        },
+        {
+          "hypothesisId": "roof_terrace",
+          "before": 0.02,
+          "after": 0.02,
+          "why": "502 meter still weakens supply leakage."
+        },
+        {
+          "hypothesisId": "condensation",
+          "before": 0.01,
+          "after": 0.01,
+          "why": "502 meter still weakens supply leakage."
+        },
+        {
+          "hypothesisId": "other",
+          "before": 0.01,
+          "after": 0.01,
+          "why": "502 meter still weakens supply leakage."
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "observationId": "trap",
+      "changes": [
+        {
+          "hypothesisId": "upper_wet_area",
+          "before": 0.8,
+          "after": 0.87,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        },
+        {
+          "hypothesisId": "upper_supply",
+          "before": 0.03,
+          "after": 0.02,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        },
+        {
+          "hypothesisId": "shared_shaft",
+          "before": 0.06,
+          "after": 0.04,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        },
+        {
+          "hypothesisId": "facade_window",
+          "before": 0.07,
+          "after": 0.04,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        },
+        {
+          "hypothesisId": "roof_terrace",
+          "before": 0.02,
+          "after": 0.01,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        },
+        {
+          "hypothesisId": "condensation",
+          "before": 0.01,
+          "after": 0.01,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        },
+        {
+          "hypothesisId": "other",
+          "before": 0.01,
+          "after": 0.01,
+          "why": "Cracked trap grout supports a probable component, not certainty."
+        }
+      ]
+    }
+  ]
+}
