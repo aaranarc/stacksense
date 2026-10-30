@@ -1,0 +1,3 @@
+import type { EngineState } from '@stacksense/contracts';
+import { Drawer } from '../layout/Drawer';
+export function LedgerDrawer({state,onClose}:{state:EngineState;onClose:()=>void}) {return <Drawer title="Evidence ledger" onClose={onClose}><p>Recorded evidence · {state.observations.length} observations</p>{state.observations.map(o=><article key={o.id} className="feed-row"><strong>{o.flatId??'Unassigned'} · {o.kind.replaceAll('_',' ')}</strong><p><time dateTime={o.at}>{new Date(o.at).toLocaleString('en-GB',{timeZone:'UTC'})} UTC</time> · {o.provenance}</p><p>Source messages: {o.sourceMessageIds.join(', ')||'None'}</p>{o.photoIds.some(id=>state.photoLabels.some(p=>p.photoId===id&&p.humanCorrected))&&<p>Human-corrected label</p>}</article>)}</Drawer>;}

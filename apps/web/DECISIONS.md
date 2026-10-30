@@ -1,5 +1,10 @@
 # App decisions
 
+- B-T11 review: a new same-stack inspection request takes visual precedence over an old passed check, so both 302 and 602 are amber at A9 step 11. The fixture simulator also exposes the remaining A6 signature for later work; its answers are labelled simulated, not physical model results.
+
+- B-T11: Fixture images are monochrome SVG illustrations, clearly labelled as demo illustrations rather than real photos. They support the whole-view, crop and annotation interactions without making claims about private photos. Confirming a label records the human marker without changing odds; changing its surface or zone reruns the adapter. Mock corrections choose a predefined weaker-evidence state, never calculate probabilities in the UI.
+- B-T11: The feed groups by `eventKey`, retains attached photos, and shows the latest observation per incident. Its header opens a small evidence ledger; the fuller timeline remains the later B-T25 task.
+
 - B-T10: Sender assignment follows source-message IDs from the locally parsed chat. Cached demo observations additionally use stable `msg-S07` style IDs. Assignment does not change unrelated incidents or discard their existing flat mapping.
 
 - B-T09: A's browser preprocessing entry point currently exports no helpers. The local mock follows parse → pseudonymise → stripExif mock → qualityCheck mock → cached read. Pass-through photos never reach a live endpoint: the import is blocked unless the API mock flag is true. Demo results explicitly state they are not interpretations of uploaded evidence. The live path needs A's privacy helpers before enabling it.

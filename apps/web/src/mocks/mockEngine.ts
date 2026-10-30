@@ -1,5 +1,5 @@
 import { EngineState } from '@stacksense/contracts';
-import type { Building, Observation, PhotoLabel, RainSeries, SecondOpinion } from '@stacksense/contracts';
+import type { Building, Hypothesis, RankedCheck, Observation, PhotoLabel, RainSeries, SecondOpinion } from '@stacksense/contracts';
 import s00 from './states/state-00.json';
 import s01 from './states/state-01.json';
 import s02 from './states/state-02.json';
@@ -21,7 +21,7 @@ export const mockEngine={
  createCase(building:Building,opts?:{memory?:EngineState['prediction']['memory'];now?:string}):EngineState { return EngineState.parse({...heroStates[0],building,now:opts?.now??heroStates[0]!.now}); },
  applyObservations(state:EngineState,obs:Observation[],ctx?:{rain?:RainSeries;forecast?:RainSeries;photoLabels?:PhotoLabel[]}):EngineState {
   if(obs.some(o=>o.hazards.length)) return structuredClone(emergencyState);
-  if(ctx?.photoLabels?.some(p=>p.humanCorrected && p.surface!=='crack' && p.photoId==='P502')) return EngineState.parse({...corrected,photoLabels:ctx.photoLabels,observations:obs});
+  if(ctx?.photoLabels?.some(p=>{const original=heroStates[8]!.photoLabels.find(o=>o.photoId===p.photoId);return p.humanCorrected&&original&&(p.surface!==original.surface||p.zone!==original.zone);})) return EngineState.parse({...corrected,photoLabels:ctx.photoLabels,observations:obs});
   const i=heroStates.findIndex(s=>s.caseId===state.caseId);
   const next=structuredClone(heroStates[Math.min(Math.max(i,0)+1,11)]!);
   // Sender remapping updates the matching event without duplicating it.
@@ -33,4 +33,9 @@ export const mockEngine={
  applySecondOpinion(state:EngineState,draft:SecondOpinion|null):EngineState {return {...state,secondOpinion:draft};},
  whatIf(_state:EngineState,_patches:{observationId:string;patch:Partial<Observation>}[]):EngineState {return EngineState.parse(moved);},
  scenarios:{happy:{title:'Happy path',building:heroStates[0]!.building,steps:heroStates.slice(1).map(s=>s.observations)}},
+ simulateBuilding(_seed:number,opts?:{hiddenFamily?:Hypothesis['family']}):{building:Building;truth:Hypothesis;answer(check:RankedCheck):Observation} {
+  const fixture=heroStates[9]!;
+  const truth=fixture.hypotheses.find(h=>h.family===(opts?.hiddenFamily??'upper_wet_area'))!;
+  return {building:structuredClone(fixture.building),truth:structuredClone(truth),answer(check){const observation=fixture.observations.find(o=>o.checkId===check.id)??fixture.observations[0]!;return {...structuredClone(observation),checkId:check.id,flatId:check.targetFlatId,provenance:'simulated'};}};
+ },
 };

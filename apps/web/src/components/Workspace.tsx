@@ -1,30 +1,50 @@
 'use client';
-import { SafetyBoundary } from './safety/SafetyBoundary';
-
 import { useState } from 'react';
-import type { ReadResult,ChatMessage } from '@stacksense/contracts';
-import { PasteChat } from './import/PasteChat';
-import { SenderChips } from './import/SenderChips';
-import { remapSender } from '../lib/assignSender';
+import type { ChatMessage,ReadResult } from '@stacksense/contracts';
 import { engine,demo } from '../lib/adapters';
+import { remapSender } from '../lib/assignSender';
+import { correctPhoto } from '../lib/correctPhoto';
 import { Shell } from './layout/Shell';
 import { TopBar } from './layout/TopBar';
 import { RightTabs } from './tabs/RightTabs';
 import { CrossSection } from './building/CrossSection';
 import { SourceBars } from './odds/SourceBars';
 import { NextCheck } from './checks/NextCheck';
+import { SafetyBoundary } from './safety/SafetyBoundary';
+import { PasteChat } from './import/PasteChat';
+import { SenderChips } from './import/SenderChips';
+import { CaseFeed } from './feed/CaseFeed';
+import { PhotoViewer } from './photo/PhotoViewer';
 export function Workspace() {
  const [state,setState]=useState(()=>engine.createCase(demo.states[0]!.building));
  const [messages,setMessages]=useState<ChatMessage[]>([]);
  const [read,setRead]=useState<ReadResult|null>(null);
  const [judge,setJudge]=useState(false);
  const [flat,setFlat]=useState<string|null>(null);
- const reset=()=>{setState(engine.createCase(demo.states[0]!.building));setFlat(null);setRead(null);};
- return <><TopBar judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{setState(id==='electrical_hazard'?structuredClone(demo.emergency):engine.createCase(demo.states[0]!.building));setFlat(null);}}/><div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{demo.enabled?'Demo data · Cached':'Live'}</p></div><SafetyBoundary state={state}>{judge&&<aside className="judge-panel panel" aria-label="Judge Mode"><strong>Hero story · {state.caseId}</strong><button className="primary" onClick={()=>setState(engine.applyObservations(state,[]))}>Next step ▸</button><button onClick={reset}>Reset story</button></aside>}<Shell feed={<><PasteChat mode={read?.mode??'cached'} onRead={(result,chatMessages)=>{setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(state.building),result.observations,{photoLabels:result.photoLabels}));}}/>{read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}{flat&&<p>Showing flat {flat}</p>}{flat&&<button onClick={()=>setFlat(null)}>Clear flat filter</button>}</>} building={<><div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span></div><CrossSection state={state} selected={flat} onSelect={setFlat}/></>} analysis={<><SourceBars state={state}/><NextCheck state={state} onDemoStep={()=>setState(engine.applyObservations(state,[]))}/><section className="panel opinion-line">Second Opinion: {state.secondOpinion?.claim??'Not reviewed yet.'}</section><RightTabs/></>}/></SafetyBoundary></>;
+ const [photo,setPhoto]=useState<string|null>(null);
+ const [resetKey,setResetKey]=useState(0);
+ const reset=()=>{setState(engine.createCase(demo.states[0]!.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);};
+ const advance=()=>setState(engine.applyObservations(state,[]));
+ const mode=read?.mode??(demo.enabled?'cached':'fallback');
+ return <>
+  <TopBar judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
+  <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{mode==='cached'?'Cached':mode==='live'?'Live':'Fallback'}{demo.enabled?' · Demo data':''}</p></div>
+  <SafetyBoundary state={state}>
+   {judge&&<aside className="judge-panel panel" aria-label="Judge Mode"><strong>Hero story · {state.caseId}</strong><button className="primary" onClick={advance}>Next step ▸</button><button onClick={reset}>Reset story</button></aside>}
+   <Shell feed={<>
+    <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} onRead={(result,chatMessages)=>{setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
+    {read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}
+    {flat&&<p>Showing flat {flat} <button onClick={()=>setFlat(null)}>Clear flat filter</button></p>}
+    <CaseFeed state={state} selectedFlat={flat} onPhoto={setPhoto}/>
+   </>} building={<>
+    <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span></div>
+    <CrossSection state={state} selected={flat} onSelect={setFlat}/>
+   </>} analysis={<>
+    <SourceBars state={state}/><NextCheck state={state} onDemoStep={advance}/>
+    <section className="panel opinion-line">{state.secondOpinion?.verdict==='review_failed'?'Second Opinion unavailable — treat this result as unreviewed.':`Second Opinion: ${state.secondOpinion?.source==='fallback'?'Fallback · ':''}${state.secondOpinion?.claim??'Not reviewed yet.'}`}</section>
+    <RightTabs/>
+   </>}/>
+   {photo&&<PhotoViewer key={photo} photoId={photo} label={state.photoLabels.find(p=>p.photoId===photo)} onClose={()=>setPhoto(null)} onCorrect={(label,changed)=>setState(correctPhoto(state,label,changed))}/>}
+  </SafetyBoundary>
+ </>;
 }
-
-
-
-
-
-
