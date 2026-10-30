@@ -18,12 +18,7 @@ export { applySecondOpinion } from "./secondOpinion";
 
 export { whatIf } from "./whatIf";
 
-export function simulateBuilding(
-  _seed: number,
-  _opts?: { hiddenFamily?: SourceFamilyValue },
-): { building: Building; truth: Hypothesis; answer(check: RankedCheck): Observation } {
-  throw new Error("not implemented");
-}
+export { simulateBuilding } from "./sim";
 
 export { buildJobSheet } from "./jobSheet";
 export { recoveryOf, moistureThresholds } from "./recovery";
