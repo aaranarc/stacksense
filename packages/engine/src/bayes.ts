@@ -1,4 +1,5 @@
 import { Building, Observation, PhotoLabel, SourceFamily, type EngineState, type Hypothesis, type RainSeries } from "@stacksense/contracts";
+import { predict, localizeComponents, type MemoryState } from "./predict";
 import { rainFeature, forecastRechecks, type WeatherState } from "./rain";
 import { hypothesesForVictims } from "./hypotheses";
 import { hypothesisPriors, type Memory } from "./priors/archetypes";
@@ -26,7 +27,7 @@ export function updatePosterior(prior: Record<string, number>, hypotheses: Hypot
   return Object.fromEntries(weights.map(([id, n]) => [id, n / total]));
 }
 
-export function createCase(building: Building, opts: { memory?: Memory; now?: string } = {}): EngineState {
+export function createCase(building: Building, opts: { memory?: Memory; now?: string } = {}): MemoryState {
   const parsed = Building.safeParse(building);
   if (!parsed.success) throw new Error(`Invalid building: ${parsed.error.message}`);
   const now = opts.now ?? "1970-01-01T00:00:00.000Z";
@@ -34,7 +35,7 @@ export function createCase(building: Building, opts: { memory?: Memory; now?: st
   const memory = Object.fromEntries(SourceFamily.options.map(f => [f, opts.memory?.[f] ?? 0]));
   for (const n of Object.values(memory)) if (!Number.isFinite(n) || n < 0) throw new Error("Invalid memory count");
   return {
-    caseId: building.id, now, building: parsed.data, observations: [], photoLabels: [], hypotheses: [], posterior: {},
+    memoryPrior: memory, caseId: building.id, now, building: parsed.data, observations: [], photoLabels: [], hypotheses: [], posterior: {},
     safety: { status: "incomplete", reasons: ["Hazard questions unanswered"], actions: [] }, nextChecks: [],
     stop: { stopped: false, reason: null }, secondOpinion: null, jobSheet: null,
     recovery: { repair: "not_started", dry: "unknown", paint: "not_ready", day14DueAt: null, reopened: false, flags: [] },
@@ -48,7 +49,7 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   const victim = state.building.flats.find(f => f.id === victimId)!;
   const lateral = state.observations.some(o => o.kind === "professional_finding" && o.finding?.family === "upper_wet_area" && state.building.flats.some(f => f.id === o.flatId && f.floor === victim.floor + 1 && f.position !== victim.position));
   const group = hypothesesForVictims(state.building, [victimId], { caseId: baseId, lateral })[0]!;
-  let posterior = hypothesisPriors(state.building, group, state.prediction.memory);
+  let posterior = hypothesisPriors(state.building, group, (state as MemoryState).memoryPrior ?? state.prediction.memory);
   const graph = createGraph(state.building);
   const aboveId = graph.above(victimId)?.id;
   const stackIds = new Set(graph.sameStack(victimId).map(f => f.id));
@@ -85,6 +86,8 @@ function forVictim(state: EngineState, victimId: string): EngineState {
   const next = { ...state, caseId: group.caseId, hypotheses: group.hypotheses, posterior, trace,
     secondOpinion: state.caseId === group.caseId ? state.secondOpinion : null,
     recovery: { ...state.recovery, flags: [...state.recovery.flags.filter(f => !f.startsWith("Photo ")), ...warnings] } };
+  next.posterior = localizeComponents(next);
+  next.prediction = predict(next, (state as MemoryState).memoryPrior ?? {});
   const forecast = (state as WeatherState).weather?.forecast;
   if (forecast) next.prediction = { ...next.prediction, forecastRechecks: forecastRechecks(next, forecast) };
   const recovered = { ...next, recovery: recoveryOf(next) };

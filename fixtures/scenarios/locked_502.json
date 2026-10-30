@@ -269,6 +269,15 @@
     ]
   ],
   "state": {
+    "memoryPrior": {
+      "upper_wet_area": 0,
+      "upper_supply": 0,
+      "shared_shaft": 0,
+      "facade_window": 0,
+      "roof_terrace": 0,
+      "condensation": 0,
+      "other": 0
+    },
     "caseId": "block-a:402",
     "now": "2026-10-30T16:30:00.000Z",
     "building": {

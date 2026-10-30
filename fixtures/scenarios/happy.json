@@ -418,6 +418,15 @@
     "source": "fallback"
   },
   "state": {
+    "memoryPrior": {
+      "upper_wet_area": 0,
+      "upper_supply": 0,
+      "shared_shaft": 0,
+      "facade_window": 0,
+      "roof_terrace": 0,
+      "condensation": 0,
+      "other": 0
+    },
     "caseId": "block-a:402",
     "now": "2026-10-30T16:30:00.000Z",
     "building": {
@@ -923,9 +932,9 @@
       }
     ],
     "posterior": {
-      "402:upper_wet_area@502": 0.9669714189457522,
+      "402:upper_wet_area@502": 0.09669714189457523,
       "402:nahani_trap@502": 0,
-      "402:tile_grout@502": 0,
+      "402:tile_grout@502": 0.870274277051177,
       "402:sunken_slab_membrane@502": 0,
       "402:wc_connection@502": 0,
       "402:upper_supply@502": 0.007904699760432324,
@@ -963,7 +972,7 @@
         "targetFlatId": "302",
         "effortMin": 0.5,
         "accessPenalty": 1,
-        "expectedBits": 0.042240105236753756,
+        "expectedBits": 0.04224010523675381,
         "score": 0,
         "why": "302 shares the duct; a dry duct would rule against a shaft leak",
         "excluded": "already checked",
@@ -979,7 +988,7 @@
         "targetFlatId": "502",
         "effortMin": 120,
         "accessPenalty": 1,
-        "expectedBits": 0.11048241838031159,
+        "expectedBits": 0.1104824183803117,
         "score": 0,
         "why": "dye test at 502 tests the remaining explanations",
         "excluded": "can't change the action",
@@ -995,7 +1004,7 @@
         "targetFlatId": "502",
         "effortMin": 1440,
         "accessPenalty": 1,
-        "expectedBits": 0.11048241838031159,
+        "expectedBits": 0.1104824183803117,
         "score": 0,
         "why": "flood test at 502 tests the remaining explanations",
         "excluded": "can't change the action",
@@ -1011,7 +1020,7 @@
         "targetFlatId": "402",
         "effortMin": 60,
         "accessPenalty": 1,
-        "expectedBits": 0.15715461083422116,
+        "expectedBits": 0.15715461083422122,
         "score": 0,
         "why": "inspect at 402 tests the remaining explanations",
         "excluded": "can't change the action",
@@ -1027,7 +1036,7 @@
         "targetFlatId": "502",
         "effortMin": 10,
         "accessPenalty": 1,
-        "expectedBits": 0.040888643508826844,
+        "expectedBits": 0.04088864350882704,
         "score": 0,
         "why": "502 has a meter; still versus moving readings distinguish a supply leak",
         "excluded": "already checked",
@@ -1075,7 +1084,7 @@
         "targetFlatId": "502",
         "effortMin": 1,
         "accessPenalty": 1,
-        "expectedBits": 0.0037331808590010396,
+        "expectedBits": 0.003733180859001095,
         "score": 0,
         "why": "502 bathroom trap/grout may help locate the probable wet-area defect",
         "excluded": "already checked",
@@ -1175,9 +1184,20 @@
       "flags": []
     },
     "prediction": {
-      "sameStack": [],
+      "sameStack": [
+        {
+          "flatId": "302",
+          "why": "same stack as 502 wet-area defect — 1-minute inspection photo"
+        },
+        {
+          "flatId": "602",
+          "why": "same stack as 502 wet-area defect — 1-minute inspection photo"
+        }
+      ],
       "forecastRechecks": [],
-      "seasonal": [],
+      "seasonal": [
+        "Before monsoon: check W window seals on x02 flats"
+      ],
       "memory": {
         "upper_wet_area": 0,
         "upper_supply": 0,

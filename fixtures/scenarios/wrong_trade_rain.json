@@ -3281,6 +3281,15 @@
     ]
   },
   "state": {
+    "memoryPrior": {
+      "upper_wet_area": 0,
+      "upper_supply": 0,
+      "shared_shaft": 0,
+      "facade_window": 0,
+      "roof_terrace": 0,
+      "condensation": 0,
+      "other": 0
+    },
     "caseId": "block-a:202",
     "now": "2026-10-30T23:00:00.000Z",
     "building": {
@@ -3877,7 +3886,9 @@
           "why": "re-check 202 after Tue heavy rain — W wall"
         }
       ],
-      "seasonal": [],
+      "seasonal": [
+        "Before monsoon: check W window seals on x02 flats"
+      ],
       "memory": {
         "upper_wet_area": 0,
         "upper_supply": 0,

@@ -70,3 +70,8 @@
 - Scenario entries optionally include photoLabels and a scripted review so the dark-photo and component-evidence scenarios work without changing the shared contract. All scenario observations are simulated and titles disclose demo data.
 - A professional finding in a diagonal upper flat enables lateral candidates and supplies an explicit high-likelihood finding update (prototype .999/.001); generic reports never identify a diagonal flat by guesswork. The hypothesis generator itself keeps its existing optional lateral interface.
 - The break-it entry is a deterministic seed template until A-T22 replaces its building/steps with the simulator. This preserves task order; no simulator implementation is claimed in A-T20.
+
+## A-T21
+- Specific component evidence assigns 90% of the parent area's mass to the matching component and leaves 10% on the area, a prototype localization assumption pending contractor review. Parent-plus-child mass is unchanged and all mutually exclusive entries still sum to one. The reviewer never chooses these numbers.
+- Prediction requires a professional finding or component probability >=0.8 with no objection. Diagnostic duct photos do not count as completed preventive inspections; this is why hero 302 is still suggested alongside 602. Explicit inspection/professional records suppress repeat suggestions. Prevention is inspection only.
+- Memory is seed counts plus unique professional-finding event keys, never incremented by replay. Engine-only memoryPrior preserves the initial Dirichlet seed through whatIf; current-case findings are not added back into their own priors. Seasonal advice is derived only from this building's recorded cases.

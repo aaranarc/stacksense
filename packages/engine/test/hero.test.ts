@@ -42,6 +42,6 @@ describe("A-T11 hero A9 steps 1–6", () => {
     expect(snapshots[9]?.jobSheet?.send.map(t => t.trade)).toContain("waterproofer_tiler");
     expect(snapshots[10]?.recovery.repair).toBe("done");
     expect(snapshots[10]?.recovery.flags).toContain("looks better ≠ dry");
-    expect(snapshots[11]?.prediction.sameStack).toEqual([]);
+    expect(snapshots[11]?.prediction.sameStack.map(f=>f.flatId)).toEqual(["302","602"]);
   });
 });

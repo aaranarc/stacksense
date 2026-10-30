@@ -4,6 +4,7 @@ import { stopRule } from "./stop";
 const levels = {mechanism:0,area:1,component:2} as const;
 import { claimEvidence } from "./claimEvidence";
 export { claimEvidence } from "./claimEvidence";
+import { predict, type MemoryState } from "./predict";
 import { buildJobSheet } from "./jobSheet";
 export function applySecondOpinion(state:EngineState,draft:SecondOpinion|null):EngineState {
   const evidence=claimEvidence(state),parsed=SecondOpinion.safeParse(draft);
@@ -19,6 +20,7 @@ export function applySecondOpinion(state:EngineState,draft:SecondOpinion|null):E
     opinion={...parsed.data,allowedLevel,claim,verdict:capped&&parsed.data.verdict!=="objection"?"needs_evidence":parsed.data.verdict};
   }
   const next={...state,secondOpinion:opinion};
+  next.prediction=predict(next,(state as MemoryState).memoryPrior ?? {});
   let checks=state.safety.status==="ok"?rankChecks(next):[];
   if(opinion.verdict==="needs_evidence") {
     const suggestion=opinion.wouldChange.join(" ").toLowerCase();
