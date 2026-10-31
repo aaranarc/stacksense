@@ -7,8 +7,8 @@ it("covers all demo slots with validated caches and explicit illustration proven
  const manifest=JSON.parse(readFileSync(new URL("fixtures-ai/cache/demo-manifest.json",root),"utf8"));
  const status=JSON.parse(readFileSync(new URL("fixtures-ai/cache/demo-status.json",root),"utf8"));
  const bundled=JSON.parse(readFileSync(new URL("fixtures-ai/cache/bundled.json",root),"utf8"));
- expect(manifest.inputs).toHaveLength(14);expect(manifest.inputs.filter((i:{id:string})=>i.id.startsWith("scenario-"))).toHaveLength(8);
- expect(status.complete).toBe(true);expect(status.inputs).toHaveLength(14);
+ expect(manifest.inputs).toHaveLength(16);expect(manifest.inputs.filter((i:{id:string})=>i.id.startsWith("scenario-"))).toHaveLength(8);
+ expect(status.complete).toBe(true);expect(status.inputs).toHaveLength(16);
  for(const row of status.inputs){expect(row.status).toBe("cached");const cached=ReadResult.parse(bundled[row.key]);expect(cached.mode).toBe("live");if(row.assetSource==="demo-illustration")expect(cached.warnings.join(" ")).toContain("DEMO illustration");}
  for(const id of ["duct-302","meter-start-502","meter-end-502","trap-502"])expect(status.inputs.find((r:{id:string})=>r.id===id).uploadContexts).toBe(3);
 });

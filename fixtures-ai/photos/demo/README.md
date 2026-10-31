@@ -1,13 +1,19 @@
-# Team demo photographs
+# Photographic demo references
 
-`duct_302.jpg` is the user's authorized real team photograph, not a generated image or a ground-truth defect label. Prepared on 31 October 2026 from an ignored raw photo using `packages/ai/scripts/prepare-demo-photo.ts`:
+All active JPEGs are re-encoded at quality 85, maximum edge 1600, with EXIF/GPS, XMP, IPTC and ICC absent. Raw files remain ignored under eval/data/photos/ and are never committed. Visible source watermarks are preserved.
 
-- JPEG, quality 85, 1200×1600; maximum edge 1600.
-- Sharp inspection: no EXIF (including GPS), XMP, IPTC or ICC.
-- No raw image is tracked. Never commit `eval/data/photos/*_raw.jpg`.
+| Asset | Source / limitation |
+| --- | --- |
+| duct_302.jpg | Previously supplied team duct photograph; demo flat ID is not a verified address |
+| ceiling_402.jpg | User-supplied photographic ceiling reference; capture/location unverified |
+| window_202.jpg | User-supplied stock window/mould reference; Shutterstock watermark retained |
+| trap_502.jpg | User-supplied drain/trap reference; does not establish cracked tile grout |
+| meter_502_a.jpg | User-supplied meter reference; only one register image, not a timed pair |
+| meter_end_502.jpg | DEMO ILLUSTRATION; no matching second meter photograph exists |
+| day14_402.jpg | DEMO ILLUSTRATION; no actual post-repair Day-14 recapture supplied |
 
-The photograph's demo identifier is not a verified property address. Its visual labels are model outputs, not a moisture measurement or proof of a hidden source. Add a real trap photograph only after the user supplies it, using the same cleaning/metadata checks.
+The three clean-room WhatsApp images do not establish a post-repair recapture, so they are not substituted for Day-14 evidence. The photograph content need not match every scripted hero label: for example the window reference shows mould, while the simulated hero includes efflorescence. Neither the reference nor its model label validates the scenario's scripted cause, date, reading or finding.
 
-## Other demo inputs
+`assets.json` maps hero photo IDs and scenario previews to these clean assets, with provenance labels. Generated hero/scenario JSON includes a `demoAssets` extension for display metadata; shared EngineState schemas, observations and posterior calculations remain unchanged. Consumers may resolve metadata through assets.json without treating it as observed evidence. B's UI files are not edited by this asset task.
 
-Meter start/end, trap detail and Day-14 appearance are schematic illustrations when no corresponding raw team photo is supplied. Each generated JPEG has a visible DEMO ILLUSTRATION banner and matching `.demo.svg` source; cache warnings repeat the simulated provenance. The meter registers are invented demo values, not observed readings; the Day-14 drawing is not a real follow-up or evidence of dryness. Scenario schematics are in `../scenarios/` with the same labels. `demo-manifest.json` identifies the real-photo slots separately. These assets never enter the human-labelled evaluation dataset.
+Happy/uncertainty previews use the ceiling photograph, and the rain preview uses the window reference. Electrical, locked-access, dark-photo, lateral-travel and Break-it previews remain visibly labelled schematics under ../scenarios/. Obsolete replaced schematic files were removed. Cached reference-photo outputs carry DEMO warnings; no image here becomes human-labelled evaluation data or a real measured reading automatically.

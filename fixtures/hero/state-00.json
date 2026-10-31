@@ -268,5 +268,11 @@
       "other": 0
     }
   },
-  "trace": []
+  "trace": [],
+  "demoAssets": {
+    "label": "Visual demo references only. Engine evidence and timings remain simulated; photographs do not validate scripted findings.",
+    "images": {},
+    "meterReferences": [],
+    "preview": null
+  }
 }

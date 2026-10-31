@@ -1051,5 +1051,23 @@
       }
     ],
     "weather": {}
+  },
+  "demoAssets": {
+    "label": "Visual demo references only. Engine evidence and timings remain simulated; photographs do not validate scripted findings.",
+    "images": {
+      "hero-ceiling-402": {
+        "id": "ceiling-402",
+        "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
+        "assetSource": "reference-photo",
+        "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      }
+    },
+    "meterReferences": [],
+    "preview": {
+      "id": "scenario-beam_travel",
+      "path": "fixtures-ai/photos/scenarios/beam_travel.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    }
   }
 }

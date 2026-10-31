@@ -488,5 +488,16 @@
       }
     ],
     "weather": {}
+  },
+  "demoAssets": {
+    "label": "Visual demo references only. Engine evidence and timings remain simulated; photographs do not validate scripted findings.",
+    "images": {},
+    "meterReferences": [],
+    "preview": {
+      "id": "scenario-break_it",
+      "path": "fixtures-ai/photos/scenarios/break_it.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    }
   }
 }
