@@ -8,7 +8,8 @@ import s from './judge.module.css';
 type Results = z.infer<typeof EvalResults>;
 type Row = Results['rows'][number];
 type Pending = { method: string; reason: string };
-type Latest = Results & { pending?: Pending[]; rowsBySet?: { hard: Row[]; sim: Row[] } };
+type AiMessages = { measured: number; reviewed: number; stopped: string; f1ByField: Record<string, number | null>; f1ByLanguage: Record<string, number | null>; photo: string; cost: string };
+type Latest = Results & { pending?: Pending[]; rowsBySet?: { hard: Row[]; sim: Row[] }; aiMessages?: AiMessages | null };
 
 export const LABEL = 'Team-built test, not field accuracy.';
 const pct = (x: number | null) => (x === null || Number.isNaN(x) ? 'n/a' : `${Math.round(x * 100)}%`);
@@ -64,7 +65,7 @@ export function EvalCard({ src = '/eval/latest.json' }: { src?: string }) {
   useEffect(() => {
     let live = true;
     fetch(src).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((json) => { const parsed = EvalResults.safeParse(json); if (live) setData(parsed.success ? { ...parsed.data, pending: json.pending, rowsBySet: json.rowsBySet } : 'missing'); })
+      .then((json) => { const parsed = EvalResults.safeParse(json); if (live) setData(parsed.success ? { ...parsed.data, pending: json.pending, rowsBySet: json.rowsBySet, aiMessages: json.aiMessages ?? null } : 'missing'); })
       .catch(() => { if (live) setData('missing'); });
     return () => { live = false; };
   }, [src]);
@@ -92,6 +93,11 @@ export function EvalCard({ src = '/eval/latest.json' }: { src?: string }) {
       <li>Photo accuracy {pct(ai.photoAccuracy)} · clean-wall false positives {pct(ai.cleanWallFalsePositive)} · cost per case ${ai.costPerCaseUsd.toFixed(4)}</li>
       <li>F1 by field: {Object.entries(ai.f1ByField).map(([k, v]) => `${k} ${pct(v)}`).join(' · ') || 'n/a'}</li>
       <li>F1 by language: {Object.entries(ai.f1ByLanguage).map(([k, v]) => `${k} ${pct(v)}`).join(' · ') || 'n/a'}</li>
+    </ul> : data.aiMessages ? <ul className={s.small}>
+      <li><strong>Partial:</strong> message extraction measured on {data.aiMessages.measured} of {data.aiMessages.reviewed} human-reviewed messages (free-tier quota)</li>
+      <li>F1 by field: {Object.entries(data.aiMessages.f1ByField).map(([k, v]) => `${k} ${pct(v)}`).join(' · ')}</li>
+      <li>F1 by language: {Object.entries(data.aiMessages.f1ByLanguage).map(([k, v]) => `${k} ${pct(v)}`).join(' · ')}</li>
+      <li>Photo accuracy and clean-wall false positives: {data.aiMessages.photo} · cost {data.aiMessages.cost}</li>
     </ul> : <p className={s.small}>AI evaluation pending — human labels in progress.</p>}
   </div>;
 }

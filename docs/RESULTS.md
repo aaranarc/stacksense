@@ -1,12 +1,12 @@
 # StackSense — evaluation results
 
-> **Team-built test, not field accuracy.** Generated 2026-10-31T09:20:03.107Z by `pnpm eval` from `eval/results/*.json`.
+> **Team-built test, not field accuracy.** Generated 2026-10-31T11:06:40.802Z by `pnpm eval` from `eval/results/*.json`.
 > Every number on the evaluation card comes from `apps/web/public/eval/latest.json`, written by this same run.
 
 ## Sets
 - **30 hard cases** (`eval/hard-cases/`, frozen at tag `eval-frozen` before any results were seen; truths written from building physics, not from the engine's tables).
 - **60 simulated buildings** (`simulateBuilding`, seeds 1–60; answers sampled from the simulator's true outcome model).
-- **AI data:** 0 of 150 messages and 0 of 0 photos are human-labelled.
+- **AI data:** 109 of 109 messages and 0 of 0 photos are human-labelled.
 
 ## Methods
 1. **StackSense** — the engine the app uses: picks the check with the most expected information, Second Opinion applied (offline: labelled fallback, see below).
@@ -32,28 +32,28 @@ A method that ends without a decision sends no trade, which is scored as "genera
 ## Results — v2 (after A's stop-rule fix, made against the spec without opening the hard cases — no outcome changed on this test) — all 90 cases
 | Method | Right trade | Top-1 after 1 check | Top-1 after 2 checks | Top-1 after 3 checks | Over-claim | Harmful flips | Checks to decision | Hazard pass | ms per case |
 |---|---|---|---|---|---|---|---|---|---|
-| StackSense | 46% | 79% | 83% | 83% | 1% | 2 | 0.67 | 100% | 0.23 |
+| StackSense | 46% | 79% | 83% | 83% | 1% | 2 | 0.67 | 100% | 0.24 |
 | Blame the flat above | 31% | 36% | 36% | 36% | 63% | 0 **(loses)** | 0 **(loses)** | 0% | 0 **(loses)** |
 | Send a trade straight away | 18% | 21% | 21% | 21% | 7% | 0 **(loses)** | 0 **(loses)** | 0% | 0 **(loses)** |
-| Fixed checklist | 47% **(loses)** | 68% | 74% | 80% | 0% **(loses)** | 5 | 1.15 | 100% **(tie)** | 0.31 |
-| StackSense without Second Opinion | 46% **(tie)** | 79% **(tie)** | 83% **(tie)** | 83% **(tie)** | 1% **(tie)** | 2 **(tie)** | 0.67 **(tie)** | 100% **(tie)** | 0.14 **(loses)** |
+| Fixed checklist | 47% **(loses)** | 68% | 74% | 80% | 0% **(loses)** | 5 | 1.15 | 100% **(tie)** | 0.3 |
+| StackSense without Second Opinion | 46% **(tie)** | 79% **(tie)** | 83% **(tie)** | 83% **(tie)** | 1% **(tie)** | 2 **(tie)** | 0.67 **(tie)** | 100% **(tie)** | 0.13 **(loses)** |
 
 ### Hard cases only (30)
 | Method | Right trade | Top-1 after 1 check | Top-1 after 2 checks | Top-1 after 3 checks | Over-claim | Harmful flips | Checks to decision | Hazard pass | ms per case |
 |---|---|---|---|---|---|---|---|---|---|
-| StackSense | 67% | 81% | 86% | 86% | 0% | 0 | 0.84 | 100% | 0.29 |
+| StackSense | 67% | 81% | 86% | 86% | 0% | 0 | 0.84 | 100% | 0.3 |
 | Blame the flat above | 23% | 38% | 38% | 38% | 60% | 0 **(tie)** | 0 **(loses)** | 0% | 0 **(loses)** |
 | Send a trade straight away | 20% | 33% | 33% | 33% | 17% | 0 **(tie)** | 0 **(loses)** | 0% | 0 **(loses)** |
-| Fixed checklist | 63% | 76% | 81% | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 1.12 | 100% **(tie)** | 0.35 |
-| StackSense without Second Opinion | 67% **(tie)** | 81% **(tie)** | 86% **(tie)** | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 0.84 **(tie)** | 100% **(tie)** | 0.22 **(loses)** |
+| Fixed checklist | 63% | 76% | 81% | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 1.12 | 100% **(tie)** | 0.36 |
+| StackSense without Second Opinion | 67% **(tie)** | 81% **(tie)** | 86% **(tie)** | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 0.84 **(tie)** | 100% **(tie)** | 0.19 **(loses)** |
 
 ### Simulated buildings only (60)
 | Method | Right trade | Top-1 after 1 check | Top-1 after 2 checks | Top-1 after 3 checks | Over-claim | Harmful flips | Checks to decision | Hazard pass | ms per case |
 |---|---|---|---|---|---|---|---|---|---|
-| StackSense | 35% | 78% | 81% | 81% | 2% | 2 | 0.6 | n/a | 0.2 |
+| StackSense | 35% | 78% | 81% | 81% | 2% | 2 | 0.6 | n/a | 0.21 |
 | Blame the flat above | 35% **(tie)** | 36% | 36% | 36% | 65% | 0 **(loses)** | 0 **(loses)** | n/a | 0 **(loses)** |
 | Send a trade straight away | 17% | 17% | 17% | 17% | 2% **(tie)** | 0 **(loses)** | 0 **(loses)** | n/a | 0 **(loses)** |
-| Fixed checklist | 38% **(loses)** | 64% | 71% | 78% | 0% **(loses)** | 5 | 1.17 | n/a | 0.29 |
+| Fixed checklist | 38% **(loses)** | 64% | 71% | 78% | 0% **(loses)** | 5 | 1.17 | n/a | 0.28 |
 | StackSense without Second Opinion | 35% **(tie)** | 78% **(tie)** | 81% **(tie)** | 81% **(tie)** | 2% **(tie)** | 2 **(tie)** | 0.6 **(tie)** | n/a | 0.11 **(loses)** |
 
 **(tie)** / **(loses)** mark metrics where StackSense ties or loses to that method.
@@ -62,10 +62,10 @@ A method that ends without a decision sends no trade, which is scored as "genera
 ### All cases
 - **Loss** vs *Blame the flat above* on **Harmful flips** (2 vs 0) — this method never updates, so it cannot flip; StackSense's leader moved right → wrong on probabilistic simulator answers (per case in engine-cases.json).
 - **Loss** vs *Blame the flat above* on **Checks to decision** (0.67 vs 0) — this method decides without (or with fewer) checks — it never looks at evidence, which is the cost being measured, not an advantage.
-- **Loss** vs *Blame the flat above* on **ms per case** (0.23 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
+- **Loss** vs *Blame the flat above* on **ms per case** (0.24 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
 - **Loss** vs *Send a trade straight away* on **Harmful flips** (2 vs 0) — this method never updates, so it cannot flip; StackSense's leader moved right → wrong on probabilistic simulator answers (per case in engine-cases.json).
 - **Loss** vs *Send a trade straight away* on **Checks to decision** (0.67 vs 0) — this method decides without (or with fewer) checks — it never looks at evidence, which is the cost being measured, not an advantage.
-- **Loss** vs *Send a trade straight away* on **ms per case** (0.23 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
+- **Loss** vs *Send a trade straight away* on **ms per case** (0.24 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
 - **Loss** vs *Fixed checklist* on **Right trade** (46% vs 47%) — the fixed order asks more checks before the engine's stop rule fires; the extra evidence sometimes lifts the leader past the stop threshold, so it commits to a trade (right) where StackSense stopped at "inspect".
 - **Loss** vs *Fixed checklist* on **Over-claim** (1% vs 0%) — StackSense committed at area level on a source that was wrong in at least one case where the checklist ended undecided.
 - **Tie** vs *Fixed checklist* on **Hazard pass** (100% vs 100%) — both stop every hazard case (same engine safety gate).
@@ -77,15 +77,15 @@ A method that ends without a decision sends no trade, which is scored as "genera
 - **Tie** vs *StackSense without Second Opinion* on **Harmful flips** (2 vs 2) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
 - **Tie** vs *StackSense without Second Opinion* on **Checks to decision** (0.67 vs 0.67) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
 - **Tie** vs *StackSense without Second Opinion* on **Hazard pass** (100% vs 100%) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
-- **Loss** vs *StackSense without Second Opinion* on **ms per case** (0.23 vs 0.14) — the fallback Second Opinion pass re-ranks checks once more per step; same decisions, a fraction of a millisecond slower.
+- **Loss** vs *StackSense without Second Opinion* on **ms per case** (0.24 vs 0.13) — the fallback Second Opinion pass re-ranks checks once more per step; same decisions, a fraction of a millisecond slower.
 
 ### Hard cases
 - **Tie** vs *Blame the flat above* on **Harmful flips** (0 vs 0) — neither method's leader was flipped from right to wrong by a single observation here.
 - **Loss** vs *Blame the flat above* on **Checks to decision** (0.84 vs 0) — this method decides without (or with fewer) checks — it never looks at evidence, which is the cost being measured, not an advantage.
-- **Loss** vs *Blame the flat above* on **ms per case** (0.29 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
+- **Loss** vs *Blame the flat above* on **ms per case** (0.3 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
 - **Tie** vs *Send a trade straight away* on **Harmful flips** (0 vs 0) — neither method's leader was flipped from right to wrong by a single observation here.
 - **Loss** vs *Send a trade straight away* on **Checks to decision** (0.84 vs 0) — this method decides without (or with fewer) checks — it never looks at evidence, which is the cost being measured, not an advantage.
-- **Loss** vs *Send a trade straight away* on **ms per case** (0.29 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
+- **Loss** vs *Send a trade straight away* on **ms per case** (0.3 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
 - **Tie** vs *Fixed checklist* on **Top-1 after 3 checks** (86% vs 86%) — after three checks both have asked similar checks and share the same posterior.
 - **Tie** vs *Fixed checklist* on **Over-claim** (0% vs 0%) — neither over-claimed on these cases.
 - **Tie** vs *Fixed checklist* on **Harmful flips** (0 vs 0) — neither method's leader was flipped from right to wrong by a single observation here.
@@ -98,17 +98,17 @@ A method that ends without a decision sends no trade, which is scored as "genera
 - **Tie** vs *StackSense without Second Opinion* on **Harmful flips** (0 vs 0) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
 - **Tie** vs *StackSense without Second Opinion* on **Checks to decision** (0.84 vs 0.84) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
 - **Tie** vs *StackSense without Second Opinion* on **Hazard pass** (100% vs 100%) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
-- **Loss** vs *StackSense without Second Opinion* on **ms per case** (0.29 vs 0.22) — the fallback Second Opinion pass re-ranks checks once more per step; same decisions, a fraction of a millisecond slower.
+- **Loss** vs *StackSense without Second Opinion* on **ms per case** (0.3 vs 0.19) — the fallback Second Opinion pass re-ranks checks once more per step; same decisions, a fraction of a millisecond slower.
 
 ### Simulated buildings
 - **Tie** vs *Blame the flat above* on **Right trade** (35% vs 35%) — StackSense's early "inspect" stops cost about as many right trades as this method gets right by default.
 - **Loss** vs *Blame the flat above* on **Harmful flips** (2 vs 0) — this method never updates, so it cannot flip; StackSense's leader moved right → wrong on probabilistic simulator answers (per case in engine-cases.json).
 - **Loss** vs *Blame the flat above* on **Checks to decision** (0.6 vs 0) — this method decides without (or with fewer) checks — it never looks at evidence, which is the cost being measured, not an advantage.
-- **Loss** vs *Blame the flat above* on **ms per case** (0.2 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
+- **Loss** vs *Blame the flat above* on **ms per case** (0.21 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
 - **Tie** vs *Send a trade straight away* on **Over-claim** (2% vs 2%) — both over-claim on the same share of cases (often none).
 - **Loss** vs *Send a trade straight away* on **Harmful flips** (2 vs 0) — this method never updates, so it cannot flip; StackSense's leader moved right → wrong on probabilistic simulator answers (per case in engine-cases.json).
 - **Loss** vs *Send a trade straight away* on **Checks to decision** (0.6 vs 0) — this method decides without (or with fewer) checks — it never looks at evidence, which is the cost being measured, not an advantage.
-- **Loss** vs *Send a trade straight away* on **ms per case** (0.2 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
+- **Loss** vs *Send a trade straight away* on **ms per case** (0.21 vs 0) — this method does no inference (a fixed rule), so it is faster; StackSense still answers in about a millisecond.
 - **Loss** vs *Fixed checklist* on **Right trade** (35% vs 38%) — the fixed order asks more checks before the engine's stop rule fires; the extra evidence sometimes lifts the leader past the stop threshold, so it commits to a trade (right) where StackSense stopped at "inspect".
 - **Loss** vs *Fixed checklist* on **Over-claim** (2% vs 0%) — StackSense committed at area level on a source that was wrong in at least one case where the checklist ended undecided.
 - **Tie** vs *StackSense without Second Opinion* on **Right trade** (35% vs 35%) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
@@ -118,7 +118,7 @@ A method that ends without a decision sends no trade, which is scored as "genera
 - **Tie** vs *StackSense without Second Opinion* on **Over-claim** (2% vs 2%) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
 - **Tie** vs *StackSense without Second Opinion* on **Harmful flips** (2 vs 2) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
 - **Tie** vs *StackSense without Second Opinion* on **Checks to decision** (0.6 vs 0.6) — no live LLM runs in the offline eval, so the Second Opinion is the labelled fallback (review_failed), which never changes the posterior, check choice or trade — the ablation ties by construction; measuring its effect needs a live run.
-- **Loss** vs *StackSense without Second Opinion* on **ms per case** (0.2 vs 0.11) — the fallback Second Opinion pass re-ranks checks once more per step; same decisions, a fraction of a millisecond slower.
+- **Loss** vs *StackSense without Second Opinion* on **ms per case** (0.21 vs 0.11) — the fallback Second Opinion pass re-ranks checks once more per step; same decisions, a fraction of a millisecond slower.
 
 
 ## v1 (before stop-rule fix) — kept for honesty
@@ -162,7 +162,11 @@ StackSense top-1 after 3 checks when the true family's prior is shifted (others 
 | Top-1 | 38% | 63% | 83% | 90% | 95% | 38% | 96% |
 
 ## AI reading
-Pending — 0 of 150 messages and 0 of 0 photos are human-labelled so far. Unlabelled lines are skipped, never guessed. Run `pnpm --filter @stacksense/engine exec tsx ../../eval/runner/ai.ts` after labelling, then `pnpm eval`.
+**Partial, messages only.** 15 of 109 human-reviewed messages measured live (call cap 15 reached (reserve kept)); the measured lines are the first rows of the file, so the sample is small and not language-balanced.
+- F1 by field: flatId 31% · room 77% · zone 100% · surface 80% · hazards 100% · kind 93%
+- F1 by language: en 83% (other languages not yet measured)
+- Photo accuracy and clean-wall false positives: not measured — too few photos, free-tier quota.
+- Cost per case: $0 (free tier).
 
 ## Known limitations of this evaluation
 - Team-built: the hard cases and simulator were written by the team; this is not field accuracy.

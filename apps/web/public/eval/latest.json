@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-31T09:20:03.107Z",
+  "generatedAt": "2026-10-31T11:06:40.802Z",
   "label": "team-built test, not field accuracy",
   "sets": {
     "simBuildings": 60,
     "hardCases": 30,
     "photos": 0,
-    "messages": 0
+    "messages": 15
   },
   "rows": [
     {
@@ -20,7 +20,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.23
+      "msPerCase": 0.24
     },
     {
       "method": "Blame the flat above",
@@ -48,7 +48,7 @@
       "harmfulFlips": 0,
       "checksToDecision": 0,
       "hazardPass": 0,
-      "msPerCase": 0.001
+      "msPerCase": 0.002
     },
     {
       "method": "Fixed checklist",
@@ -62,7 +62,7 @@
       "harmfulFlips": 5,
       "checksToDecision": 1.153,
       "hazardPass": 1,
-      "msPerCase": 0.309
+      "msPerCase": 0.304
     },
     {
       "method": "StackSense without Second Opinion",
@@ -76,7 +76,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.145
+      "msPerCase": 0.132
     }
   ],
   "robustness": [
@@ -126,7 +126,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.292
+        "msPerCase": 0.297
       },
       {
         "method": "Blame the flat above",
@@ -168,7 +168,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 1.12,
         "hazardPass": 1,
-        "msPerCase": 0.348
+        "msPerCase": 0.36
       },
       {
         "method": "StackSense without Second Opinion",
@@ -182,7 +182,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.224
+        "msPerCase": 0.185
       }
     ],
     "sim": [
@@ -198,7 +198,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.199
+        "msPerCase": 0.212
       },
       {
         "method": "Blame the flat above",
@@ -240,7 +240,7 @@
         "harmfulFlips": 5,
         "checksToDecision": 1.167,
         "hazardPass": null,
-        "msPerCase": 0.29
+        "msPerCase": 0.276
       },
       {
         "method": "StackSense without Second Opinion",
@@ -265,5 +265,53 @@
     }
   ],
   "engineTree": "858c49cde3ff7256d9af7ae318105e57ae45000c",
-  "aiRaw": null
+  "aiRaw": {
+    "generatedAt": "2026-10-31T11:06:08.412Z",
+    "label": "team-built test, not field accuracy",
+    "placeholder": false,
+    "humanReviewed": true,
+    "execution": "live-provider, messages only",
+    "reviewedMessages": 109,
+    "measuredMessages": 15,
+    "providerRequests": 15,
+    "modes": {
+      "live": 15
+    },
+    "stopped": "call cap 15 reached (reserve kept)",
+    "f1ByField": {
+      "flatId": 0.3076923076923077,
+      "room": 0.7692307692307693,
+      "zone": 1,
+      "surface": 0.8,
+      "hazards": 1,
+      "kind": 0.9333333333333333
+    },
+    "f1ByLanguage": {
+      "en": 0.8305084745762712
+    },
+    "meanLatencyMs": 1317.675275,
+    "photoAccuracy": null,
+    "cleanWallFalsePositive": null,
+    "photoNote": "not measured — too few photos, free-tier quota",
+    "meanCostPerCaseUsd": 0,
+    "costNote": "$0 (free tier)"
+  },
+  "aiMessages": {
+    "measured": 15,
+    "reviewed": 109,
+    "stopped": "call cap 15 reached (reserve kept)",
+    "f1ByField": {
+      "flatId": 0.3076923076923077,
+      "room": 0.7692307692307693,
+      "zone": 1,
+      "surface": 0.8,
+      "hazards": 1,
+      "kind": 0.9333333333333333
+    },
+    "f1ByLanguage": {
+      "en": 0.8305084745762712
+    },
+    "photo": "not measured — too few photos, free-tier quota",
+    "cost": "$0 (free tier)"
+  }
 }

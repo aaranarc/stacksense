@@ -258,6 +258,7 @@ Phone-width polish fixes drawer keyboard handling after asynchronous focus loss,
 
 With mock flags off, the isolated Chrome 156 runner passes 59 local check groups at desktop/390 px, including both B-003b chat images, the four hero images, all eight Judge scenarios, all tab accordions/drawers, IN/UK/IN, demo phone iframe and standalone resident screens, loading/errors, focus and control targets. No uncaught JavaScript or unexpected console errors. The actual hero PDF was exported, confirmed as one approximately A4 page and visually inspected. Recursive typecheck and all 249 tests pass (93 web); web production build also passes. The signed branch-preview owner/resident Cached upload and automatic dashboard refresh already passed; final-source deployment acceptance follows this push. See apps/web/QA_REPORT.md and FINAL_STATUS.md. C owns the Day-14 integration follow-up above and final main merge/retest; recordings, physical-phone footage and submission remain human work.
 
+<<<<<<< HEAD
 ## C merge 5 — main 3826dce (31 Oct, 16:17 IST)
 Merged origin/a/core (no change) → origin/b/app (3ee1c37, B-T28 phone width/accessibility) → origin/c/help (109
 human-reviewed message labels). Log-only conflict resolved on c/help keeping both sections. Typecheck, tests (3 / 66 AI /
@@ -275,3 +276,8 @@ success before checking; checked in a fresh isolated browser context.
 | /c/demo at 390×844 | PASS — consent → 4× No → camera step, Demo label, no overflow |
 
 No open integration failures at 16:20 IST.
+=======
+## B final deployed acceptance — app source 3ee1c37 (31 Oct, 16:19 IST)
+
+Vercel success confirmed for exact SHA 3ee1c376611184be563a21e83ca75c8b47fbb74a, deployment https://vercel.com/byte-me21/stacksense/862Ga2ejfGWpJgHrghPdytN7syB2 . The b/app preview then passed all 61 browser check groups, zero uncaught JavaScript errors and zero unexpected console errors. B-003b is verified on the deployed branch: both canonical chat attachments load as thumbnails and full photos. The complete desktop/390 px suite also passed, plus a guarded signed Cached duct upload from a separate browser context: owner updates 200/no-store, unauthorized context 403/no-store, dashboard updates automatically, frame closes and repeat refresh does not duplicate evidence. No WhatsApp message was sent and no uncached LLM probe was used. The acceptance-note follow-up changes documentation only. b/app ready for final; C should merge/retest main and handle the Day-14 API/engine finding above. B-owned implementation items B-T21 through B-T28 are complete; human recordings/submission remain pending.
+>>>>>>> origin/b/app

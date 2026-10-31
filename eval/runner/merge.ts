@@ -92,8 +92,16 @@ export function merge() {
       ai = { photoAccuracy: r.photoAccuracy, cleanWallFalsePositive: r.cleanWallFalsePositive, f1ByField: clean(r.f1ByField), f1ByLanguage: clean(r.f1ByLanguage), costPerCaseUsd: r.meanCostPerCaseUsd };
     }
   }
-  const latest = { ...engine, generatedAt: new Date().toISOString(), ai, aiRaw,
-    sets: { ...engine.sets, photos: ai ? data.photos.length : 0, messages: ai ? data.messages.length : 0 } };
+  // Messages-only live run (eval/runner/ai-messages.ts): the contract's ai block needs photo numbers, so it stays null and
+  // the partial message-extraction result travels as an additive aiMessages block.
+  const raw = aiRaw as null | { execution?: string; measuredMessages?: number; reviewedMessages?: number; stopped?: string;
+    f1ByField?: Record<string, number | null>; f1ByLanguage?: Record<string, number | null>; photoNote?: string; costNote?: string };
+  const aiMessages = raw?.execution === "live-provider, messages only" ? {
+    measured: raw.measuredMessages ?? 0, reviewed: raw.reviewedMessages ?? 0, stopped: raw.stopped ?? "",
+    f1ByField: raw.f1ByField ?? {}, f1ByLanguage: raw.f1ByLanguage ?? {},
+    photo: raw.photoNote ?? "not measured", cost: raw.costNote ?? "unknown" } : null;
+  const latest = { ...engine, generatedAt: new Date().toISOString(), ai, aiRaw, aiMessages,
+    sets: { ...engine.sets, photos: ai ? data.photos.length : 0, messages: ai ? data.messages.length : aiMessages?.measured ?? 0 } };
   EvalResults.parse(latest);
   mkdirSync(at("../../apps/web/public/eval/"), { recursive: true });
   writeFileSync(at("../../apps/web/public/eval/latest.json"), JSON.stringify(latest, null, 2) + "\n");
@@ -106,7 +114,7 @@ export function merge() {
 }
 
 /** Replace the README block between eval markers with a summary from latest.json (numbers never typed by hand). */
-export function readmeEval(md: string, r: Engine): string {
+export function readmeEval(md: string, r: Engine & { aiMessages?: AiMessages }): string {
   const cols: [string, (x: EvalRow) => number | null, boolean, boolean][] = [
     ["Right trade (all)", (x) => x.rightTrade, true, true],
     ["Top-1 after 3 checks", (x) => x.top1[2] ?? null, true, true],
@@ -132,6 +140,7 @@ export function readmeEval(md: string, r: Engine): string {
       return h ? `| ${p.method} | ${fmt(h.rightTrade, true)}${mark(oursHard.rightTrade, h.rightTrade, true)} | ${cols.map(() => "hard cases only").join(" | ")} |`
         : `| ${p.method} | ${p.reason} |${cols.map(() => " |").join("")}`; }),
     "",
+    ...(r.aiMessages ? [`AI reading (partial): message extraction measured on ${r.aiMessages.measured} of ${r.aiMessages.reviewed} human-reviewed messages (free-tier quota); photo accuracy ${r.aiMessages.photo}; cost ${r.aiMessages.cost}.`, ""] : []),
     "(tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks " +
       r.robustness.map((x) => `${x.priorShiftPct > 0 ? "+" : ""}${x.priorShiftPct}% → ${fmt(x.top1, true)}`).join(", ") + " (true family's prior shifted).",
     "<!-- eval:end -->",
@@ -139,7 +148,8 @@ export function readmeEval(md: string, r: Engine): string {
   return md.replace(/<!-- eval:start -->[\s\S]*?<!-- eval:end -->/, block);
 }
 
-function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown }, data: ReturnType<typeof prepare>, v1: Engine | null): string {
+type AiMessages = { measured: number; reviewed: number; stopped: string; f1ByField: Record<string, number | null>; f1ByLanguage: Record<string, number | null>; photo: string; cost: string } | null;
+function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown; aiMessages: AiMessages }, data: ReturnType<typeof prepare>, v1: Engine | null): string {
   const sets = r.sets, all = tiesAndLosses(r.rows), hard = tiesAndLosses(r.rowsBySet.hard), sim = tiesAndLosses(r.rowsBySet.sim);
   const runName = v1 ? ` — v2 (${V2_NOTE})` : "";
   const v1Section = v1 ? `
@@ -229,6 +239,11 @@ StackSense top-1 after 3 checks when the true family's prior is shifted (others 
 ${r.ai ? `- Photo surface accuracy ${fmt(r.ai.photoAccuracy, true)} · clean-wall false-positive rate ${fmt(r.ai.cleanWallFalsePositive, true)} · mean cost per case $${r.ai.costPerCaseUsd.toFixed(4)}
 - F1 by field: ${Object.entries(r.ai.f1ByField).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")}
 - F1 by language: ${Object.entries(r.ai.f1ByLanguage).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")}`
+  : r.aiMessages ? `**Partial, messages only.** ${r.aiMessages.measured} of ${r.aiMessages.reviewed} human-reviewed messages measured live (${r.aiMessages.stopped}); the measured lines are the first rows of the file, so the sample is small and not language-balanced.
+- F1 by field: ${Object.entries(r.aiMessages.f1ByField).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")}
+- F1 by language: ${Object.entries(r.aiMessages.f1ByLanguage).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")} (other languages not yet measured)
+- Photo accuracy and clean-wall false positives: ${r.aiMessages.photo}.
+- Cost per case: ${r.aiMessages.cost}.`
   : `Pending — ${data.messages.length} of ${data.total} messages and ${data.photos.length} of ${data.photoTotal} photos are human-labelled so far. Unlabelled lines are skipped, never guessed. Run \`pnpm --filter @stacksense/engine exec tsx ../../eval/runner/ai.ts\` after labelling, then \`pnpm eval\`.`}
 
 ## Known limitations of this evaluation

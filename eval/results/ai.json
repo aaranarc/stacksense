@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-10-31T11:06:08.412Z",
+  "label": "team-built test, not field accuracy",
+  "placeholder": false,
+  "humanReviewed": true,
+  "execution": "live-provider, messages only",
+  "reviewedMessages": 109,
+  "measuredMessages": 15,
+  "providerRequests": 15,
+  "modes": {
+    "live": 15
+  },
+  "stopped": "call cap 15 reached (reserve kept)",
+  "f1ByField": {
+    "flatId": 0.3076923076923077,
+    "room": 0.7692307692307693,
+    "zone": 1,
+    "surface": 0.8,
+    "hazards": 1,
+    "kind": 0.9333333333333333
+  },
+  "f1ByLanguage": {
+    "en": 0.8305084745762712
+  },
+  "meanLatencyMs": 1317.675275,
+  "photoAccuracy": null,
+  "cleanWallFalsePositive": null,
+  "photoNote": "not measured — too few photos, free-tier quota",
+  "meanCostPerCaseUsd": 0,
+  "costNote": "$0 (free tier)"
+}

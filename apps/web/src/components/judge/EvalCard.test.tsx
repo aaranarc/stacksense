@@ -28,6 +28,14 @@ it('renders StackSense first, the label, a tie chip and the pending row', async 
   expect(screen.getByText('AI evaluation pending — human labels in progress.')).toBeTruthy();
 });
 
+it('shows the partial messages-only AI block with counts and the photo/cost notes', async () => {
+  serve({ ...fixture, aiMessages: { measured: 15, reviewed: 109, stopped: 'cap', f1ByField: { zone: 1 }, f1ByLanguage: { en: 0.83 }, photo: 'not measured — too few photos, free-tier quota', cost: '$0 (free tier)' } });
+  render(<EvalCard />);
+  await waitFor(() => expect(screen.getByText(/measured on 15 of 109/)).toBeTruthy());
+  expect(screen.getByText(/not measured — too few photos, free-tier quota/)).toBeTruthy();
+  expect(screen.getByText(/\$0 \(free tier\)/)).toBeTruthy();
+});
+
 it('shows "numbers pending" when latest.json is missing', async () => {
   serve({}, false);
   render(<EvalCard />);

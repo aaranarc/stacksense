@@ -17,7 +17,9 @@ Unit/schema validation: recursive typecheck and tests, plus web production build
 
 ## Signed branch-preview integration
 
-The configured b/app preview previously passed separate owner and resident browser contexts: signed link creation, owner cookie, unauthorized updates rejected with 403/no-store, authorized updates 200/no-store, clean cached duct upload, automatic dashboard update, frame dismissal and repeat-refresh deduplication. WhatsApp navigation was intercepted; no message was sent. Final app-source preview acceptance is reported in the integration log after deployment.
+Final app-source commit **3ee1c376611184be563a21e83ca75c8b47fbb74a** received a successful Vercel status before the branch preview was tested. The full suite passed **61 check groups**, zero uncaught JavaScript errors and zero unexpected console errors at https://stacksense-git-b-app-byte-me21.vercel.app, including B-003b's two actual thumbnails/full photos.
+
+Separate owner and resident browser contexts verified signed link creation, owner cookie, unauthorized updates rejected with 403/no-store, authorized updates 200/no-store, clean cached duct upload, automatic dashboard update, frame dismissal and repeat-refresh deduplication. WhatsApp navigation was intercepted; no message was sent. Deployment status: https://vercel.com/byte-me21/stacksense/862Ga2ejfGWpJgHrghPdytN7syB2 . The later acceptance-note commit changes documentation only; this is the app-source SHA tested.
 
 The upload runner verifies the exact cleaned photo bytes, current prompt versions and check context against A's bundled cache before sending; it refuses an unknown input. No uncached quota or accuracy probe was run. Cached/Demo labels remain visible. Browser emulation is not a physical-device recording.
 
