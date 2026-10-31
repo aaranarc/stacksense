@@ -2,6 +2,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ["sharp"],
   transpilePackages: ['@stacksense/contracts', '@stacksense/engine', '@stacksense/ai'],
   cacheComponents: true,
   partialPrefetching: true,

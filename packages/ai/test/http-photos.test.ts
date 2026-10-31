@@ -3,6 +3,11 @@ import sharp from "sharp";
 import { preparePhoto } from "../src/read/photos";
 import { rateLimiter, jsonBody, jsonResponse } from "../src/http/common";
 describe("server input boundaries",()=>{
+ it("rejects browser execution before loading the native image module",async()=>{
+   Object.defineProperty(globalThis,"window",{value:{},configurable:true});
+   try { await expect(preparePhoto("data:image/jpeg;base64,YQ==")).rejects.toThrow("Server-only"); }
+   finally { Reflect.deleteProperty(globalThis,"window"); }
+ });
  it("re-encodes valid image data, bounds dimensions, and strips metadata",async()=>{
    const bytes=await sharp({create:{width:2000,height:10,channels:3,background:"white"}}).jpeg().withMetadata().toBuffer();
    const clean=await preparePhoto(`data:image/jpeg;base64,${bytes.toString("base64")}`);
