@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T04:28:59.126Z",
+  "generatedAt": "2026-10-31T04:35:44.511Z",
   "label": "team-built test, not field accuracy",
   "sets": {
     "simBuildings": 60,
@@ -20,7 +20,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.265
+      "msPerCase": 0.238
     },
     {
       "method": "Blame the flat above",
@@ -62,7 +62,7 @@
       "harmfulFlips": 5,
       "checksToDecision": 1.153,
       "hazardPass": 1,
-      "msPerCase": 0.318
+      "msPerCase": 0.315
     },
     {
       "method": "StackSense without Second Opinion",
@@ -76,7 +76,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.149
+      "msPerCase": 0.141
     }
   ],
   "robustness": [
@@ -126,7 +126,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.374
+        "msPerCase": 0.328
       },
       {
         "method": "Blame the flat above",
@@ -154,7 +154,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": 0,
-        "msPerCase": 0.003
+        "msPerCase": 0.002
       },
       {
         "method": "Fixed checklist",
@@ -168,7 +168,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 1.12,
         "hazardPass": 1,
-        "msPerCase": 0.374
+        "msPerCase": 0.396
       },
       {
         "method": "StackSense without Second Opinion",
@@ -182,7 +182,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.223
+        "msPerCase": 0.216
       }
     ],
     "sim": [
@@ -198,7 +198,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.21
+        "msPerCase": 0.194
       },
       {
         "method": "Blame the flat above",
@@ -240,7 +240,7 @@
         "harmfulFlips": 5,
         "checksToDecision": 1.167,
         "hazardPass": null,
-        "msPerCase": 0.29
+        "msPerCase": 0.274
       },
       {
         "method": "StackSense without Second Opinion",
@@ -254,7 +254,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.112
+        "msPerCase": 0.103
       }
     ]
   },
@@ -264,5 +264,6 @@
       "reason": "pending — singleLlmBaseline is not exported by @stacksense/ai yet (requested from A in C_REQUESTS.md)"
     }
   ],
+  "engineTree": "42a624d3e20d5b3962c8cab55f456b2219d0e5f2",
   "aiRaw": null
 }

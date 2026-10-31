@@ -2,6 +2,7 @@
 // Run: pnpm --filter @stacksense/engine exec tsx ../../eval/runner/run.ts
 // Uses the same engine code the UI uses; never re-implements or tunes engine logic.
 import { writeFileSync, mkdirSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { performance } from "node:perf_hooks";
 import {
@@ -174,6 +175,12 @@ export const PENDING = [{
   reason: "pending — singleLlmBaseline is not exported by @stacksense/ai yet (requested from A in C_REQUESTS.md)",
 }];
 
+/** Git tree hash of packages/engine (working copy included) — tells v1 and v2 runs apart. */
+function engineTree(): string {
+  try { return execSync("git rev-parse HEAD:packages/engine", { encoding: "utf8" }).trim() + (execSync("git status --porcelain -- packages/engine", { encoding: "utf8" }).trim() ? "+dirty" : ""); }
+  catch { return "unknown"; }
+}
+
 export function evaluate(opts: { sims?: number } = {}) {
   const factories = [...hardCases(), ...simCases(opts.sims ?? 60)];
   const robustness = SHIFTS.map((p) => ({ priorShiftPct: p, top1: robustnessRun(factories, p) }));
@@ -195,6 +202,7 @@ export function evaluate(opts: { sims?: number } = {}) {
     robustnessArchetype,
     rowsBySet: { hard: rowsFor("hard"), sim: rowsFor("sim") },
     pending: PENDING,
+    engineTree: engineTree(),
   };
   EvalResults.parse(results); // contract check (extra keys are additive)
   return { results, outcomes, trails };

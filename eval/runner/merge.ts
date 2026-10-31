@@ -8,7 +8,8 @@ import { prepare } from "./ai";
 
 const at = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 type Engine = EvalResults & { rowsBySet: { hard: EvalRow[]; sim: EvalRow[] }; pending: { method: string; reason: string }[];
-  robustnessArchetype: { trueFamilyPriorAt: string; top1: number }[] };
+  robustnessArchetype: { trueFamilyPriorAt: string; top1: number }[]; engineTree?: string };
+export const V2_NOTE = "after fix — bug found by the frozen test, fixed against the spec without opening the hard cases";
 
 const METRICS: { key: string; label: string; get: (r: EvalRow) => number | null; higher: boolean; pct: boolean }[] = [
   { key: "rightTrade", label: "Right trade", get: (r) => r.rightTrade, higher: true, pct: true },
@@ -96,7 +97,9 @@ export function merge() {
   EvalResults.parse(latest);
   mkdirSync(at("../../apps/web/public/eval/"), { recursive: true });
   writeFileSync(at("../../apps/web/public/eval/latest.json"), JSON.stringify(latest, null, 2) + "\n");
-  writeFileSync(at("../../docs/RESULTS.md"), resultsMd(latest, data));
+  const v1Path = at("../results/engine-v1.json");
+  const v1 = existsSync(v1Path) ? (JSON.parse(readFileSync(v1Path, "utf8")) as Engine) : null;
+  writeFileSync(at("../../docs/RESULTS.md"), resultsMd(latest, data, v1 && v1.engineTree !== engine.engineTree ? v1 : null));
   const readme = at("../../README.md");
   if (existsSync(readme)) writeFileSync(readme, readmeEval(readFileSync(readme, "utf8"), latest));
   return latest;
@@ -134,8 +137,29 @@ export function readmeEval(md: string, r: Engine): string {
   return md.replace(/<!-- eval:start -->[\s\S]*?<!-- eval:end -->/, block);
 }
 
-function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown }, data: ReturnType<typeof prepare>): string {
+function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown }, data: ReturnType<typeof prepare>, v1: Engine | null): string {
   const sets = r.sets, all = tiesAndLosses(r.rows), hard = tiesAndLosses(r.rowsBySet.hard), sim = tiesAndLosses(r.rowsBySet.sim);
+  const runName = v1 ? ` — v2 (${V2_NOTE})` : "";
+  const v1Section = v1 ? `
+## v1 (before stop-rule fix) — kept for honesty
+Engine tree \`${v1.engineTree}\`, generated ${v1.generatedAt}; the full file is \`eval/results/engine-v1.json\`.
+The frozen hard cases flagged that the engine stopped with "inspect" while its leading source was already right; A fixed
+the stop rule against the spec. Both runs use the same frozen cases and simulator seeds.
+
+### v1 — all ${v1.sets.hardCases + v1.sets.simBuildings} cases
+${table(v1.rows)}
+
+### v1 — hard cases only
+${table(v1.rowsBySet.hard)}
+
+### v1 → v2, StackSense
+| Set | Right trade v1 → v2 | Top-1 after 3 checks v1 → v2 | Over-claim v1 → v2 | Hazard pass v1 → v2 |
+|---|---|---|---|---|
+${(["all", "hard", "sim"] as const).map((k) => {
+    const a = (k === "all" ? v1.rows : v1.rowsBySet[k]).find((x) => x.method === "StackSense")!, b = (k === "all" ? r.rows : r.rowsBySet[k]).find((x) => x.method === "StackSense")!;
+    return `| ${k} | ${fmt(a.rightTrade, true)} → ${fmt(b.rightTrade, true)} | ${fmt(a.top1[2] ?? null, true)} → ${fmt(b.top1[2] ?? null, true)} | ${fmt(a.overclaim, true)} → ${fmt(b.overclaim, true)} | ${fmt(a.hazardPass, true)} → ${fmt(b.hazardPass, true)} |`;
+  }).join("\n")}
+` : "";
   return `# StackSense — evaluation results
 
 > **Team-built test, not field accuracy.** Generated ${r.generatedAt} by \`pnpm eval\` from \`eval/results/*.json\`.
@@ -167,7 +191,7 @@ A method that ends without a decision sends no trade, which is scored as "genera
 - **Hazard pass** — share of hazard cases that ended in an emergency stop (must be 100% for StackSense). n/a when a set has no hazard cases.
 - **ms per case** — wall-clock time, this machine.
 
-## Results — all ${sets.hardCases + sets.simBuildings} cases
+## Results${runName} — all ${sets.hardCases + sets.simBuildings} cases
 ${table(r.rows)}
 
 ### Hard cases only (${sets.hardCases})
@@ -188,6 +212,7 @@ ${hard.join("\n") || "- none"}
 ### Simulated buildings
 ${sim.join("\n") || "- none"}
 
+${v1Section}
 ## Robustness — priors shifted
 StackSense top-1 after 3 checks when the true family's prior is shifted (others at mode, re-normalised), applied through the engine's public \`memory\` option (exact: prior = (mode×10 + memory)/Σ).
 
