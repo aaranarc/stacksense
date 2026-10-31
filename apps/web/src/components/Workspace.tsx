@@ -44,9 +44,10 @@ export function Workspace() {
    </>} analysis={<>
     <SourceBars state={state}/><NextCheck state={state} onDemoStep={advance}/>
     <SecondOpinionBanner state={state} onState={setState}/>
-    <RightTabs/>
+    <RightTabs state={state}/>
    </>}/>
    {photo&&<PhotoViewer key={photo} photoId={photo} label={state.photoLabels.find(p=>p.photoId===photo)} onClose={()=>setPhoto(null)} onCorrect={(label,changed)=>setState(correctPhoto(state,label,changed))}/>}
   </SafetyBoundary>
  </>;
 }
+
