@@ -105,3 +105,29 @@ B-001 and B-T21 through B-T27 are implemented on b/app. The mock engine/API flag
 ### Final branch-preview verification — 31 Oct, 12:56 IST
 
 App commit `ef8c12a` has Vercel status success. The branch preview returns 200, serves the exact bundled demo text, and its `/api/read` returns cached with five observations and zero warnings. Its deployed client includes the new panel states and preparation warnings, with no old blocking gate. The explicit demo-token helper now compiles to a direct `token === "demo"` check: preview demo mode is enabled, resolving the configuration part of A-001 on this branch. Production and visual mobile interaction are not reverified here. Browser control still cannot initialise; the local real-adapter Load demo click regression and mobile safety tests pass. Full-workspace typecheck and all 199 tests pass; web production build passes. Both local engine/API mock flags are false.
+
+
+## CP2 production verification — 31 October 2026
+
+Merged origin/a/core `2b0b527`, then origin/b/app `2a61976`, then origin/c/help `c002451` with --no-edit. Main result `e7422bd`. The only conflict was this chronological log; both sides were retained. No code ownership conflict occurred; A's sharp configuration remains. Install, recursive typecheck, 219 tests (3 contracts, 63 AI, 86 engine, 67 web), and web build passed before pushing main. Exact-commit Vercel deployment succeeded: https://vercel.com/byte-me21/stacksense/GT6tvFNx6guasQAapxpYhLvWNAzn . The following checks were performed on https://stacksense-omega.vercel.app after that success.
+
+| Production check | Result |
+| --- | --- |
+| Page loads without login | PASS — dashboard accessible without authentication |
+| Load demo chat lights the building | PASS — parsed complaints; 402/202 victims, 502 check passed; prior B-001 is closed by this production retest |
+| /api/read Live or Cached | PASS — browser request POST /api/read HTTP 200, mode cached, five observations, warnings [Cached]; no fresh live LLM probe consumed quota |
+| Judge Mode hero | PASS — six steps end with Job Sheet send waterproofer_tiler |
+| What-if meter flip | PASS — moved meter produces probable 502 supply leak (95%) and Send plumber |
+| Job Sheet PDF opens | FAIL — B-002 below; a tab opens but the Job Sheet content is unavailable |
+| /c/demo completes at 390 px | PASS — actual 390×844, scrollWidth 390; consent, four explicit negative safety answers, camera/photo selection, Upload photo, Done. Used the existing clean team duct JPEG through the file input. Cached · Demo data explicitly says no real resident upload or AI interpretation; this does not claim a signed-link cloud upload test |
+| IN/UK toggle | PASS — UK Block, 4 floors, managing-agent/floor-gully terminology and Shelter/Awaab links; switching back restores Block A and the meter-flipped plumber case |
+
+### B-002 — OPEN — Job Sheet PDF has no content
+
+Owner: **B** (Job Sheet export, case persistence and print route). Reproduce: Judge Mode → hero → Next step six times → Download PDF. New tab `/print/<caseId>` shows “This Job Sheet is unavailable in this browser. Open Download PDF from the case first.” Print / Save PDF is disabled. The popup sessionStorage contains the expected `stacksense:<caseId>` key, so this is not merely a blocked popup. The print route calls `loadCase`, which catches schema/parse failures and returns null; investigate the saved EngineState round trip. No successful PDF generation is claimed. No B-owned code was changed by A.
+
+### B-003 — OPEN — Judge hero evidence photo previews unavailable
+
+Owner: **B** (Judge fixture-to-media display integration; coordinate with C for Judge fixture IDs). Additional observed failure: after playing hero, the feed shows “Preview unavailable” for hero-ceiling-402, hero-window-202, hero-duct-302 and hero-trap-502. These are visible photo buttons but do not render the corresponding prepared own-photo assets. The canonical clean files and fixture mappings exist; the UI media resolver must connect the scenario photo IDs to those assets. This did not prevent deterministic hero or What-if results. No B/C-owned code was edited.
+
+No new A-owned or C-owned failure was found in these eight acceptance checks. Previously recorded A-002 prevention-link eligibility and A-003 physical-phone dashboard refresh remain separate open handoffs; this checkpoint did not retest or close them. The older photo-only-read A-002 fix is included in the deployed A commits. Historical duplicate issue numbers above are retained without silently overwriting their different reports.
