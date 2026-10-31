@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import type { Building, EngineState, Observation, PhotoLabel, RainSeries, SecondOpinion } from '@stacksense/contracts';
 import { engine } from '../../lib/adapters';
 import s from './judge.module.css';
@@ -17,7 +17,8 @@ export function outcomeOf(state: EngineState): string {
   return next ? `Next check: ${next.type.replaceAll('_', ' ')}${next.targetFlatId ? ` at ${next.targetFlatId}` : ''}` : 'Investigating';
 }
 
-export function ScenarioPicker({ onState }: { onState: (s: EngineState) => void }) {
+/** Scenario playback; the dashboard provider holds one instance so Play keeps running across pages. */
+export function useScenarioPlayer(onState: (s: EngineState) => void) {
   const ids = Object.keys(scenarios);
   const [id, setId] = useState(ids[0] ?? 'happy');
   const [step, setStep] = useState(0);
@@ -44,24 +45,35 @@ export function ScenarioPicker({ onState }: { onState: (s: EngineState) => void 
     setStep(step + 1);
     if (step + 1 >= total || state.safety.status === 'emergency') setPlaying(false);
   };
+  const toggle = () => { if (step >= total) reset(); setPlaying(!playing); };
+  const select = (scenarioId: string) => { setId(scenarioId); reset(scenarioId); };
+  /** Forget playback without publishing a state (case reset / region change). */
+  const clear = () => { setPlaying(false); setStep(0); current.current = null; setStatus('Pick a scenario and press Play or Next step.'); };
 
   useEffect(() => {
     if (!playing) return;
     const t = setTimeout(next, PLAY_MS);
     return () => clearTimeout(t);
   });
+  return { ids, id, step, total, playing, status, next, reset, toggle, select, clear };
+}
+export type ScenarioPlayer = ReturnType<typeof useScenarioPlayer>;
+export const PlayerContext = createContext<ScenarioPlayer | null>(null);
 
+export function ScenarioPicker({ onState }: { onState: (s: EngineState) => void }) {
+  const local = useScenarioPlayer(onState);
+  const p = useContext(PlayerContext) ?? local;
   return <div className={s.stack}>
     <label className={s.field}>Scenario
-      <select value={id} onChange={(e) => { setId(e.target.value); reset(e.target.value); }}>
-        {ids.map((k) => <option key={k} value={k}>{scenarios[k]!.title}</option>)}
+      <select value={p.id} onChange={(e) => p.select(e.target.value)}>
+        {p.ids.map((k) => <option key={k} value={k}>{scenarios[k]!.title}</option>)}
       </select>
     </label>
     <div className={s.row} role="group" aria-label="Scenario controls">
-      <button className="primary" onClick={next} disabled={step >= total}>Next step ▸</button>
-      <button onClick={() => { if (step >= total) reset(); setPlaying(!playing); }} aria-pressed={playing}>{playing ? 'Pause' : 'Play'}</button>
-      <button onClick={() => reset()}>Reset</button>
+      <button className="primary" onClick={p.next} disabled={p.step >= p.total}>Next step ▸</button>
+      <button onClick={p.toggle} aria-pressed={p.playing}>{p.playing ? 'Pause' : 'Play'}</button>
+      <button onClick={() => p.reset()}>Reset</button>
     </div>
-    <p className={s.small} aria-live="polite">Step {step} / {total} · {status}</p>
+    <p className={s.small} aria-live="polite">Step {p.step} / {p.total} · {p.status}</p>
   </div>;
 }

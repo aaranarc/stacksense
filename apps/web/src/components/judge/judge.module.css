@@ -52,9 +52,9 @@
 .panel a:focus-visible, .panel [tabindex]:focus-visible { outline: 2px solid #93C5FD; outline-offset: 2px; }
 /* Phone width: bottom sheet with its own scroll; tables keep scrolling sideways inside .scroll. */
 @media (max-width: 480px) {
-  .panel { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 40; max-height: 72vh; overflow-y: auto;
+  .sheet { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 40; max-height: 72vh; overflow-y: auto;
     border-radius: 18px 18px 0 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
-  .sheetHead { position: sticky; top: -12px; background: #0F1A2E; padding: 6px 0; z-index: 1; }
+  .sheet .sheetHead { position: sticky; top: -12px; background: #0F1A2E; padding: 6px 0; z-index: 1; }
   .sheetToggle { display: inline-block; min-height: 44px; white-space: nowrap; flex-shrink: 0; }
   .collapsed .body { display: none; }
   .row button, .field select { min-height: 44px; }

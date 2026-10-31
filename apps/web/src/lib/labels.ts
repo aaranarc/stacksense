@@ -2,5 +2,7 @@ export const labels={IN:{group:'society',manager:'secretary',trap:'nahani trap',
 // UK flats are numbered 1–8, so a bare number before a noun ("6 bathroom", "breaking 4 ceiling") is a flat; units and dates ("31 Oct") are excluded.
 const ukFlat=/(?<![\w.%-]|Flat |flat )(\d{1,2})(?=\s+(?!h\b|min\b|minutes?\b|floors\b|s\b|m\b|hours?\b|days?\b|weeks?\b|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b)[A-Za-z])/g;
 export function regionalText(text:string,region:'IN'|'UK'){return region==='IN'?text:text.replace(/\bsociety\b/gi,'building/landlord').replace(/\bsecretary\b/gi,'managing agent').replace(/nahani trap/gi,'floor gully/shower trap').replace(/\bflat (\d{1,2})\b/gi,'Flat $1').replace(ukFlat,'Flat $1');}
-export function trailTime(at:string){const d=new Date(at);return Number.isFinite(d.getTime())?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'Europe/London'}).format(d):at;}
+// Case clock times in the building's own zone (IN: India Standard Time, UK: London), never a "UTC" label.
+export function caseTime(at:string,region:'IN'|'UK'){const d=new Date(at);return Number.isFinite(d.getTime())?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:region==='UK'?'Europe/London':'Asia/Kolkata'}).format(d):at;}
+export function trailTime(at:string){return caseTime(at,'UK');}
 export function flatLabel(id:string,region:'IN'|'UK'){return region==='UK'?`Flat ${id}`:id;}

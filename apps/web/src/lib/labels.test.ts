@@ -1,5 +1,5 @@
 import {expect,it} from 'vitest';
-import {regionalText,trailTime} from './labels';
+import {regionalText,trailTime,caseTime} from './labels';
 it('uses UK flat labels in sentences without touching units',()=>{
  expect(regionalText('Arrange open access to flat 6','UK')).toBe('Arrange open access to Flat 6');
  expect(regionalText('breaking 4 ceiling','UK')).toBe('breaking Flat 4 ceiling');
@@ -11,3 +11,8 @@ it('uses UK flat labels in sentences without touching units',()=>{
  expect(regionalText('re-check after rain · Tue 3 Nov','UK')).toBe('re-check after rain · Tue 3 Nov');
 });
 it('formats trail timestamps for people',()=>{expect(trailTime('2026-10-31T14:05:00.000Z')).toBe('31 Oct 2026, 14:05');expect(trailTime('unknown')).toBe('unknown');});
+it('shows case times in the building zone with no UTC label (IN: India time; UK format unchanged)',()=>{
+ expect(caseTime('2026-10-31T11:00:00.000Z','IN')).toBe('31 Oct 2026, 16:30');
+ expect(caseTime('2026-10-31T11:00:00.000Z','UK')).toBe(trailTime('2026-10-31T11:00:00.000Z'));
+ expect(caseTime('2026-10-31T11:00:00.000Z','IN')).not.toMatch(/UTC/);
+});

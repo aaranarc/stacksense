@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { EvalResults } from '@stacksense/contracts';
 import type { z } from 'zod';
 import { visualStatus } from '../../lib/visual';
+import { caseTime } from '../../lib/labels';
 import s from './judge.module.css';
 
 type Results = z.infer<typeof EvalResults>;
@@ -59,7 +60,7 @@ export function EvalTable({ rows, pending = [] }: { rows: Row[]; pending?: Pendi
   </div>;
 }
 
-export function EvalCard({ src = '/eval/latest.json' }: { src?: string }) {
+export function EvalCard({ src = '/eval/latest.json', region = 'IN' }: { src?: string; region?: 'IN' | 'UK' }) {
   const [data, setData] = useState<Latest | null | 'missing'>(null);
   const [set, setSet] = useState<'all' | 'hard' | 'sim'>('all');
   useEffect(() => {
@@ -76,7 +77,7 @@ export function EvalCard({ src = '/eval/latest.json' }: { src?: string }) {
   const { sets, ai, robustness } = data;
   return <div className={s.stack}>
     <p className={s.label}><strong>{LABEL}</strong></p>
-    <p className={s.small}>{sets.hardCases} hard cases · {sets.simBuildings} simulated buildings · {sets.photos} photos · {sets.messages} messages · generated {data.generatedAt.slice(0, 16).replace('T', ' ')} UTC</p>
+    <p className={s.small}>{sets.hardCases} hard cases · {sets.simBuildings} simulated buildings · {sets.photos} photos · {sets.messages} messages · generated {caseTime(data.generatedAt, region)}</p>
     {data.rowsBySet && <label className={s.field}>Show
       <select value={set} onChange={(e) => setSet(e.target.value as typeof set)}>
         <option value="all">All cases</option><option value="hard">Hard cases only</option><option value="sim">Simulated only</option>
