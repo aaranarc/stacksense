@@ -39,7 +39,7 @@ export function DryPaintTab({state,onState}:{state:EngineState;onState:(state:En
    <div className="photo-row">{tile('Before',victim)}{tile('After repair',afterRepair)}{tile('Day 14 check',day14,true)}</div>
    <div className="moisture-card">
     <span className="eyebrow-strong">Moisture reading</span>
-    <div className="moisture-value"><Droplet size={22} aria-hidden="true"/><strong>{lastReading?.moisture?`${lastReading.moisture.value}%`:'No reading yet'}</strong><span>Target ≤ {threshold} %WME</span></div>
+    <div className="moisture-value"><Droplet size={22} aria-hidden="true"/><strong className={lastReading?.moisture?undefined:'empty'}>{lastReading?.moisture?`${lastReading.moisture.value}%`:'No reading yet'}</strong><span>Target ≤ {threshold} %WME</span></div>
     <form onSubmit={e=>{e.preventDefault();record('moisture_reading');}}><label className="sr-only" htmlFor={inputId}>Moisture reading</label><input id={inputId} aria-label="Moisture reading" type="number" min="0" max="100" step="0.1" required value={value} placeholder="%WME" onChange={e=>setValue(e.target.value)}/><select aria-label="Moisture unit" value="%WME" onChange={()=>{}}><option>%WME</option></select><button className="outline-btn" disabled={state.safety.status!=='ok'||r.repair!=='done'||value===''}>Add reading</button></form>
     <small>Threshold set by contractor configuration; prototype review pending.</small>
    </div>
