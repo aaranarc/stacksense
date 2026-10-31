@@ -1,5 +1,7 @@
 # App decisions
 
+- B-T17: `/c/demo` uses labelled cached check results and does not upload a real resident photo. Real-token flows use A's browser EXIF/quality helpers and `/api/upload`, after explicit consent and all four negative safety answers. Each token starts a fresh flow. C's published JudgePanel hookup is copied unchanged. C's reported CrossSection title hydration bug is fixed in B's component.
+
 - B-T16: The WhatIfSliders export lives in components/whatif. C's judge folder is copied byte-for-byte for integration and remains read-only. JudgePanel still owns its placeholder replacement; B only wires the panel in Workspace. A's sharp dependency/configuration fix is merged unchanged.
 
 - B-T11 review: a new same-stack inspection request takes visual precedence over an old passed check, so both 302 and 602 are amber at A9 step 11. The fixture simulator also exposes the remaining A6 signature for later work; its answers are labelled simulated, not physical model results.

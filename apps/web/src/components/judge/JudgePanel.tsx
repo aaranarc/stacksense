@@ -5,13 +5,9 @@ import { ScenarioPicker } from './ScenarioPicker';
 import { EvalCard } from './EvalCard';
 import { HowItDecided } from './HowItDecided';
 import { BreakIt } from './BreakIt';
+import { WhatIfSliders } from '../whatif/WhatIfSliders';
 import s from './judge.module.css';
 
-// shortcut: B's WhatIfSliders (@/components/whatif/WhatIfSliders) is not pushed yet — swap this placeholder for
-// `<WhatIfSliders state={state} onState={onState} />` when it lands.
-function WhatIfPlaceholder() {
-  return <p className={s.small}>What-if sliders — coming from B</p>;
-}
 
 export function JudgePanel({ state, onState }: { state: EngineState; onState: (s: EngineState) => void }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -24,7 +20,7 @@ export function JudgePanel({ state, onState }: { state: EngineState; onState: (s
       </button>
     </div>
     <div id="judge-body" className={s.body}>
-    <details open><summary>What-if</summary><WhatIfPlaceholder /></details>
+    <details open><summary>What-if</summary><WhatIfSliders state={state} onState={onState} /></details>
     <details open><summary>Scenarios</summary><ScenarioPicker onState={onState} /></details>
     <details><summary>Evaluation</summary><EvalCard /></details>
     <details><summary>How it decided</summary><HowItDecided state={state} /></details>
