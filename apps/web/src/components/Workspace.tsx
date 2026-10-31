@@ -21,20 +21,21 @@ export function Workspace() {
  const [state,setState]=useState(()=>engine.createCase(demo.states[0]!.building));
  const [messages,setMessages]=useState<ChatMessage[]>([]);
  const [read,setRead]=useState<ReadResult|null>(null);
+ const [fixture,setFixture]=useState(false);
  const [judge,setJudge]=useState(false);
  const [flat,setFlat]=useState<string|null>(null);
  const [photo,setPhoto]=useState<string|null>(null);
  const [resetKey,setResetKey]=useState(0);
- const reset=()=>{setState(engine.createCase(demo.states[0]!.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);};
+ const reset=()=>{setState(engine.createCase(demo.states[0]!.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);setFixture(false);};
  const advance=()=>setState(engine.applyObservations(state,[]));
  const mode=read?.mode??(demo.enabled?'cached':'fallback');
  return <>
   <TopBar judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
-  <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{mode==='cached'?'Cached':mode==='live'?'Live':'Fallback'}{demo.enabled?' · Demo data':''}</p></div>
+  <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{mode==='cached'?'Cached':mode==='live'?'Live':'Fallback'}{demo.enabled||fixture||state.observations.some(o=>o.provenance==='simulated')?' · Demo data':''}</p></div>
   <SafetyBoundary state={state}>
    {judge && <JudgePanel state={state} onState={setState} />}
    <Shell feed={<>
-    <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} onRead={(result,chatMessages)=>{setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
+    <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} onRead={(result,chatMessages,isDemo)=>{setFixture(!!isDemo);setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
     {read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}
     {flat&&<p>Showing flat {flat} <button onClick={()=>setFlat(null)}>Clear flat filter</button></p>}
     <CaseFeed state={state} selectedFlat={flat} onPhoto={setPhoto}/>
@@ -50,5 +51,6 @@ export function Workspace() {
   </SafetyBoundary>
  </>;
 }
+
 
 

@@ -18,7 +18,15 @@ const realApi={
 export const engine = USE_MOCK_ENGINE ? mockEngine : realEngine;
 export const api = USE_MOCK_API ? mockApi : realApi;
 export const demo = { states:heroStates, emergency:emergencyState, enabled:USE_MOCK_ENGINE || USE_MOCK_API };
-export const browser = { ...mockBrowser, available:USE_MOCK_API };
+async function fileDataUrl(file:Blob):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not read the prepared photo.'));reader.readAsDataURL(file);});}
+const liveBrowser={
+ available:true,
+ parseWhatsAppExport:realBrowser.parseWhatsAppExport,
+ pseudonymise:(messages:Parameters<typeof realBrowser.pseudonymise>[0])=>realBrowser.pseudonymise(messages).messages,
+ stripExif:async(file:File)=>fileDataUrl(await realBrowser.stripExif(file)),
+ async qualityCheck(dataUrl:string){const blob=await(await fetch(dataUrl)).blob();const bitmap=await createImageBitmap(blob);try{const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Photo quality check unavailable.');ctx.drawImage(bitmap,0,0);const result=realBrowser.qualityCheck(ctx.getImageData(0,0,canvas.width,canvas.height));return {warnings:result.quality==='ok'?[]:[`${result.quality.replaceAll('_',' ')} — ${result.hints.en}`]};}finally{bitmap.close();}},
+};
+export const browser = USE_MOCK_API?{...mockBrowser,available:true}:liveBrowser;
 export function applyRecoveryObservation(state:EngineState,observation:Observation):EngineState {
  if(!USE_MOCK_ENGINE)return realEngine.applyObservations(state,[observation]);
  const observations=[...state.observations,observation];

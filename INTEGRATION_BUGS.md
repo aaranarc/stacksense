@@ -12,13 +12,15 @@ Merged A `9fe98e0`, B `30823b2`, C `997e9ce`, in that order, into main `813d535`
 | Judge Mode → hero completion | PASS: step 6/6, Job Sheet sends waterproofer_tiler (displayed as “waterproofer tiler”) |
 | /c/demo at actual viewport 390×844 | FAIL: A-001 |
 
-## B-001 — OPEN — demo import blocked by browser adapter
+## B-001 — FIXED on b/app — preview verification pending
 
 Owner: **B**. Priority: P0 for the hero import flow.
 
 Reproduce: open production, click **Load demo chat**. The textarea fills, then displays **“Private browser preparation is unavailable. Use demo mode until it is connected.”** The case remains empty; the building does not light up from chat. Judge scenario playback separately works.
 
 Cause confirmed in `apps/web/src/lib/adapters.ts` and `importChat.ts`: `browser` still spreads mock preprocessing and sets `available: USE_MOCK_API`; `readChat` rejects when real APIs are selected. Wire the actual `@stacksense/ai/browser` functions, adapting their return shapes, and retain browser-local keyMap privacy. Do not enable mock APIs to hide this defect: direct deployed /api/read already succeeds. A has not edited B's files.
+
+B resolution: real parsing and pseudonymisation are connected; keyMap is never transmitted. Text-only imports skip both photo helpers. Metadata failures omit the unsafe photo with a labelled warning; quality failures retain only the stripped photo with a warning. Bundled demo text and its sanitised fallback match the canonical request. Both local mock flags are false. Local UI regression passes (Load demo chat → 402 victim); local `/api/read` returns 200 with five observations and a labelled fallback because this checkout has no provider key. Web typecheck, tests and production build pass. Branch-preview verification follows the push.
 
 ## A-001 — OPEN — deployed demo token disabled
 
