@@ -1,0 +1,3 @@
+import type { EngineState } from '@stacksense/contracts';
+import { Drawer } from '../layout/Drawer';
+export function WhyDrawer({state,onClose}:{state:EngineState;onClose:()=>void}) {return <Drawer title="Why this check?" onClose={onClose}><div style={{overflowX:'auto'}}><table><thead><tr>{['Check','Flat','Bits','Effort','Score','Excluded reason'].map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{state.nextChecks.map(c=><tr key={c.id}><td>{c.type.replaceAll('_',' ')}</td><td>{c.targetFlatId??'Building'}</td><td>{c.expectedBits.toFixed(2)}</td><td>{c.effortMin} min</td><td>{c.score.toFixed(2)}</td><td>{c.excluded??'Eligible'}</td></tr>)}</tbody></table></div><p>Ranking is provided by the engine.</p></Drawer>;}

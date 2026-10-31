@@ -1,0 +1,4 @@
+31/10/26, 10:00 - S01: Flat 402 bathroom ceiling has a damp stain near the duct corner. All four safety questions answered no. [Demo data]
+31/10/26, 10:02 - S02: Flat 202 west wall near the window has white marks after heavy rain. All four safety questions answered no. [Demo data]
+31/10/26, 10:04 - S03: Flat 502: our floor is dry. [Demo data]
+31/10/26, 10:06 - S07: There is also a stain on my ceiling. Which flat should this be assigned to? [Demo data]

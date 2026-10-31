@@ -1,0 +1,13 @@
+@theme static {
+ --color-unassessed: #9CA3AF;
+ --color-suspected: #D97706;
+ --color-leading: #DC2626;
+ --color-passed: #16A34A;
+ --color-ink: #111827;
+ --color-surface: #FFFFFF;
+ --color-muted: #F9FAFB;
+ --color-border: #E5E7EB;
+ --font-sans: 'Inter', sans-serif;
+ --spacing: 8px;
+ --radius-panel: 12px;
+}
