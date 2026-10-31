@@ -8,6 +8,7 @@ import { Shell } from './layout/Shell';
 import { TopBar } from './layout/TopBar';
 import { RightTabs } from './tabs/RightTabs';
 import { CrossSection } from './building/CrossSection';
+import { Pills } from './building/Pills';
 import { SourceBars } from './odds/SourceBars';
 import { NextCheck } from './checks/NextCheck';
 import { SafetyBoundary } from './safety/SafetyBoundary';
@@ -41,7 +42,7 @@ export function Workspace() {
     <CaseFeed state={state} selectedFlat={flat} onPhoto={setPhoto}/>
    </>} building={<>
     <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span></div>
-    <CrossSection state={state} selected={flat} onSelect={setFlat}/>
+    <CrossSection state={state} selected={flat} onSelect={setFlat}/><Pills state={state} selectedFlat={flat}/>
    </>} analysis={<>
     <SourceBars state={state}/><NextCheck state={state} onDemoStep={advance}/>
     <SecondOpinionBanner state={state} onState={setState}/>
@@ -51,6 +52,7 @@ export function Workspace() {
   </SafetyBoundary>
  </>;
 }
+
 
 
 

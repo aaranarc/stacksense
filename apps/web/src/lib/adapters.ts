@@ -1,6 +1,6 @@
 import type { z } from 'zod';
 import * as realEngine from '@stacksense/engine';
-import { ReadResult, SecondOpinion, LinkResult } from '@stacksense/contracts';
+import { ReadResult, SecondOpinion, LinkResult, RainSeries } from '@stacksense/contracts';
 import type { EngineState, Observation, ReadRequest, LinkRequest } from '@stacksense/contracts';
 import { mockEngine, heroStates, emergencyState } from '../mocks/mockEngine';
 import { mockApi } from '../mocks/mockApi';
@@ -27,6 +27,12 @@ const liveBrowser={
  async qualityCheck(dataUrl:string){const blob=await(await fetch(dataUrl)).blob();const bitmap=await createImageBitmap(blob);try{const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Photo quality check unavailable.');ctx.drawImage(bitmap,0,0);const result=realBrowser.qualityCheck(ctx.getImageData(0,0,canvas.width,canvas.height));return {warnings:result.quality==='ok'?[]:[`${result.quality.replaceAll('_',' ')} — ${result.hints.en}`]};}finally{bitmap.close();}},
 };
 export const browser = USE_MOCK_API?{...mockBrowser,available:true}:liveBrowser;
+export async function getRain(state:EngineState):Promise<RainSeries|null>{
+ const supplied=(state as EngineState&{weather?:{rain?:RainSeries}}).weather?.rain;if(supplied)return RainSeries.parse(supplied);
+ const report=state.observations.find(o=>o.kind==='complaint');if(!report)return null;
+ const end=report.at.slice(0,10),start=new Date(Date.parse(report.at)-72*3600000).toISOString().slice(0,10);
+ const query=new URLSearchParams({lat:String(state.building.lat),lon:String(state.building.lon),start,end});const response=await fetch(`/api/weather?${query}`);if(!response.ok)throw new Error('Weather data is unavailable.');return RainSeries.parse(await response.json());
+}
 export function applyRecoveryObservation(state:EngineState,observation:Observation):EngineState {
  if(!USE_MOCK_ENGINE)return realEngine.applyObservations(state,[observation]);
  const observations=[...state.observations,observation];
