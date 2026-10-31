@@ -2,6 +2,8 @@
 import { useRef,useState } from 'react';
 import type { ChatMessage,ReadResult } from '@stacksense/contracts';
 import { engine,demo,buildings } from '../lib/adapters';
+import {answerDelta,applyResidentAnswers,mergeAnswerRead} from '../lib/answers';
+import {AnswerRefresh} from './phone/AnswerRefresh';
 import {ukDemo} from '../lib/regionDemo';
 import {labels} from '../lib/labels';
 import { remapSender } from '../lib/assignSender';
@@ -38,7 +40,8 @@ export function Workspace() {
  const advance=()=>setState(engine.applyObservations(state,[]));
  const isDemo=demo.enabled||fixture||state.observations.some(o=>o.provenance==='simulated');
  const mode=read?.mode??(isDemo?'cached':undefined);
- return <CheckLinkProvider state={state} onRead={result=>{setRead(previous=>previous?{...previous,mode:result.mode,warnings:[...previous.warnings,...result.warnings],observations:[...previous.observations,...result.observations],photoLabels:[...previous.photoLabels,...result.photoLabels]}:result);setState(previous=>engine.applyObservations(previous,result.observations,{photoLabels:result.photoLabels}));}}>
+ const acceptAnswers=(result:ReadResult)=>{const delta=answerDelta(state,result);if(!delta.observations.length)return 0;setRead(previous=>mergeAnswerRead(previous,delta));setState(previous=>applyResidentAnswers(previous,result));return delta.observations.length;};
+ return <CheckLinkProvider state={state} onRead={acceptAnswers}>
   <TopBar region={state.building.region} buildingName={state.building.name} onRegion={changeRegion} judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
   <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><DataBadge mode={mode} demoData={isDemo}/></div>
   <SafetyBoundary state={state}>
@@ -47,7 +50,7 @@ export function Workspace() {
     <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} buildingId={state.building.id} onRead={(result,chatMessages,isDemo)=>{setFixture(!!isDemo);setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(isDemo?buildings.IN:state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
     {read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}
     {flat&&<p>Showing flat {flat} <button onClick={()=>setFlat(null)}>Clear flat filter</button></p>}
-    <CaseFeed state={state} messages={messages} selectedFlat={flat} onPhoto={setPhoto}/>
+    <CaseFeed state={state} messages={messages} selectedFlat={flat} onPhoto={setPhoto}/><AnswerRefresh key={state.caseId} caseId={state.caseId} enabled={state.observations.length>0&&state.safety.status!=='emergency'} onAnswers={acceptAnswers} demoData={isDemo}/>
    </PanelState>} building={<PanelState key={`building-${state.caseId}`} name="Building">
     <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span><small>{labels[state.building.region].group} · {labels[state.building.region].manager} · {labels[state.building.region].trap}</small></div>
     <CrossSection state={state} selected={flat} onSelect={setFlat}/>{!state.observations.length&&<p className="diagram-key">No evidence assessed yet.</p>}<Pills state={state} selectedFlat={flat}/>

@@ -1,0 +1,13 @@
+import {render,screen,fireEvent,cleanup,act} from '@testing-library/react';
+import {afterEach,beforeEach,expect,it,vi} from 'vitest';
+import type {ReadResult} from '@stacksense/contracts';
+const mock=vi.hoisted(()=>({get:vi.fn()}));
+vi.mock('../../lib/adapters',async original=>({...await original<typeof import('../../lib/adapters')>(),getAnswerUpdates:mock.get}));
+import {AnswerRefresh,ANSWER_POLL_LIMIT,ANSWER_POLL_MS} from './AnswerRefresh';
+import {AnswerRefreshError,CHECK_LINK_CREATED} from '../../lib/adapters';
+const empty:ReadResult={observations:[],photoLabels:[],senderMap:{},warnings:['Cached'],mode:'cached'};
+beforeEach(()=>{mock.get.mockReset();vi.spyOn(document,'visibilityState','get').mockReturnValue('visible');});
+afterEach(()=>{cleanup();vi.useRealTimers();vi.restoreAllMocks();});
+it('provides manual refresh and stops automatic requests after an ownership rejection',async()=>{mock.get.mockRejectedValue(new AnswerRefreshError('Not authorised for this case.',403));render(<AnswerRefresh caseId="case:402" enabled onAnswers={vi.fn()}/>);fireEvent.click(screen.getByRole('button',{name:'Refresh neighbour answers'}));expect(await screen.findByRole('alert')).toHaveProperty('textContent','Not authorised for this case.');fireEvent.focus(window);expect(mock.get).toHaveBeenCalledTimes(1);});
+it('starts bounded polling only for a link created for this case',async()=>{vi.useFakeTimers();mock.get.mockResolvedValue(empty);const onAnswers=vi.fn(()=>0);render(<AnswerRefresh caseId="case:402" enabled onAnswers={onAnswers}/>);await act(async()=>{window.dispatchEvent(new CustomEvent(CHECK_LINK_CREATED,{detail:{caseId:'other'}}));});expect(mock.get).not.toHaveBeenCalled();await act(async()=>{window.dispatchEvent(new CustomEvent(CHECK_LINK_CREATED,{detail:{caseId:'case:402'}}));});await act(async()=>{await vi.advanceTimersByTimeAsync(ANSWER_POLL_MS*(ANSWER_POLL_LIMIT+2));});expect(mock.get).toHaveBeenCalledTimes(ANSWER_POLL_LIMIT);expect(screen.getByRole('status').textContent).toBe('No new neighbour answers.');});
+it('aborts and ignores an answer that arrives after switching cases',async()=>{let resolve!:(result:ReadResult)=>void;mock.get.mockImplementation(()=>new Promise<ReadResult>(done=>{resolve=done;}));const onAnswers=vi.fn(()=>1);const {rerender}=render(<AnswerRefresh caseId="old" enabled onAnswers={onAnswers}/>);fireEvent.click(screen.getByRole('button',{name:'Refresh neighbour answers'}));const signal=mock.get.mock.calls[0]![1] as AbortSignal;rerender(<AnswerRefresh caseId="new" enabled onAnswers={onAnswers}/>);expect(signal.aborted).toBe(true);await act(async()=>resolve(empty));expect(onAnswers).not.toHaveBeenCalled();expect(screen.queryByRole('status')).toBeNull();});

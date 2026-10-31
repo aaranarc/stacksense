@@ -203,3 +203,15 @@ tests (3 / 66 AI / 87 engine / 72 web) and build passed; Vercel status for bc852
 | Judge photo previews | **PASS — B-003 judge path CLOSED**: ceiling_402_own, window_202_own, duct_302, trap_502_own all HTTP 200 and rendered | — |
 | Demo-chat attachment previews | **FAIL — B-003b OPEN**: after "Load demo chat" the two chat attachments (IMG-20261030-WA0402.jpg, IMG-20261030-WA0202.jpg) still show "Preview unavailable" | **B** (lib/media.ts mapping for chat attachment IDs) |
 | Evaluation card | PASS — label shown; single-LLM row "pending — free-tier AI quota (16/30 hard cases answered)" | — |
+
+## B final run — B-STATUS fixed on b/app
+Leading source flats are red and labelled probable source; other assessed candidates are amber. Green requires a named, dated dry check with answered safety questions and usable dry labels; denials, unrequested dry reports, poor-quality photos and superseded wet checks do not qualify. New prevention inspections remain amber. SourceBars uses a single red leading bar and neutral grey alternatives, never green. Tests cover these cases.
+
+## B final run — B-REFRESH consumes the deployed A-003 API
+The owner dashboard now fetches /api/link/updates with same-origin credentials and no-store. It supports manual/focus refresh and twelve ten-second polls after a successful link creation; 403 stops automatic requests. Case changes abort in-flight requests and ignore stale replies. New observation IDs and labels are applied through the engine with a non-decreasing answer timestamp; repeated all-current snapshots preserve local human corrections and do not duplicate evidence. The phone frame closes when its check is answered externally. Local tests cover authorization, credentials, bounded polling, stale responses, idempotence, timestamps and external frame dismissal. Local cloud credentials are absent; the configured branch preview will be used for signed-link verification.
+
+## B final run — B-AUDIT
+Reviewed the full chronological report and A handoff after merging main. B-001 and the prior CrossSection title hydration defect are already fixed. B-002/B-003/B-STATUS/B-REFRESH are pushed on b/app for C. A's deployed inspect targets now enable the existing 302/602 UI buttons; a regression validates the current generated engine fixture. No packages/API/judge/root-config change was made by B. Remaining app verification and /c/demo preview/polish work are tracked in apps/web/FINAL_STATUS.md.
+
+## B final run — B-T23 explicit demo phone preview
+Added Preview demo phone beside the safe neighbour-check controls. It opens /c/demo in the phone frame with an explicit Cached/Demo notice and closes on completion. Demo answers do not alter the current case; signed answers still update it through the real API/frame/refresh paths. Both launch and non-application of demo evidence have regression coverage.

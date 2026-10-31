@@ -47,3 +47,7 @@ table { width:100%; border-collapse:collapse; } th,td { text-align:left; padding
 .evidence-timeline { padding-left:24px; } .evidence-timeline blockquote { margin:8px 0; padding:8px 16px; border-left:2px solid var(--color-border); overflow-wrap:anywhere; } .evidence-timeline summary { min-height:44px; }
 
 .ghost-comparison { position:relative; } .ghost-comparison>img:first-child { display:block; width:100%; } .ghost-compare input[type=range] { width:100%; min-height:44px; } .edge-control { display:flex; align-items:center; gap:8px; min-height:44px; } .edge-control input { width:24px; height:24px; }
+
+.answer-refresh { border-top:1px solid var(--color-border); margin-top:24px; padding-top:16px; overflow-wrap:anywhere; }
+
+.demo-note { margin:16px 32px; } @media(max-width:800px) { .demo-note { margin:16px; } }
