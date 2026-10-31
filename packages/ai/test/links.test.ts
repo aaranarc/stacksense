@@ -9,7 +9,7 @@ import sharp from "sharp";
 const state=JSON.parse(readFileSync(new URL("../../../fixtures/hero/state-05.json",import.meta.url),"utf8")) as EngineState;
 function memoryRepository():LinkRepository {
  const owners=new Map<string,string>();const cases=new Map<string,EngineState>(),links=new Map<string,LinkRow>(),photos:PhotoRow[]=[];
- return {async getCase(id){return cases.get(id)??null;},async ownerHash(id){return owners.get(id)??null;},async putCase(s,hash){cases.set(s.caseId,s);owners.set(s.caseId,hash!);},async insertLink(row){links.set(row.token_hash,row);},async getLink(hash){return links.get(hash)??null;},async claim(hash,at){const row=links.get(hash);if(!row||row.used_at)return false;row.used_at=at;return true;},async release(hash,at){const row=links.get(hash);if(row?.used_at===at)row.used_at=null;},async savePhoto(row,_bytes){photos.push(row);},async removePhoto(path){const i=photos.findIndex(p=>p.path===path);if(i>=0)photos.splice(i,1);},async saveObservation(_caseId,_obs){},async ghost(caseId,flatId,zone){return photos.find(p=>p.case_id===caseId&&p.flat_id===flatId&&p.zone===zone)?.path??null;},async signedUrl(path){return `https://private.example.invalid/${path}?signed=test`;}};
+ return {async getCase(id){return cases.get(id)??null;},async ownerHash(id){return owners.get(id)??null;},async putCase(s,hash){cases.set(s.caseId,s);owners.set(s.caseId,hash!);},async insertLink(row){links.set(row.token_hash,row);},async getLink(hash){return links.get(hash)??null;},async claim(hash,at){const row=links.get(hash);if(!row||row.used_at)return false;row.used_at=at;return true;},async release(hash,at){const row=links.get(hash);if(row?.used_at===at)row.used_at=null;},async savePhoto(row,_bytes){photos.push(row);},async removePhoto(path){const i=photos.findIndex(p=>p.path===path);if(i>=0)photos.splice(i,1);},async saveObservation(_caseId,_obs){},async getUpdates(){return {observations:[],photoLabels:[],senderMap:{},mode:"cached",warnings:["Cached"]};},async ghost(caseId,flatId,zone){return photos.find(p=>p.case_id===caseId&&p.flat_id===flatId&&p.zone===zone)?.path??null;},async signedUrl(path){return `https://private.example.invalid/${path}?signed=test`;}};
 }
 const secret="test-only-secret-32-characters-long";
 const request=(body:unknown)=>new Request("https://demo.example.invalid/api/link",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
@@ -64,4 +64,21 @@ it("labels a missing-key photo upload fallback and never invents meter readings"
  const response=await handlers.upload(new Request("https://demo.example.invalid/api/upload",{method:"POST",body:form}));
  expect(response.status).toBe(200);const result=ReadResult.parse(await response.json());
  expect(result.mode).toBe("fallback");expect(result.warnings.join(" ")).toContain("Labelled fallback");expect(result.observations[0]?.checkId).toBe("meter_check@502");expect(result.observations[0]?.meter).toBeNull();
+});
+
+it("returns stored resident answers only to the case owner through link updates",async()=>{
+ const repository=memoryRepository();
+ const getUpdates=vi.fn(async()=>({observations:[],photoLabels:[],senderMap:{},warnings:['Cached'],mode:'cached' as const}));
+ Object.assign(repository,{getUpdates});
+ const handlers=createLinkHandlers({repository,secret});
+ const body={caseId:state.caseId,checkId:'meter_check@502',flatId:'502',lang:'en',state};
+ const first=await handlers.link(request(body));const cookie=first.headers.get('set-cookie')!.split(';')[0]!;
+ const url=`https://demo.example.invalid/api/link/updates?caseId=${encodeURIComponent(state.caseId)}`;
+ expect((await handlers.updates(new Request(url))).status).toBe(403);
+ expect(getUpdates).not.toHaveBeenCalled();
+ const result=await handlers.updates(new Request(url,{headers:{cookie}}));
+ expect(result.status).toBe(200);expect(ReadResult.parse(await result.json()).mode).toBe('cached');
+ expect(result.headers.get('cache-control')).toBe('no-store');
+ expect(getUpdates).toHaveBeenCalledWith(state.caseId);
+ expect(first.headers.get('set-cookie')).toContain('Path=/api/link');
 });

@@ -4,5 +4,5 @@ export { createReadService } from "./read/pipeline";
 export { handleSecondOpinion, createSecondOpinionHandler } from "./secondOpinion";
 export { handleWeather, handleForecast } from "./weather/openMeteo";
 export {handleMemory} from "./memory";
-export {handleLink,handleLinkVerify,handleUpload} from "./links/http";
+export {handleLink,handleLinkVerify,handleLinkUpdates,handleUpload} from "./links/http";
 export { singleLlmBaseline } from "./baseline";

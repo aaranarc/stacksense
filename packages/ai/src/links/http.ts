@@ -41,6 +41,18 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
     return jsonResponse(LinkResult.parse({url,token,waUrl:`https://wa.me/?text=${encodeURIComponent(messages[p.lang])}`}),200,{"Set-Cookie":`${cookieName}=${owner}; HttpOnly; Secure; SameSite=Strict; Path=/api/link; Max-Age=172800`});
    }catch{return jsonResponse({error:"Link could not be created"},400);}
   },
+  async updates(request:Request):Promise<Response>{
+   if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
+   try {
+    const caseId=new URL(request.url).searchParams.get("caseId");
+    if(!caseId||caseId.length>500)return jsonResponse({error:"Case ID required"},400);
+    const name=`stacksense_case_${codec.hash(caseId).slice(0,24)}`;
+    const owner=(request.headers.get("cookie")??"").split(";").map(s=>s.trim()).find(s=>s.startsWith(name+"="))?.slice(name.length+1);
+    const expected=await repo.ownerHash(caseId),actual=owner?codec.hash(owner):"";
+    if(!expected||actual.length!==expected.length||!timingSafeEqual(Buffer.from(actual),Buffer.from(expected)))return jsonResponse({error:"Case owner authorization required"},403);
+    return jsonResponse(ReadResult.parse(await repo.getUpdates(caseId)));
+   }catch{return jsonResponse({error:"Case updates unavailable"},503);}
+  },
   async verify(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
    try{const row=await resolve(new URL(request.url).searchParams.get("token")??""),state=await repo.getCase(row.case_id);if(!state||state.safety.status!=="ok")return jsonResponse({error:"Resident checks unavailable"},403);const check=state.nextChecks.find(c=>c.id===row.check_id);if(!check||check.excluded!==null)throw new Error();const path=await repo.ghost(row.case_id,row.flat_id,zoneFor(row.check_type));return jsonResponse({caseId:row.case_id,checkId:row.check_id,flatId:row.flat_id,lang:row.lang,checkType:row.check_type,instructions:check.instructions,ghostPhotoUrl:path?await repo.signedUrl(path):null});}catch{return jsonResponse({error:"Invalid, expired or used link"},410);}
@@ -76,7 +88,7 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
     }
     const observation:Observation={id:randomUUID(),flatId:row.flat_id,eventKey:`${row.case_id}:${row.check_id}:${claimedAt}`,at:claimedAt,kind:meter?"meter_reading":"check_result",zone:zoneFor(row.check_type),surface:row.check_type==="meter_check"&&!meter?"unclear":labels[0]!.surface,room:null,hazards:[],hazardQuestionsAnswered:true,checkId:row.check_id,meter,moisture:null,finding:null,photoIds:labels.map(p=>p.photoId),sourceMessageIds:[],provenance:"observed",rawText:row.check_type==="meter_check"?(meter?"Meter readings from two resident photos":"Meter unreadable; retake requested"):"Resident check photo received"};
     if(fallback)warnings.push("Labelled fallback: photo labels unavailable; no meter digits were guessed");
-    await repo.saveObservation(row.case_id,observation);const mode=fallback?"fallback":allCached?"cached":"live";return jsonResponse(ReadResult.parse({observations:[observation],photoLabels:labels,senderMap:{},warnings:modeWarnings(mode,warnings),mode}));
+    const mode=fallback?"fallback":allCached?"cached":"live";const result=ReadResult.parse({observations:[observation],photoLabels:labels,senderMap:{},warnings:modeWarnings(mode,warnings),mode});await repo.saveObservation(row.case_id,observation,result);return jsonResponse(result);
    }catch{
     if(row&&claimedAt){const cleanup=await Promise.allSettled(saved.map(p=>repo.removePhoto(p)));if(cleanup.every(r=>r.status==="fulfilled"))await repo.release(row.token_hash,claimedAt).catch(()=>{});}
     return jsonResponse({error:row?"Upload failed; retake or request a new link":"Invalid, expired or used link"},row?(claimedAt?503:400):410);
@@ -89,3 +101,5 @@ function configured(){if(!handlers){const {SUPABASE_URL:url,SUPABASE_SERVICE_ROL
 export async function handleLink(request:Request){try{return await configured().link(request);}catch{return jsonResponse({error:"Configure Supabase and MAGIC_LINK_SECRET"},503);}}
 export async function handleLinkVerify(request:Request){try{return await configured().verify(request);}catch{return jsonResponse({error:"Configure Supabase and MAGIC_LINK_SECRET"},503);}}
 export async function handleUpload(request:Request){try{return await configured().upload(request);}catch{return jsonResponse({error:"Configure Supabase and MAGIC_LINK_SECRET"},503);}}
+
+export async function handleLinkUpdates(request:Request){try{return await configured().updates(request);}catch{return jsonResponse({error:"Configure Supabase and MAGIC_LINK_SECRET"},503);}}

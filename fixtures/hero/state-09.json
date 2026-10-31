@@ -596,6 +596,22 @@
       }
     },
     {
+      "id": "inspect@302",
+      "type": "inspect",
+      "targetFlatId": "302",
+      "effortMin": 1,
+      "accessPenalty": 1,
+      "expectedBits": 0,
+      "score": 0,
+      "why": "same stack as 502 wet-area defect — 1-minute inspection photo",
+      "excluded": null,
+      "instructions": {
+        "en": "Photograph the same-stack wet-area surface only if safe; do not dismantle fittings. This is a prevention inspection, not a diagnosis.",
+        "hi": "सुरक्षित हो तभी उसी स्टैक के गीले क्षेत्र की फोटो लें; कुछ खोलें नहीं। यह निवारक निरीक्षण है, निदान नहीं।",
+        "mr": "सुरक्षित असेल तरच त्याच स्टॅकमधील ओल्या भागाचा फोटो घ्या; काहीही काढू नका। ही प्रतिबंधक तपासणी आहे, निदान नाही।"
+      }
+    },
+    {
       "id": "inspect@402",
       "type": "inspect",
       "targetFlatId": "402",
@@ -609,6 +625,22 @@
         "en": "Arrange a professional inspection only if safe; keep away from hazardous areas.",
         "hi": "सुरक्षित हो तभी विशेषज्ञ से निरीक्षण करवाएँ; खतरनाक जगहों से दूर रहें।",
         "mr": "सुरक्षित असेल तरच तज्ज्ञांकडून तपासणी करून घ्या; धोकादायक जागांपासून दूर राहा।"
+      }
+    },
+    {
+      "id": "inspect@602",
+      "type": "inspect",
+      "targetFlatId": "602",
+      "effortMin": 1,
+      "accessPenalty": 1,
+      "expectedBits": 0,
+      "score": 0,
+      "why": "same stack as 502 wet-area defect — 1-minute inspection photo",
+      "excluded": null,
+      "instructions": {
+        "en": "Photograph the same-stack wet-area surface only if safe; do not dismantle fittings. This is a prevention inspection, not a diagnosis.",
+        "hi": "सुरक्षित हो तभी उसी स्टैक के गीले क्षेत्र की फोटो लें; कुछ खोलें नहीं। यह निवारक निरीक्षण है, निदान नहीं।",
+        "mr": "सुरक्षित असेल तरच त्याच स्टॅकमधील ओल्या भागाचा फोटो घ्या; काहीही काढू नका। ही प्रतिबंधक तपासणी आहे, निदान नाही।"
       }
     },
     {
