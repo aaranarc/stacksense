@@ -257,3 +257,21 @@ Owner: C (API/engine); B has not edited those folders. `packages/ai/src/links/ht
 Phone-width polish fixes drawer keyboard handling after asynchronous focus loss, stacked-modal handling, background scroll locking, 44 px native file controls, text contrast and room beneath the collapsed Judge bar. Edge contrast exposes its pending selected state. New live cases use the current app clock while explicit scenario dates remain fixed. Demo provenance is retained on the printed Job Sheet and WhatsApp draft. A labelled fixture comparison is available in the styleguide; no measured moisture is inferred.
 
 With mock flags off, the isolated Chrome 156 runner passes 59 local check groups at desktop/390 px, including both B-003b chat images, the four hero images, all eight Judge scenarios, all tab accordions/drawers, IN/UK/IN, demo phone iframe and standalone resident screens, loading/errors, focus and control targets. No uncaught JavaScript or unexpected console errors. The actual hero PDF was exported, confirmed as one approximately A4 page and visually inspected. Recursive typecheck and all 249 tests pass (93 web); web production build also passes. The signed branch-preview owner/resident Cached upload and automatic dashboard refresh already passed; final-source deployment acceptance follows this push. See apps/web/QA_REPORT.md and FINAL_STATUS.md. C owns the Day-14 integration follow-up above and final main merge/retest; recordings, physical-phone footage and submission remain human work.
+
+## C merge 5 — main 3826dce (31 Oct, 16:17 IST)
+Merged origin/a/core (no change) → origin/b/app (3ee1c37, B-T28 phone width/accessibility) → origin/c/help (109
+human-reviewed message labels). Log-only conflict resolved on c/help keeping both sections. Typecheck, tests (3 / 66 AI /
+87 engine / 93 web) and build passed. Both Vercel deployments for 3826dce (c/help preview + main production) reported
+success before checking; checked in a fresh isolated browser context.
+
+| Production check after 3826dce | Result |
+| --- | --- |
+| No login; Load demo chat; /api/read | PASS — Cached · Demo data; 202/402 victims, 502 probable source; chat thumbnails render, 0× unavailable |
+| Judge hero / What-if meter | PASS — waterproofer tiler; moved → plumber; flip back restores |
+| Judge photo previews | PASS — 4/4 rendered |
+| Evaluation card | PASS — label, set sizes, 19 tie/loses chips, single-LLM row "pending — free-tier AI quota (16/30)" |
+| IN → UK → IN | PASS |
+| Judge Mode at 390×844 | PASS — fixed bottom sheet, 591 px tall, Hide-panel toggle, no horizontal overflow |
+| /c/demo at 390×844 | PASS — consent → 4× No → camera step, Demo label, no overflow |
+
+No open integration failures at 16:20 IST.
