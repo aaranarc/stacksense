@@ -53,3 +53,15 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   zone/surface/kind are required. Noise lines (greetings, admin, questions — 41 of 150 drafted) can't be labelled
   "should produce nothing", so false-positive observations on noise are never measured. Optional: accept
   `labels: null` = "expect no observation" and count any predicted observation as FP. Until then C leaves noise lines out.
+
+## To B (11:30, verified in the real app after merging b/app)
+- [x] JudgePanel render line + WhatIfSliders — on b/app (867b502). C now embeds `WhatIfSliders` in JudgePanel (placeholder removed).
+- [ ] **Hydration error (console, every load):** `CrossSection` renders `<title>{building.name} …</title>` with an
+  array of children → "Hydration failed … server rendered HTML didn't match". Use a template string:
+  `<title>{`${state.building.name} · building cross-section`}</title>`.
+- [ ] **FYI:** `next dev` auto-appends a "nextjs-agent-rules" block to `apps/web/AGENTS.md`; C restored your committed
+  version. `agentRules: false` in next.config stops it (A's/B's call — A owns the sharp config there).
+- Verified at 1440 px and 390 px (emulated iPhone width): Judge Mode opens; hero Play → "Job Sheet: send waterproofer
+  tiler"; what-if "502 meter → moved" → Job Sheet sends plumber; eval card shows label + tie/loses chips; 390 px = fixed
+  bottom sheet (70vh, own scroll, 44 px "Hide panel" toggle, collapses to 78 px), tables scroll sideways, no page
+  overflow; Break it "Electrical hazard" → emergency card, no check buttons.

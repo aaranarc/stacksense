@@ -6,10 +6,10 @@ import { JudgePanel } from './JudgePanel';
 afterEach(cleanup);
 const start = (): EngineState => engine.createCase(demo.states[0]!.building);
 
-it('shows the five calm sections with a labelled What-if placeholder', () => {
+it('shows the five calm sections with B\'s What-if sliders', () => {
   render(<JudgePanel state={start()} onState={() => {}} />);
   for (const name of ['What-if', 'Scenarios', 'Evaluation', 'How it decided', 'Break it']) expect(screen.getByText(name)).toBeTruthy();
-  expect(screen.getByText('What-if sliders — coming from B')).toBeTruthy();
+  expect(screen.getByRole('switch', { name: '302 duct: dry ↔ wet' })).toBeTruthy();
 });
 
 it('steps a scenario through the engine and resets it', () => {
