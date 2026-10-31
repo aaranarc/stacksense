@@ -2,7 +2,7 @@
 Scope: eval/hard-cases/**, eval/runner/**, eval/results/**, eval/data/**, apps/web/public/eval/**,
 apps/web/src/components/judge/**, docs/RESULTS.md, README.md, docs/plan/C_*.md.
 Never edit packages/**, apps/web/src/app/api/**, other apps/web folders, eval/runner-ai/**, or root config.
-If something outside scope must change, write the request to C_REQUESTS.md and tell the human.
+If something outside scope must change, write the request to docs/internal/C_REQUESTS.md and tell the human.
 
 - Engine and API only through @stacksense/engine and apps/web/src/lib/adapters.ts. Types from @stacksense/contracts.
 - Never re-implement or tune engine logic to improve numbers. Ties and losses are reported, never hidden.

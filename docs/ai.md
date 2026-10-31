@@ -21,7 +21,7 @@ The four prompts are copied verbatim from Part E of the person-A build plan; a t
 
 Provider requests use a JSON schema. Every model output is Zod validated. Invalid JSON/schema or a non-HTTP failure/timeout gets at most one repair attempt, then a conservative fallback. HTTP failures do not enter that repair loop; 429 follows the bounded model/provider chain below. Each adapter attempt has a 20-second timeout. Repair instructions contain schema errors, not secrets. Inputs embedded in prompts are data; this boundary reduces prompt-injection risk but does not guarantee correct extraction.
 
-Both Gemini and OpenAI adapters are implemented. Keys come only from server `process.env`. Current absent-env defaults are `GEMINI_MODEL=gemini-3.1-flash-lite` and `GEMINI_FALLBACK_MODEL=gemini-3.8-flash`; explicit env values override them. Historical local/production live probes are in INTEGRATION_BUGS.md. No live probe was run for this handoff. Availability can change. We do not silently report fallback output as a successful model response.
+Both Gemini and OpenAI adapters are implemented. Keys come only from server `process.env`. Current absent-env defaults are `GEMINI_MODEL=gemini-3.1-flash-lite` and `GEMINI_FALLBACK_MODEL=gemini-3.8-flash`; explicit env values override them. Historical local/production live probes are in docs/internal/INTEGRATION_BUGS.md. No live probe was run for this handoff. Availability can change. We do not silently report fallback output as a successful model response.
 
 ## Boundaries and data flow
 
@@ -85,6 +85,6 @@ Read/link routes apply process-local rate limits; these are not a distributed qu
 
 ## Final handoff limitations
 
-The 16 canonical demo reads and 12 upload-label contexts are cached and verified without a provider. Arbitrary changed inputs are not guaranteed cached. With no key, known inputs remain Cached; uncached inputs are Fallback, and Second Opinion becomes unreviewed. Scripted Judge evidence and /c/demo are labelled simulations, not live resident checks. B currently owns two presentation defects: encoded print-route case IDs and unresolved hero photo IDs; exact reproductions and lines are in INTEGRATION_BUGS.md. The owner answer-refresh endpoint exists, but B must consume it before physical-phone answers automatically update an open dashboard.
+The 16 canonical demo reads and 12 upload-label contexts are cached and verified without a provider. Arbitrary changed inputs are not guaranteed cached. With no key, known inputs remain Cached; uncached inputs are Fallback, and Second Opinion becomes unreviewed. Scripted Judge evidence and /c/demo are labelled simulations, not live resident checks. B currently owns two presentation defects: encoded print-route case IDs and unresolved hero photo IDs; exact reproductions and lines are in docs/internal/INTEGRATION_BUGS.md. The owner answer-refresh endpoint exists, but B must consume it before physical-phone answers automatically update an open dashboard.
 
 The application does not maintain a project-wide daily token/request budget, distributed rate limiter, retention/deletion UI, full multilingual privacy guarantee or clinical/engineering accuracy claim. Free capacity is not guaranteed. Human-labelled AI evaluation, real phone footage, final C-owned evaluation and release/submission are distinct from unit tests and this handoff.

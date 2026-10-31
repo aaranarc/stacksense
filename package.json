@@ -11,7 +11,8 @@
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "build": "pnpm -r build",
-    "eval": "pnpm --filter @stacksense/engine exec tsx ../../eval/runner/run.ts"
+    "eval": "pnpm --filter @stacksense/engine exec tsx ../../eval/runner/run.ts",
+    "test:eval": "pnpm --filter @stacksense/engine exec vitest run --root ../../eval/runner"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
