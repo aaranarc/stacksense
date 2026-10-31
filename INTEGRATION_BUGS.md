@@ -12,7 +12,7 @@ Merged A `9fe98e0`, B `30823b2`, C `997e9ce`, in that order, into main `813d535`
 | Judge Mode → hero completion | PASS: step 6/6, Job Sheet sends waterproofer_tiler (displayed as “waterproofer tiler”) |
 | /c/demo at actual viewport 390×844 | PASS after A-001 deployment fix; initial failure retained below |
 
-## B-001 — OPEN — demo import blocked by browser adapter
+## B-001 — FIXED on b/app — verified locally and on branch preview
 
 Owner: **B**. Priority: P0 for the hero import flow.
 
@@ -21,6 +21,15 @@ Reproduce: open production, click **Load demo chat**. The textarea fills, then d
 Cause confirmed in `apps/web/src/lib/adapters.ts` and `importChat.ts`: `browser` still spreads mock preprocessing and sets `available: USE_MOCK_API`; `readChat` rejects when real APIs are selected. Wire the actual `@stacksense/ai/browser` functions, adapting their return shapes, and retain browser-local keyMap privacy. Do not enable mock APIs to hide this defect: direct deployed /api/read already succeeds. A has not edited B's files.
 
 ## A-001 — CLOSED / VERIFIED IN PRODUCTION — deployed demo token disabled
+B resolution: real parsing and pseudonymisation are connected; keyMap is never transmitted. Text-only imports skip both photo helpers. Metadata failures omit the unsafe photo with a labelled warning; quality failures retain only the stripped photo with a warning. Bundled demo text and its sanitised fallback match the canonical request. Both local mock flags are false. Local UI regression passes (Load demo chat → 402 victim); local `/api/read` returns 200 with five observations and a labelled fallback because this checkout has no provider key. Web typecheck, tests and production build pass. Branch-preview verification follows the push.
+
+Preview verification for `d2a3787`: GitHub Vercel status success; https://stacksense-git-b-app-byte-me21.vercel.app/ returns 200, canonical demo text matches, `/api/read` returns cached with five observations, and the deployed page bundle contains the new preparation warnings and no old blocking gate. Automated browser control could not initialise (missing runtime asset path), so remote UI clicks were not verified; the local UI click regression passes.
+
+## A-002 — OPEN — prevention inspection links have no matching ranked check
+
+Owner: A. Next Leak renders engine `prediction.sameStack` entries, but the current check catalogue targets the victim/above/below flats only. `/api/link` requires a matching eligible `nextChecks` entry. This leaves new same-stack targets such as 602 without a creatable inspection link. B disables that unavailable action and labels it; B does not invent checks or bypass endpoint validation. Please expose an eligible inspection check or a supported prediction-link request.
+
+## A-001 — preview configuration resolved; production retest pending
 
 Owner: **A (Vercel configuration)**. Priority: P1.
 
@@ -86,3 +95,13 @@ Normal git rm removes files from this and subsequent revisions but cannot remove
 The user confirmed a new set of attached images are their own. Matching images 2 (ceiling), 5 (window), 10 (unannotated trap) and 11 (meter overview) were copied to ignored *_own_raw.png files, re-encoded JPEG85 with maximum edge ≤1600, and checked for absent EXIF/GPS/XMP/IPTC/ICC. They use new *_own.jpg filenames; the removed prior stock/unverified files remain absent. Clean team duct remains unchanged. Hero/scenario display references now use the corresponding own photos; case evidence/timings/causes stay simulated. The meter overview is not a pair of readings; meter end and Day-14 remain labelled illustrations, as do unmatched scenarios. No hazard or actual repair timeline is invented from these attachments.
 
 Own-photo cache update: all 16 canonical inputs and all declared EN/HI/MR upload contexts were warmed successfully with the explicit LIVE_LLM_TESTS=1 opt-in; no fallback was relabelled live. Thirteen obsolete illustration-cache keys were pruned from the bundle and Supabase. Removed corresponding replaced schematic assets. The only photographic inputs are the newly user-confirmed own ceiling/window/trap/meter overview plus the existing own duct photo; the removed earlier stock files remain absent. Original attachments and keys are not tracked.
+## A-003 — OPEN — physical-phone answers need a dashboard refresh channel
+
+Owner: A for an owner-authorised read/subscription API; B for consuming it once available. The upload handler stores the resident observation, but the current API routes provide no case refresh endpoint or subscription for the secretary's open dashboard. B-T23 accepts same-origin answers from its active phone iframe, with token/source validation. A separate physical phone cannot use that iframe channel. Please expose a supported refresh/subscription contract; do not bypass owner authorisation. The phone simulator can be recorded meanwhile. This does not prevent completing the resident upload itself.
+
+## B handoff for CP2
+
+B-001 and B-T21 through B-T27 are implemented on b/app. The mock engine/API flags are off locally; cached illustrations and scenarios remain explicitly labelled Demo data. C-owned judge files, A-owned packages/API routes and build tooling are unchanged. B's final web validation has 67 passing tests; the production build and full-workspace checks are recorded in the chat. Remote browser control could not initialise, so a visual preview click-through remains a human check. A-002 and A-003 require A-owned API work. A-001 now needs a production retest; preview configuration is resolved as recorded below.
+### Final branch-preview verification — 31 Oct, 12:56 IST
+
+App commit `ef8c12a` has Vercel status success. The branch preview returns 200, serves the exact bundled demo text, and its `/api/read` returns cached with five observations and zero warnings. Its deployed client includes the new panel states and preparation warnings, with no old blocking gate. The explicit demo-token helper now compiles to a direct `token === "demo"` check: preview demo mode is enabled, resolving the configuration part of A-001 on this branch. Production and visual mobile interaction are not reverified here. Browser control still cannot initialise; the local real-adapter Load demo click regression and mobile safety tests pass. Full-workspace typecheck and all 199 tests pass; web production build passes. Both local engine/API mock flags are false.

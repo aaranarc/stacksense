@@ -1,0 +1,14 @@
+'use client';
+import {useState} from 'react';
+import type {EngineState} from '@stacksense/contracts';
+import {createCheckLink} from '../../lib/adapters';
+import {visualStatus} from '../../lib/visual';
+import {useCheckLink} from '../phone/PhoneSimulator';
+export function NextLeakTab({state}:{state:EngineState}) {
+ const [busy,setBusy]=useState<string|null>(null),[error,setError]=useState('');
+ const open=useCheckLink();
+ const p=state.prediction,status=visualStatus('Inspect','amber',true);
+ async function send(flatId:string){const check=state.nextChecks.find(c=>c.targetFlatId===flatId&&!c.excluded);if(!check)return;setBusy(flatId);setError('');const popup=window.open('about:blank','_blank');if(popup)popup.opener=null;try{const link=await createCheckLink(state,check.id,flatId);if(popup)popup.location.href=link.waUrl;open(link);}catch{popup?.close();setError('Could not create the inspection link. Please try again.');}finally{setBusy(null);}}
+ return <section><h2>Next Leak</h2><p>Inspection first · one-minute photo checks</p><h3>Same-stack inspections</h3>{p.sameStack.length?p.sameStack.map(item=>{const available=state.nextChecks.some(c=>c.targetFlatId===item.flatId&&!c.excluded);return <article className="inspection-card" key={item.flatId} style={{borderColor:status.colour}}><strong style={{color:status.colour}}>{item.flatId} · {status.label}</strong><p>{item.why}</p><button aria-label={`Send inspection link to flat ${item.flatId}`} disabled={!available||state.safety.status!=='ok'||busy!==null} onClick={()=>void send(item.flatId)}>{busy===item.flatId?'Creating link…':'Send link'}</button>{!available&&<p className="diagram-key">A signed inspection link is not available for this flat yet.</p>}</article>;}):<p>No same-stack inspection recommendations yet.</p>}<h3>Forecast re-checks</h3>{p.forecastRechecks.length?p.forecastRechecks.map((item,i)=><article key={i}><strong>Re-check {item.flatId} after {new Date(item.afterDate+'T12:00:00Z').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'})} · {item.orientation} wall</strong><p>{item.why}</p></article>):<p>No forecast re-checks available.</p>}<h3>Seasonal inspections</h3>{p.seasonal.length?<ul>{p.seasonal.map(item=><li key={item}>{item}</li>)}</ul>:<p>No seasonal inspections recorded.</p>}<h3>Memory · confirmed cases</h3><dl className="memory-counts">{Object.entries(p.memory).map(([family,count])=><div key={family}><dt>{family.replaceAll('_',' ')}</dt><dd>{count}</dd></div>)}</dl>{error&&<p role="alert">{error}</p>}</section>;
+}
+
