@@ -10,7 +10,6 @@ export function statusOf(item: Flat | Hypothesis, state: EngineState) {
  }
  const flatId=item.id,observations=state.observations.filter(o=>o.flatId===flatId);
  if(state.observations.length&&leader?.flatId===flatId)return visualStatus(`${flatId} · probable source`,'red',!state.stop.stopped);
- if(state.prediction.sameStack.some(p=>p.flatId===flatId))return visualStatus(`${flatId} · inspect`,'amber',true);
  if(observations.some(o=>o.kind==='complaint'))return visualStatus(`${flatId} · victim`,'amber');
  // Only a named check can clear a flat; denials and unrequested dry-floor reports cannot.
  const latest=new Map<string,Observation>();
@@ -20,7 +19,9 @@ export function statusOf(item: Flat | Hypothesis, state: EngineState) {
   const labels=state.photoLabels.filter(p=>o.photoIds.includes(p.photoId));
   return o.surface==='dry'&&labels.every(p=>p.quality==='ok'&&p.surface==='dry');
  }).sort((a,b)=>b.at.localeCompare(a.at))[0];
- if(passed)return visualStatus(`${flatId} · ${passed.zone==='duct_wall'?'duct dry':'check passed'} · ${new Date(passed.at).toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'})}`,'green');
+ if(passed)return visualStatus(`${flatId} · ${passed.zone==='duct_wall'?'duct dry':'check passed'} · ${new Date(passed.at).toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'})}${state.prediction.sameStack.some(p=>p.flatId===flatId)?' · inspection requested':''}`,'green');
+ // A dated passed check stays green; the same-stack prevention photo is listed in Next Leak.
+ if(state.prediction.sameStack.some(p=>p.flatId===flatId))return visualStatus(`${flatId} · inspect`,'amber',true);
  if(observations.length||state.hypotheses.some(h=>h.flatId===flatId&&(state.posterior[h.id]??0)>0))return visualStatus(`${flatId} · suspected`,'amber',!observations.length);
  return visualStatus(`${flatId} · not assessed`,'grey',true);
 }

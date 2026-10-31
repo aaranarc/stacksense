@@ -15,7 +15,7 @@ export function applySecondOpinion(state:EngineState,draft:SecondOpinion|null):E
     const allowedLevel=levels[requested]>levels[evidence.level]?evidence.level:requested;
     const capped=allowedLevel!==requested;
     const claim=allowedLevel==="component" ? `Probable ${evidence.top?.flatId ?? "source"} ${evidence.component ?? "component"}`
-      : allowedLevel==="area" ? evidence.top?.label ?? "Probable source area requires inspection"
+      : allowedLevel==="area" ? (evidence.top ? `Probable ${evidence.top.label}` : "Probable source area requires inspection")
       : `Probable ${evidence.top?.family.replaceAll("_"," ") ?? "unresolved"} mechanism; source area requires evidence`;
     opinion={...parsed.data,allowedLevel,claim,verdict:capped&&parsed.data.verdict!=="objection"?"needs_evidence":parsed.data.verdict};
   }

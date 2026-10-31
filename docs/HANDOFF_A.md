@@ -64,7 +64,7 @@ Use https://stacksense-omega.vercel.app after the exact main deployment:
 7. /c/demo at actual 390×844: consent → all four explicit No answers → clean photo → Upload → Done, with Cached/Demo labeling and no horizontal overflow. This is not proof of a signed-link real cloud upload.
 8. IN → UK → IN changes building/terminology/responsibility links and restores the previous region's case.
 
-Record every failure and owner in INTEGRATION_BUGS.md, commit/push the report, and keep unresolved failures visible. Do not fabricate a pass from unit tests. Also inspect Judge photo thumbnails while playing the hero.
+Record every failure and owner in docs/internal/INTEGRATION_BUGS.md, commit/push the report, and keep unresolved failures visible. Do not fabricate a pass from unit tests. Also inspect Judge photo thumbnails while playing the hero.
 
 ## Gemini 429 and unavailable AI
 
@@ -81,11 +81,11 @@ Tests, eval, warm-up and health diagnostics must not call a live model unless LI
 - Real phone footage, B's full signed-link dashboard flow/recordings, video/submission, final release/tag and any remaining B/C plan tasks are not completed by this handoff. Do not infer whole-plan completion from green checks.
 - Prototype inference/priors, correlated evidence, privacy-pattern coverage, local rate limiting, no retention UI and unavailable AI remain documented limitations in engine.md and ai.md. Always verify the probable source on site; a photograph is not a moisture measurement.
 
-The final deployed verification will be appended to INTEGRATION_BUGS.md. C owns subsequent merges and may repair packages/API bugs without waiting for A's return.
+The final deployed verification will be appended to docs/internal/INTEGRATION_BUGS.md. C owns subsequent merges and may repair packages/API bugs without waiting for A's return.
 
 ## Final deployed result
 
-Final application main SHA: 927094b. Production deployment: https://vercel.com/byte-me21/stacksense/4PXkgpUjadpwgEHEWaCSStF2nFyu . Install/typecheck/223 tests/web build passed. Seven of eight CP2 checks pass; PDF remains B-002, and additional photo-preview failure B-003 remains. The prevention buttons for 302/602 are enabled in production; unauthorized owner-refresh requests correctly return 403/no-store. B still needs owner-dashboard refresh wiring. The final verification report is in INTEGRATION_BUGS.md. No live model calls were made for this handoff, and A will not merge again.
+Final application main SHA: 927094b. Production deployment: https://vercel.com/byte-me21/stacksense/4PXkgpUjadpwgEHEWaCSStF2nFyu . Install/typecheck/223 tests/web build passed. Seven of eight CP2 checks pass; PDF remains B-002, and additional photo-preview failure B-003 remains. The prevention buttons for 302/602 are enabled in production; unauthorized owner-refresh requests correctly return 403/no-store. B still needs owner-dashboard refresh wiring. The final verification report is in docs/internal/INTEGRATION_BUGS.md. No live model calls were made for this handoff, and A will not merge again.
 
 ## C fixes after handoff (authorized: C may fix packages/** and apps/web/src/app/api/**)
 

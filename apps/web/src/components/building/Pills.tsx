@@ -8,7 +8,7 @@ import {Drawer} from '../layout/Drawer';
 type Wall=NonNullable<Hypothesis['orientation']>;
 export function Pills({state,selectedFlat}:{state:EngineState;selectedFlat:string|null}) {
  const [pane,setPane]=useState<'rain'|'memory'|null>(null),[series,setSeries]=useState<RainSeries|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[retry,setRetry]=useState(0),[wall,setWall]=useState<Wall>('W');
- const flat=state.building.flats.find(f=>f.id===selectedFlat)??state.building.flats.find(f=>f.id===state.observations.find(o=>o.kind==='complaint')?.flatId)??state.building.flats[0];
+ const flat=state.building.flats.find(f=>f.id===selectedFlat)??state.building.flats.find(f=>f.id===(state.observations.find(o=>o.kind==='complaint'&&(o.zone==='window_perimeter'||o.zone==='external_wall'))??state.observations.find(o=>o.kind==='complaint'))?.flatId)??state.building.flats[0];
  const walls=flat?.externalWalls??[],selectedWall=walls.includes(wall)?wall:walls[0]??'W';
  useEffect(()=>{if(pane!=='rain')return;let active=true;setBusy(true);setError('');getRain(state).then(data=>{if(active)setSeries(data);}).catch(()=>{if(active)setError('Weather data is unavailable. Please retry.');}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[pane,state.caseId,state.observations.length,retry]);
  const days=series?dailyRain(series,selectedWall):[],max=Math.max(1,...days.map(d=>d.value)),width=Math.max(520,days.length*20),reports=new Set(state.observations.filter(o=>o.kind==='complaint'&&(!flat||o.flatId===flat.id)).map(o=>o.at.slice(0,10)));

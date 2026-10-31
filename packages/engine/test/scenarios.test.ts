@@ -18,3 +18,13 @@ describe("A-T20 scenarios",()=>{
   if(id==="break_it")expect(state.building.flats.length).toBeGreaterThan(0);
  });
 });
+import { describe as describeHero, expect as expectHero, it as itHero } from "vitest";
+import { runScenario as runHero, scenarios as heroScenarios } from "../src/scenarios";
+describeHero("hero walkthrough (plan step 12)", () => {
+  itHero("ends with Building Memory +1 wet-area and a 202 forecast re-check, still sending the waterproofer", () => {
+    const s = runHero(heroScenarios.happy);
+    expectHero(s.prediction.memory.upper_wet_area).toBe(1);
+    expectHero(s.prediction.forecastRechecks.some(r => r.flatId === "202" && r.orientation === "W")).toBe(true);
+    expectHero(s.jobSheet?.send.map(t => t.trade)).toEqual(["waterproofer_tiler"]);
+  });
+});

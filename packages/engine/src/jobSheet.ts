@@ -19,7 +19,7 @@ export function buildJobSheet(state:EngineState):JobSheet|null {
   const last=state.observations.map(o=>o.at).sort().at(-1) ?? state.now;
   const areaFlat=state.building.flats.find(f=>f.id===root.flatId);
   const probableSource=uncertain?"Remote evidence insufficient; professional inspection required":state.secondOpinion?.verdict!=="review_failed"&&state.secondOpinion?state.secondOpinion.claim:
-    level==="component"?`Probable ${source} ${evidence.component}`:root.label;
+    level==="component"?`Probable ${source} ${evidence.component}`:`Probable ${root.label}`;
   return JobSheet.parse({caseId:state.caseId,region:state.building.region,probableSource,level:uncertain?"mechanism":level,
     send:uncertain?[]:tradesFor(root.family,evidence.component),dontSend,
     access:root.flatId?`Arrange ${areaFlat?.access ?? "unknown"} access to flat ${root.flatId}`:`Coordinate access to ${source} with society/landlord`,
