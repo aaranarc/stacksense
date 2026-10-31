@@ -1,6 +1,6 @@
 {
   "label": "Demo cache coverage — not evaluation or field accuracy",
-  "generatedAt": "2026-10-31T06:26:01.055Z",
+  "generatedAt": "2026-10-31T07:01:44.126Z",
   "liveOptIn": true,
   "inputs": [
     {
@@ -12,10 +12,10 @@
     },
     {
       "id": "scenario-happy",
-      "path": "fixtures-ai/photos/demo/duct_302.jpg",
-      "key": "4ba5a0686225be3d1773766c70a3f883aebdaa9ef49de54bdebd2fc9ebfd31c5",
-      "assetSource": "team-photo",
-      "label": "Real team duct photo reused as a demo scenario input; not case ground truth",
+      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
+      "key": "dfe5a9616381d944f759854e1c275d629aa84b651a4e3a455421512bd1c377d4",
+      "assetSource": "reference-photo",
+      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     },
@@ -57,19 +57,19 @@
     },
     {
       "id": "scenario-wrong_trade_rain",
-      "path": "fixtures-ai/photos/scenarios/wrong_trade_rain.jpg",
-      "key": "a2ce3b1f5a661a334e5af7c2be30ae48e0a98a5e36962346fd303c2d267d55bc",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/window_202.jpg",
+      "key": "08ada0bd4904a22b2d97c0a97b0b0da141c5d5507895d623b218de32fc3feeff",
+      "assetSource": "reference-photo",
+      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label.",
       "status": "cached",
       "uploadContexts": 0
     },
     {
       "id": "scenario-honest_uncertainty",
-      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
-      "key": "592a48237bac872c579df50d80cabf0d96a4a47ef7ecacbc4556f2f9b8c824f1",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
+      "key": "8113f4259e25811cf4679b65942e2a727450b8ebf104d6068016656b41894180",
+      "assetSource": "reference-photo",
+      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     },
@@ -93,10 +93,10 @@
     },
     {
       "id": "meter-start-502",
-      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
-      "key": "af46d69ab3e184046327492f50044f73598294f405b1aa599a6f13a6315a58ec",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/meter_502_a.jpg",
+      "key": "141dd8f695caf7969b1f139bdc9b351f492cf35eea86f0907a29537b280df900",
+      "assetSource": "reference-photo",
+      "label": "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading.",
       "status": "cached",
       "uploadContexts": 3
     },
@@ -112,9 +112,9 @@
     {
       "id": "trap-502",
       "path": "fixtures-ai/photos/demo/trap_502.jpg",
-      "key": "ff296db609af86568fe46eca04f424cfd54d0582b53514b21ce86f022b367e74",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "key": "384996e732c766bdf436085a355e5202dfe8146b067ee964c5fbcf24a945ad37",
+      "assetSource": "reference-photo",
+      "label": "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause.",
       "status": "cached",
       "uploadContexts": 3
     },
@@ -124,6 +124,24 @@
       "key": "67799e2c4bd2390ffe41adc8660a5cdc0735ab941e6178c4158db40a0ab62a73",
       "assetSource": "demo-illustration",
       "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "status": "cached",
+      "uploadContexts": 0
+    },
+    {
+      "id": "ceiling-402",
+      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
+      "key": "b3bffdd92d80e4e0f0e229afa9ab34f8ee27cf99c0e32a2cd2050b3bed95fde5",
+      "assetSource": "reference-photo",
+      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated.",
+      "status": "cached",
+      "uploadContexts": 0
+    },
+    {
+      "id": "window-202",
+      "path": "fixtures-ai/photos/demo/window_202.jpg",
+      "key": "c85bf30249fd0386f6d038a22fa97790a797e9c97262a461bb5c003f0488785f",
+      "assetSource": "reference-photo",
+      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label.",
       "status": "cached",
       "uploadContexts": 0
     }

@@ -695,5 +695,396 @@
         "humanCorrected": false
       }
     ]
+  },
+  "dfe5a9616381d944f759854e1c275d629aa84b651a4e3a455421512bd1c377d4": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-happy",
+        "surface": "peeling",
+        "zone": "ceiling",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.28,
+            "y": 0.44,
+            "w": 0.36,
+            "h": 0.45,
+            "label": "peeling"
+          },
+          {
+            "x": 0.52,
+            "y": 0.41,
+            "w": 0.08,
+            "h": 0.08,
+            "label": "peeling"
+          },
+          {
+            "x": 0.25,
+            "y": 0.17,
+            "w": 0.05,
+            "h": 0.1,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+    ],
+    "mode": "live"
+  },
+  "08ada0bd4904a22b2d97c0a97b0b0da141c5d5507895d623b218de32fc3feeff": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-wrong_trade_rain",
+        "surface": "mould",
+        "zone": "window_perimeter",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.37317073170731707,
+            "y": 0.11578947368421053,
+            "w": 0.6268292682926829,
+            "h": 0.3815789473684211,
+            "label": "mould"
+          },
+          {
+            "x": 0.5926829268292683,
+            "y": 0.10526315789473684,
+            "w": 0.07317073170731707,
+            "h": 0.05263157894736842,
+            "label": "peeling paint"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+    ],
+    "mode": "live"
+  },
+  "8113f4259e25811cf4679b65942e2a727450b8ebf104d6068016656b41894180": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-honest_uncertainty",
+        "surface": "peeling",
+        "zone": "ceiling",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.28,
+            "y": 0.44,
+            "w": 0.36,
+            "h": 0.45,
+            "label": "peeling"
+          },
+          {
+            "x": 0.52,
+            "y": 0.41,
+            "w": 0.08,
+            "h": 0.08,
+            "label": "peeling"
+          },
+          {
+            "x": 0.25,
+            "y": 0.17,
+            "w": 0.05,
+            "h": 0.1,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+    ],
+    "mode": "live"
+  },
+  "141dd8f695caf7969b1f139bdc9b351f492cf35eea86f0907a29537b280df900": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "meter-start-502",
+        "surface": "dry",
+        "zone": "meter",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": "00182470",
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+    ],
+    "mode": "live"
+  },
+  "9e47e9c88ae5f4fbb10751b560e368626d7664ce064e16626458ca93fdbda50b": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.146,
+            "y": 0.45765500000000003,
+            "w": 0.707,
+            "h": 0.165,
+            "label": "meterDigits"
+          }
+        ],
+        "meterDigits": "00182470",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "ab6da24821308b91da10217b5b431e798b1a2f1c88eafc0651c3c0930326e6c3": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [],
+        "meterDigits": "00182470",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "685dc32ff33ec4ea3974a364c9c43ad31c519f15d481aafa68d986c09ce051b7": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.174,
+            "y": 0.4542857142857143,
+            "w": 0.655,
+            "h": 0.144,
+            "label": "meter digits"
+          }
+        ],
+        "meterDigits": "00182470",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "384996e732c766bdf436085a355e5202dfe8146b067ee964c5fbcf24a945ad37": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "trap-502",
+        "surface": "mould",
+        "zone": "trap_grout",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.28,
+            "y": 0.32,
+            "w": 0.44,
+            "h": 0.37,
+            "label": "mould"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause."
+    ],
+    "mode": "live"
+  },
+  "8be8bacb07120e1dcedf8a3b3352ffaa9e57987fad2a358f45f8b5b02b43221f": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause."
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "mould",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.28,
+            "y": 0.35,
+            "w": 0.53,
+            "h": 0.44,
+            "label": "mould"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "7e986e39ecf4c87430eb22d80428e46a2a7daf0f8641d6085f7819bd0483c8eb": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause."
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "mould",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.23,
+            "y": 0.35,
+            "w": 0.33,
+            "h": 0.38,
+            "label": "mould accumulation"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "212491f18b28fe7a06e80e9b7fe8aed86995a92c6b50b0dc3c5d0ece09792e1b": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause."
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "mould",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.23,
+            "y": 0.23,
+            "w": 0.61,
+            "h": 0.61,
+            "label": "mouldy trap"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "b3bffdd92d80e4e0f0e229afa9ab34f8ee27cf99c0e32a2cd2050b3bed95fde5": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "ceiling-402",
+        "surface": "peeling",
+        "zone": "ceiling",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.28,
+            "y": 0.44,
+            "w": 0.36,
+            "h": 0.45,
+            "label": "peeling"
+          },
+          {
+            "x": 0.52,
+            "y": 0.41,
+            "w": 0.08,
+            "h": 0.08,
+            "label": "peeling"
+          },
+          {
+            "x": 0.25,
+            "y": 0.17,
+            "w": 0.05,
+            "h": 0.1,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+    ],
+    "mode": "live"
+  },
+  "c85bf30249fd0386f6d038a22fa97790a797e9c97262a461bb5c003f0488785f": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "window-202",
+        "surface": "mould",
+        "zone": "window_perimeter",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.37317073170731707,
+            "y": 0.11578947368421053,
+            "w": 0.6268292682926829,
+            "h": 0.3815789473684211,
+            "label": "mould"
+          },
+          {
+            "x": 0.5926829268292683,
+            "y": 0.10526315789473684,
+            "w": 0.07317073170731707,
+            "h": 0.05263157894736842,
+            "label": "peeling paint"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+    ],
+    "mode": "live"
   }
 }

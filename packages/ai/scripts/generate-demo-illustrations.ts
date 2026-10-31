@@ -24,7 +24,7 @@ const scenes:Record<string,string>={
 };
 for(const input of manifest.inputs){
  if(input.kind==='chat')continue;
- if(input.id==='scenario-happy'){input.path='fixtures-ai/photos/demo/duct_302.jpg';input.assetSource='team-photo';input.label='Real team duct photo reused as a demo scenario input; not case ground truth';continue;}
+ if(input.assetSource==='reference-photo'&&existsSync(resolve(root,input.path)))continue;
  const raw=resolve(root,`eval/data/photos/${input.path.split('/').at(-1)!.replace('.jpg','_raw.jpg')}`);
  if(input.id==='duct-302'){input.assetSource='team-photo';input.label='Authorized clean team duct photograph';continue;}
  const target=resolve(root,input.path);mkdirSync(dirname(target),{recursive:true});

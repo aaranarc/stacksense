@@ -3,7 +3,7 @@ import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 import {fileURLToPath} from "node:url";
 import {resolve} from "node:path";
 const root=fileURLToPath(new URL("../../../",import.meta.url));
-const name=process.argv[2];if(name!=="duct_302"&&name!=="trap_502")throw Error("Use duct_302 or trap_502");
+const name=process.argv[2];if(!name||!["ceiling_402","window_202","trap_502","meter_502_a","meter_502_b","duct_302"].includes(name))throw Error("Use a supported named demo photo");
 const raw=process.argv[3]??resolve(root,`eval/data/photos/${name}_raw.jpg`);
 const {default:sharp}=await import("sharp");
 const bytes=await sharp(readFileSync(raw),{limitInputPixels:128000000}).rotate().resize({width:1600,height:1600,fit:"inside",withoutEnlargement:true}).jpeg({quality:85}).toBuffer();

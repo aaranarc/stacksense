@@ -3900,5 +3900,43 @@
         }
       ]
     }
+  },
+  "demoAssets": {
+    "label": "Visual demo references only. Engine evidence and timings remain simulated; photographs do not validate scripted findings.",
+    "images": {
+      "hero-ceiling-402": {
+        "id": "ceiling-402",
+        "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
+        "assetSource": "reference-photo",
+        "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      },
+      "hero-window-202": {
+        "id": "window-202",
+        "path": "fixtures-ai/photos/demo/window_202.jpg",
+        "assetSource": "reference-photo",
+        "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+      },
+      "hero-duct-302": {
+        "id": "duct-302",
+        "path": "fixtures-ai/photos/demo/duct_302.jpg",
+        "assetSource": "team-photo",
+        "label": "Authorized clean team duct photograph"
+      }
+    },
+    "meterReferences": [
+      {
+        "id": "meter-start-502",
+        "path": "fixtures-ai/photos/demo/meter_502_a.jpg",
+        "assetSource": "reference-photo",
+        "label": "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+      },
+      {
+        "id": "meter-end-502",
+        "path": "fixtures-ai/photos/demo/meter_end_502.jpg",
+        "assetSource": "demo-illustration",
+        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      }
+    ],
+    "preview": null
   }
 }
