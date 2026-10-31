@@ -23,3 +23,6 @@ After EVERY task:
   if red: fix, never push red. Never commit .env*, keys, real names or phone numbers. Never force-push.
 If something you need from the other person is missing: use the mock described in the plan and continue.
 Ask the human only for secrets, accounts, or a decision the plan does not cover.
+
+## Final A handoff authority (user instruction, 31 October 2026)
+After A's single final a/core-only handoff merge, C (person C, Claude Code) is the sole merger to main. C is also authorized to fix bugs in packages/** and apps/web/src/app/api/**. This supersedes the plan's older A-only merge/bug-fix ownership for those folders. B retains other app ownership except C's components/judge/**. Keep contracts, trust rules, green-check gates and no-force-push rules. See docs/HANDOFF_A.md. A must not merge again after this handoff.
