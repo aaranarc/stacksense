@@ -199,7 +199,7 @@ export function evaluate(opts: { sims?: number } = {}) {
   const ids = factories.map((f) => f().id), have = ids.filter((id) => cached(id)).length;
   const methods = have === ids.length ? [...METHODS.slice(0, 4), { name: LLM_METHOD, run: singleLlm }, METHODS[4]!] : METHODS;
   const pending = have === ids.length ? [] : [{ method: LLM_METHOD,
-    reason: `pending — ${have}/${ids.length} cases cached; run eval/runner/llm-baseline.ts (live LLM calls) to fill eval/runner/baseline-cache/` }];
+    reason: `pending — ${have}/${ids.length} cases answered by the model so far (last attempt: provider quota exceeded, HTTP 429); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts` }];
   const robustness = SHIFTS.map((p) => ({ priorShiftPct: p, top1: robustnessRun(factories, p) }));
   const robustnessArchetype = (["min", "max"] as const).map((at) => ({ trueFamilyPriorAt: at, top1: robustnessRun(factories, at) }));
   const outcomes: Record<string, Outcome[]> = {}, trails: Record<string, Record<string, Trail>> = {};

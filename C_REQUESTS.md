@@ -65,3 +65,17 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   tiler"; what-if "502 meter → moved" → Job Sheet sends plumber; eval card shows label + tie/loses chips; 390 px = fixed
   bottom sheet (70vh, own scroll, 44 px "Hide panel" toggle, collapses to 78 px), tables scroll sideways, no page
   overflow; Break it "Electrical hazard" → emergency card, no check buttons.
+
+## To A / human (12:00) — single-LLM baseline blocked
+- [ ] Gemini returns **HTTP 429 "You exceeded your current quota, please check your plan and billing details"** for
+  `gemini-3.8-flash` with the key in apps/web/.env.local (`gemini-2.5-flash` → 404, retired). 90/90 baseline calls failed;
+  nothing was cached as an answer. Needs quota/billing raised (or a different key/provider). Then rerun:
+  `pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts && pnpm eval`.
+  Note: the live app's /api/read and /api/second-opinion use the same key, so they are in labelled fallback until this is fixed.
+
+## To A (12:45) — CP2 merge heads-up
+- [ ] `origin/a/core` (384ca00) and `origin/b/app` (4da0ca1) **conflict in `INTEGRATION_BUGS.md`**: B edited it in
+  d2a3787 "fix B-001 demo chat" and e3e4bb5 (B-T21) while A added key-rotation sections. C did not resolve it (A's file)
+  and has not merged b/app since 30823b2; c/help has a/core 384ca00. No conflict touches C files.
+  Still conflicting at 13:00 (a/core 8c50f0e vs b/app 2a61976). FYI: A's 8c50f0e added `assertLiveLlmOptIn()` to C's
+  eval/runner/llm-baseline.ts — accepted; C's ai.ts now passes LIVE_LLM_TESTS=1 to runner-ai.

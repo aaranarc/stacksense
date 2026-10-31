@@ -1,5 +1,5 @@
 // Baseline 4 prefetch: single LLM (prompt E.4) on exactly the evidence StackSense collected per case. Live calls; cached.
-// Run (from repo root): pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts
+// Run (from repo root): LIVE_LLM_TESTS=1 pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts
 import { assertLiveLlmOptIn } from "../../packages/ai/src/llm/guard";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -15,7 +15,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   if (!key) { console.error(`No usable LLM key: LLM_PROVIDER must be "gemini" or "openai" with GEMINI_API_KEY / OPENAI_API_KEY set. Nothing called, nothing cached.`); process.exit(1); }
   mkdirSync(CACHE_DIR, { recursive: true });
   const model = `${process.env.LLM_PROVIDER ?? "gemini"}:${process.env.GEMINI_MODEL ?? process.env.OPENAI_MODEL ?? "default"}`;
-  let calls = 0, nulls = 0, reused = 0;
+  let calls = 0, nulls = 0, reused = 0, streak = 0;
   for (const make of [...hardCases(), ...simCases(60)]) {
     const c = make(), trail: Trail = { unscripted: [], asked: [] };
     METHODS[0]!.run(c, trail); // StackSense run → trail.evidence = what it saw
@@ -25,10 +25,16 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     if (existsSync(file) && (JSON.parse(readFileSync(file, "utf8")) as CachedBaseline).evidenceHash === evidenceHash) { reused++; continue; }
     calls++;
     const result = await singleLlmBaseline(evidence);
-    if (!result) nulls++;
+    // null = provider failure (quota, outage, invalid twice): never cached as an answer; retried on the next run.
+    if (!result) {
+      nulls++; process.stdout.write(`${c.id}:unavailable `);
+      if (++streak >= 3) { console.error("\n3 unavailable in a row (quota or outage) — stopping; nothing cached for them."); break; }
+      continue;
+    }
+    streak = 0;
     const row: CachedBaseline = { caseId: c.id, promptVersion: PROMPT_VERSION, model, evidenceHash, result };
     writeFileSync(file, JSON.stringify(row, null, 1) + "\n");
-    process.stdout.write(`${c.id}:${result ? result.trade : "null"} `);
+    process.stdout.write(`${c.id}:${result.trade} `);
   }
-  console.log(`\n${calls} live calls (${nulls} unavailable → null, never invented), ${reused} reused from cache.`);
+  console.log(`\n${calls} live calls (${nulls} unavailable, not cached), ${reused} reused from cache.`);
 }

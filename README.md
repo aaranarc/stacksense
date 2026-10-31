@@ -6,7 +6,7 @@
 <!-- B: replace docs/demo.gif with the demo GIF and add the video link here. -->
 
 ## Try it
-- **Live app:** `<production URL — added at v1.0>`
+- **Live app:** https://stacksense-omega.vercel.app/
 - **Judge Mode:** press **Judge Mode** in the top bar. Inside:
   - **What-if** sliders — flip "302 duct dry ↔ wet", "502 meter still ↔ moved"… and watch the odds, Second Opinion and Job Sheet change live.
   - **Scenarios** — 8 stories with **Next step ▸ / Play / Reset**: Happy path · Electrical hazard · Locked 502 · Dark photo · Horizontal beam travel · Wrong-trade save (rain) · Honest uncertainty · Break it.
@@ -55,7 +55,7 @@ If the AI is down you get a labelled fallback, never a fake result. Details: [do
 | Send a trade straight away | 20% | 18% | 21% | 7% | 0% |
 | Fixed checklist | 63% | 47% (loses) | 80% | 0% (loses) | 100% (tie) |
 | StackSense without Second Opinion | 67% (tie) | 46% (tie) | 83% (tie) | 1% (tie) | 100% (tie) |
-| Single LLM, same evidence | pending — 0/90 cases cached; run eval/runner/llm-baseline.ts (live LLM calls) to fill eval/runner/baseline-cache/ | | | | |
+| Single LLM, same evidence | pending — 0/90 cases answered by the model so far (last attempt: provider quota exceeded, HTTP 429); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts | | | | |
 
 (tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks -40% → 38%, -20% → 63%, 0% → 83%, +20% → 90%, +40% → 95% (true family's prior shifted).
 <!-- eval:end -->
