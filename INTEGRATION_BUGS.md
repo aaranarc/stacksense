@@ -236,3 +236,14 @@ sections chronologically, then main merged c/help (which contains b/app 422a3a2)
 
 ## B final run — B-003b fixed on b/app
 Mapped canonical demo-chat attachment IDs IMG-20261030-WA0402.jpg and IMG-20261030-WA0202.jpg to the same approved cached ceiling/window assets and labels as their hero preview IDs. Added a regression using A's actual bundled chat result: Load demo chat renders both thumbnail paths and each PhotoViewer image, with own-photo reference and simulated-case labels. No API, package, judge or root-config file changed. Pending C's merge and production retest.
+
+## C merge 4 — main 08e8da9 (31 Oct, 16:03 IST)
+Merged origin/a/core (no change) → origin/b/app (08e8da9, B-003b) → origin/c/help; fast-forward, no conflicts. Install,
+typecheck, tests (3 / 66 AI / 87 engine / 89 web) and build passed. Note: a commit gets two Vercel deployments (branch
+preview + production); C's first check hit production before its deployment finished (old chunk without the B-003b
+mapping). After the production deployment completed, re-checked in a fresh isolated browser context:
+
+| Production re-check after 08e8da9 | Result | Owner |
+| --- | --- | --- |
+| Demo-chat attachment previews | **PASS — B-003b CLOSED**: ceiling_402_own.jpg and window_202_own.jpg render, 0× "Preview unavailable" | — |
+| Load demo chat / /api/read | PASS — Cached · Demo data, 202/402 victims, 502 probable source | — |
