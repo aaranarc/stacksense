@@ -47,3 +47,9 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
 
 ## To B (C-T09)
 - [ ] **README GIF + video link:** README shows `docs/demo.gif` (placeholder) — please add the GIF and the video link.
+
+## To A (labelling, 10:00)
+- [ ] **AI runner can't score "no observation":** `eval/runner-ai/run.ts` parses labels with `Observation.pick`, so
+  zone/surface/kind are required. Noise lines (greetings, admin, questions — 41 of 150 drafted) can't be labelled
+  "should produce nothing", so false-positive observations on noise are never measured. Optional: accept
+  `labels: null` = "expect no observation" and count any predicted observation as FP. Until then C leaves noise lines out.
