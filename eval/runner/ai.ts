@@ -39,6 +39,6 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const env = fileURLToPath(new URL("../../apps/web/.env.local", import.meta.url));
   if (!existsSync(env)) { console.log("apps/web/.env.local missing — cannot run the live AI eval (needs the LLM key)."); process.exit(0); }
   // A's runner (eval/runner-ai) is run unmodified; it writes eval/results/ai.json.
-  const r = spawnSync("pnpm", ["--filter", "@stacksense/engine", "exec", "tsx", `--env-file=${env}`, "../../eval/runner-ai/run.ts", "--live", "--data", OUT], { stdio: "inherit" });
+  const r = spawnSync("pnpm", ["--filter", "@stacksense/engine", "exec", "tsx", `--env-file=${env}`, "../../eval/runner-ai/run.ts", "--live", "--data", OUT], { stdio: "inherit", env: { ...process.env, LIVE_LLM_TESTS: "1" } }); // explicit live opt-in (A's guard)
   process.exit(r.status ?? 1);
 }

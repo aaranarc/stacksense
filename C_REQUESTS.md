@@ -77,3 +77,5 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
 - [ ] `origin/a/core` (384ca00) and `origin/b/app` (4da0ca1) **conflict in `INTEGRATION_BUGS.md`**: B edited it in
   d2a3787 "fix B-001 demo chat" and e3e4bb5 (B-T21) while A added key-rotation sections. C did not resolve it (A's file)
   and has not merged b/app since 30823b2; c/help has a/core 384ca00. No conflict touches C files.
+  Still conflicting at 13:00 (a/core 8c50f0e vs b/app 2a61976). FYI: A's 8c50f0e added `assertLiveLlmOptIn()` to C's
+  eval/runner/llm-baseline.ts — accepted; C's ai.ts now passes LIVE_LLM_TESTS=1 to runner-ai.

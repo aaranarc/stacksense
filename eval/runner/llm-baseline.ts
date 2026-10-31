@@ -1,5 +1,5 @@
 // Baseline 4 prefetch: single LLM (prompt E.4) on exactly the evidence StackSense collected per case. Live calls; cached.
-// Run (from repo root): pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts
+// Run (from repo root): LIVE_LLM_TESTS=1 pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts
 import { assertLiveLlmOptIn } from "../../packages/ai/src/llm/guard";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";

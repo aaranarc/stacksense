@@ -55,7 +55,7 @@ If the AI is down you get a labelled fallback, never a fake result. Details: [do
 | Send a trade straight away | 20% | 18% | 21% | 7% | 0% |
 | Fixed checklist | 63% | 47% (loses) | 80% | 0% (loses) | 100% (tie) |
 | StackSense without Second Opinion | 67% (tie) | 46% (tie) | 83% (tie) | 1% (tie) | 100% (tie) |
-| Single LLM, same evidence | pending — 0/90 cases answered by the model so far (last attempt: provider quota exceeded, HTTP 429); rerun eval/runner/llm-baseline.ts | | | | |
+| Single LLM, same evidence | pending — 0/90 cases answered by the model so far (last attempt: provider quota exceeded, HTTP 429); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts | | | | |
 
 (tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks -40% → 38%, -20% → 63%, 0% → 83%, +20% → 90%, +40% → 95% (true family's prior shifted).
 <!-- eval:end -->
