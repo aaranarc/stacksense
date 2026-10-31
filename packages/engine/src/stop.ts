@@ -1,10 +1,13 @@
 import type { EngineState } from "@stacksense/contracts";
+import { claimEvidence } from "./claimEvidence";
 
 export function stopRule(state: EngineState): EngineState["stop"] {
   if (state.safety.status === "emergency") return { stopped: true, reason: "emergency" };
   if (state.safety.status !== "ok" || state.recovery.reopened || !state.hypotheses.length) return { stopped: false, reason: null };
-  const top = [...state.hypotheses].sort((a,b) => (state.posterior[b.id] ?? 0) - (state.posterior[a.id] ?? 0))[0]!;
-  if ((state.posterior[top.id] ?? 0) >= .80 && state.secondOpinion?.verdict !== "objection") {
+  // Area and its localized component are one source, with conserved total mass.
+  const { top, mass } = claimEvidence(state);
+  if (!top) return { stopped: false, reason: null };
+  if (mass >= .80 - Number.EPSILON && state.secondOpinion?.verdict !== "objection") {
     return { stopped: true, reason: "Probable source reached 80% with no Second Opinion objection" };
   }
   const best = Math.max(0, ...state.nextChecks.filter(c => c.excluded === null).map(c => c.score));
