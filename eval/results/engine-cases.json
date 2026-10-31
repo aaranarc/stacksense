@@ -1,0 +1,5350 @@
+{
+ "StackSense": [
+  {
+   "id": "hc-a01",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a02",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a03",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a04",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@2"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a05",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c01",
+   "truth": "condensation@3 → ventilation",
+   "trade": "ventilation",
+   "level": "area",
+   "leader": "condensation@3",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c02",
+   "truth": "condensation@401 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@501",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c03",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c04",
+   "truth": "condensation@5 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_supply@7",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f01",
+   "truth": "facade_window@202 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f02",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f03",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f04",
+   "truth": "facade_window@6 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f05",
+   "truth": "facade_window@502 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f06",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h01",
+   "truth": "upper_supply@502 → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h02",
+   "truth": "shared_shaft → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h03",
+   "truth": "upper_wet_area@4 → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h04",
+   "truth": "shared_shaft → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l01",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@502",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@502",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l03",
+   "truth": "shared_shaft → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l04",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l05",
+   "truth": "upper_wet_area@6 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@6",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@2"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p01",
+   "truth": "upper_supply@502 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p03",
+   "truth": "upper_wet_area@302 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@102",
+    "meter_check@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p04",
+   "truth": "upper_supply@6 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_supply@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p05",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": false,
+   "asked": [],
+   "unscripted": [
+    "duct_photo@202",
+    "inspect@302",
+    "dye_test@402",
+    "flood_test@402"
+   ]
+  },
+  {
+   "id": "hc-p06",
+   "truth": "upper_wet_area@302 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@302",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@102"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-1",
+   "truth": "facade_window@701 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@701",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-2",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@601",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@401",
+    "meter_check@601"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-3",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@101",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-4",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-5",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-6",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-7",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-8",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@202"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-9",
+   "truth": "upper_wet_area@503 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@503",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@303"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-10",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-11",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-12",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-13",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-14",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-15",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-16",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-17",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-18",
+   "truth": "facade_window@102 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-19",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-20",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-21",
+   "truth": "upper_supply@401 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@401",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@201",
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-22",
+   "truth": "upper_supply@301 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-23",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-24",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@202",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@202"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-25",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-26",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@103",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-27",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-28",
+   "truth": "condensation@401 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-29",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-30",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-31",
+   "truth": "condensation@102 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-32",
+   "truth": "upper_supply@602 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@602",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@402"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-33",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-34",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-35",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-36",
+   "truth": "upper_supply@303 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@303",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@103",
+    "meter_check@303"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-37",
+   "truth": "upper_wet_area@601 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@601",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-38",
+   "truth": "upper_wet_area@803 → waterproofer_tiler",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@803",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@603",
+    "meter_check@803"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-39",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@103",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-40",
+   "truth": "upper_wet_area@602 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@602",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@402"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-41",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-42",
+   "truth": "condensation@501 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-43",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@101",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-44",
+   "truth": "upper_wet_area@801 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@801",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@601",
+    "meter_check@801"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-45",
+   "truth": "condensation@202 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@202",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@102"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-46",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-47",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-48",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-49",
+   "truth": "condensation@102 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-50",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-51",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-52",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-53",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-54",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-55",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-56",
+   "truth": "condensation@201 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-57",
+   "truth": "upper_wet_area@701 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@701",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@501",
+    "meter_check@701"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-58",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-59",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-60",
+   "truth": "upper_supply@501 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@501",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@501"
+   ],
+   "unscripted": []
+  }
+ ],
+ "Blame the flat above": [
+  {
+   "id": "hc-a01",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a02",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a03",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a04",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a05",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c01",
+   "truth": "condensation@3 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@5",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c02",
+   "truth": "condensation@401 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c03",
+   "truth": "condensation@301 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c04",
+   "truth": "condensation@5 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@7",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f01",
+   "truth": "facade_window@202 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f02",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@402",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f03",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f04",
+   "truth": "facade_window@6 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@8",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f05",
+   "truth": "facade_window@502 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@602",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f06",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@402",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h01",
+   "truth": "upper_supply@502 → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h02",
+   "truth": "shared_shaft → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@402",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h03",
+   "truth": "upper_wet_area@4 → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@4",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h04",
+   "truth": "shared_shaft → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l01",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l03",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l04",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l05",
+   "truth": "upper_wet_area@6 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p01",
+   "truth": "upper_supply@502 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p03",
+   "truth": "upper_wet_area@302 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p04",
+   "truth": "upper_supply@6 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p05",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@402",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p06",
+   "truth": "upper_wet_area@302 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-1",
+   "truth": "facade_window@701 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@801",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-2",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@601",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-3",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-4",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-5",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@601",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-6",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-7",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-8",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@402",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-9",
+   "truth": "upper_wet_area@503 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@503",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-10",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-11",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-12",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-13",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-14",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-15",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-16",
+   "truth": "condensation@301 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-17",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-18",
+   "truth": "facade_window@102 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-19",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-20",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-21",
+   "truth": "upper_supply@401 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-22",
+   "truth": "upper_supply@301 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-23",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-24",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-25",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-26",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@203",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-27",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-28",
+   "truth": "condensation@401 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-29",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-30",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-31",
+   "truth": "condensation@102 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-32",
+   "truth": "upper_supply@602 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@602",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-33",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-34",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-35",
+   "truth": "condensation@301 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-36",
+   "truth": "upper_supply@303 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@303",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-37",
+   "truth": "upper_wet_area@601 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@601",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-38",
+   "truth": "upper_wet_area@803 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@803",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-39",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@203",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-40",
+   "truth": "upper_wet_area@602 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@602",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-41",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-42",
+   "truth": "condensation@501 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@601",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-43",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-44",
+   "truth": "upper_wet_area@801 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@801",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-45",
+   "truth": "condensation@202 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-46",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-47",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-48",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-49",
+   "truth": "condensation@102 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-50",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-51",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-52",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-53",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-54",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-55",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-56",
+   "truth": "condensation@201 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-57",
+   "truth": "upper_wet_area@701 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@701",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-58",
+   "truth": "roof_terrace → roofer",
+   "trade": "roofer",
+   "level": "area",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-59",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-60",
+   "truth": "upper_supply@501 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  }
+ ],
+ "Send a trade straight away": [
+  {
+   "id": "hc-a01",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a02",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a03",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a04",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a05",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c01",
+   "truth": "condensation@3 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c02",
+   "truth": "condensation@401 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c03",
+   "truth": "condensation@301 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c04",
+   "truth": "condensation@5 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f01",
+   "truth": "facade_window@202 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f02",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f03",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f04",
+   "truth": "facade_window@6 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f05",
+   "truth": "facade_window@502 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f06",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h01",
+   "truth": "upper_supply@502 → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h02",
+   "truth": "shared_shaft → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h03",
+   "truth": "upper_wet_area@4 → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h04",
+   "truth": "shared_shaft → emergency",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l01",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l03",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l04",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l05",
+   "truth": "upper_wet_area@6 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p01",
+   "truth": "upper_supply@502 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p03",
+   "truth": "upper_wet_area@302 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p04",
+   "truth": "upper_supply@6 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p05",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p06",
+   "truth": "upper_wet_area@302 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-1",
+   "truth": "facade_window@701 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-2",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-3",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-4",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-5",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-6",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-7",
+   "truth": "other → general_inspector",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-8",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-9",
+   "truth": "upper_wet_area@503 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-10",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-11",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-12",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-13",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-14",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-15",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-16",
+   "truth": "condensation@301 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-17",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-18",
+   "truth": "facade_window@102 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-19",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-20",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-21",
+   "truth": "upper_supply@401 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-22",
+   "truth": "upper_supply@301 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-23",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-24",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-25",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-26",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-27",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-28",
+   "truth": "condensation@401 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-29",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-30",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-31",
+   "truth": "condensation@102 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-32",
+   "truth": "upper_supply@602 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-33",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-34",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-35",
+   "truth": "condensation@301 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-36",
+   "truth": "upper_supply@303 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-37",
+   "truth": "upper_wet_area@601 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-38",
+   "truth": "upper_wet_area@803 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-39",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-40",
+   "truth": "upper_wet_area@602 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-41",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-42",
+   "truth": "condensation@501 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-43",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-44",
+   "truth": "upper_wet_area@801 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-45",
+   "truth": "condensation@202 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-46",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-47",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-48",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-49",
+   "truth": "condensation@102 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-50",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-51",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-52",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-53",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-54",
+   "truth": "shared_shaft → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-55",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-56",
+   "truth": "condensation@201 → ventilation",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-57",
+   "truth": "upper_wet_area@701 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-58",
+   "truth": "roof_terrace → roofer",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-59",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-60",
+   "truth": "upper_supply@501 → plumber",
+   "trade": "waterproofer_tiler",
+   "level": "mechanism",
+   "leader": "upper_wet_area",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  }
+ ],
+ "Fixed checklist": [
+  {
+   "id": "hc-a01",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": [
+    "ceiling_photo@402"
+   ]
+  },
+  {
+   "id": "hc-a02",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@201",
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a03",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a04",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@4",
+    "duct_photo@2"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a05",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": [
+    "ceiling_photo@402"
+   ]
+  },
+  {
+   "id": "hc-c01",
+   "truth": "condensation@3 → ventilation",
+   "trade": "ventilation",
+   "level": "area",
+   "leader": "condensation@3",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c02",
+   "truth": "condensation@401 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@501",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@401",
+    "duct_photo@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c03",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c04",
+   "truth": "condensation@5 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_supply@7",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f01",
+   "truth": "facade_window@202 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f02",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f03",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@602"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f04",
+   "truth": "facade_window@6 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f05",
+   "truth": "facade_window@502 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f06",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h01",
+   "truth": "upper_supply@502 → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h02",
+   "truth": "shared_shaft → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h03",
+   "truth": "upper_wet_area@4 → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h04",
+   "truth": "shared_shaft → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l01",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@402",
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@502",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": [
+    "ceiling_photo@402"
+   ]
+  },
+  {
+   "id": "hc-l03",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 3,
+   "decided": false,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502",
+    "trap_grout_photo@502"
+   ],
+   "unscripted": [
+    "ceiling_photo@402",
+    "ceiling_photo@402",
+    "ceiling_photo@402",
+    "ceiling_photo@402"
+   ]
+  },
+  {
+   "id": "hc-l04",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": [
+    "ceiling_photo@402",
+    "ceiling_photo@402"
+   ]
+  },
+  {
+   "id": "hc-l05",
+   "truth": "upper_wet_area@6 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@6",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@4",
+    "duct_photo@2"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p01",
+   "truth": "upper_supply@502 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@502",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@402",
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": [
+    "ceiling_photo@402",
+    "ceiling_photo@402"
+   ]
+  },
+  {
+   "id": "hc-p03",
+   "truth": "upper_wet_area@302 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@102",
+    "meter_check@302"
+   ],
+   "unscripted": [
+    "ceiling_photo@202",
+    "ceiling_photo@202"
+   ]
+  },
+  {
+   "id": "hc-p04",
+   "truth": "upper_supply@6 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_supply@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p05",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@302",
+    "trap_grout_photo@402"
+   ],
+   "unscripted": [
+    "duct_photo@202"
+   ]
+  },
+  {
+   "id": "hc-p06",
+   "truth": "upper_wet_area@302 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@302",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@102"
+   ],
+   "unscripted": [
+    "ceiling_photo@202"
+   ]
+  },
+  {
+   "id": "sim-1",
+   "truth": "facade_window@701 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@701",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-2",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@601",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@501",
+    "duct_photo@401",
+    "meter_check@601"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-3",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@101",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-4",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-5",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@601",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@501",
+    "duct_photo@401",
+    "meter_check@601"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-6",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-7",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "duct_photo@201",
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-8",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@302",
+    "duct_photo@202"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-9",
+   "truth": "upper_wet_area@503 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@503",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@403",
+    "duct_photo@303"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-10",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-11",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-12",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-13",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-14",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-15",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@201",
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-16",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "duct_photo@201",
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-17",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-18",
+   "truth": "facade_window@102 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-19",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-20",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-21",
+   "truth": "upper_supply@401 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@401",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "duct_photo@201",
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-22",
+   "truth": "upper_supply@301 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@201",
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-23",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-24",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@202",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@102",
+    "meter_check@202"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-25",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-26",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@103",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-27",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@101",
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-28",
+   "truth": "condensation@401 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@401",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@401",
+    "duct_photo@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-29",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@101",
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-30",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-31",
+   "truth": "condensation@102 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-32",
+   "truth": "upper_supply@602 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@602",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@502",
+    "duct_photo@402"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-33",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-34",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-35",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-36",
+   "truth": "upper_supply@303 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@303",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@203",
+    "duct_photo@103",
+    "meter_check@303"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-37",
+   "truth": "upper_wet_area@601 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@501",
+    "duct_photo@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-38",
+   "truth": "upper_wet_area@803 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@803",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@703",
+    "duct_photo@603",
+    "meter_check@803"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-39",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@103",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-40",
+   "truth": "upper_wet_area@602 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@602",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@502",
+    "duct_photo@402"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-41",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-42",
+   "truth": "condensation@501 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-43",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@101",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-44",
+   "truth": "upper_wet_area@801 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@801",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@701",
+    "duct_photo@601",
+    "meter_check@801"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-45",
+   "truth": "condensation@202 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@302",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@202",
+    "duct_photo@102"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-46",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-47",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-48",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-49",
+   "truth": "condensation@102 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-50",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@101",
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-51",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@101",
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-52",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-53",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@301",
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-54",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@201",
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-55",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-56",
+   "truth": "condensation@201 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@201",
+    "duct_photo@101",
+    "meter_check@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-57",
+   "truth": "upper_wet_area@701 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@701",
+   "checks": 3,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@601",
+    "duct_photo@501",
+    "meter_check@701"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-58",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-59",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@201",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@101",
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-60",
+   "truth": "upper_supply@501 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@501",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "ceiling_photo@401",
+    "meter_check@501"
+   ],
+   "unscripted": []
+  }
+ ],
+ "StackSense without Second Opinion": [
+  {
+   "id": "hc-a01",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a02",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a03",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a04",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@2"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-a05",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c01",
+   "truth": "condensation@3 → ventilation",
+   "trade": "ventilation",
+   "level": "area",
+   "leader": "condensation@3",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c02",
+   "truth": "condensation@401 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@501",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c03",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-c04",
+   "truth": "condensation@5 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_supply@7",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f01",
+   "truth": "facade_window@202 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@202",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f02",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f03",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f04",
+   "truth": "facade_window@6 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f05",
+   "truth": "facade_window@502 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@502",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-f06",
+   "truth": "facade_window@302 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@302",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h01",
+   "truth": "upper_supply@502 → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h02",
+   "truth": "shared_shaft → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h03",
+   "truth": "upper_wet_area@4 → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-h04",
+   "truth": "shared_shaft → emergency",
+   "trade": "emergency",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l01",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@502",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@502",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l03",
+   "truth": "shared_shaft → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "shared_shaft",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "duct_photo@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l04",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-l05",
+   "truth": "upper_wet_area@6 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@6",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@2"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p01",
+   "truth": "upper_supply@502 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p02",
+   "truth": "upper_wet_area@502 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@502",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@302",
+    "meter_check@502"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p03",
+   "truth": "upper_wet_area@302 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@302",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@102",
+    "meter_check@302"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p04",
+   "truth": "upper_supply@6 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_supply@6",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "hc-p05",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": null,
+   "checks": 0,
+   "decided": false,
+   "asked": [],
+   "unscripted": [
+    "duct_photo@202",
+    "inspect@302",
+    "dye_test@402",
+    "flood_test@402"
+   ]
+  },
+  {
+   "id": "hc-p06",
+   "truth": "upper_wet_area@302 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@302",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@102"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-1",
+   "truth": "facade_window@701 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@701",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-2",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@601",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@401",
+    "meter_check@601"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-3",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@101",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-4",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-5",
+   "truth": "upper_supply@601 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-6",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-7",
+   "truth": "other → general_inspector",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-8",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@202"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-9",
+   "truth": "upper_wet_area@503 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@503",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@303"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-10",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-11",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-12",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-13",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-14",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-15",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-16",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-17",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-18",
+   "truth": "facade_window@102 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-19",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-20",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-21",
+   "truth": "upper_supply@401 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@401",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@201",
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-22",
+   "truth": "upper_supply@301 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-23",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-24",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@202",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@202"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-25",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-26",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@103",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-27",
+   "truth": "upper_wet_area@201 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-28",
+   "truth": "condensation@401 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@301"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-29",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-30",
+   "truth": "facade_window@201 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-31",
+   "truth": "condensation@102 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-32",
+   "truth": "upper_supply@602 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@602",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@402"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-33",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-34",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-35",
+   "truth": "condensation@301 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@301",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-36",
+   "truth": "upper_supply@303 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@303",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@103",
+    "meter_check@303"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-37",
+   "truth": "upper_wet_area@601 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@601",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@401"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-38",
+   "truth": "upper_wet_area@803 → waterproofer_tiler",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@803",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@603",
+    "meter_check@803"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-39",
+   "truth": "facade_window@103 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@103",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-40",
+   "truth": "upper_wet_area@602 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@602",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@402"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-41",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-42",
+   "truth": "condensation@501 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@501",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-43",
+   "truth": "facade_window@101 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@101",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-44",
+   "truth": "upper_wet_area@801 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@801",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@601",
+    "meter_check@801"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-45",
+   "truth": "condensation@202 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@202",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@102"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-46",
+   "truth": "facade_window@301 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@301",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-47",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-48",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-49",
+   "truth": "condensation@102 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@102",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-50",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-51",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-52",
+   "truth": "facade_window@401 → facade_sealant",
+   "trade": "facade_sealant",
+   "level": "area",
+   "leader": "facade_window@401",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-53",
+   "truth": "upper_wet_area@401 → waterproofer_tiler",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "upper_wet_area@401",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-54",
+   "truth": "shared_shaft → plumber",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "shared_shaft",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-55",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-56",
+   "truth": "condensation@201 → ventilation",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "condensation@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "duct_photo@101"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-57",
+   "truth": "upper_wet_area@701 → waterproofer_tiler",
+   "trade": "waterproofer_tiler",
+   "level": "area",
+   "leader": "upper_wet_area@701",
+   "checks": 2,
+   "decided": true,
+   "asked": [
+    "duct_photo@501",
+    "meter_check@701"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-58",
+   "truth": "roof_terrace → roofer",
+   "trade": "general_inspector",
+   "level": "mechanism",
+   "leader": "roof_terrace",
+   "checks": 0,
+   "decided": true,
+   "asked": [],
+   "unscripted": []
+  },
+  {
+   "id": "sim-59",
+   "truth": "upper_supply@201 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@201",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@201"
+   ],
+   "unscripted": []
+  },
+  {
+   "id": "sim-60",
+   "truth": "upper_supply@501 → plumber",
+   "trade": "plumber",
+   "level": "area",
+   "leader": "upper_supply@501",
+   "checks": 1,
+   "decided": true,
+   "asked": [
+    "meter_check@501"
+   ],
+   "unscripted": []
+  }
+ ]
+}

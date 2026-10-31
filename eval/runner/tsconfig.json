@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "noUncheckedIndexedAccess": false, // frozen eval/hard-cases/validate.ts cannot be edited after tag eval-frozen
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "zod": ["../../packages/contracts/node_modules/zod"],
+      "vitest": ["../../packages/engine/node_modules/vitest"],
+      "@stacksense/contracts": ["../../packages/contracts/src/index.ts"]
+    }
+  },
+  "include": ["*.ts", "../hard-cases/*.ts"]
+}
