@@ -8,13 +8,13 @@ import rainFixture from "../../../../fixtures-ai/weather/hero-rain.simulated.jso
 import forecastFixture from "../../../../fixtures-ai/weather/hero-forecast.simulated.json";
 export type ScenarioId="happy"|"electrical_hazard"|"locked_502"|"dark_photo"|"beam_travel"|"wrong_trade_rain"|"honest_uncertainty"|"break_it";
 export type Scenario={title:string;building:Building;steps:Observation[][];rain?:RainSeries;forecast?:RainSeries;photoLabels?:PhotoLabel[];review?:SecondOpinion|null};
-const hero=heroSnapshots(),ledger=hero[9]!.observations;
+const hero=heroSnapshots(),ledger=hero[9]!.observations,finding=hero[11]!.observations.find(o=>o.kind==="professional_finding")!;
 const first=ledger.find(o=>o.id==="hero-402")!,duct=ledger.find(o=>o.id==="hero-302-duct")!,meter=ledger.find(o=>o.id==="hero-502-meter")!;
 const obs=(id:string,patch:Partial<Observation>={}):Observation=>({...structuredClone(first),id,eventKey:id,photoIds:[],rawText:"simulated evidence",...patch});
 const simulated=simulateBuilding(23);
 const locked=structuredClone(blockA);locked.flats.find(f=>f.id==="502")!.access="locked";
 export const scenarios:Record<ScenarioId,Scenario>={
- happy:{title:"Hero: evidence before repairs (demo data)",building:blockA,steps:ledger.map(o=>[o]),photoLabels:hero[9]!.photoLabels,review:hero[9]!.secondOpinion},
+ happy:{title:"Hero: evidence before repairs (demo data)",building:blockA,steps:[...ledger.map(o=>[o]),[finding]],forecast:forecastFixture as RainSeries,photoLabels:hero[9]!.photoLabels,review:hero[9]!.secondOpinion},
  electrical_hazard:{title:"Water near electrics (demo data)",building:blockA,steps:[[obs("hazard",{hazards:["water_near_electrics"]})]]},
  locked_502:{title:"502 locked: alternative inspection (demo data)",building:locked,steps:[[first],[duct]]},
  dark_photo:{title:"Dark photo: retake, no inference (demo data)",building:blockA,steps:[[obs("dark",{surface:"unclear",rawText:"photo supplied",photoIds:["dark"]})]],photoLabels:[{photoId:"dark",surface:"damp_stain",zone:"ceiling",quality:"too_dark",boxes:[],meterDigits:null,humanCorrected:false}]},
