@@ -44,7 +44,7 @@ export function Workspace() {
     <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} buildingId={state.building.id} onRead={(result,chatMessages,isDemo)=>{setFixture(!!isDemo);setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(isDemo?buildings.IN:state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
     {read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}
     {flat&&<p>Showing flat {flat} <button onClick={()=>setFlat(null)}>Clear flat filter</button></p>}
-    <CaseFeed state={state} selectedFlat={flat} onPhoto={setPhoto}/>
+    <CaseFeed state={state} messages={messages} selectedFlat={flat} onPhoto={setPhoto}/>
    </>} building={<>
     <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span><small>{labels[state.building.region].group} · {labels[state.building.region].manager} · {labels[state.building.region].trap}</small></div>
     <CrossSection state={state} selected={flat} onSelect={setFlat}/><Pills state={state} selectedFlat={flat}/>
@@ -57,6 +57,7 @@ export function Workspace() {
   </SafetyBoundary>
  </CheckLinkProvider>;
 }
+
 
 
 
