@@ -63,6 +63,14 @@ export function rankChecks(state: EngineState): RankedCheck[] {
       expectedBits: info.bits, score, why: why(candidate), excluded, instructions: definition.instructions,
     };
   });
+  // After a recorded repair the victim's ceiling photo is the Day-14 recapture: a recovery link target (score 0, never
+  // outranks diagnostic checks or changes the stop rule), not diagnostic information gain.
+  const repairAt = state.observations.filter(o => o.kind === "repair_done").map(o => o.at).sort().at(-1);
+  if (repairAt && state.safety.status === "ok") for (const [i, c] of diagnostic.entries()) {
+    const answered = state.observations.some(o => o.checkId === c.id && o.at >= repairAt);
+    if (c.type === "ceiling_photo" && !answered && (c.excluded === "can't change the action" || c.excluded === "already checked"))
+      diagnostic[i] = { ...c, excluded: null, score: 0, why: `Day-14 recapture of ${c.targetFlatId} after the repair — looks better ≠ dry; only a moisture reading can mark it ready to paint` };
+  }
   // Prevention photos are supported link targets, not diagnostic information gain.
   const prevention: RankedCheck[] = state.prediction.sameStack.flatMap(target => {
     const flat = state.building.flats.find(f => f.id === target.flatId);

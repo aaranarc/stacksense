@@ -98,3 +98,11 @@ Final application main SHA: 927094b. Production deployment: https://vercel.com/b
   `packages/ai/test/links.test.ts` "C final: a ceiling photo after a recorded repair is a Day-14 recapture…" (worse photo →
   recapture → engine reopens, paint not ready). Note: in the hero fixtures `ceiling_photo@402` is excluded ("can't change
   the action"), so the Dry & Paint card offers the link only when the engine marks that check available.
+- **Day-14 recapture link target (31 Oct, C).** Found in the production check: after "Record repair completed" the Dry &
+  Paint card said "No recapture check is currently available from the engine" because `rankChecks` excluded the victim's
+  `ceiling_photo` as "can't change the action" (a diagnostic rule). Minimal fix in `packages/engine/src/voi.ts`: once a
+  `repair_done` exists and safety is ok, the victim ceiling photo is re-offered as a recovery link target with
+  `excluded: null` and `score: 0` (same pattern as the prevention `inspect@flat` targets) until a recapture answers it after
+  the repair. Score 0 means it never outranks diagnostic checks and never changes the stop rule; no repair exists in the
+  frozen hard cases or simulator, so evaluation numbers are unchanged (verified: identical to v1). Regression test:
+  `packages/engine/test/recapture-link.test.ts`.
