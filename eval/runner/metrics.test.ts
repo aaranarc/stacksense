@@ -73,3 +73,14 @@ describe("robustness prior shift", () => {
     expect(max.condensation).toBeGreaterThan(familyPriors("GENERIC").condensation);
   });
 });
+
+describe("README eval block", () => {
+  it("replaces only the marked block, numbers from results", async () => {
+    const { readmeEval } = await import("./merge");
+    const { results } = evaluate({ sims: 2 });
+    const md = readmeEval("# T\n<!-- eval:start -->\nold\n<!-- eval:end -->\ntail", results as never);
+    expect(md).toMatch(/^# T\n<!-- eval:start -->\n\*\*Team-built test, not field accuracy\.\*\*/);
+    expect(md).not.toContain("old");
+    expect(md.endsWith("<!-- eval:end -->\ntail")).toBe(true);
+  });
+});

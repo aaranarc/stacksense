@@ -97,7 +97,41 @@ export function merge() {
   mkdirSync(at("../../apps/web/public/eval/"), { recursive: true });
   writeFileSync(at("../../apps/web/public/eval/latest.json"), JSON.stringify(latest, null, 2) + "\n");
   writeFileSync(at("../../docs/RESULTS.md"), resultsMd(latest, data));
+  const readme = at("../../README.md");
+  if (existsSync(readme)) writeFileSync(readme, readmeEval(readFileSync(readme, "utf8"), latest));
   return latest;
+}
+
+/** Replace the README block between eval markers with a summary from latest.json (numbers never typed by hand). */
+export function readmeEval(md: string, r: Engine): string {
+  const cols: [string, (x: EvalRow) => number | null, boolean, boolean][] = [
+    ["Right trade (all)", (x) => x.rightTrade, true, true],
+    ["Top-1 after 3 checks", (x) => x.top1[2] ?? null, true, true],
+    ["Over-claim", (x) => x.overclaim, false, true],
+    ["Hazard pass", (x) => x.hazardPass, true, true],
+  ];
+  const hard = new Map(r.rowsBySet.hard.map((x) => [x.method, x]));
+  const ours = r.rows.find((x) => x.method === "StackSense")!, oursHard = hard.get("StackSense")!;
+  const mark = (a: number | null, b: number | null, higher: boolean) => { const v = verdict(a, b, higher); return v ? ` (${v})` : ""; };
+  const lines = [ours, ...r.rows.filter((x) => x !== ours)].map((x) => {
+    const h = hard.get(x.method)!;
+    const right = x === ours ? "" : mark(oursHard.rightTrade, h.rightTrade, true);
+    return `| ${x.method} | ${fmt(h.rightTrade, true)}${right} | ${cols.map(([, get, higher, pct]) => fmt(get(x), pct) + (x === ours ? "" : mark(get(ours), get(x), higher))).join(" | ")} |`;
+  });
+  const block = [
+    "<!-- eval:start -->",
+    `**Team-built test, not field accuracy.** ${r.sets.hardCases} frozen hard cases + ${r.sets.simBuildings} simulated buildings · generated ${r.generatedAt.slice(0, 10)} by \`pnpm eval\`.`,
+    "",
+    `| Method | Right trade (hard cases) | ${cols.map(([l]) => l).join(" | ")} |`,
+    `|---|---|${cols.map(() => "---").join("|")}|`,
+    ...lines,
+    ...r.pending.map((p) => `| ${p.method} | ${p.reason} |${cols.map(() => " |").join("")}`),
+    "",
+    "(tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks " +
+      r.robustness.map((x) => `${x.priorShiftPct > 0 ? "+" : ""}${x.priorShiftPct}% → ${fmt(x.top1, true)}`).join(", ") + " (true family's prior shifted).",
+    "<!-- eval:end -->",
+  ].join("\n");
+  return md.replace(/<!-- eval:start -->[\s\S]*?<!-- eval:end -->/, block);
 }
 
 function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown }, data: ReturnType<typeof prepare>): string {

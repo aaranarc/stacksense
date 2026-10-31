@@ -43,3 +43,7 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   unit-tested in eval/runner/metrics.test.ts). An explicit `priorShift` would make this less indirect — not blocking.
 - [ ] **FYI robustness (C-T07):** top-1 after 3 checks 83% at mode priors → 38% when the true family's prior is cut 40%
   (also at archetype min). Reported in RESULTS.md as a limitation.
+- [ ] **docs/ai.md (C-T09):** README links `docs/ai.md` ("what is AI and what isn't") — A owns it; it does not exist yet.
+
+## To B (C-T09)
+- [ ] **README GIF + video link:** README shows `docs/demo.gif` (placeholder) — please add the GIF and the video link.
