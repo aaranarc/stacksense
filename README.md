@@ -4,8 +4,16 @@
 
 ## Try it
 - **Live app:** https://stacksense-omega.vercel.app/
-- **Start with Judge Mode → Play.** (Load demo chat alone stops at the safety gate: a chat cannot answer the hazard questions.)
-- **Judge Mode:** press **Judge Mode** in the top bar. Inside:
+- **Start with [Judge Mode → Play](https://stacksense-omega.vercel.app/judge).** (Load demo chat alone stops at the safety gate: a chat cannot answer the hazard questions.)
+  Then walk the case page by page with **Next →** at the bottom of each page; the top-bar pill shows "Demo running · step n/7".
+- **Pages:** [Dashboard](https://stacksense-omega.vercel.app/) ·
+  [Incidents](https://stacksense-omega.vercel.app/incidents) (1 Read & See, 2 Safety Gate, case feed) ·
+  [Building](https://stacksense-omega.vercel.app/building) (3 Ask the Right Check, 4 Second Opinion, odds) ·
+  [Job Sheet](https://stacksense-omega.vercel.app/job-sheet) (5) ·
+  [Repairs](https://stacksense-omega.vercel.app/repairs) (6 Repair → Dry → Paint) ·
+  [Predict & Prevent](https://stacksense-omega.vercel.app/predict) (7) ·
+  [Settings](https://stacksense-omega.vercel.app/settings) (IN / UK region, reset).
+- **Judge Mode:** [/judge](https://stacksense-omega.vercel.app/judge), or the **Judge Mode** pill in the top bar on any page. Inside:
   - **What-if** sliders — flip "302 duct dry ↔ wet", "502 meter still ↔ moved"… and watch the odds, Second Opinion and Job Sheet change live.
   - **Scenarios** — 8 stories with **Next step ▸ / Play / Reset**: Happy path · Electrical hazard · Locked 502 · Dark photo · Horizontal beam travel · Wrong-trade save (rain) · Honest uncertainty · Break it.
   - **Evaluation** — the real numbers below, ties and losses marked.

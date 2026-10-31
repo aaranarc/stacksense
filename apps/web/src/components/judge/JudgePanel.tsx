@@ -35,18 +35,19 @@ function useRightTrade(src = '/eval/latest.json') {
   return pct;
 }
 
-export function JudgePanel({ state, onState }: { state: EngineState; onState: (s: EngineState) => void }) {
+/** sheet: phone bottom sheet (default). The /judge page passes sheet={false} and shows the panel as the page. */
+export function JudgePanel({ state, onState, sheet = true }: { state: EngineState; onState: (s: EngineState) => void; sheet?: boolean }) {
   const [collapsed, setCollapsed] = useState(false);
   // At phone width (≤480 px) the panel is a bottom sheet; it starts collapsed there so the case stays visible.
-  useEffect(() => { if (window.matchMedia?.('(max-width: 480px)').matches) setCollapsed(true); }, []);
+  useEffect(() => { if (sheet && window.matchMedia?.('(max-width: 480px)').matches) setCollapsed(true); }, [sheet]);
   const rightTrade = useRightTrade();
   const checks = decisionChecks(state);
-  return <aside className={`${s.panel} ${collapsed ? s.collapsed : ''}`} aria-label="Judge Mode">
+  return <aside className={`${s.panel} ${sheet ? s.sheet : ''} ${collapsed ? s.collapsed : ''}`} aria-label="Judge Mode">
     <div className={s.sheetHead}>
       <div className={s.title}><span className={s.titleIcon} aria-hidden="true"><Scale size={20} /></span><div><h2>Judge Mode</h2><p>What-if scenarios. See how it decides.</p></div></div>
-      <button className={s.sheetToggle} aria-expanded={!collapsed} aria-controls="judge-body" onClick={() => setCollapsed(!collapsed)}>
+      {sheet && <button className={s.sheetToggle} aria-expanded={!collapsed} aria-controls="judge-body" onClick={() => setCollapsed(!collapsed)}>
         {collapsed ? 'Show panel ▴' : 'Hide panel ▾'}
-      </button>
+      </button>}
     </div>
     <div id="judge-body" className={s.body}>
       <div className={s.cols}>
@@ -61,7 +62,7 @@ export function JudgePanel({ state, onState }: { state: EngineState; onState: (s
           {rightTrade !== null && <p className={s.foot}>Right trade {rightTrade}% · team-built test, not field accuracy</p>}
         </section>
       </div>
-      <details><summary>Evaluation</summary><EvalCard /></details>
+      <details><summary>Evaluation</summary><EvalCard region={state.building.region} /></details>
       <details><summary>How it decided</summary><HowItDecided state={state} /></details>
       <details><summary>Break it</summary><BreakIt onState={onState} /></details>
     </div>
