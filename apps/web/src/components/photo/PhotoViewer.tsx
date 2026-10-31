@@ -13,7 +13,7 @@ export function PhotoViewer({photoId,label,onClose,onCorrect}:{photoId:string;la
   setEdge(true);setEdgeBusy(true);try{setEdgeUrl(await edgeContrastPhoto(media.url));setEdge(true);}catch{setEdge(false);setEdgeError('Edge contrast is unavailable. The original image remains visible.');}finally{setEdgeBusy(false);}
  }
  const contrasted=edge&&!!edgeUrl,url=contrasted?edgeUrl:media?.url;
- return <Drawer title={`Photo · ${(label?.zone??'unclear').replaceAll('_',' ')}`} onClose={onClose}>
+ return <Drawer title={/\.\w{3,4}$/.test(photoId)?`Photo ${photoId}`:`Photo · ${(label?.zone??'unclear').replaceAll('_',' ')}`} onClose={onClose}>
   {media?.demo?<><p className="chip">Cached · Demo data</p><p>{media.illustration?'Illustration, not a real photo.':'Own-photo reference; case evidence and timing remain simulated.'}</p><p className="diagram-key">{media.label}</p></>:media?<p>{media.label}</p>:null}
   {!media?<p>Photo preview unavailable in this browser session. The evidence label remains recorded.</p>:<>
    <label className="edge-control"><input type="checkbox" checked={edge} disabled={edgeBusy} onChange={e=>void contrast(e.target.checked)}/>Edge contrast, not moisture.</label>
