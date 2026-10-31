@@ -168,3 +168,6 @@ The print-route boundary now safely decodes its case ID exactly once before stor
 
 ## B final run — B-003 fixed on b/app
 The media resolver now binds all approved hero IDs, meter references and scenario preview IDs to public copies of A's clean cached assets. Hero ID bindings remain unchanged. Tests compare served hero bytes with the approved originals and verify own-photo-reference versus Day-14 illustration labels. Scenario evidence/timing remains labelled simulated. No judge or engine file was edited. C should retest hero thumbnails and the photo drawer after merging.
+
+## B final run — B-STATUS fixed on b/app
+Leading source flats are red and labelled probable source; other assessed candidates are amber. Green requires a named, dated dry check with answered safety questions and usable dry labels; denials, unrequested dry reports, poor-quality photos and superseded wet checks do not qualify. New prevention inspections remain amber. SourceBars uses a single red leading bar and neutral grey alternatives, never green. Tests cover these cases.
