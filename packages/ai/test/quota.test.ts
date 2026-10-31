@@ -57,3 +57,10 @@ it('never selects an implicit paid endpoint when compatible configuration is inc
  setup();vi.stubEnv('LLM_PROVIDER','openai');vi.stubEnv('OPENAI_BASE_URL','');const transport=vi.fn(async()=>compatible());vi.stubGlobal('fetch',transport);
  expect((await serverAdapter().readChat(fields)).source).toBe('fallback');expect(transport).not.toHaveBeenCalled();
 });
+
+it('defaults both Gemini model IDs when env overrides are absent',async()=>{
+ setup();delete process.env.GEMINI_MODEL;delete process.env.GEMINI_FALLBACK_MODEL;
+ const transport=vi.fn().mockResolvedValueOnce(quota()).mockResolvedValueOnce(gemini());vi.stubGlobal('fetch',transport);
+ expect((await serverAdapter().readChat(fields)).source).toBe('llm');
+ expect(String(transport.mock.calls[0]?.[0])).toContain('/gemini-3.1-flash-lite:');expect(String(transport.mock.calls[1]?.[0])).toContain('/gemini-3.8-flash:');expect(transport).toHaveBeenCalledTimes(2);
+});
