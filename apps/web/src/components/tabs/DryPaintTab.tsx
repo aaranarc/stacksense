@@ -13,7 +13,7 @@ export function DryPaintTab({state,onState}:{state:EngineState;onState:(state:En
  const lastReading=state.observations.filter(o=>o.kind==='moisture_reading').at(-1);
  const repair=state.observations.filter(o=>o.kind==='repair_done').at(-1);
  const stamp=(at:string|undefined)=>at?new Date(at).toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}):'';
- const pill=(label:string,done:boolean,at:string|undefined)=>{const s=visualStatus(`${label}${done&&at?` · ${stamp(at)}`:''}`,done&&at?'green':'grey');return <span className="chip" style={{color:s.colour}}>{s.label}</span>;};
+ const pill=(label:string,done:boolean,at:string|undefined)=>{const s=visualStatus(`${label}${done&&at?` · ${stamp(at)}`:''}`,done&&at?'green':'grey');return <span className="chip" style={{borderColor:s.colour}}>{s.label}</span>;};
  const check=state.nextChecks.find(c=>!c.excluded&&c.type==='ceiling_photo');
  async function send(){if(!check?.targetFlatId)return;setBusy(true);setError('');try{const result=await createCheckLink(state,check.id,check.targetFlatId);window.open(result.waUrl,'_blank','noopener,noreferrer');open(result);}catch{setError('Could not create the recapture link. Please try again.');}finally{setBusy(false);}}
  function record(kind:'repair_done'|'moisture_reading'){try{setError('');onState(applyRecoveryObservation(state,recoveryInput(state,kind,kind==='moisture_reading'?Number(value):undefined)));}catch(e){setError(e instanceof Error?e.message:'Could not record the evidence.');}}
