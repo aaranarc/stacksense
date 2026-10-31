@@ -1,5 +1,5 @@
 import type { EngineState, Flat, Hypothesis,Observation } from '@stacksense/contracts';
-export const colours = { grey: '#9CA3AF', amber: '#D97706', red: '#DC2626', green: '#16A34A' };
+export const colours = { grey: '#98A2B3', amber: '#F5A524', red: '#E5484D', green: '#16A34A' };
 export function visualStatus(label: string, kind: keyof typeof colours = 'grey', dashed = false) { return {colour: colours[kind], label, dashed}; }
 export function sourceBarStatus(leading:boolean){return visualStatus(leading?'Probable source':'Alternative',leading?'red':'grey');}
 export function statusOf(item: Flat | Hypothesis, state: EngineState) {
@@ -25,3 +25,5 @@ export function statusOf(item: Flat | Hypothesis, state: EngineState) {
  if(observations.length||state.hypotheses.some(h=>h.flatId===flatId&&(state.posterior[h.id]??0)>0))return visualStatus(`${flatId} · suspected`,'amber',!observations.length);
  return visualStatus(`${flatId} · not assessed`,'grey',true);
 }
+/** Status tint for row backgrounds (8% of the status colour); colour itself still comes from `colours`. */
+export function tint(hex:string,alpha=.08){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${alpha})`;}
