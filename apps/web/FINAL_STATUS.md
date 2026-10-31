@@ -11,7 +11,7 @@ Branch: b/app. C owns all main merges and production retests. No packages, API r
 | B-AUDIT | Done | Historical B-001 and hydration reports are already fixed. Current 302/602 inspection eligibility has regression coverage. No other B-owned handoff bug remains unidentified. |
 | B-T21 | Implemented | Inspection links now consume A's eligible inspect targets; forecast/seasonal/memory sections present. |
 | B-T22 | Implemented | Rain graph, report markers, attribution, Memory drawer and Slab tooltip. |
-| B-T23 | In progress | Signed-check frame works; explicit /c/demo launcher is next. |
+| B-T23 | Done on b/app | Signed-check frame plus explicit /c/demo launcher; demo completion closes without adding simulated evidence to the current case. |
 | B-T24 | Implemented | IN/UK case restore, terminology, responsibility links and timestamp trail. |
 | B-T25 | Implemented | Complete observation timeline, messages, photos, provenance and human-corrected markers. |
 | B-T26 | Implemented | 35% ghost comparison and edge contrast; no moisture inference. |

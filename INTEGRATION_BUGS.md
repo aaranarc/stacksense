@@ -177,3 +177,6 @@ The owner dashboard now fetches /api/link/updates with same-origin credentials a
 
 ## B final run — B-AUDIT
 Reviewed the full chronological report and A handoff after merging main. B-001 and the prior CrossSection title hydration defect are already fixed. B-002/B-003/B-STATUS/B-REFRESH are pushed on b/app for C. A's deployed inspect targets now enable the existing 302/602 UI buttons; a regression validates the current generated engine fixture. No packages/API/judge/root-config change was made by B. Remaining app verification and /c/demo preview/polish work are tracked in apps/web/FINAL_STATUS.md.
+
+## B final run — B-T23 explicit demo phone preview
+Added Preview demo phone beside the safe neighbour-check controls. It opens /c/demo in the phone frame with an explicit Cached/Demo notice and closes on completion. Demo answers do not alter the current case; signed answers still update it through the real API/frame/refresh paths. Both launch and non-application of demo evidence have regression coverage.
