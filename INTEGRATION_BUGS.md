@@ -165,3 +165,6 @@ Final remaining integration list: B-002 print decode; B-003 hero media resolver;
 
 ## B final run — B-002 fixed on b/app
 The print-route boundary now safely decodes its case ID exactly once before storage lookup. The original storage key and export URL encoding remain intact. Regression coverage renders the actual encoded-colon route with a validated stored Job Sheet and confirms populated content plus enabled Print / Save PDF; malformed and double-encoded segments are handled without guessing. This is a branch fix pending C's main merge and production retest.
+
+## B final run — B-003 fixed on b/app
+The media resolver now binds all approved hero IDs, meter references and scenario preview IDs to public copies of A's clean cached assets. Hero ID bindings remain unchanged. Tests compare served hero bytes with the approved originals and verify own-photo-reference versus Day-14 illustration labels. Scenario evidence/timing remains labelled simulated. No judge or engine file was edited. C should retest hero thumbnails and the photo drawer after merging.
