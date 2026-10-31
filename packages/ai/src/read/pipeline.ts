@@ -7,6 +7,7 @@ import { assignIncidents } from "./incidents";
 import { hazardsIn } from "./hazards";
 import { cacheKey, createCache, type ReadCache } from "./cache";
 import { preparePhoto } from "./photos";
+import { createPhotoReader } from "./photoCache";
 let defaultCache:ReadCache|undefined;
 const damage=/water|damp|leak|stain|crack|mould|mold|peel|meter|repair|dry|paani|pani|सीलन|डाग|ओल|पाणी|छत|गील|नमी/i;
 function fallbackObservation(m:ChatMessage,flatId:string|null):Observation {
@@ -23,9 +24,11 @@ export function createReadService(opts:{adapter?:LlmAdapter;cache?:ReadCache;pre
     const messages=pseudonymise(request.messages).messages;
     const cleanRequest={...request,messages};
     const cache=opts.cache ?? (defaultCache ??= createCache({supabaseUrl:process.env.SUPABASE_URL,serviceRoleKey:process.env.SUPABASE_SERVICE_ROLE_KEY}));
-    const key=await cacheKey(cleanRequest), cached=await cache.get(key);
-    if(cached) return {...cached,mode:"cached"};
-    const senderMap=resolveSenders(messages),adapter=opts.adapter ?? serverAdapter();
+    const adapter=opts.adapter ?? serverAdapter();
+    const key=await cacheKey(cleanRequest), cached=adapter.configured?await cache.get(key):null;
+    if(cached?.mode==="live") return {...cached,mode:"cached"};
+    const senderMap=resolveSenders(messages);
+    const readPhoto=createPhotoReader({adapter,cache});
     const result=await adapter.readChat({buildingSummary:request.buildingId,messagesJson:JSON.stringify(messages)});
     const warnings=[...result.warnings]; let fallback=result.source==="fallback";
     let observations:Observation[]=[];
@@ -40,7 +43,7 @@ export function createReadService(opts:{adapter?:LlmAdapter;cache?:ReadCache;pre
     const photoLabels:PhotoLabel[]=[];
     for(const photo of request.photos) {
       const clean=await (opts.preparePhoto ?? preparePhoto)(photo.dataUrl);
-      const read=await adapter.readPhoto({checkType:"inspect",flatId:observations.find(o=>o.photoIds.includes(photo.id))?.flatId ?? "unknown",instruction:"Label visible evidence only",images:[clean]});
+      const read=await readPhoto({checkType:"inspect",flatId:observations.find(o=>o.photoIds.includes(photo.id))?.flatId ?? "unknown",instruction:"Label visible evidence only",images:[clean]});
       if(!read.data) fallback=true; warnings.push(...read.warnings);
       photoLabels.push({photoId:photo.id,surface:"unclear",zone:"unclear",quality:"ok",boxes:[],meterDigits:null,humanCorrected:false,...read.data});
     }

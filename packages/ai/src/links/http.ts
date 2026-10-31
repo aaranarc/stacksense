@@ -2,9 +2,10 @@ import {randomUUID,randomBytes,timingSafeEqual} from "node:crypto";
 import {z} from "zod";
 import {EngineState,LinkRequest,LinkResult,ReadResult,type Observation,type PhotoLabel} from "@stacksense/contracts";
 import {jsonBody,jsonResponse,rateLimiter} from "../http/common";
-import {serverAdapter} from "../llm/server";
 import type {LlmAdapter} from "../llm/adapter";
 import {preparePhoto} from "../read/photos";
+import {createPhotoReader} from "../read/photoCache";
+import {createCache} from "../read/cache";
 import {createTokenCodec} from "./token";
 import {supabaseRepository,type LinkRepository,type LinkRow,type PhotoRow} from "./repository";
 const Input=LinkRequest.extend({state:EngineState.optional()});
@@ -12,6 +13,7 @@ const SafetyAnswers=z.object({water_near_electrics:z.boolean(),sagging_ceiling:z
 const zoneFor=(kind:string):PhotoLabel["zone"]=>kind==="meter_check"?"meter":kind==="duct_photo"?"duct_wall":kind==="trap_grout_photo"?"trap_grout":kind==="ceiling_photo"?"ceiling":"unclear";
 export function createLinkHandlers(opts:{repository:LinkRepository;secret:string;adapter?:LlmAdapter;now?:()=>number;origin?:string}) {
  const now=opts.now??Date.now,codec=createTokenCodec(opts.secret,now),allowed=rateLimiter(),repo=opts.repository;
+ const readPhoto=createPhotoReader(opts.adapter?{adapter:opts.adapter,cache:createCache({bundled:{}})}:{});
  const checkRate=(r:Request)=>allowed(r.headers.get("x-forwarded-for")??"unknown");
  async function resolve(token:string){const claims=codec.verify(token),row=await repo.getLink(codec.hash(token));if(!row||row.used_at||Date.parse(row.expires_at)<=now()||row.case_id!==claims.caseId||row.check_id!==claims.checkId||row.flat_id!==claims.flatId||row.lang!==claims.lang)throw new Error("Invalid or used token");return row;}
  return {
@@ -57,10 +59,10 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
     if(files.some(f=>!(f instanceof File)||f.size>4*1024*1024||!['image/jpeg','image/png','image/webp'].includes(f.type)))return jsonResponse({error:"Valid photos up to 4 MB required"},400);
     const minutes=Number(form.get("minutes")??10);if(row.check_type==="meter_check"&&(!Number.isFinite(minutes)||minutes<=0||minutes>1440))return jsonResponse({error:"Invalid meter interval"},400);
     claimedAt=new Date(now()).toISOString();if(!await repo.claim(row.token_hash,claimedAt))return jsonResponse({error:"Link already used"},410);
-    const labels:PhotoLabel[]=[],warnings:string[]=[];let fallback=false;
+    const labels:PhotoLabel[]=[],warnings:string[]=[];let fallback=false,allCached=true;
     for(const file of files as File[]){
       const cleaned=await preparePhoto(`data:${file.type};base64,${Buffer.from(await file.arrayBuffer()).toString("base64")}`),photoId=randomUUID(),path=`${Buffer.from(row.case_id).toString("base64url")}/${photoId}.jpg`;
-      const read=await(opts.adapter??serverAdapter()).readPhoto({checkType:row.check_type,flatId:row.flat_id,instruction:caseState.nextChecks.find(c=>c.id===row!.check_id)?.instructions[row.lang]??"only if safe",images:[cleaned]});fallback ||= !read.data;warnings.push(...read.warnings);
+      const read=await readPhoto({checkType:row.check_type,flatId:row.flat_id,instruction:caseState.nextChecks.find(c=>c.id===row!.check_id)?.instructions[row.lang]??"only if safe",images:[cleaned]});fallback ||= !read.data;allCached &&= read.cached;warnings.push(...read.warnings);
       const label:PhotoLabel={photoId,surface:"unclear",zone:zoneFor(row.check_type),quality:"ok",boxes:[],meterDigits:null,humanCorrected:false,...read.data};labels.push(label);
       const photo:PhotoRow={photo_id:photoId,case_id:row.case_id,flat_id:row.flat_id,check_id:row.check_id,zone:label.zone,path};saved.push(path);await repo.savePhoto(photo,Buffer.from(cleaned.split(",")[1]!,"base64"));
     }
@@ -70,7 +72,8 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
       if(!meter){labels.forEach(p=>p.surface="unclear");warnings.push("Meter unreadable: retake both photos; no number was guessed");}
     }
     const observation:Observation={id:randomUUID(),flatId:row.flat_id,eventKey:`${row.case_id}:${row.check_id}:${claimedAt}`,at:claimedAt,kind:meter?"meter_reading":"check_result",zone:zoneFor(row.check_type),surface:row.check_type==="meter_check"&&!meter?"unclear":labels[0]!.surface,room:null,hazards:[],hazardQuestionsAnswered:true,checkId:row.check_id,meter,moisture:null,finding:null,photoIds:labels.map(p=>p.photoId),sourceMessageIds:[],provenance:"observed",rawText:row.check_type==="meter_check"?(meter?"Meter readings from two resident photos":"Meter unreadable; retake requested"):"Resident check photo received"};
-    await repo.saveObservation(row.case_id,observation);return jsonResponse(ReadResult.parse({observations:[observation],photoLabels:labels,senderMap:{},warnings,mode:fallback?"fallback":"live"}));
+    if(fallback)warnings.push("Labelled fallback: photo labels unavailable; no meter digits were guessed");
+    await repo.saveObservation(row.case_id,observation);return jsonResponse(ReadResult.parse({observations:[observation],photoLabels:labels,senderMap:{},warnings,mode:fallback?"fallback":allCached?"cached":"live"}));
    }catch{
     if(row&&claimedAt){const cleanup=await Promise.allSettled(saved.map(p=>repo.removePhoto(p)));if(cleanup.every(r=>r.status==="fulfilled"))await repo.release(row.token_hash,claimedAt).catch(()=>{});}
     return jsonResponse({error:row?"Upload failed; retake or request a new link":"Invalid, expired or used link"},row?(claimedAt?503:400):410);

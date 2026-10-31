@@ -1,1 +1,206 @@
-{}
+{
+  "03d6c8f3ea2d4c639b6675a762f4a1178b2cb4aa88ef296dfa02a93d1f570381": {
+    "observations": [
+      {
+        "id": "obs-msg-2",
+        "flatId": "402",
+        "eventKey": "402:ceiling:2026-10-30T15:31:00.000Z",
+        "at": "2026-10-30T15:31:00.000Z",
+        "kind": "complaint",
+        "zone": "ceiling",
+        "surface": "damp_stain",
+        "room": "bathroom",
+        "hazards": [],
+        "hazardQuestionsAnswered": false,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [
+          "IMG-20261030-WA0402.jpg"
+        ],
+        "sourceMessageIds": [
+          "msg-2"
+        ],
+        "provenance": "reported",
+        "rawText": "402 here, bathroom ceiling stain near duct corner. IMG-[PHONE]WA0402.jpg (file attached)"
+      },
+      {
+        "id": "obs-msg-3",
+        "flatId": "202",
+        "eventKey": "202:window_perimeter:2026-10-30T15:32:00.000Z",
+        "at": "2026-10-30T15:32:00.000Z",
+        "kind": "complaint",
+        "zone": "window_perimeter",
+        "surface": "damp_stain",
+        "room": null,
+        "hazards": [],
+        "hazardQuestionsAnswered": false,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [
+          "IMG-20261030-WA0202.jpg"
+        ],
+        "sourceMessageIds": [
+          "msg-3"
+        ],
+        "provenance": "reported",
+        "rawText": "flat 202, wall stain near west window after rain. IMG-[PHONE]WA0202.jpg (file attached)"
+      },
+      {
+        "id": "obs-msg-4",
+        "flatId": "502",
+        "eventKey": "502:floor:2026-10-30T15:33:00.000Z",
+        "at": "2026-10-30T15:33:00.000Z",
+        "kind": "check_result",
+        "zone": "floor",
+        "surface": "dry",
+        "room": null,
+        "hazards": [],
+        "hazardQuestionsAnswered": false,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [],
+        "sourceMessageIds": [
+          "msg-4"
+        ],
+        "provenance": "reported",
+        "rawText": "502 here, hamara floor dry hai"
+      },
+      {
+        "id": "obs-msg-5",
+        "flatId": "202",
+        "eventKey": "202:window_perimeter:2026-10-30T15:32:00.000Z",
+        "at": "2026-10-30T15:34:00.000Z",
+        "kind": "complaint",
+        "zone": "window_perimeter",
+        "surface": "damp_stain",
+        "room": null,
+        "hazards": [],
+        "hazardQuestionsAnswered": false,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [],
+        "sourceMessageIds": [
+          "msg-5"
+        ],
+        "provenance": "reported",
+        "rawText": "मी 202, खिडकीजवळ भिंतीवर डाग आहे"
+      },
+      {
+        "id": "obs-msg-6",
+        "flatId": "402",
+        "eventKey": "402:ceiling:2026-10-30T15:31:00.000Z",
+        "at": "2026-10-30T15:35:00.000Z",
+        "kind": "complaint",
+        "zone": "ceiling",
+        "surface": "damp_stain",
+        "room": "bathroom",
+        "hazards": [],
+        "hazardQuestionsAnswered": false,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [
+          "IMG-20261030-WA0402.jpg"
+        ],
+        "sourceMessageIds": [
+          "msg-6"
+        ],
+        "provenance": "reported",
+        "rawText": "Forwarded photo, bathroom ceiling stain. IMG-[PHONE]WA0402.jpg (file attached)"
+      }
+    ],
+    "photoLabels": [],
+    "senderMap": {
+      "S01": "402",
+      "S02": "202",
+      "S03": "502"
+    },
+    "warnings": [],
+    "mode": "live"
+  },
+  "79e56e0af80913b1a0f4d711a506063c25de25bd32248355aed53c6eeaf43fe0": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "duct-302",
+        "surface": "dry",
+        "zone": "duct_wall",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live"
+  },
+  "70f75c9cc213508797ab79cd01648c0a75c9abbd9ce8dc67667c9d383099a875": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "duct_wall",
+        "boxes": [
+          {
+            "x": 0.39,
+            "y": 0.17,
+            "w": 0.25,
+            "h": 0.1,
+            "label": "pipe bracket"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "2e44a64037de46353c900b91935b05d723e9db53f6ff9abc4d20e3ca98fd75da": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "duct_wall",
+        "boxes": [],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "feab79881be93afbfe864159678246546e6200418d62d1ba2c1ca2101ae383cf": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "duct_wall",
+        "boxes": [],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  }
+}
