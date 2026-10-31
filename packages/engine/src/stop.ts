@@ -12,7 +12,8 @@ export function stopRule(state: EngineState): EngineState["stop"] {
   }
   const best = Math.max(0, ...state.nextChecks.filter(c => c.excluded === null).map(c => c.score));
   if (best < .05) {
-    const target = top.flatId ?? top.stackId ?? state.caseId;
+    // caseId is "<building>-<uuid>:<victim flat>"; show only the flat label, never the internal id.
+    const target = top.flatId ?? top.stackId ?? state.caseId.split(":").pop();
     return { stopped: true, reason: `Remote evidence can't decide — inspect ${target}` };
   }
   return { stopped: false, reason: null };

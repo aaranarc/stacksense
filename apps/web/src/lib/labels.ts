@@ -1,2 +1,3 @@
 export const labels={IN:{group:'society',manager:'secretary',trap:'nahani trap',languages:['en','hi','mr']},UK:{group:'building/landlord',manager:'managing agent',trap:'floor gully/shower trap',languages:['en']}} as const;
 export function regionalText(text:string,region:'IN'|'UK'){return region==='IN'?text:text.replace(/\bsociety\b/gi,'building/landlord').replace(/\bsecretary\b/gi,'managing agent').replace(/nahani trap/gi,'floor gully/shower trap');}
+export function flatLabel(id:string,region:'IN'|'UK'){return region==='UK'?`Flat ${id}`:id;}

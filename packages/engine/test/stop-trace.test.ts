@@ -20,6 +20,9 @@ describe("A-T10 stop and trace", () => {
     expect(stopRule({ ...low, safety: { status: "incomplete", reasons: [], actions: [] } }).stopped).toBe(false);
     expect(stopRule({ ...low, safety: { status: "emergency", reasons: [], actions: [] } })).toEqual({ stopped: true, reason: "emergency" });
     expect(stopRule(createCase(blockA)).stopped).toBe(false);
+    const roofKey = Object.keys(low.posterior).find(k => k.endsWith(":roof_terrace"))!;
+    const roof = { ...low, caseId: "sim-23-96446053-82bf:401", posterior: Object.fromEntries(Object.keys(low.posterior).map(k => [k, k === roofKey ? .6 : .4 / (Object.keys(low.posterior).length - 1)])) };
+    expect(stopRule(roof)).toEqual({ stopped: true, reason: "Remote evidence can't decide — inspect 401" });
   });
   it("keeps the 80% source threshold invariant when mass is localized to a component", () => {
     const state=applyObservations(createCase(blockA),[observation()]);
