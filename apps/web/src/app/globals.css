@@ -388,3 +388,19 @@ summary { padding:12px 0; cursor:pointer; font-weight:600; } details { border-bo
 .detail-crops { display:flex; flex-wrap:wrap; gap:16px; margin:24px 0; } .detail-crops figure { margin:0; border:1px solid var(--color-border); padding:8px; } figcaption { font-size:11px; }
 .drawer form { display:grid; gap:16px; margin:24px 0; } .drawer form label { display:flex; flex-direction:column; gap:8px; } .drawer section { margin:20px 0; } .drawer ul { list-style:disc; padding-left:24px; }
 .demo-note { position:fixed; bottom:16px; right:16px; z-index:70; max-width:360px; }
+/* Drawers: sticky header, soft backdrop; the print-page heading is hidden inside the Job Sheet drawer. */
+.drawer-backdrop { backdrop-filter:blur(2px); background:rgba(16,24,40,.28); }
+.drawer.panel { width:min(100%,640px); border-radius:20px 0 0 20px; padding:0 28px 28px; box-shadow:-12px 0 40px rgba(16,24,40,.16); border:0; }
+.drawer .section-heading { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; align-items:center; gap:12px; margin:0 -28px 16px; padding:18px 28px; background:rgba(255,255,255,.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--color-border); }
+.drawer .section-heading h2 { margin:0; font-size:20px; font-weight:650; letter-spacing:-.015em; }
+.drawer h3 { font-size:13px; font-weight:650; color:#344054; margin:0 0 6px; }
+.drawer .job-sheet > h2 { display:none; }
+.drawer .job-sheet { font-size:13.5px; }
+.drawer .job-sheet section { margin:0; padding:12px 0; border-bottom:1px solid #F2F4F7; }
+.drawer .job-sheet ul { margin:0; }
+.job-trades { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin:8px 0; }
+.job-trades > section, .job-trades .dont-send { border:1px solid var(--color-border); border-radius:12px; padding:12px 14px !important; }
+.job-trades > section { background:#F6FEF9; border-color:#ABEFC6; }
+.drawer .chip { margin-bottom:6px; }
+.dont-send > section, .job-trades > section { border-bottom:0 !important; }
+.dont-send > section { padding:0 !important; }
