@@ -162,3 +162,6 @@ Additional checks: **B-003 remains OPEN**: four hero photo buttons show Preview 
 Final remaining integration list: B-002 print decode; B-003 hero media resolver; B owner-dashboard refresh wiring. Full final evaluation/AI labels, real phone footage, video/submission and final release are separate B/C/human items in docs/HANDOFF_A.md. This documentation-only result commit changes no deployed application behavior.
 
 **Authority transferred:** C is now the sole main merger and may fix packages/** and apps/web/src/app/api/** bugs. A performs no further merges after this handoff. Root AGENTS.md records the user override. No force-push or history rewrite was used.
+
+## B final run — B-002 fixed on b/app
+The print-route boundary now safely decodes its case ID exactly once before storage lookup. The original storage key and export URL encoding remain intact. Regression coverage renders the actual encoded-colon route with a validated stored Job Sheet and confirms populated content plus enabled Print / Save PDF; malformed and double-encoded segments are handled without guessing. This is a branch fix pending C's main merge and production retest.
