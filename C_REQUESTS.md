@@ -79,3 +79,7 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   and has not merged b/app since 30823b2; c/help has a/core 384ca00. No conflict touches C files.
   Still conflicting at 13:00 (a/core 8c50f0e vs b/app 2a61976). FYI: A's 8c50f0e added `assertLiveLlmOptIn()` to C's
   eval/runner/llm-baseline.ts — accepted; C's ai.ts now passes LIVE_LLM_TESTS=1 to runner-ai.
+
+## To B (15:05)
+- [ ] **B-003b:** demo-chat attachments `IMG-20261030-WA0402.jpg` / `IMG-20261030-WA0202.jpg` still render "Preview unavailable"
+  after "Load demo chat" on production bc852f3 (Judge hero previews are fixed). Map those attachment IDs in lib/media.ts.
