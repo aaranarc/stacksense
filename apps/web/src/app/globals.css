@@ -389,7 +389,8 @@ summary { padding:12px 0; cursor:pointer; font-weight:600; } details { border-bo
   .page, .page-grid, .boundary { gap:16px; }
   .next-link { justify-content:stretch; } .next-link .button-link { width:100%; }
   .topbar { background:var(--color-muted); box-shadow:0 1px 0 var(--color-border); margin:0 -12px; padding:10px 12px; }
-  .demo-pill, .demo-pill.idle { min-height:44px; } .demo-pill button, .demo-pill a { min-height:44px; display:inline-flex; align-items:center; } .demo-pill { font-size:12.5px; }
+  .demo-pill, .demo-pill.idle { min-height:44px; } .demo-pill button, .demo-pill a { min-height:44px; display:inline-flex; align-items:center; }
+  .topbar-left:has(.demo-pill:not(.idle)) .topbar-brand strong { display:none; } .demo-pill:not(.idle) { max-width:calc(100vw - 72px); } .demo-pill button { white-space:nowrap; } .demo-pill { font-size:12.5px; }
   .topbar { gap:8px; } .topbar-building { display:none; } .topbar-right { gap:6px; flex-wrap:nowrap; }
   .card { padding:16px; } .hero-card { padding:0; }
   .hero-card > .card-head { inset:10px 10px auto 10px; flex-wrap:wrap; }
