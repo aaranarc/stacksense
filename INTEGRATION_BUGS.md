@@ -28,7 +28,7 @@ Preview verification for `d2a3787`: GitHub Vercel status success; https://stacks
 
 Owner: A. Next Leak renders engine `prediction.sameStack` entries, but the current check catalogue targets the victim/above/below flats only. `/api/link` requires a matching eligible `nextChecks` entry. This leaves new same-stack targets such as 602 without a creatable inspection link. B disables that unavailable action and labels it; B does not invent checks or bypass endpoint validation. Please expose an eligible inspection check or a supported prediction-link request.
 
-## A-001 — OPEN — deployed demo token disabled
+## A-001 — preview configuration resolved; production retest pending
 
 Owner: **A (Vercel configuration)**. Priority: P1.
 
@@ -46,4 +46,7 @@ Owner: A for an owner-authorised read/subscription API; B for consuming it once 
 
 ## B handoff for CP2
 
-B-001 and B-T21 through B-T27 are implemented on b/app. The mock engine/API flags are off locally; cached illustrations and scenarios remain explicitly labelled Demo data. C-owned judge files, A-owned packages/API routes and build tooling are unchanged. B's final web validation has 67 passing tests; the production build and full-workspace checks are recorded in the chat. Remote browser control could not initialise, so a visual preview click-through remains a human check. A-001, A-002 and A-003 require A-owned configuration/API work.
+B-001 and B-T21 through B-T27 are implemented on b/app. The mock engine/API flags are off locally; cached illustrations and scenarios remain explicitly labelled Demo data. C-owned judge files, A-owned packages/API routes and build tooling are unchanged. B's final web validation has 67 passing tests; the production build and full-workspace checks are recorded in the chat. Remote browser control could not initialise, so a visual preview click-through remains a human check. A-002 and A-003 require A-owned API work. A-001 now needs a production retest; preview configuration is resolved as recorded below.
+### Final branch-preview verification — 31 Oct, 12:56 IST
+
+App commit `ef8c12a` has Vercel status success. The branch preview returns 200, serves the exact bundled demo text, and its `/api/read` returns cached with five observations and zero warnings. Its deployed client includes the new panel states and preparation warnings, with no old blocking gate. The explicit demo-token helper now compiles to a direct `token === "demo"` check: preview demo mode is enabled, resolving the configuration part of A-001 on this branch. Production and visual mobile interaction are not reverified here. Browser control still cannot initialise; the local real-adapter Load demo click regression and mobile safety tests pass. Full-workspace typecheck and all 199 tests pass; web production build passes. Both local engine/API mock flags are false.
