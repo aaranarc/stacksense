@@ -355,7 +355,7 @@ summary { padding:12px 0; cursor:pointer; font-weight:600; } details { border-bo
   .side-col { grid-template-columns:minmax(0,1fr); gap:16px; }
   #read, #safety, #check, #opinion, #jobsheet, #predict, #repair, .judge-slot { grid-column:1 / -1; }
   .main { padding:0 12px 140px; }
-  .topbar { gap:8px; } .topbar-building { display:none; } .topbar-right { gap:6px; flex-wrap:nowrap; } .topbar-brand strong { display:none; }
+  .topbar { gap:8px; } .topbar-building { display:none; } .topbar-right { gap:6px; flex-wrap:nowrap; }
   .card { padding:16px; } .hero-card { padding:0; }
   .hero-card > .card-head { inset:10px 10px auto 10px; flex-wrap:wrap; }
   .hero-card .card-titles p { display:none; }
@@ -368,7 +368,8 @@ summary { padding:12px 0; cursor:pointer; font-weight:600; } details { border-bo
   .outline-btn { min-height:44px; }
   .btn-label { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
   .ghost-btn { min-width:44px; justify-content:center; }
-  .topbar-right { width:auto; } .topbar { flex-wrap:nowrap; } .demo-chip { padding:7px 10px; }
+  .topbar { flex-wrap:wrap; row-gap:10px; } .topbar-left { flex-wrap:nowrap; } .topbar-right { width:100%; justify-content:space-between; }
+  .segmented button, .demo-chip { white-space:nowrap; } .demo-chip { padding:7px 10px; min-height:44px; }
   .bubble-photos button { min-height:44px; }
   .card:hover { translate:none; }
 }
