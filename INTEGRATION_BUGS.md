@@ -49,10 +49,16 @@ The user set a new GEMINI_API_KEY locally and in Vercel. No key value was printe
 | Environment | Verification | Result |
 | --- | --- | --- |
 | Local production server | One POST /api/read at 12:06:43 IST with a new UUID message ID and timestamp, one short synthetic ceiling-stain report, no photos | HTTP 200; mode **live**; one validated observation; no warnings; 7,134 ms |
-| Production after next main deployment | **PENDING** — use a different fresh UUID/timestamp payload after the next successful deployment | Must return mode **live**; a cached response does not prove the rotated key works |
+| Production after refreshing current main | One fresh UUID/timestamp chat POST after deployment DZbtPyrULzRhj8oa6pz1xJe8Z4gp became Ready and acquired the production domain | **PASS** at 12:20:05 IST: HTTP 200; mode **live**; one observation; no warnings; 2,826 ms |
 
-The local server was restarted with the updated ignored .env.local and stopped after this check. Local and production use a shared optional Supabase cache, so do not reuse the local payload verbatim for the production key test. The next CP2 checks must include exactly one fresh production /api/read request on https://stacksense-omega.vercel.app after the new main deployment is ready; record HTTP status, mode, observation count and warnings here without recording any key. This is additional to the five CP1/CP2 integration checks above. Do not initiate CP2 until the user says **CP2 merge**.
+The local server was restarted with the updated ignored .env.local and stopped after this check. Local and production use a shared optional Supabase cache, so do not reuse the local payload verbatim for the production key test. The production key check is now complete, independently of CP2. The standard five CP1/CP2 checks still apply at the next requested checkpoint. Do not initiate CP2 until the user says **CP2 merge**.
 
 ### Real-photo replacement audit
 
 At this check, eval/data/photos/ contains only duct_302_raw.jpg. Re-encoding it again at JPEG quality 85 and maximum edge 1600 produced the existing clean 1200×1600 fixture byte-for-byte. EXIF/GPS, XMP, IPTC and ICC are absent. The real duct and happy-scenario slots already use this photograph, and their cache bytes still match. No additional matching real team shot exists for the remaining illustration slots, so no illustration was relabelled as a photograph and no unchanged input was needlessly re-cached. Raw files remain ignored and untracked. When matching shots are supplied, replace only those slots, update assetSource to team-photo, strip metadata and warm the changed canonical read/upload contexts.
+
+### Production redeploy and rotated-key confirmation
+
+Vercel showed that the previous current-production deployment (3Lob492uK, main 9de3697, built before the key update) predated the secret change. An initial fresh request on that deployment returned live, but was not used as proof of the rotated key. At the user's request, current main was explicitly redeployed with the latest Project Settings and build-cache reuse disabled; no branch merges or key disclosure were needed.
+
+Verified deployment: https://vercel.com/byte-me21/stacksense/DZbtPyrULzRhj8oa6pz1xJe8Z4gp . Vercel reported Ready, source main 9de3697, and assigned https://stacksense-omega.vercel.app . Only then was a different, unique UUID/timestamp short synthetic chat sent once to production /api/read. Result: HTTP 200, mode live, one observation, no warnings, 2,826 ms, at 12:20:05 IST on 31 October 2026. This was not a cached hero or a replay of the local/pre-deploy request. The secret value was neither revealed nor written to this report.
