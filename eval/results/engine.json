@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T04:12:35.731Z",
+  "generatedAt": "2026-10-31T04:26:37.517Z",
   "label": "team-built test, not field accuracy",
   "sets": {
     "simBuildings": 60,
@@ -20,7 +20,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.509
+      "msPerCase": 0.253
     },
     {
       "method": "Blame the flat above",
@@ -48,7 +48,7 @@
       "harmfulFlips": 0,
       "checksToDecision": 0,
       "hazardPass": 0,
-      "msPerCase": 0.003
+      "msPerCase": 0.002
     },
     {
       "method": "Fixed checklist",
@@ -62,7 +62,7 @@
       "harmfulFlips": 5,
       "checksToDecision": 1.153,
       "hazardPass": 1,
-      "msPerCase": 0.44
+      "msPerCase": 0.319
     },
     {
       "method": "StackSense without Second Opinion",
@@ -76,11 +76,42 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.182
+      "msPerCase": 0.146
     }
   ],
-  "robustness": [],
+  "robustness": [
+    {
+      "priorShiftPct": -40,
+      "top1": 0.375
+    },
+    {
+      "priorShiftPct": -20,
+      "top1": 0.625
+    },
+    {
+      "priorShiftPct": 0,
+      "top1": 0.825
+    },
+    {
+      "priorShiftPct": 20,
+      "top1": 0.9
+    },
+    {
+      "priorShiftPct": 40,
+      "top1": 0.95
+    }
+  ],
   "ai": null,
+  "robustnessArchetype": [
+    {
+      "trueFamilyPriorAt": "min",
+      "top1": 0.375
+    },
+    {
+      "trueFamilyPriorAt": "max",
+      "top1": 0.963
+    }
+  ],
   "rowsBySet": {
     "hard": [
       {
@@ -95,7 +126,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.903
+        "msPerCase": 0.341
       },
       {
         "method": "Blame the flat above",
@@ -123,7 +154,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": 0,
-        "msPerCase": 0.005
+        "msPerCase": 0.003
       },
       {
         "method": "Fixed checklist",
@@ -137,7 +168,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 1.12,
         "hazardPass": 1,
-        "msPerCase": 0.539
+        "msPerCase": 0.37
       },
       {
         "method": "StackSense without Second Opinion",
@@ -151,7 +182,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.269
+        "msPerCase": 0.221
       }
     ],
     "sim": [
@@ -167,7 +198,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.312
+        "msPerCase": 0.209
       },
       {
         "method": "Blame the flat above",
@@ -181,7 +212,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": null,
-        "msPerCase": 0.001
+        "msPerCase": 0
       },
       {
         "method": "Send a trade straight away",
@@ -195,7 +226,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": null,
-        "msPerCase": 0.001
+        "msPerCase": 0.002
       },
       {
         "method": "Fixed checklist",
@@ -209,7 +240,7 @@
         "harmfulFlips": 5,
         "checksToDecision": 1.167,
         "hazardPass": null,
-        "msPerCase": 0.39
+        "msPerCase": 0.293
       },
       {
         "method": "StackSense without Second Opinion",
@@ -223,7 +254,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.138
+        "msPerCase": 0.109
       }
     ]
   },

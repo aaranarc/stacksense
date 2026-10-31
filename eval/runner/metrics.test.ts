@@ -57,3 +57,19 @@ describe("runner", () => {
     expect(hz.every((x) => x.trade === "emergency")).toBe(true);
   });
 });
+
+describe("robustness prior shift", () => {
+  it("memory counts reproduce the shifted, re-normalised prior exactly", async () => {
+    const { shiftMemory } = await import("./run");
+    const { familyPriors, archetypes } = await import("../../packages/engine/src/priors/archetypes");
+    for (const shift of [-40, -20, 20, 40] as const) {
+      const p = familyPriors("MUMBAI_RCC_1990S", shiftMemory("MUMBAI_RCC_1990S", "shared_shaft", shift));
+      const modes = archetypes.MUMBAI_RCC_1990S;
+      const raw = { ...Object.fromEntries(Object.entries(modes).map(([f, r]) => [f, r.mode])), shared_shaft: modes.shared_shaft.mode * (1 + shift / 100) };
+      const total = Object.values(raw).reduce((a, b) => a + b, 0);
+      for (const [f, v] of Object.entries(raw)) expect(p[f as keyof typeof p]).toBeCloseTo(v / total, 9);
+    }
+    const max = familyPriors("GENERIC", shiftMemory("GENERIC", "condensation", "max"));
+    expect(max.condensation).toBeGreaterThan(familyPriors("GENERIC").condensation);
+  });
+});

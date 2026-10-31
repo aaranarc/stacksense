@@ -38,3 +38,8 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   → `Could not load the "sharp" module`. Likely fix: B adds `serverExternalPackages: ['sharp']` **and** `sharp` as an
   `apps/web` dependency (or A moves sharp behind a server-only dynamic import). Please agree between you before CP1.
   C therefore did **not** merge `b/app` into `c/help`.
+- [ ] **priorShift hook (C-T07, optional):** `createCase` has no `opts.priorShift`. C ran robustness exactly through the
+  public `memory` option instead (prior = (mode×10 + memory)/Σ, so any target prior is reachable with memory ≥ 0;
+  unit-tested in eval/runner/metrics.test.ts). An explicit `priorShift` would make this less indirect — not blocking.
+- [ ] **FYI robustness (C-T07):** top-1 after 3 checks 83% at mode priors → 38% when the true family's prior is cut 40%
+  (also at archetype min). Reported in RESULTS.md as a limitation.

@@ -9,9 +9,10 @@ import {
 } from "../../packages/contracts/src/index";
 import { createCase, applyObservations, applySecondOpinion, simulateBuilding } from "../../packages/engine/src/index";
 // Read-only use of A's archetype priors for the "send a trade straight away" baseline (most common family).
-import { familyPriors } from "../../packages/engine/src/priors/archetypes";
+import { archetypes, familyPriors, type Family } from "../../packages/engine/src/priors/archetypes";
 import { loadHardCases } from "../hard-cases/validate";
 import { aggregate, type Level, type Outcome, type Source, type Truth } from "./metrics";
+import { merge } from "./merge";
 
 export const LABEL = "team-built test, not field accuracy" as const;
 export const MAX_CHECKS = 5;
@@ -25,6 +26,7 @@ const FIXED_ORDER = ["ceiling_photo", "duct_photo", "meter_check", "trap_grout_p
 export type EvalCase = {
   id: string; set: "hard" | "sim"; building: Building; truth: Truth; victimFlatId: string | null;
   timeline: Observation[][]; rain?: RainSeries; photoLabels?: PhotoLabel[];
+  memory?: Partial<Record<Family, number>>; // robustness only: Dirichlet counts that shift the priors
   /** Answer to a requested check, or null when this case holds no answer for it. Stateful per instance. */
   answer(check: RankedCheck): Observation[] | null;
 };
@@ -90,7 +92,7 @@ function engineRun(c: EvalCase, choose: Chooser, review: boolean, trail: Trail):
   const t0 = performance.now();
   const ctx = { rain: c.rain, photoLabels: c.photoLabels };
   const reviewed = (s: EngineState) => (review ? applySecondOpinion(s, null) : s); // no live LLM in eval → labelled fallback
-  let s: EngineState = createCase(c.building, { now: c.timeline[0]![0]!.at });
+  let s: EngineState = createCase(c.building, { now: c.timeline[0]![0]!.at, memory: c.memory });
   for (const step of c.timeline) s = applyObservations(s, step, ctx);
   s = reviewed(s);
   const leaders = [leader(s)], collected = c.timeline.flat(), asked = new Set<string>();
@@ -139,13 +141,43 @@ export const METHODS: { name: string; run: (c: EvalCase, t: Trail) => Outcome }[
   { name: "Fixed checklist", run: (c, t) => engineRun(c, fixedChoice, true, t) },
   { name: "StackSense without Second Opinion", run: (c, t) => engineRun(c, voiChoice, false, t) },
 ];
+export type Shift = number | "min" | "max";
+/**
+ * Memory counts that make the engine's prior equal the target: the true family's prior × (1 + pct/100)
+ * (or set to the archetype min/max), others at mode, re-normalised. Engine prior = (mode×10 + memory)/Σ, so with
+ * m_f = K·q_f − 10·mode_f and K = max(10·mode_f / q_f) every m_f ≥ 0 and the prior is exactly q.
+ */
+export function shiftMemory(archetype: Building["archetype"], family: Family, shift: Shift): Record<Family, number> {
+  const ranges = archetypes[archetype];
+  const fams = Object.keys(ranges) as Family[];
+  const raw = Object.fromEntries(fams.map((f) => [f, f !== family ? ranges[f].mode
+    : shift === "min" ? ranges[f].min : shift === "max" ? ranges[f].max : ranges[f].mode * (1 + shift / 100)])) as Record<Family, number>;
+  const total = fams.reduce((a, f) => a + raw[f], 0);
+  const q = Object.fromEntries(fams.map((f) => [f, raw[f] / total])) as Record<Family, number>;
+  const K = Math.max(...fams.map((f) => (10 * ranges[f].mode) / q[f]));
+  return Object.fromEntries(fams.map((f) => [f, Math.max(0, K * q[f] - 10 * ranges[f].mode)])) as Record<Family, number>;
+}
+
+export const SHIFTS = [-40, -20, 0, 20, 40] as const;
+/** StackSense top-1 after 3 checks with shifted priors (scored cases only: not hazard, not inspect). */
+function robustnessRun(factories: (() => EvalCase)[], shift: Shift): number {
+  const outs = factories.map((make) => {
+    const c = make();
+    if (!c.truth.emergency && !c.truth.inspect) c.memory = shiftMemory(c.building.archetype, c.truth.family as Family, shift);
+    return METHODS[0]!.run(c, { unscripted: [], asked: [] });
+  });
+  return aggregate("StackSense", outs).top1[2]!;
+}
+
 export const PENDING = [{
   method: "Single LLM, same evidence",
   reason: "pending — singleLlmBaseline is not exported by @stacksense/ai yet (requested from A in C_REQUESTS.md)",
 }];
 
-export function evaluate(opts: { sims?: number; robustness?: { priorShiftPct: number; top1: number }[] } = {}) {
+export function evaluate(opts: { sims?: number } = {}) {
   const factories = [...hardCases(), ...simCases(opts.sims ?? 60)];
+  const robustness = SHIFTS.map((p) => ({ priorShiftPct: p, top1: robustnessRun(factories, p) }));
+  const robustnessArchetype = (["min", "max"] as const).map((at) => ({ trueFamilyPriorAt: at, top1: robustnessRun(factories, at) }));
   const outcomes: Record<string, Outcome[]> = {}, trails: Record<string, Record<string, Trail>> = {};
   for (const m of METHODS) {
     outcomes[m.name] = []; trails[m.name] = {};
@@ -159,7 +191,8 @@ export function evaluate(opts: { sims?: number; robustness?: { priorShiftPct: nu
   const results = {
     generatedAt: new Date().toISOString(), label: LABEL,
     sets: { simBuildings: opts.sims ?? 60, hardCases: factories.length - (opts.sims ?? 60), photos: 0, messages: 0 },
-    rows: rowsFor(), robustness: opts.robustness ?? [], ai: null,
+    rows: rowsFor(), robustness, ai: null,
+    robustnessArchetype,
     rowsBySet: { hard: rowsFor("hard"), sim: rowsFor("sim") },
     pending: PENDING,
   };
@@ -185,4 +218,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   console.log("pending:", PENDING.map((p) => `${p.method}: ${p.reason}`).join("; "));
   const failing = outcomes["StackSense"]!.filter((o) => o.truth.emergency && o.trade !== "emergency").map((o) => o.caseId);
   console.log(failing.length ? `HAZARD FAIL: ${failing.join(", ")}` : "hazard pass: all hazard cases ended in emergency");
+  console.log("robustness:", results.robustness.map((r) => `${r.priorShiftPct}%→${r.top1}`).join("  "), results.robustnessArchetype.map((r) => `${r.trueFamilyPriorAt}→${r.top1}`).join("  "));
+  merge();
+  console.log("wrote eval/results/engine.json, apps/web/public/eval/latest.json, docs/RESULTS.md");
 }
