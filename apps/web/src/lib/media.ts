@@ -6,6 +6,9 @@ const demoIds=new Set(['P402','P202','P302','P502']);
 const approved=new Map<string,PhotoMedia>();
 const entry=(asset:Asset):PhotoMedia=>({url:`/demo/photos/${asset.path.split('/').at(-1)}`,demo:true,illustration:asset.assetSource==='demo-illustration',label:asset.label});
 for(const [id,asset] of Object.entries(assets.hero))approved.set(id,entry(asset));
+// The canonical chat cache retains attachment filenames rather than Judge IDs.
+const chatAttachments={'IMG-20261030-WA0402.jpg':'hero-ceiling-402','IMG-20261030-WA0202.jpg':'hero-window-202'};
+for(const [attachment,heroId] of Object.entries(chatAttachments))approved.set(attachment,approved.get(heroId)!);
 for(const asset of assets.meters)approved.set(asset.id,entry(asset));
 for(const asset of Object.values(assets.scenarios))approved.set(asset.id,entry(asset));
 export function rememberPhoto(id:string,url:string){

@@ -233,3 +233,6 @@ sections chronologically, then main merged c/help (which contains b/app 422a3a2)
 | /c/demo at 390×844 | PASS — consent → 4× No → camera step enabled, Demo label, no overflow (full upload verified in merge 1) | — |
 | IN → UK → IN | PASS — UK Block 4 floors + gov.uk/Shelter links; IN restores Block A | — |
 | Colours | PASS — red = probable source, amber = victim/inspect, every colour has a text label | — |
+
+## B final run — B-003b fixed on b/app
+Mapped canonical demo-chat attachment IDs IMG-20261030-WA0402.jpg and IMG-20261030-WA0202.jpg to the same approved cached ceiling/window assets and labels as their hero preview IDs. Added a regression using A's actual bundled chat result: Load demo chat renders both thumbnail paths and each PhotoViewer image, with own-photo reference and simulated-case labels. No API, package, judge or root-config file changed. Pending C's merge and production retest.
