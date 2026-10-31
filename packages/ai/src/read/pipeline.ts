@@ -29,8 +29,9 @@ export function createReadService(opts:{adapter?:LlmAdapter;cache?:ReadCache;pre
     if(cached?.mode==="live") return {...cached,mode:"cached"};
     const senderMap=resolveSenders(messages);
     const readPhoto=createPhotoReader({adapter,cache});
-    const result=await adapter.readChat({buildingSummary:request.buildingId,messagesJson:JSON.stringify(messages)});
-    const warnings=[...result.warnings]; let fallback=result.source==="fallback";
+    const photoOnly=messages.length===0&&request.photos.length>0;
+    const result=photoOnly?{data:{observations:[]},source:"llm" as const,warnings:[]}:await adapter.readChat({buildingSummary:request.buildingId,messagesJson:JSON.stringify(messages)});
+    const warnings=[...result.warnings]; let fallback=result.source==="fallback",usedLive=!photoOnly&&result.source==="llm";
     let observations:Observation[]=[];
     if(result.data) for(const draft of result.data.observations) {
       const sources=messages.filter(m=>draft.sourceMessageIds.includes(m.id)); if(!sources.length) {warnings.push("Discarded observation with unknown source message");continue;}
@@ -44,12 +45,12 @@ export function createReadService(opts:{adapter?:LlmAdapter;cache?:ReadCache;pre
     for(const photo of request.photos) {
       const clean=await (opts.preparePhoto ?? preparePhoto)(photo.dataUrl);
       const read=await readPhoto({checkType:"inspect",flatId:observations.find(o=>o.photoIds.includes(photo.id))?.flatId ?? "unknown",instruction:"Label visible evidence only",images:[clean]});
-      if(!read.data) fallback=true; warnings.push(...read.warnings);
+      if(!read.data) fallback=true;usedLive ||= read.source==="llm"&&!read.cached;warnings.push(...read.warnings);
       photoLabels.push({photoId:photo.id,surface:"unclear",zone:"unclear",quality:"ok",boxes:[],meterDigits:null,humanCorrected:false,...read.data});
     }
     if(fallback) warnings.push("Labelled fallback: deterministic chat extraction; unavailable photo labels remain unclear");
-    const output=ReadResult.parse({observations:assignIncidents(observations),photoLabels,senderMap,warnings,mode:fallback?"fallback":"live"});
-    if(!fallback) await cache.set(key,output);
+    const output=ReadResult.parse({observations:assignIncidents(observations),photoLabels,senderMap,warnings,mode:fallback?"fallback":usedLive?"live":"cached"});
+    if(!fallback) await cache.set(key,{...output,mode:"live"});
     return output;
   };
 }

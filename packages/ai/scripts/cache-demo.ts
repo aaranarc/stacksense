@@ -12,22 +12,22 @@ import {createPhotoReader} from "../src/read/photoCache";
 import {preparePhoto} from "../src/read/photos";
 const root=fileURLToPath(new URL("../../../",import.meta.url));
 const file=(path:string)=>{const absolute=resolve(root,path);if(!absolute.startsWith(resolve(root,"fixtures-ai")+sep))throw Error("Demo assets must be inside fixtures-ai");return absolute;};
-const manifest=z.object({buildingId:z.string(),inputs:z.array(z.object({id:z.string(),kind:z.enum(["chat","photo"]),path:z.string(),checkId:z.string().optional(),flatId:z.string().optional()}))}).parse(JSON.parse(readFileSync(file("fixtures-ai/cache/demo-manifest.json"),"utf8")));
+const manifest=z.object({buildingId:z.string(),inputs:z.array(z.object({id:z.string(),kind:z.enum(["chat","photo"]),path:z.string(),checkId:z.string().optional(),flatId:z.string().optional(),assetSource:z.enum(["team-photo","demo-illustration"]).optional(),label:z.string().optional()}))}).parse(JSON.parse(readFileSync(file("fixtures-ai/cache/demo-manifest.json"),"utf8")));
 const live=process.argv.includes("--live"),allowMissing=process.argv.includes("--allow-missing");
 const bundlePath=file("fixtures-ai/cache/bundled.json"),bundle:Record<string,unknown>=JSON.parse(readFileSync(bundlePath,"utf8"));
 const adapter=serverAdapter();if(live&&!adapter.configured)throw Error("Configure the server provider before --live");
 const cache=createCache({bundled:bundle,...(live?{supabaseUrl:process.env.SUPABASE_URL,serviceRoleKey:process.env.SUPABASE_SERVICE_ROLE_KEY}:{})});
 const service=createReadService({adapter,cache}),readPhoto=createPhotoReader({adapter,cache});
-const status:{id:string;status:string;path:string;key?:string;uploadContexts?:number}[]=[];
+const status:{id:string;status:string;path:string;key?:string;uploadContexts?:number;assetSource?:string;label?:string}[]=[];
 for(const input of manifest.inputs){
  const path=file(input.path);if(!existsSync(path)){status.push({id:input.id,path:input.path,status:"missing"});continue;}
  const request:ReadRequest={buildingId:manifest.buildingId,messages:[],photos:[]};
  if(input.kind==="chat")request.messages=pseudonymise(parseWhatsAppExport(readFileSync(path,"utf8"))).messages;
  else{const ext=path.split(".").at(-1)?.toLowerCase(),mime=ext==="png"?"png":ext==="webp"?"webp":"jpeg";request.photos=[{id:input.id,dataUrl:`data:image/${mime};base64,${readFileSync(path).toString("base64")}`}];}
  const key=await cacheKey({...request,messages:pseudonymise(request.messages).messages});
- if(live){const result=ReadResult.parse(await service(request));if(result.mode==="fallback"){status.push({id:input.id,path:input.path,status:"provider-fallback-not-cached"});continue;}bundle[key]={...result,mode:"live"};}
+ if(live){const result=ReadResult.parse(await service(request));if(result.mode==="fallback"){status.push({id:input.id,path:input.path,status:"provider-fallback-not-cached"});continue;}bundle[key]={...result,warnings:[...new Set([...result.warnings,...(input.assetSource==="demo-illustration"?["DEMO illustration — simulated input, not field evidence"]:[])])],mode:"live"};await cache.set(key,ReadResult.parse(bundle[key]));}
  const valid=ReadResult.safeParse(bundle[key]);
- const row={id:input.id,path:input.path,key,status:valid.success&&valid.data.mode==="live"?"cached":"not-cached",uploadContexts:0};
+ const row={id:input.id,path:input.path,key,assetSource:input.assetSource,label:input.label,status:valid.success&&valid.data.mode==="live"?"cached":"not-cached",uploadContexts:0};
  if(input.kind==="photo"&&input.checkId&&input.flatId){
   const state=JSON.parse(readFileSync(resolve(root,"fixtures/hero/state-02.json"),"utf8")) as EngineState;
   const check=state.nextChecks.find(c=>c.id===input.checkId);if(!check)throw Error(`Unknown check for ${input.id}`);
@@ -35,7 +35,8 @@ for(const input of manifest.inputs){
   for(const lang of ["en","hi","mr"] as const){const fields={checkType:check.type,flatId:input.flatId,instruction:check.instructions[lang],images:[cleaned]};
    const result=live?await readPhoto(fields):null;
    const {images,...context}=fields;const photoKey=await cacheKey({buildingId:`photo:${JSON.stringify(context)}`,messages:[],photos:images.map((dataUrl,i)=>({id:`image-${i}`,dataUrl}))});
-   if(result?.data)bundle[photoKey]={observations:[],senderMap:{},warnings:result.warnings,mode:"live",photoLabels:[{...result.data,photoId:"cached-photo",quality:"ok",humanCorrected:false}]};
+   if(result?.data)bundle[photoKey]={observations:[],senderMap:{},warnings:[...new Set([...result.warnings,...(input.assetSource==="demo-illustration"?["DEMO illustration — simulated input, not field evidence"]:[])])],mode:"live",photoLabels:[{...result.data,photoId:"cached-photo",quality:"ok",humanCorrected:false}]};
+   if(live&&bundle[photoKey])await cache.set(photoKey,ReadResult.parse(bundle[photoKey]));
    const stored=ReadResult.safeParse(bundle[photoKey]);if(stored.success&&stored.data.mode==="live")row.uploadContexts++;
   }
  }

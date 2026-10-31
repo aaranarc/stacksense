@@ -1,20 +1,110 @@
 {
-  "label": "Demo cache inventory; missing assets remain missing, never replaced with generated evidence",
+  "label": "Demo cache inventory: real team photographs where supplied; explicitly labelled schematic illustrations otherwise. Not field evidence or evaluation data.",
   "buildingId": "block-a",
   "inputs": [
-    {"id":"hero-chat","kind":"chat","path":"fixtures-ai/chats/hero_blockA.txt"},
-    {"id":"scenario-happy","kind":"photo","path":"fixtures-ai/photos/scenarios/happy.jpg"},
-    {"id":"scenario-electrical_hazard","kind":"photo","path":"fixtures-ai/photos/scenarios/electrical_hazard.jpg"},
-    {"id":"scenario-locked_502","kind":"photo","path":"fixtures-ai/photos/scenarios/locked_502.jpg"},
-    {"id":"scenario-dark_photo","kind":"photo","path":"fixtures-ai/photos/scenarios/dark_photo.jpg"},
-    {"id":"scenario-beam_travel","kind":"photo","path":"fixtures-ai/photos/scenarios/beam_travel.jpg"},
-    {"id":"scenario-wrong_trade_rain","kind":"photo","path":"fixtures-ai/photos/scenarios/wrong_trade_rain.jpg"},
-    {"id":"scenario-honest_uncertainty","kind":"photo","path":"fixtures-ai/photos/scenarios/honest_uncertainty.jpg"},
-    {"id":"scenario-break_it","kind":"photo","path":"fixtures-ai/photos/scenarios/break_it.jpg"},
-    {"id":"duct-302","kind":"photo","path":"fixtures-ai/photos/demo/duct_302.jpg","checkId":"duct_photo@302","flatId":"302"},
-    {"id":"meter-start-502","kind":"photo","path":"fixtures-ai/photos/demo/meter_start_502.jpg","checkId":"meter_check@502","flatId":"502"},
-    {"id":"meter-end-502","kind":"photo","path":"fixtures-ai/photos/demo/meter_end_502.jpg","checkId":"meter_check@502","flatId":"502"},
-    {"id":"trap-502","kind":"photo","path":"fixtures-ai/photos/demo/trap_502.jpg","checkId":"trap_grout_photo@502","flatId":"502"},
-    {"id":"day14-402","kind":"photo","path":"fixtures-ai/photos/demo/day14_402.jpg"}
+    {
+      "id": "hero-chat",
+      "kind": "chat",
+      "path": "fixtures-ai/chats/hero_blockA.txt"
+    },
+    {
+      "id": "scenario-happy",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/demo/duct_302.jpg",
+      "assetSource": "team-photo",
+      "label": "Real team duct photo reused as a demo scenario input; not case ground truth"
+    },
+    {
+      "id": "scenario-electrical_hazard",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/electrical_hazard.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "scenario-locked_502",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/locked_502.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "scenario-dark_photo",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/dark_photo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "scenario-beam_travel",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/beam_travel.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "scenario-wrong_trade_rain",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/wrong_trade_rain.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "scenario-honest_uncertainty",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "scenario-break_it",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/scenarios/break_it.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "duct-302",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/demo/duct_302.jpg",
+      "checkId": "duct_photo@302",
+      "flatId": "302",
+      "assetSource": "team-photo",
+      "label": "Authorized clean team duct photograph"
+    },
+    {
+      "id": "meter-start-502",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
+      "checkId": "meter_check@502",
+      "flatId": "502",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "meter-end-502",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/demo/meter_end_502.jpg",
+      "checkId": "meter_check@502",
+      "flatId": "502",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "trap-502",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/demo/trap_502.jpg",
+      "checkId": "trap_grout_photo@502",
+      "flatId": "502",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    {
+      "id": "day14-402",
+      "kind": "photo",
+      "path": "fixtures-ai/photos/demo/day14_402.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    }
   ]
 }
