@@ -1,7 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useRef,useState } from 'react';
 import type { ChatMessage,ReadResult } from '@stacksense/contracts';
-import { engine,demo } from '../lib/adapters';
+import { engine,demo,buildings } from '../lib/adapters';
+import {ukDemo} from '../lib/regionDemo';
+import {labels} from '../lib/labels';
 import { remapSender } from '../lib/assignSender';
 import { correctPhoto } from '../lib/correctPhoto';
 import { Shell } from './layout/Shell';
@@ -28,21 +30,23 @@ export function Workspace() {
  const [flat,setFlat]=useState<string|null>(null);
  const [photo,setPhoto]=useState<string|null>(null);
  const [resetKey,setResetKey]=useState(0);
- const reset=()=>{setState(engine.createCase(demo.states[0]!.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);setFixture(false);};
+ const regionCases=useRef<Partial<Record<'IN'|'UK',{state:typeof state;read:ReadResult|null;messages:ChatMessage[];fixture:boolean}>>>({});
+ const changeRegion=(region:'IN'|'UK')=>{if(region===state.building.region)return;regionCases.current[state.building.region]={state,read,messages,fixture};const saved=regionCases.current[region];setState(saved?.state??(region==='UK'?ukDemo():engine.createCase(buildings.IN)));setRead(saved?.read??null);setMessages(saved?.messages??[]);setFixture(saved?.fixture??region==='UK');setFlat(null);setPhoto(null);setResetKey(key=>key+1);};
+ const reset=()=>{setState(engine.createCase(state.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);setFixture(false);};
  const advance=()=>setState(engine.applyObservations(state,[]));
  const mode=read?.mode??(demo.enabled?'cached':'fallback');
  return <CheckLinkProvider state={state} onRead={result=>{setRead(previous=>previous?{...previous,mode:result.mode,warnings:[...previous.warnings,...result.warnings],observations:[...previous.observations,...result.observations],photoLabels:[...previous.photoLabels,...result.photoLabels]}:result);setState(previous=>engine.applyObservations(previous,result.observations,{photoLabels:result.photoLabels}));}}>
-  <TopBar judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
+  <TopBar region={state.building.region} buildingName={state.building.name} onRegion={changeRegion} judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
   <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{mode==='cached'?'Cached':mode==='live'?'Live':'Fallback'}{demo.enabled||fixture||state.observations.some(o=>o.provenance==='simulated')?' · Demo data':''}</p></div>
   <SafetyBoundary state={state}>
    {judge && <JudgePanel state={state} onState={setState} />}
    <Shell feed={<>
-    <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} onRead={(result,chatMessages,isDemo)=>{setFixture(!!isDemo);setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
+    <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} buildingId={state.building.id} onRead={(result,chatMessages,isDemo)=>{setFixture(!!isDemo);setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(isDemo?buildings.IN:state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
     {read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}
     {flat&&<p>Showing flat {flat} <button onClick={()=>setFlat(null)}>Clear flat filter</button></p>}
     <CaseFeed state={state} selectedFlat={flat} onPhoto={setPhoto}/>
    </>} building={<>
-    <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span></div>
+    <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span><small>{labels[state.building.region].group} · {labels[state.building.region].manager} · {labels[state.building.region].trap}</small></div>
     <CrossSection state={state} selected={flat} onSelect={setFlat}/><Pills state={state} selectedFlat={flat}/>
    </>} analysis={<>
     <SourceBars state={state}/><NextCheck state={state} onDemoStep={advance}/>
@@ -53,6 +57,7 @@ export function Workspace() {
   </SafetyBoundary>
  </CheckLinkProvider>;
 }
+
 
 
 

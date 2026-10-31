@@ -29,3 +29,5 @@
 
 - B-T02: Inter is loaded by the browser with a sans-serif fallback, so building the app does not require a font download. Status chips always include text. The styleguide deliberately displays all four status tokens together for review; case views use at most three colours plus grey.
 - B-T02: `statusOf` maps documented observations and engine outputs to presentation only. It does not change the engine's safety, probabilities, check selection or trade.
+
+- B-T24: The UK fixture uses the actual flat IDs in A's UK building (1–8), rather than inventing Flat 12. Switching regions retains each local case. The initial UK example is labelled Demo data and replayed by the engine; real UK imports use that building ID. Responsibility links and timestamp trail come from its Job Sheet.
