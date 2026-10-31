@@ -1,7 +1,7 @@
 import type { z } from 'zod';
 import * as realEngine from '@stacksense/engine';
 import { ReadResult, SecondOpinion, LinkResult, RainSeries } from '@stacksense/contracts';
-import type { EngineState, Observation, ReadRequest, LinkRequest } from '@stacksense/contracts';
+import type { Building,EngineState, Observation, ReadRequest, LinkRequest } from '@stacksense/contracts';
 import { mockEngine, heroStates, emergencyState } from '../mocks/mockEngine';
 import { mockApi } from '../mocks/mockApi';
 import { mockBrowser } from '../mocks/browser';
@@ -15,7 +15,8 @@ const realApi={
  async secondOpinion(state:EngineState) {return SecondOpinion.nullable().parse(await post('/api/second-opinion',{state}));},
  async createLink(request:z.infer<typeof LinkRequest>) {return LinkResult.parse(await post('/api/link',request));},
 };
-export const engine = USE_MOCK_ENGINE ? mockEngine : realEngine;
+const liveEngine={...realEngine,createCase(building:Building,opts?:Parameters<typeof realEngine.createCase>[1]){return realEngine.createCase(building,{...opts,caseId:opts?.caseId??`${building.id}-${crypto.randomUUID()}`});}};
+export const engine = USE_MOCK_ENGINE ? mockEngine : liveEngine;
 export const api = USE_MOCK_API ? mockApi : realApi;
 export const demo = { states:heroStates, emergency:emergencyState, enabled:USE_MOCK_ENGINE || USE_MOCK_API };
 async function fileDataUrl(file:Blob):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not read the prepared photo.'));reader.readAsDataURL(file);});}

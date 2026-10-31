@@ -16,6 +16,7 @@ import { PasteChat } from './import/PasteChat';
 import { SenderChips } from './import/SenderChips';
 import { CaseFeed } from './feed/CaseFeed';
 import { PhotoViewer } from './photo/PhotoViewer';
+import {CheckLinkProvider} from './phone/PhoneSimulator';
 import { JudgePanel } from './judge/JudgePanel';
 import { SecondOpinionBanner } from './opinion/SecondOpinionBanner';
 export function Workspace() {
@@ -30,7 +31,7 @@ export function Workspace() {
  const reset=()=>{setState(engine.createCase(demo.states[0]!.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);setFixture(false);};
  const advance=()=>setState(engine.applyObservations(state,[]));
  const mode=read?.mode??(demo.enabled?'cached':'fallback');
- return <>
+ return <CheckLinkProvider state={state} onRead={result=>{setRead(previous=>previous?{...previous,mode:result.mode,warnings:[...previous.warnings,...result.warnings],observations:[...previous.observations,...result.observations],photoLabels:[...previous.photoLabels,...result.photoLabels]}:result);setState(previous=>engine.applyObservations(previous,result.observations,{photoLabels:result.photoLabels}));}}>
   <TopBar judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
   <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{mode==='cached'?'Cached':mode==='live'?'Live':'Fallback'}{demo.enabled||fixture||state.observations.some(o=>o.provenance==='simulated')?' · Demo data':''}</p></div>
   <SafetyBoundary state={state}>
@@ -50,8 +51,9 @@ export function Workspace() {
    </>}/>
    {photo&&<PhotoViewer key={photo} photoId={photo} label={state.photoLabels.find(p=>p.photoId===photo)} onClose={()=>setPhoto(null)} onCorrect={(label,changed)=>setState(correctPhoto(state,label,changed))}/>}
   </SafetyBoundary>
- </>;
+ </CheckLinkProvider>;
 }
+
 
 
 
