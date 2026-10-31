@@ -67,3 +67,28 @@ it("keeps a ceiling complaint near a duct corner in the ceiling zone",async()=>{
  const result=await createReadService({adapter:createAdapter(),cache:createCache()})({...input,messages:[{...messages[0]!,text:"402 here, bathroom ceiling stain near duct corner"}]});
  expect(result.observations[0]?.zone).toBe("ceiling");
 });
+
+it("serves twenty sequential HTTP reads from cache without another model call",async()=>{
+ const provider=vi.fn(async()=>({observations:[]}));
+ const service=createReadService({adapter:createAdapter({provider}),cache:createCache({bundled:{}})});
+ const handler=createReadHandler({service});
+ const call=()=>handler(new Request("http://localhost/api/read",{method:"POST",headers:{"content-type":"application/json","x-forwarded-for":"cache-smoke"},body:JSON.stringify(input)}));
+ expect((await (await call()).json()).mode).toBe("live");
+ for(let i=0;i<20;i++) {const r=await call();expect(r.status).toBe(200);expect(ReadResult.parse(await r.json()).mode).toBe("cached");}
+ expect(provider).toHaveBeenCalledTimes(1);
+});
+it("labels a missing-key read fallback even when the cache was previously warmed",async()=>{
+ const cache=createCache({bundled:{}});
+ await createReadService({cache,adapter:createAdapter({provider:async()=>({observations:[]})})})(input);
+ const result=await createReadService({cache,adapter:createAdapter()})(input);
+ expect(result.mode).toBe("fallback");expect(result.warnings.join(" ")).toContain("Labelled fallback");
+});
+
+it("serves the actual bundled hero without contacting an unavailable configured provider",async()=>{
+ const {readFileSync}=await import("node:fs");
+ const {parseWhatsAppExport,pseudonymise}=await import("../src/browser/chat");
+ const messages=pseudonymise(parseWhatsAppExport(readFileSync(new URL("../../../fixtures-ai/chats/hero_blockA.txt",import.meta.url),"utf8"))).messages;
+ const provider=vi.fn(async()=>{throw Error("provider offline")});
+ const result=await createReadService({adapter:createAdapter({provider}),cache:createCache()})({buildingId:"block-a",messages,photos:[]});
+ expect(result.mode).toBe("cached");expect(result.observations.length).toBeGreaterThan(0);expect(provider).not.toHaveBeenCalled();
+});

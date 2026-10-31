@@ -25,7 +25,8 @@ it("A-T23 link -> verify -> two-meter-photo upload is one-use and private",async
  const data=await created.json();expect(data.waUrl).toContain("wa.me");
  const verified=await handlers.verify(new Request(`https://demo.example.invalid/api/link/verify?token=${encodeURIComponent(data.token)}`));expect(verified.status).toBe(200);
  const bytes=await sharp({create:{width:20,height:20,channels:3,background:"white"}}).jpeg().withMetadata().toBuffer();
- const upload=()=>{const form=new FormData();form.set("token",data.token);form.set("consent","true");form.set("safety",JSON.stringify({water_near_electrics:false,sagging_ceiling:false,fast_ingress:false,sewage:false}));form.set("photo",new File([new Uint8Array(bytes)],"start.jpg",{type:"image/jpeg"}));form.set("photo2",new File([new Uint8Array(bytes)],"end.jpg",{type:"image/jpeg"}));form.set("minutes","10");return new Request("https://demo.example.invalid/api/upload",{method:"POST",body:form});};
+ const endBytes=await sharp({create:{width:20,height:20,channels:3,background:"grey"}}).jpeg().toBuffer();
+ const upload=()=>{const form=new FormData();form.set("token",data.token);form.set("consent","true");form.set("safety",JSON.stringify({water_near_electrics:false,sagging_ceiling:false,fast_ingress:false,sewage:false}));form.set("photo",new File([new Uint8Array(bytes)],"start.jpg",{type:"image/jpeg"}));form.set("photo2",new File([new Uint8Array(endBytes)],"end.jpg",{type:"image/jpeg"}));form.set("minutes","10");return new Request("https://demo.example.invalid/api/upload",{method:"POST",body:form});};
  const response=await handlers.upload(upload());expect(response.status).toBe(200);const result=ReadResult.parse(await response.json());expect(result.observations[0]?.meter).toEqual({start:100,end:101,minutes:10});expect(result.observations[0]?.checkId).toBe("meter_check@502");
  expect((await handlers.upload(upload())).status).toBe(410);
 });
@@ -52,4 +53,15 @@ it("requires the owner's HttpOnly cookie before replacing an existing case or cr
  const rejected=await handlers.link(request(body));expect(rejected.status).toBe(403);
  const cookie=first.headers.get("set-cookie")!;expect(cookie).toContain("HttpOnly");
  const own=request(body);own.headers.set("cookie",cookie.split(";")[0]!);expect((await handlers.link(own)).status).toBe(200);
+});
+
+it("labels a missing-key photo upload fallback and never invents meter readings",async()=>{
+ const handlers=createLinkHandlers({repository:memoryRepository(),secret,adapter:createAdapter()});
+ const data=await(await handlers.link(request({caseId:state.caseId,checkId:"meter_check@502",flatId:"502",lang:"en",state}))).json();
+ const bytes=await sharp({create:{width:20,height:20,channels:3,background:"white"}}).jpeg().toBuffer();
+ const form=new FormData();form.set("token",data.token);form.set("consent","true");form.set("safety",JSON.stringify({water_near_electrics:false,sagging_ceiling:false,fast_ingress:false,sewage:false}));
+ for(const name of ["photo","photo2"])form.set(name,new File([new Uint8Array(bytes)],"meter.jpg",{type:"image/jpeg"}));
+ const response=await handlers.upload(new Request("https://demo.example.invalid/api/upload",{method:"POST",body:form}));
+ expect(response.status).toBe(200);const result=ReadResult.parse(await response.json());
+ expect(result.mode).toBe("fallback");expect(result.warnings.join(" ")).toContain("Labelled fallback");expect(result.observations[0]?.checkId).toBe("meter_check@502");expect(result.observations[0]?.meter).toBeNull();
 });

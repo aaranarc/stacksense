@@ -35,6 +35,7 @@ export function createAdapter(opts: {provider?: Provider; timeoutMs?: number} = 
     return {data:null,source:"fallback",warnings:["LLM unavailable or invalid after one repair retry"]};
   }
   return {
+    configured: Boolean(opts.provider),
     readChat: (fields: {buildingSummary:string;messagesJson:string}) => run(ChatLabels,READ,fields),
     readPhoto: ({images,...fields}: {checkType:string;flatId:string;instruction:string;images:string[]}) => run(PhotoLabels,PHOTO,fields,images.slice(0,3)),
     secondOpinion: (fields: {topHypothesisLabel:string;topProbabilityPct:string;otherHypotheses:string;observationsJson:string;checksJson:string}) => run(OpinionDraft,OPINION,fields),
