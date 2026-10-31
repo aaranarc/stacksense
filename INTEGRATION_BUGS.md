@@ -215,3 +215,21 @@ Reviewed the full chronological report and A handoff after merging main. B-001 a
 
 ## B final run — B-T23 explicit demo phone preview
 Added Preview demo phone beside the safe neighbour-check controls. It opens /c/demo in the phone frame with an explicit Cached/Demo notice and closes on completion. Demo answers do not alter the current case; signed answers still update it through the real API/frame/refresh paths. Both launch and non-application of demo evidence have regression coverage.
+
+## C merge 3 — main 480c43f (31 Oct, 15:15 IST)
+Merged origin/a/core (927094b, no change) → origin/b/app (422a3a2: B-STATUS, B-REFRESH, B-AUDIT, B-T23 demo phone
+preview) → origin/c/help. The log-only conflict (C merge 2 vs B's four new sections) was resolved on c/help keeping all
+sections chronologically, then main merged c/help (which contains b/app 422a3a2). Install, typecheck, tests (3 / 66 AI /
+87 engine / 87 web) and build passed; Vercel status for 480c43f: success.
+
+| Production re-check after 480c43f | Result | Owner |
+| --- | --- | --- |
+| No login; Load demo chat lights building | PASS — 202/402 victim, 502 probable source (B-STATUS text labels) | — |
+| /api/read | PASS — Cached · Demo data | — |
+| Judge hero / What-if meter | PASS — waterproofer tiler; moved → plumber; flip back restores | — |
+| Job Sheet + PDF | PASS — populated, Print / Save PDF enabled | — |
+| Judge photo previews | PASS — 4/4 rendered | — |
+| Demo-chat attachment previews | **FAIL — B-003b OPEN** (2× Preview unavailable after Load demo chat) | **B** |
+| /c/demo at 390×844 | PASS — consent → 4× No → camera step enabled, Demo label, no overflow (full upload verified in merge 1) | — |
+| IN → UK → IN | PASS — UK Block 4 floors + gov.uk/Shelter links; IN restores Block A | — |
+| Colours | PASS — red = probable source, amber = victim/inspect, every colour has a text label | — |
