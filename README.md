@@ -6,7 +6,7 @@
 <!-- B: replace docs/demo.gif with the demo GIF and add the video link here. -->
 
 ## Try it
-- **Live app:** `<production URL — added at v1.0>`
+- **Live app:** https://stacksense-omega.vercel.app/
 - **Judge Mode:** press **Judge Mode** in the top bar. Inside:
   - **What-if** sliders — flip "302 duct dry ↔ wet", "502 meter still ↔ moved"… and watch the odds, Second Opinion and Job Sheet change live.
   - **Scenarios** — 8 stories with **Next step ▸ / Play / Reset**: Happy path · Electrical hazard · Locked 502 · Dark photo · Horizontal beam travel · Wrong-trade save (rain) · Honest uncertainty · Break it.
