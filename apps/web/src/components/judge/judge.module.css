@@ -1,0 +1,7 @@
+.panel { margin: 0 32px 16px; display: grid; gap: 8px; }
+.stack { display: grid; gap: 8px; padding-bottom: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.field { display: grid; gap: 4px; font-size: 12px; }
+.small { font-size: 12px; margin: 0; }
+.panel button:focus-visible, .panel select:focus-visible, .panel summary:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+@media (max-width: 800px) { .panel { margin: 0 16px 16px; } }

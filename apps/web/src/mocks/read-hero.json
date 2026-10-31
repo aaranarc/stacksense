@@ -1,0 +1,134 @@
+{
+  "observations": [
+    {
+      "id": "ceiling",
+      "flatId": "402",
+      "eventKey": "ceiling",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "complaint",
+      "zone": "ceiling",
+      "surface": "damp_stain",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P402"
+      ],
+      "sourceMessageIds": [
+        "msg-ceiling"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    },
+    {
+      "id": "window",
+      "flatId": "202",
+      "eventKey": "window",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "complaint",
+      "zone": "window_perimeter",
+      "surface": "efflorescence",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [
+        "P202"
+      ],
+      "sourceMessageIds": [
+        "msg-window"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo report after heavy rain"
+    },
+    {
+      "id": "denial",
+      "flatId": "502",
+      "eventKey": "denial",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "denial",
+      "zone": "floor",
+      "surface": "dry",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [],
+      "sourceMessageIds": [
+        "msg-denial"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo: our floor is dry"
+    },
+    {
+      "id": "unresolved",
+      "flatId": null,
+      "eventKey": "unresolved",
+      "at": "2026-10-31T04:30:00.000Z",
+      "kind": "complaint",
+      "zone": "ceiling",
+      "surface": "damp_stain",
+      "room": "bathroom",
+      "hazards": [],
+      "hazardQuestionsAnswered": true,
+      "checkId": null,
+      "meter": null,
+      "moisture": null,
+      "finding": null,
+      "photoIds": [],
+      "sourceMessageIds": [
+        "msg-S07"
+      ],
+      "provenance": "simulated",
+      "rawText": "Demo data"
+    }
+  ],
+  "photoLabels": [
+    {
+      "photoId": "P402",
+      "surface": "damp_stain",
+      "zone": "ceiling",
+      "quality": "ok",
+      "boxes": [
+        {
+          "x": 0.55,
+          "y": 0.1,
+          "w": 0.3,
+          "h": 0.3,
+          "label": "Duct corner stain"
+        }
+      ],
+      "meterDigits": null,
+      "humanCorrected": false
+    },
+    {
+      "photoId": "P202",
+      "surface": "efflorescence",
+      "zone": "external_wall",
+      "quality": "ok",
+      "boxes": [],
+      "meterDigits": null,
+      "humanCorrected": false
+    }
+  ],
+  "senderMap": {
+    "S01": "402",
+    "S02": "202",
+    "S03": "502",
+    "S07": null
+  },
+  "warnings": [
+    "Cached demo interpretation — not a reading of your uploaded evidence."
+  ],
+  "mode": "cached"
+}

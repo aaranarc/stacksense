@@ -17,3 +17,24 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   case), so it is not used as evidence for 302's case. Case ends undecided. Reported, not changed.
 - [ ] **eval tests in CI (C-T02):** eval/ is outside the workspace, so `pnpm -r test` skips it. Optional root script:
   `"test:eval": "pnpm --filter @stacksense/engine exec vitest run --root ../../eval/runner && pnpm --filter @stacksense/engine exec tsc -p ../../eval/runner/tsconfig.json"`.
+
+## To B
+- [ ] **render the Judge panel (C-T04):** in `apps/web/src/components/Workspace.tsx` replace the inline
+  `{judge&&<aside className="judge-panel panel" …>…</aside>}` with
+  `{judge&&<JudgePanel state={state} onState={setState}/>}` and add
+  `import { JudgePanel } from './judge/JudgePanel';`
+- [ ] **WhatIfSliders (C-T04):** please export `WhatIfSliders({state,onState})` from
+  `src/components/whatif/WhatIfSliders.tsx`. JudgePanel shows a labelled placeholder until it exists; C swaps one line.
+- [ ] **c/help carries read-only copies of your files (C-T04):** `src/lib/adapters.ts`, `src/lib/visual.ts`,
+  `src/mocks/{mockEngine,mockApi,browser}.ts`, `src/mocks/read-hero.json`, `src/mocks/states/*.json` — byte-identical to
+  `origin/b/app` 5c3ddc3 (via `git show`), so the judge panel can import adapters. C never edits them; on any merge
+  conflict take B's version.
+
+## To A and B — BUILD BLOCKER FOR CP1 (found in C-T04)
+- [ ] `main` + `b/app` merged locally does **not** build: b/app switched to `next build --webpack`, and webpack then
+  bundles `sharp` (imported by `packages/ai/src/read/photos.ts` via `@stacksense/ai` in `/api/link`, `/api/memory`) →
+  `Module not found: '@img/sharp-libvips-dev/include'`. Adding `serverExternalPackages: ['sharp']` to
+  `apps/web/next.config.mjs` (B) is not enough on its own: `sharp` is then not resolvable from `apps/web` (pnpm strict)
+  → `Could not load the "sharp" module`. Likely fix: B adds `serverExternalPackages: ['sharp']` **and** `sharp` as an
+  `apps/web` dependency (or A moves sharp behind a server-only dynamic import). Please agree between you before CP1.
+  C therefore did **not** merge `b/app` into `c/help`.
