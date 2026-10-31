@@ -28,12 +28,12 @@ const scenes:Record<string,string>={
 // Stock/reference images and raw imports are intentionally never auto-selected here.
 for(const input of manifest.inputs){
  if(input.kind==='chat')continue;
- if(input.id==='duct-302'){input.assetSource='team-photo';input.label='Authorized clean team duct photograph';continue;}
+ if(input.assetSource==='team-photo'){if(!existsSync(resolve(root,input.path)))throw Error('Approved clean team photo missing');continue;}
  const target=resolve(root,input.path);mkdirSync(dirname(target),{recursive:true});
  const sceneId=input.path.endsWith('/ceiling_402.demo.jpg')?'ceiling-402':input.path.endsWith('/window_202.demo.jpg')?'window-202':input.id;
  const svg=scenes[sceneId];if(!svg)throw Error(`No demo scene for ${input.id}`);
  writeFileSync(target.replace(/\.jpg$/,'.demo.svg'),svg);writeFileSync(target,await sharp(Buffer.from(svg)).jpeg({quality:85}).toBuffer());input.assetSource='demo-illustration';input.label='DEMO ILLUSTRATION - simulated, not field evidence';
 }
-manifest.label='Demo inventory: only the team duct photograph is real; all other scenes are authored DEMO illustrations, not field evidence or evaluation data.';
+manifest.label='Approved clean team photographs and authored DEMO illustrations. No raw/reference photo is imported automatically.';
 writeFileSync(manifestPath,JSON.stringify(manifest,null,2)+'\n');
 console.log(JSON.stringify(manifest.inputs.map(({id,assetSource})=>({id,assetSource})),null,2));

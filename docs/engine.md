@@ -45,7 +45,7 @@ Job Sheets use deterministic trade tables and require a stopped, safe, unreopene
 
 Repair completion schedules Day-14 follow-up. Looking better is not equivalent to being dry. Paint readiness requires a suitable, fresh post-repair recorded moisture reading at the victim spot; relative readings or photos alone cannot make paint ready. Worsening or recurrence reopens the case and suppresses its repair sheet.
 
-`whatIf` replays patches on a copy, preserves safety, and invalidates the old review when evidence changes. It does not turn a simulation into observed evidence. Prediction produces same-stack inspection requests, rain/forecast rechecks and seasonal reminders. Memory counts professional findings idempotently; prediction is an inspection suggestion, not a diagnosis in neighboring flats.
+`whatIf` replays patches on a copy, preserves safety, and invalidates the old review when evidence changes. It does not turn a simulation into observed evidence. Prediction produces same-stack inspection requests, rain/forecast rechecks and seasonal reminders. Eligible same-stack targets have `inspect@<flat>` entries with safe prevention-photo instructions. These use zero information gain/score, respect locked access and safety, and do not prolong diagnosis or justify repairs. Memory counts professional findings idempotently; prediction is an inspection suggestion, not a diagnosis in neighboring flats.
 
 ## Demonstrations and verification
 
@@ -62,3 +62,8 @@ pnpm --filter web build
 ```
 
 Further limitations include prototype priors/outcome probabilities, imperfect incident independence, limited building archetypes and visual ambiguity. High posterior odds mean probable source under this model; on-site verification remains necessary.
+
+
+## Integration ownership at handoff
+
+Engine state and generated fixtures round-trip through the shared Zod schema. IDs such as hero-ceiling-402 are evidence identifiers; browser photo URLs are separate display metadata in fixtures-ai/photos/demo/assets.json and generated demoAssets. A browser must map those IDs to approved public assets; a missing thumbnail is not evidence that the engine changed the photo path. PDF generation is B's browser print route, not an AI/API service. ReadResult from `/api/link/updates` can be replayed with its photoLabels; avoid counting repeated refreshes as independent evidence. Caller time remains explicit and must advance for new resident answers/recovery checks.

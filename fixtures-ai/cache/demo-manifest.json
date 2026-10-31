@@ -1,5 +1,5 @@
 {
-  "label": "Demo inventory: only the team duct photograph is real; all other scenes are authored DEMO illustrations, not field evidence or evaluation data.",
+  "label": "User-confirmed own photos where matching; authored labelled DEMO illustrations otherwise. Not field validation or human-labelled evaluation data.",
   "buildingId": "block-a",
   "inputs": [
     {
@@ -10,9 +10,9 @@
     {
       "id": "scenario-happy",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     },
     {
       "id": "scenario-electrical_hazard",
@@ -45,16 +45,16 @@
     {
       "id": "scenario-wrong_trade_rain",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "path": "fixtures-ai/photos/demo/window_202_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     },
     {
       "id": "scenario-honest_uncertainty",
       "kind": "photo",
-      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     },
     {
       "id": "scenario-break_it",
@@ -75,11 +75,11 @@
     {
       "id": "meter-start-502",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
+      "path": "fixtures-ai/photos/demo/meter_502_own.jpg",
       "checkId": "meter_check@502",
       "flatId": "502",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated. Meter overview only; no readable timed start/end pair is claimed."
     },
     {
       "id": "meter-end-502",
@@ -93,11 +93,11 @@
     {
       "id": "trap-502",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/trap_502.demo.jpg",
+      "path": "fixtures-ai/photos/demo/trap_502_own.jpg",
       "checkId": "trap_grout_photo@502",
       "flatId": "502",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     },
     {
       "id": "day14-402",
@@ -109,16 +109,16 @@
     {
       "id": "ceiling-402",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     },
     {
       "id": "window-202",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "path": "fixtures-ai/photos/demo/window_202_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     }
   ]
 }

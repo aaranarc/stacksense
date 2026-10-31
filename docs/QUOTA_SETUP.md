@@ -21,7 +21,7 @@ GEMINI_FALLBACK_MODEL=gemini-3.8-flash
 LIVE_LLM_TESTS=0
 ```
 
-Absent environment variables default to GEMINI_MODEL=gemini-3.1-flash-lite and GEMINI_FALLBACK_MODEL=gemini-3.8-flash; explicit environment values override these defaults. Both model names have a free tier listed in [Google's pricing documentation](https://ai.google.dev/gemini-api/docs/pricing), checked 31 October 2026. Availability and quotas remain account/model dependent. The fallback must differ from the primary; an identical name is skipped.
+Absent environment variables default to GEMINI_MODEL=gemini-3.1-flash-lite and GEMINI_FALLBACK_MODEL=gemini-3.8-flash; explicit environment values override these defaults. These are the user-authorized model IDs; no handoff live probe confirms current capacity. Availability and quotas remain account/model dependent. The fallback must differ from the primary; an identical name is skipped.
 
 Optional compatible fallback—omit these to stay Gemini-only:
 
@@ -47,3 +47,10 @@ No live provider request is permitted from standalone diagnostics, tests, build-
 The implementation was verified with simulated 429/503/schema responses, cache hits and guarded CLI failures, not live calls. The known canonical demo inventory remains in `fixtures-ai/cache/demo-status.json`.
 
 ReadResult keeps its shared `mode` enum. Warnings include Live, Cached, Fallback, or exactly **Fallback (AI quota reached)** as appropriate. A cached result is never described as a fresh live call. Invalid/unavailable labels remain unclear; no confidence, meter digits or success is fabricated. Second Opinion retains its existing null → review_failed/unreviewed contract on failure.
+
+
+## Free-tier operating budget
+
+The team reports 20 requests/day per model for this free project; treat that as a small operational budget, not a universal promised limit. Google documents RPM, TPM and RPD limits, applied per project rather than API key, with daily reset at midnight Pacific. View the actual project/model limits in AI Studio; changing keys does not create a new project quota. Capacity and stated limits are not guaranteed. [Google rate-limit documentation](https://ai.google.dev/gemini-api/docs/rate-limits) (checked 31 October 2026).
+
+Do not enable billing, change tier, loop retries, run live evaluation or repeatedly rotate keys to work around quota. A cache miss involving chat plus multiple photos may consume multiple requests, and one schema repair can consume another; model fallback is bounded per operation, not a shared daily counter. Prefer the exact demo chat/photos and cached upload instructions. When exhausted, Cached or labelled Fallback is an acceptable demo result. No live provider calls were made in the final A handoff; offline coverage, mocked quota transitions and no-key HTTP/UI paths were verified instead. A health check hitting a deployed interactive API is still a diagnostic: use cached known inputs unless LIVE_LLM_TESTS=1 was explicitly enabled for that check. The server cannot infer the purpose of an arbitrary HTTP client.

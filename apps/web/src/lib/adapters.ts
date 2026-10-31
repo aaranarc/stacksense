@@ -1,7 +1,7 @@
 import type { z } from 'zod';
 import * as realEngine from '@stacksense/engine';
-import { ReadResult, SecondOpinion, LinkResult } from '@stacksense/contracts';
-import type { EngineState, Observation, ReadRequest, LinkRequest } from '@stacksense/contracts';
+import { ReadResult, SecondOpinion, LinkResult, RainSeries } from '@stacksense/contracts';
+import type { Building,EngineState, Observation, ReadRequest, LinkRequest } from '@stacksense/contracts';
 import { mockEngine, heroStates, emergencyState } from '../mocks/mockEngine';
 import { mockApi } from '../mocks/mockApi';
 import { mockBrowser } from '../mocks/browser';
@@ -15,10 +15,26 @@ const realApi={
  async secondOpinion(state:EngineState) {return SecondOpinion.nullable().parse(await post('/api/second-opinion',{state}));},
  async createLink(request:z.infer<typeof LinkRequest>) {return LinkResult.parse(await post('/api/link',request));},
 };
-export const engine = USE_MOCK_ENGINE ? mockEngine : realEngine;
+const liveEngine={...realEngine,createCase(building:Building,opts?:Parameters<typeof realEngine.createCase>[1]){return realEngine.createCase(building,{...opts,caseId:opts?.caseId??`${building.id}-${crypto.randomUUID()}`});}};
+export const engine = USE_MOCK_ENGINE ? mockEngine : liveEngine;
+export const buildings={IN:realEngine.blockA,UK:realEngine.ukBlock};
 export const api = USE_MOCK_API ? mockApi : realApi;
 export const demo = { states:heroStates, emergency:emergencyState, enabled:USE_MOCK_ENGINE || USE_MOCK_API };
-export const browser = { ...mockBrowser, available:USE_MOCK_API };
+async function fileDataUrl(file:Blob):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not read the prepared photo.'));reader.readAsDataURL(file);});}
+const liveBrowser={
+ available:true,
+ parseWhatsAppExport:realBrowser.parseWhatsAppExport,
+ pseudonymise:(messages:Parameters<typeof realBrowser.pseudonymise>[0])=>realBrowser.pseudonymise(messages).messages,
+ stripExif:async(file:File)=>fileDataUrl(await realBrowser.stripExif(file)),
+ async qualityCheck(dataUrl:string){const blob=await(await fetch(dataUrl)).blob();const bitmap=await createImageBitmap(blob);try{const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Photo quality check unavailable.');ctx.drawImage(bitmap,0,0);const result=realBrowser.qualityCheck(ctx.getImageData(0,0,canvas.width,canvas.height));return {warnings:result.quality==='ok'?[]:[`${result.quality.replaceAll('_',' ')} — ${result.hints.en}`]};}finally{bitmap.close();}},
+};
+export const browser = USE_MOCK_API?{...mockBrowser,available:true}:liveBrowser;
+export async function getRain(state:EngineState):Promise<RainSeries|null>{
+ const supplied=(state as EngineState&{weather?:{rain?:RainSeries}}).weather?.rain;if(supplied)return RainSeries.parse(supplied);
+ const report=state.observations.find(o=>o.kind==='complaint');if(!report)return null;
+ const end=report.at.slice(0,10),start=new Date(Date.parse(report.at)-72*3600000).toISOString().slice(0,10);
+ const query=new URLSearchParams({lat:String(state.building.lat),lon:String(state.building.lon),start,end});const response=await fetch(`/api/weather?${query}`);if(!response.ok)throw new Error('Weather data is unavailable.');return RainSeries.parse(await response.json());
+}
 export function applyRecoveryObservation(state:EngineState,observation:Observation):EngineState {
  if(!USE_MOCK_ENGINE)return realEngine.applyObservations(state,[observation]);
  const observations=[...state.observations,observation];
@@ -27,8 +43,11 @@ export function applyRecoveryObservation(state:EngineState,observation:Observati
  return {...state,now:observation.at,observations,recovery:replay.recovery};
 }
 export async function createCheckLink(state:EngineState,checkId:string,flatId:string,lang:'en'|'hi'|'mr'='en') {
- const request={caseId:state.caseId,checkId,flatId,lang};
- return USE_MOCK_API?mockApi.createLink(request):LinkResult.parse(await post('/api/link',{...request,state}));
+ const request={caseId:state.caseId,checkId,flatId,lang:state.building.region==='UK'?'en' as const:lang};
+ const result=USE_MOCK_API?await mockApi.createLink(request):LinkResult.parse(await post('/api/link',{...request,state}));
+ const share=new URL(result.waUrl);if(share.protocol!=='https:'||share.hostname!=='wa.me')throw new Error('Sharing link is unavailable.');
+ if(state.building.region!=='UK')return result;
+ const url=new URL(result.url);url.searchParams.set('region','UK');share.searchParams.set('text',(share.searchParams.get('text')??'').replace(result.url,url.href));return {...result,url:url.href,waUrl:share.href};
 }
 const demoLink=(token:string)=>token==='demo'&&(process.env.NEXT_PUBLIC_DEMO_MODE==='true'||USE_MOCK_API);
 export async function prepareResidentPhoto(file:File,isDemo=false) {
@@ -55,3 +74,9 @@ export const residentApi={
  },
 };
 
+
+export async function edgeContrastPhoto(url:string):Promise<string>{
+ const response=await fetch(url);if(!response.ok)throw new Error('Photo preview could not be loaded.');
+ const bitmap=await createImageBitmap(await response.blob());
+ try{const canvas=document.createElement('canvas'),scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Edge contrast is unavailable in this browser.');ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);ctx.putImageData(realBrowser.edgeContrast(ctx.getImageData(0,0,canvas.width,canvas.height)).imageData,0,0);return canvas.toDataURL('image/png');}finally{bitmap.close();}
+}

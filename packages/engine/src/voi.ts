@@ -44,7 +44,7 @@ function why(candidate: CheckCandidate): string {
   }
 }
 export function rankChecks(state: EngineState): RankedCheck[] {
-  return candidateChecks(state, { includeUnavailableMeters: true }).map(candidate => {
+  const diagnostic = candidateChecks(state, { includeUnavailableMeters: true }).map(candidate => {
     const { definition, flat } = candidate;
     const info = informationGain(state.posterior, state.hypotheses, definition.outcomes);
     const actions = new Set(info.outcomes.map(o => actionFor(o.posterior, state.hypotheses)));
@@ -62,5 +62,21 @@ export function rankChecks(state: EngineState): RankedCheck[] {
       accessPenalty: Number.isFinite(penalty) ? penalty : Number.MAX_VALUE,
       expectedBits: info.bits, score, why: why(candidate), excluded, instructions: definition.instructions,
     };
-  }).sort((a,b) => b.score - a.score || a.id.localeCompare(b.id));
+  });
+  // Prevention photos are supported link targets, not diagnostic information gain.
+  const prevention: RankedCheck[] = state.prediction.sameStack.flatMap(target => {
+    const flat = state.building.flats.find(f => f.id === target.flatId);
+    const id = `inspect@${target.flatId}`;
+    if (!flat || diagnostic.some(c => c.id === id)) return [];
+    const excluded = state.safety.status !== "ok" ? "unsafe: hazard questions incomplete"
+      : flat.access === "locked" ? "flat locked"
+      : state.observations.some(o => o.checkId === id) ? "already checked" : null;
+    return [{id, type:"inspect", targetFlatId:flat.id, effortMin:1,
+      accessPenalty:flat.access === "unknown" ? 3 : flat.access === "locked" ? Number.MAX_VALUE : 1,
+      expectedBits:0, score:0, why:target.why, excluded,
+      instructions:{en:"Photograph the same-stack wet-area surface only if safe; do not dismantle fittings. This is a prevention inspection, not a diagnosis.",
+        hi:"सुरक्षित हो तभी उसी स्टैक के गीले क्षेत्र की फोटो लें; कुछ खोलें नहीं। यह निवारक निरीक्षण है, निदान नहीं।",
+        mr:"सुरक्षित असेल तरच त्याच स्टॅकमधील ओल्या भागाचा फोटो घ्या; काहीही काढू नका। ही प्रतिबंधक तपासणी आहे, निदान नाही।"}}];
+  });
+  return [...diagnostic, ...prevention].sort((a,b) => b.score - a.score || a.id.localeCompare(b.id));
 }

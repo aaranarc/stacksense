@@ -313,90 +313,6 @@
     ],
     "mode": "live"
   },
-  "af46d69ab3e184046327492f50044f73598294f405b1aa599a6f13a6315a58ec": {
-    "observations": [],
-    "photoLabels": [
-      {
-        "photoId": "meter-start-502",
-        "surface": "dry",
-        "zone": "meter",
-        "quality": "ok",
-        "boxes": [
-          {
-            "x": 0.3,
-            "y": 0.41,
-            "w": 0.4,
-            "h": 0.18,
-            "label": "meter reading"
-          }
-        ],
-        "meterDigits": "00100.0",
-        "humanCorrected": false
-      }
-    ],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live"
-  },
-  "ce2426dc58c5ef9d367fcccd94bc8cff32778115ce3cb445443953fcd09e71ce": {
-    "observations": [],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live",
-    "photoLabels": [
-      {
-        "surface": "dry",
-        "zone": "meter",
-        "boxes": [
-          {
-            "x": 0.301,
-            "y": 0.4104,
-            "w": 0.3996,
-            "h": 0.1868,
-            "label": "meter reading"
-          }
-        ],
-        "meterDigits": "00100.0",
-        "photoId": "cached-photo",
-        "quality": "ok",
-        "humanCorrected": false
-      }
-    ]
-  },
-  "ae4552afc7ce3e15732e071db3d2f28cd79f989e7ca96d98269b948d89a4e6c5": {
-    "observations": [],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live",
-    "photoLabels": [
-      {
-        "surface": "dry",
-        "zone": "meter",
-        "boxes": [
-          {
-            "x": 0.298,
-            "y": 0.4091,
-            "w": 0.403,
-            "h": 0.218,
-            "label": "meter"
-          }
-        ],
-        "meterDigits": "00100.0",
-        "photoId": "cached-photo",
-        "quality": "ok",
-        "humanCorrected": false
-      }
-    ]
-  },
   "284fb08e9f2a22fc7775c12f99692802ed033a53977a57e15addceaccdf552f5": {
     "observations": [],
     "photoLabels": [
@@ -509,118 +425,6 @@
       }
     ]
   },
-  "ff296db609af86568fe46eca04f424cfd54d0582b53514b21ce86f022b367e74": {
-    "observations": [],
-    "photoLabels": [
-      {
-        "photoId": "trap-502",
-        "surface": "crack",
-        "zone": "trap_grout",
-        "quality": "ok",
-        "boxes": [
-          {
-            "x": 0.31,
-            "y": 0.575,
-            "w": 0.08,
-            "h": 0.16,
-            "label": "crack"
-          }
-        ],
-        "meterDigits": null,
-        "humanCorrected": false
-      }
-    ],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live"
-  },
-  "a51b25e86da68c07824ddf9b704bd089cd7aa66bb66d025c0474968adf4ccf29": {
-    "observations": [],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live",
-    "photoLabels": [
-      {
-        "surface": "crack",
-        "zone": "trap_grout",
-        "boxes": [
-          {
-            "x": 0.31,
-            "y": 0.567,
-            "w": 0.08,
-            "h": 0.16,
-            "label": "crack"
-          }
-        ],
-        "meterDigits": null,
-        "photoId": "cached-photo",
-        "quality": "ok",
-        "humanCorrected": false
-      }
-    ]
-  },
-  "5cafa6e854dc3625922b69a2e76e68bb1d81259e1aad79d6baef6d10aca931b6": {
-    "observations": [],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live",
-    "photoLabels": [
-      {
-        "surface": "crack",
-        "zone": "trap_grout",
-        "boxes": [
-          {
-            "x": 0.31,
-            "y": 0.5485,
-            "w": 0.08,
-            "h": 0.18,
-            "label": "crack"
-          }
-        ],
-        "meterDigits": null,
-        "photoId": "cached-photo",
-        "quality": "ok",
-        "humanCorrected": false
-      }
-    ]
-  },
-  "0b2a2c16f73d335c492e2099b95ef5735115006bbcc1ec4657283bc9268fa7f5": {
-    "observations": [],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live",
-    "photoLabels": [
-      {
-        "surface": "crack",
-        "zone": "trap_grout",
-        "boxes": [
-          {
-            "x": 0.312,
-            "y": 0.5759,
-            "w": 0.1,
-            "h": 0.165,
-            "label": "crack"
-          }
-        ],
-        "meterDigits": null,
-        "photoId": "cached-photo",
-        "quality": "ok",
-        "humanCorrected": false
-      }
-    ]
-  },
   "67799e2c4bd2390ffe41adc8660a5cdc0735ab941e6178c4158db40a0ab62a73": {
     "observations": [],
     "photoLabels": [
@@ -641,55 +445,7 @@
     ],
     "mode": "live"
   },
-  "592a48237bac872c579df50d80cabf0d96a4a47ef7ecacbc4556f2f9b8c824f1": {
-    "observations": [],
-    "photoLabels": [
-      {
-        "photoId": "scenario-honest_uncertainty",
-        "surface": "unclear",
-        "zone": "unclear",
-        "quality": "ok",
-        "boxes": [],
-        "meterDigits": null,
-        "humanCorrected": false
-      }
-    ],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live"
-  },
-  "9ba7c6245000d6385e5a798cfa288707b111781cf85a26f026cf184db4a5153f": {
-    "observations": [],
-    "senderMap": {},
-    "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
-    ],
-    "mode": "live",
-    "photoLabels": [
-      {
-        "surface": "dry",
-        "zone": "meter",
-        "boxes": [
-          {
-            "x": 0.297,
-            "y": 0.4104,
-            "w": 0.407,
-            "h": 0.179,
-            "label": "meter digits"
-          }
-        ],
-        "meterDigits": "00100.0",
-        "photoId": "cached-photo",
-        "quality": "ok",
-        "humanCorrected": false
-      }
-    ]
-  },
-  "81330b37961a187f8ee036d94e2c2f68ff9166a4253b574f8f146fe839cdaa8f": {
+  "19adbd925a5bfc7ba339d30314f5cce22de248b47472161894adc396dbe62760": {
     "observations": [],
     "photoLabels": [
       {
@@ -699,11 +455,18 @@
         "quality": "ok",
         "boxes": [
           {
-            "x": 0.297,
-            "y": 0.3428,
-            "w": 0.405,
-            "h": 0.312,
+            "x": 0.007,
+            "y": 0.165,
+            "w": 0.999,
+            "h": 0.648,
             "label": "damp stain"
+          },
+          {
+            "x": 0.4673,
+            "y": 0.4643,
+            "w": 0.165,
+            "h": 0.141,
+            "label": "peeling"
           }
         ],
         "meterDigits": null,
@@ -712,26 +475,25 @@
     ],
     "senderMap": {},
     "warnings": [
-      "Live",
-      "DEMO illustration — simulated input, not field evidence"
+      "Live"
     ],
     "mode": "live"
   },
-  "270ff31f8aece2f62b67de3917b366b9d7421f3daff47a0730de998561b2d18d": {
+  "be87323623b91a8aa05173704f24f02fd53e8a3791a5f8aaae5f569ed55ec7e0": {
     "observations": [],
     "photoLabels": [
       {
         "photoId": "scenario-wrong_trade_rain",
-        "surface": "damp_stain",
+        "surface": "active_blistering",
         "zone": "window_perimeter",
         "quality": "ok",
         "boxes": [
           {
-            "x": 0.651,
-            "y": 0.5485,
-            "w": 0.027,
-            "h": 0.232,
-            "label": "damp_stain"
+            "x": 0.28,
+            "y": 0.05,
+            "w": 0.32,
+            "h": 0.93,
+            "label": "active blistering"
           }
         ],
         "meterDigits": null,
@@ -740,12 +502,305 @@
     ],
     "senderMap": {},
     "warnings": [
-      "Live",
-      "DEMO illustration — simulated input, not field evidence"
+      "Live"
     ],
     "mode": "live"
   },
-  "6c993e9d6d9acb22e4f7b2dc98760ff5ae960aee02067572f98a81e20212f1b3": {
+  "8abfad26a537e9ddbcac3761ce7c2dea158c54a3b9ae71a1056f24388381c0f6": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-honest_uncertainty",
+        "surface": "damp_stain",
+        "zone": "ceiling",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.007,
+            "y": 0.165,
+            "w": 0.999,
+            "h": 0.648,
+            "label": "damp stain"
+          },
+          {
+            "x": 0.4673,
+            "y": 0.4643,
+            "w": 0.165,
+            "h": 0.141,
+            "label": "peeling"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "Cached"
+    ],
+    "mode": "live"
+  },
+  "fb5154a5660d720d9ce5b7deb5449d6672b11bcf62cde6dd6b3754878c469abe": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "meter-start-502",
+        "surface": "dry",
+        "zone": "meter",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.528,
+            "y": 0.2709,
+            "w": 0.148,
+            "h": 0.0994,
+            "label": "meter 1"
+          },
+          {
+            "x": 0.531,
+            "y": 0.4195,
+            "w": 0.134,
+            "h": 0.0921,
+            "label": "meter 2"
+          },
+          {
+            "x": 0.525,
+            "y": 0.5643,
+            "w": 0.134,
+            "h": 0.0906,
+            "label": "meter 3"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "Live"
+    ],
+    "mode": "live"
+  },
+  "3f80d41e0b16f2375faf19059902f49d57f3e7c906d4e579387aadc6b3df8b0e": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.443,
+            "y": 0.2278,
+            "w": 0.353,
+            "h": 0.165,
+            "label": "meter 1"
+          },
+          {
+            "x": 0.457,
+            "y": 0.4167,
+            "w": 0.286,
+            "h": 0.147,
+            "label": "meter 2"
+          },
+          {
+            "x": 0.442,
+            "y": 0.5619,
+            "w": 0.245,
+            "h": 0.145,
+            "label": "meter 3"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "42138fd2085da56f96b37d80c7334fe8b4a818ab02ca835e5618c0eef2cc0f5e": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.448,
+            "y": 0.265,
+            "w": 0.233,
+            "h": 0.125,
+            "label": "meter 1"
+          },
+          {
+            "x": 0.468,
+            "y": 0.418,
+            "w": 0.207,
+            "h": 0.122,
+            "label": "meter 2"
+          },
+          {
+            "x": 0.465,
+            "y": 0.561,
+            "w": 0.187,
+            "h": 0.123,
+            "label": "meter 3"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "90bfd2e61c74156516517e284c0c06f34f8ef278c0d888c6c56f2744a42c58e2": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.443,
+            "y": 0.2215,
+            "w": 0.505,
+            "h": 0.158,
+            "label": "meter"
+          },
+          {
+            "x": 0.457,
+            "y": 0.4155,
+            "w": 0.493,
+            "h": 0.134,
+            "label": "meter"
+          },
+          {
+            "x": 0.467,
+            "y": 0.5564,
+            "w": 0.478,
+            "h": 0.126,
+            "label": "meter"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "1d6b61910be9d5ed1d11882e5cec1a66c134feb323e1667357e0d0c858db4419": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "trap-502",
+        "surface": "mould",
+        "zone": "trap_grout",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.21,
+            "y": 0.414,
+            "w": 0.49,
+            "h": 0.38,
+            "label": "mould"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "Live"
+    ],
+    "mode": "live"
+  },
+  "5aa0e969efb4e0a8a42c7f2bca859b608b9153581fef3804e11b709576a5d8fe": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "mould",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.22,
+            "y": 0.38,
+            "w": 0.53,
+            "h": 0.44,
+            "label": "mould in trap"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "27e14aabc7386dfe168ce4f4e8b534308c8ca732177cd57c44966f2935787bad": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "damp_stain",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.28,
+            "y": 0.44,
+            "w": 0.35,
+            "h": 0.45,
+            "label": "damp trap surround"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "43eeb9e7241bbcd46ad92467594c6ff3c6bc6791019420c06f0a986b9cc7accf": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "damp_stain",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.33,
+            "y": 0.548,
+            "w": 0.35,
+            "h": 0.35,
+            "label": "staining and debris in trap"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "1d1478668b9fe3b21be4688daf020214e3df6512ea2572d62438d3c053e07483": {
     "observations": [],
     "photoLabels": [
       {
@@ -755,11 +810,18 @@
         "quality": "ok",
         "boxes": [
           {
-            "x": 0.297,
-            "y": 0.3428,
-            "w": 0.405,
-            "h": 0.312,
+            "x": 0.007,
+            "y": 0.165,
+            "w": 0.999,
+            "h": 0.648,
             "label": "damp stain"
+          },
+          {
+            "x": 0.4673,
+            "y": 0.4643,
+            "w": 0.165,
+            "h": 0.141,
+            "label": "peeling"
           }
         ],
         "meterDigits": null,
@@ -768,26 +830,25 @@
     ],
     "senderMap": {},
     "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
+      "Cached"
     ],
     "mode": "live"
   },
-  "78a4fed9006f5880fab1744879a0756869864cd1d6cdad38eec5ec1b8e10580b": {
+  "ea8d73c2883d97e11b0ba2b4a200cec92639656d80edb9d3a9311552d9a38cc5": {
     "observations": [],
     "photoLabels": [
       {
         "photoId": "window-202",
-        "surface": "damp_stain",
+        "surface": "active_blistering",
         "zone": "window_perimeter",
         "quality": "ok",
         "boxes": [
           {
-            "x": 0.651,
-            "y": 0.5485,
-            "w": 0.027,
-            "h": 0.232,
-            "label": "damp_stain"
+            "x": 0.28,
+            "y": 0.05,
+            "w": 0.32,
+            "h": 0.93,
+            "label": "active blistering"
           }
         ],
         "meterDigits": null,
@@ -796,8 +857,7 @@
     ],
     "senderMap": {},
     "warnings": [
-      "Cached",
-      "DEMO illustration — simulated input, not field evidence"
+      "Cached"
     ],
     "mode": "live"
   }

@@ -969,9 +969,9 @@
     "images": {
       "hero-ceiling-402": {
         "id": "ceiling-402",
-        "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
-        "assetSource": "demo-illustration",
-        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+        "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+        "assetSource": "team-photo",
+        "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
       },
       "hero-duct-302": {
         "id": "duct-302",

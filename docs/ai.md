@@ -19,9 +19,9 @@ The four prompts are copied verbatim from Part E of the person-A build plan; a t
 - `so-v1`: cautious reviewer; no probabilities, trades, cost, blame or liability.
 - `base-v1`: evaluation-only single-LLM source/trade baseline. E.4 supplies no component claim, so the wrapper returns area specificity only when it identifies a flat, otherwise mechanism.
 
-Provider requests use a JSON schema. Every model output is Zod validated. An invalid response or failed attempt gets one repair retry, then a conservative fallback. Each attempt has a 20-second timeout. Repair instructions contain schema errors, not secrets. Inputs embedded in prompts are data; this boundary reduces prompt-injection risk but does not guarantee correct extraction.
+Provider requests use a JSON schema. Every model output is Zod validated. Invalid JSON/schema or a non-HTTP failure/timeout gets at most one repair attempt, then a conservative fallback. HTTP failures do not enter that repair loop; 429 follows the bounded model/provider chain below. Each adapter attempt has a 20-second timeout. Repair instructions contain schema errors, not secrets. Inputs embedded in prompts are data; this boundary reduces prompt-injection risk but does not guarantee correct extraction.
 
-Both Gemini and OpenAI adapters are implemented. Keys come only from server `process.env`. The local live verification used `GEMINI_MODEL=gemini-3.1-flash-lite`; the default Gemini model encountered capacity errors during that test. Availability can change. We do not silently report fallback output as a successful model response.
+Both Gemini and OpenAI adapters are implemented. Keys come only from server `process.env`. Current absent-env defaults are `GEMINI_MODEL=gemini-3.1-flash-lite` and `GEMINI_FALLBACK_MODEL=gemini-3.8-flash`; explicit env values override them. Historical local/production live probes are in INTEGRATION_BUGS.md. No live probe was run for this handoff. Availability can change. We do not silently report fallback output as a successful model response.
 
 ## Boundaries and data flow
 
@@ -31,7 +31,7 @@ WhatsApp names/phone numbers/emails are pseudonymized in the browser; the server
 
 Before a photo is sent to a provider or saved by upload, it is decoded and re-encoded as JPEG at quality 85 with maximum edge 1600. EXIF/GPS metadata is stripped. Browser preparation also supports bounded detail crops and a clearly labelled edge-contrast view; this is not a moisture detector. Server upload accepts JPEG/PNG/WebP up to 4 MiB per image and bounds the actual streamed multipart body to 10 MiB. Invalid/oversized images are rejected.
 
-The explicitly authorized team demo fixture is prepared from ignored `eval/data/photos/duct_302_raw.jpg` into a clean `fixtures-ai/photos/demo/duct_302.jpg`. The helper checks that EXIF, XMP, IPTC and ICC are absent before writing. Raw photos are never committed. A public demo fixture is intentionally shareable evidence; private resident uploads instead go to the private Supabase bucket.
+User-confirmed own clean fixtures are ceiling_402_own.jpg, window_202_own.jpg, trap_502_own.jpg, meter_502_own.jpg and duct_302.jpg in `fixtures-ai/photos/demo/`. Original raw files stay in ignored `eval/data/photos/`. The meter overview is not two readable timed readings, and no actual Day-14 follow-up photo was provided. Other scenes retain labelled demo illustrations. The helper checks that EXIF, XMP, IPTC and ICC are absent before writing. Raw photos are never committed. A public demo fixture is intentionally shareable evidence; private resident uploads instead go to the private Supabase bucket.
 
 ## API behavior and fallback
 
@@ -40,6 +40,7 @@ The explicitly authorized team demo fixture is prepared from ignored `eval/data/
 | POST /api/read | Shared `ReadResult`, including `mode: live/cached/fallback` and warnings |
 | POST /api/second-opinion | Validated `SecondOpinion` or HTTP 200/null; engine turns null into explicit review-failed/unreviewed state |
 | POST /api/link | Signed check-bound 48-hour link; safe/available checks only |
+| GET /api/link/updates?caseId=… | Owner-cookie-authorized ReadResult containing persisted resident answers/labels; no-store; B must wire dashboard polling/refetch |
 | GET /api/link/verify | Check instructions and optional private 10-minute signed ghost-photo URL |
 | POST /api/upload | Consent plus four safety answers, photo(s), validated labels and observation bound to the requested checkId |
 | GET/POST /api/memory | Professional-finding counts, persistent with Supabase; explicit localStorage fallback otherwise |
@@ -55,7 +56,7 @@ Meter checks require two images and a positive time interval. Both digit strings
 
 Full read cache keys include building ID, pseudonymized messages, photo IDs/bytes and prompt versions. Photo-label cache keys additionally bind the exact cleaned image bytes to check type, flat and instruction, allowing upload retries/demo inputs to reuse validated labels without reusing observation IDs. Only successful model results are persisted as model cache entries. Cached responses remain labelled cached.
 
-Caches use bounded process memory, optional server-side Supabase `ai_cache`, and checked-in `fixtures-ai/cache/bundled.json`. Keys hash evidence; cache values contain pseudonymized observations/labels and must still be treated as resident data. The demo manifest/status records coverage explicitly. All demo inputs other than the team duct photograph now use visibly labelled schematic DEMO illustrations with simulated-input cache warnings; these are never presented as field evidence or evaluation data. See [hardening evidence and commands](HARDENING.md).
+Caches use bounded process memory, optional server-side Supabase `ai_cache`, and checked-in `fixtures-ai/cache/bundled.json`. Keys hash evidence; cache values contain pseudonymized observations/labels and must still be treated as resident data. The demo manifest/status records coverage explicitly. User-confirmed own photos cover matching ceiling/window/trap/meter-overview/duct inputs; unmatched scenes use visibly labelled schematic DEMO illustrations with simulated-input cache warnings; these are never presented as field evidence or evaluation data. See [hardening evidence and commands](HARDENING.md).
 
 ## Links, storage and configuration
 
@@ -69,7 +70,7 @@ Server environment variables:
 LLM_PROVIDER=gemini
 GEMINI_API_KEY=...
 GEMINI_MODEL=gemini-3.1-flash-lite
-GEMINI_FALLBACK_MODEL=gemini-3.5-flash-lite
+GEMINI_FALLBACK_MODEL=gemini-3.8-flash
 LIVE_LLM_TESTS=0
 SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=...
@@ -80,3 +81,10 @@ APP_ORIGIN=https://YOUR_CANONICAL_DEPLOYMENT
 For an active compatible provider, configure OPENAI_BASE_URL, OPENAI_MODEL and OPENAI_API_KEY; select it directly with LLM_PROVIDER=openai or use LLM_FALLBACK_PROVIDER=openai after Gemini quotas. GitHub Models has retired; see QUOTA_SETUP.md. Never prefix a service-role key, model key or signing secret with `NEXT_PUBLIC_`. Set server variables in the deployment as well as ignored local `.env.local`, then restart/redeploy. Migration SQL is in `packages/ai/supabase/migrations/001_init.sql`.
 
 Read/link routes apply process-local rate limits; these are not a distributed quota or abuse-prevention system. Model output can still be wrong despite schema validation, and a single photo cannot reveal hidden building defects. The human-labelled AI evaluation remains pending: the runner's placeholder dataset/results are explicitly synthetic smoke data, not measured accuracy. Current upload/mobile-preview acceptance is recorded in [upload verification](UPLOAD_VERIFICATION.md).
+
+
+## Final handoff limitations
+
+The 16 canonical demo reads and 12 upload-label contexts are cached and verified without a provider. Arbitrary changed inputs are not guaranteed cached. With no key, known inputs remain Cached; uncached inputs are Fallback, and Second Opinion becomes unreviewed. Scripted Judge evidence and /c/demo are labelled simulations, not live resident checks. B currently owns two presentation defects: encoded print-route case IDs and unresolved hero photo IDs; exact reproductions and lines are in INTEGRATION_BUGS.md. The owner answer-refresh endpoint exists, but B must consume it before physical-phone answers automatically update an open dashboard.
+
+The application does not maintain a project-wide daily token/request budget, distributed rate limiter, retention/deletion UI, full multilingual privacy guarantee or clinical/engineering accuracy claim. Free capacity is not guaranteed. Human-labelled AI evaluation, real phone footage, final C-owned evaluation and release/submission are distinct from unit tests and this handoff.

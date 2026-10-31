@@ -84,3 +84,6 @@
 ## CP1 stop-rule correction (A-T10)
 
 The 0.80 threshold applies to a source area including its localized component mass, consistently with claimEvidence and Job Sheet evidence caps. Previously localization could turn 0.80 into 0.08 area + 0.72 component and incorrectly select the low-value inspection stop. stopRule now uses conserved source mass; Number.EPSILON only absorbs summation rounding at the boundary. An objection still blocks the confidence path. The independent best available score < 0.05 inspection path, safety and reopened gates are unchanged; exactly 0.05 continues. Inspection stops still make no repair-trade claim. We did not lower the cost threshold, tune likelihoods, or read/run eval/hard-cases. Low-value inspection losses reported by C remain legitimate under the specified rule; correct top-1 alone below 0.80 is insufficient for a repair decision. Verification uses the hero, eight scenarios, and seeded simulated buildings only.
+
+
+Final handoff bug fix: prediction same-stack photo inspections are supported link targets with zero diagnostic score/information gain. They exist only for actual predicted targets, respect access/safety/completion, and do not change A-T10 stop thresholds. Their observations remain inspection evidence, not a pre-emptive repair recommendation.
