@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T07:29:37.684Z",
+  "generatedAt": "2026-10-31T09:13:27.884Z",
   "label": "team-built test, not field accuracy",
   "sets": {
     "simBuildings": 60,
@@ -20,7 +20,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.232
+      "msPerCase": 0.235
     },
     {
       "method": "Blame the flat above",
@@ -62,7 +62,7 @@
       "harmfulFlips": 5,
       "checksToDecision": 1.153,
       "hazardPass": 1,
-      "msPerCase": 0.3
+      "msPerCase": 0.319
     },
     {
       "method": "StackSense without Second Opinion",
@@ -126,7 +126,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.305
+        "msPerCase": 0.299
       },
       {
         "method": "Blame the flat above",
@@ -140,7 +140,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": 0,
-        "msPerCase": 0.002
+        "msPerCase": 0.001
       },
       {
         "method": "Send a trade straight away",
@@ -168,7 +168,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 1.12,
         "hazardPass": 1,
-        "msPerCase": 0.344
+        "msPerCase": 0.349
       },
       {
         "method": "StackSense without Second Opinion",
@@ -182,7 +182,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.194
+        "msPerCase": 0.191
       }
     ],
     "sim": [
@@ -198,7 +198,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.196
+        "msPerCase": 0.204
       },
       {
         "method": "Blame the flat above",
@@ -240,7 +240,7 @@
         "harmfulFlips": 5,
         "checksToDecision": 1.167,
         "hazardPass": null,
-        "msPerCase": 0.278
+        "msPerCase": 0.303
       },
       {
         "method": "StackSense without Second Opinion",
@@ -254,7 +254,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.103
+        "msPerCase": 0.105
       }
     ]
   },
@@ -264,5 +264,5 @@
       "reason": "pending — 0/90 cases answered by the model so far (last attempt: provider quota exceeded, HTTP 429); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts"
     }
   ],
-  "engineTree": "9caebbc957314cfc1ccd58b2f8474e9ede800d7e"
+  "engineTree": "858c49cde3ff7256d9af7ae318105e57ae45000c"
 }
