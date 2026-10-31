@@ -41,7 +41,7 @@ export function Workspace() {
  const isDemo=demo.enabled||fixture||state.observations.some(o=>o.provenance==='simulated');
  const mode=read?.mode??(isDemo?'cached':undefined);
  const acceptAnswers=(result:ReadResult)=>{const delta=answerDelta(state,result);if(!delta.observations.length)return 0;setRead(previous=>mergeAnswerRead(previous,delta));setState(previous=>applyResidentAnswers(previous,result));return delta.observations.length;};
- return <CheckLinkProvider state={state} onRead={acceptAnswers}>
+ return <CheckLinkProvider state={state} onRead={acceptAnswers}><div className={judge?'app-with-judge':undefined}>
   <TopBar region={state.building.region} buildingName={state.building.name} onRegion={changeRegion} judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
   <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><DataBadge mode={mode} demoData={isDemo}/></div>
   <SafetyBoundary state={state}>
@@ -57,9 +57,9 @@ export function Workspace() {
    </PanelState>} analysis={<>
     <PanelState key={`odds-${state.caseId}`} name="Source estimates"><SourceBars state={state}/></PanelState><PanelState key={`check-${state.caseId}`} name="Next check"><NextCheck state={state} onDemoStep={advance}/></PanelState>
     <PanelState key={`opinion-${state.caseId}`} name="Second Opinion"><SecondOpinionBanner state={state} demoData={isDemo} onState={setState}/></PanelState>
-    <RightTabs state={state} onState={setState}/>
+    <RightTabs state={state} onState={setState} demoData={isDemo}/>
    </>}/>
    {photo&&<PhotoViewer key={photo} photoId={photo} label={state.photoLabels.find(p=>p.photoId===photo)} onClose={()=>setPhoto(null)} onCorrect={(label,changed)=>setState(correctPhoto(state,label,changed))}/>}
   </SafetyBoundary>
- </CheckLinkProvider>;
+ </div></CheckLinkProvider>;
 }

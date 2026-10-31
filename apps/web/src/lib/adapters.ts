@@ -15,7 +15,7 @@ const realApi={
  async secondOpinion(state:EngineState) {return SecondOpinion.nullable().parse(await post('/api/second-opinion',{state}));},
  async createLink(request:z.infer<typeof LinkRequest>) {return LinkResult.parse(await post('/api/link',request));},
 };
-const liveEngine={...realEngine,createCase(building:Building,opts?:Parameters<typeof realEngine.createCase>[1]){return realEngine.createCase(building,{...opts,caseId:opts?.caseId??`${building.id}-${crypto.randomUUID()}`});}};
+const liveEngine={...realEngine,createCase(building:Building,opts?:Parameters<typeof realEngine.createCase>[1]){return realEngine.createCase(building,{...opts,now:opts?.now??new Date().toISOString(),caseId:opts?.caseId??`${building.id}-${crypto.randomUUID()}`});}};
 export const engine = USE_MOCK_ENGINE ? mockEngine : liveEngine;
 export const buildings={IN:realEngine.blockA,UK:realEngine.ukBlock};
 export const api = USE_MOCK_API ? mockApi : realApi;

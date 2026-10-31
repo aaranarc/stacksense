@@ -51,3 +51,11 @@ table { width:100%; border-collapse:collapse; } th,td { text-align:left; padding
 .answer-refresh { border-top:1px solid var(--color-border); margin-top:24px; padding-top:16px; overflow-wrap:anywhere; }
 
 .demo-note { margin:16px 32px; } @media(max-width:800px) { .demo-note { margin:16px; } }
+
+.panel,.drawer,.source-label { min-width:0; overflow-wrap:anywhere; }
+.drawer { overscroll-behavior:contain; }
+input[type=file] { max-width:100%; min-height:44px; }
+input[type=file]::file-selector-button { min-height:44px; padding:8px 12px; margin-right:8px; border:1px solid var(--color-border); border-radius:8px; font:inherit; background:var(--color-surface); color:var(--color-ink); cursor:pointer; }
+@media(max-width:480px) { .app-with-judge { padding-bottom:calc(96px + env(safe-area-inset-bottom)); } .app-with-judge + .demo-note { margin-bottom:calc(112px + env(safe-area-inset-bottom)); } }
+
+input[type=range],input[type=checkbox],input[type=radio] { accent-color:var(--color-ink); } textarea::placeholder { color:var(--color-ink); opacity:.75; }
