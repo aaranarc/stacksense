@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T11:38:24.822Z",
+  "generatedAt": "2026-10-31T18:07:14.463Z",
   "label": "team-built test, not field accuracy",
   "sets": {
     "simBuildings": 60,
@@ -20,7 +20,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.229
+      "msPerCase": 0.313
     },
     {
       "method": "Blame the flat above",
@@ -62,7 +62,7 @@
       "harmfulFlips": 5,
       "checksToDecision": 1.153,
       "hazardPass": 1,
-      "msPerCase": 0.308
+      "msPerCase": 0.403
     },
     {
       "method": "StackSense without Second Opinion",
@@ -76,7 +76,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.131
+      "msPerCase": 0.174
     }
   ],
   "robustness": [
@@ -126,7 +126,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.297
+        "msPerCase": 0.381
       },
       {
         "method": "Blame the flat above",
@@ -140,7 +140,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": 0,
-        "msPerCase": 0.001
+        "msPerCase": 0.002
       },
       {
         "method": "Send a trade straight away",
@@ -154,7 +154,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": 0,
-        "msPerCase": 0.003
+        "msPerCase": 0.002
       },
       {
         "method": "Fixed checklist",
@@ -168,7 +168,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 1.12,
         "hazardPass": 1,
-        "msPerCase": 0.366
+        "msPerCase": 0.452
       },
       {
         "method": "StackSense without Second Opinion",
@@ -182,7 +182,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.187
+        "msPerCase": 0.237
       }
     ],
     "sim": [
@@ -198,7 +198,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.196
+        "msPerCase": 0.279
       },
       {
         "method": "Blame the flat above",
@@ -240,7 +240,7 @@
         "harmfulFlips": 5,
         "checksToDecision": 1.167,
         "hazardPass": null,
-        "msPerCase": 0.28
+        "msPerCase": 0.378
       },
       {
         "method": "StackSense without Second Opinion",
@@ -254,7 +254,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.103
+        "msPerCase": 0.142
       }
     ]
   },
@@ -264,5 +264,5 @@
       "reason": "partial — 16 of 30 (free-tier quota); not scored until all 30 hard cases are answered"
     }
   ],
-  "engineTree": "858c49cde3ff7256d9af7ae318105e57ae45000c"
+  "engineTree": "d24621c439825d1d9a56844ceaf194fc1cf6591e"
 }

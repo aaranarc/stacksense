@@ -4,14 +4,16 @@ import type { ReadResult,ChatMessage } from '@stacksense/contracts';
 import { readChat } from '../../lib/importChat';
 import {DataBadge} from '../states/DataBadge';
 import { demo } from '../../lib/adapters';
-export function PasteChat({onRead,mode,buildingId='block-a',autoDemo=false}:{onRead:(read:ReadResult,messages:ChatMessage[],demoData?:boolean)=>void;mode?:ReadResult['mode'];buildingId?:string;autoDemo?:boolean}) {
- const [text,setText]=useState(''),[files,setFiles]=useState<File[]>([]),[busy,setBusy]=useState(false),[error,setError]=useState(''),[warnings,setWarnings]=useState<string[]>([]);
+export function PasteChat({onRead,mode,buildingId='block-a',autoDemo=false,draftText,onDraftChange}:{draftText?:string;onDraftChange?:(text:string)=>void;onRead:(read:ReadResult,messages:ChatMessage[],demoData?:boolean)=>void;mode?:ReadResult['mode'];buildingId?:string;autoDemo?:boolean}) {
+ const [localText,setLocalText]=useState(''),[files,setFiles]=useState<File[]>([]),[busy,setBusy]=useState(false),[error,setError]=useState(''),[warnings,setWarnings]=useState<string[]>([]);
+ const text=draftText??localText;
+ function setText(value:string){setLocalText(value);onDraftChange?.(value);}
  const active=useRef(true);
  const [demoLoaded,setDemoLoaded]=useState(false);
  useEffect(()=>{active.current=true;return ()=>{active.current=false;};},[]);
  const autoLoaded=useRef(false);
  async function acceptFiles(incoming:File[]){if(busy)return;setDemoLoaded(false);setWarnings([]);setError('');try{const images:File[]=[];for(const file of incoming){if(file.name.toLowerCase().endsWith('.txt'))setText(await file.text());else if(['image/jpeg','image/png','image/webp'].includes(file.type))images.push(file);else throw new Error('Choose a .txt export or JPG, PNG, or WebP image.');}setFiles(old=>[...old,...images]);}catch(e){setError(e instanceof Error?e.message:'Could not read these files.');}}
- async function run(input=text,isDemo=false){if(!active.current)return;setBusy(true);setError('');setWarnings([]);try{const read=await readChat(input,isDemo?[]:files,isDemo,buildingId);if(!active.current)return;setWarnings(read.warnings);onRead(read,read.messages,isDemo||demoLoaded);}catch(e){if(active.current)setError(e instanceof Error?e.message:'Could not read this chat. Please try again.');}finally{if(active.current)setBusy(false);}}
+ async function run(input=text,isDemo=false){if(!active.current)return;setBusy(true);setError('');setWarnings([]);try{const read=await readChat(input,isDemo?[]:files,isDemo,buildingId);if(!active.current)return;onRead(read,read.messages,isDemo||demoLoaded);}catch(e){if(active.current)setError(e instanceof Error?e.message:'Could not read this chat. Please try again.');}finally{if(active.current)setBusy(false);}}
  async function loadDemo(){setBusy(true);setError('');try{const response=await fetch('/demo/hero_blockA.txt');if(!response.ok)throw new Error();const chat=await response.text();setText(chat);setFiles([]);setDemoLoaded(true);await run(chat,true);}catch{setError('Could not load the demo chat. Please try again.');}finally{if(active.current)setBusy(false);}}
  // Dashboard "Load demo chat" lands here with autoDemo; load once per mount.
  useEffect(()=>{if(autoDemo&&!autoLoaded.current){autoLoaded.current=true;void loadDemo();}});

@@ -6,7 +6,8 @@ import {recoveryInput} from '../../lib/recoveryInput';
 import {visualStatus} from '../../lib/visual';
 import {GhostCompare} from '../photo/GhostCompare';
 import {photoMedia} from '../../lib/media';
-import {moistureThresholds} from '@stacksense/engine';
+import {moistureThresholds} from '../../lib/adapters';
+import Link from 'next/link';
 import {Check,Droplet} from 'lucide-react';
 import {useCheckLink} from '../phone/PhoneSimulator';
 export function DryPaintTab({state,onState}:{state:EngineState;onState:(state:EngineState)=>void}) {
@@ -30,7 +31,7 @@ export function DryPaintTab({state,onState}:{state:EngineState;onState:(state:En
  ];
  const current=steps.findIndex(s=>!s.done);
  const tile=(title:string,o:typeof victim,ghost=false)=>{const m=o&&photoMedia(o.photoIds[0]!);return <figure className="photo-tile"><figcaption>{title}</figcaption>{m?<div className={`photo-frame${ghost?' ghost':''}`}><img src={m.url} alt={`${title} photo, flat ${o!.flatId}`}/>{ghost&&<span className="ghost-outline" aria-hidden="true"/>}</div>:<div className="photo-frame empty">No photo yet</div>}<small>{o?stamp(o.at):ghost?'Ghost outline aligns the recapture':'—'}</small></figure>;};
- const threshold=moistureThresholds[state.building.region];
+ const threshold=state.building.moistureThresholdWme??moistureThresholds[state.building.region];
  return <section className="recovery">
   <ol className="stepper" aria-label="Repair, dry and paint status">{steps.map((s,i)=>{const st=visualStatus(s.label,s.done&&s.at?'green':'grey');return <li key={s.key} className={s.done?'done':i===current?'current':undefined}><span className="step-circle" style={s.done?{background:st.colour,borderColor:st.colour}:undefined} aria-hidden="true">{s.done?<Check size={14}/>:i+1}</span><span className="step-text"><strong>{s.label}</strong><small>{s.done&&s.at?stamp(s.at):i===current?(i===0?'Not recorded yet':i===1?'Needs a moisture reading':'Needs a dry reading'):'Pending'}</small></span></li>;})}</ol>
   <p className="note">Looks better ≠ dry. Only a moisture reading can mark this ready to paint.</p>
@@ -41,7 +42,7 @@ export function DryPaintTab({state,onState}:{state:EngineState;onState:(state:En
     <span className="eyebrow-strong">Moisture reading</span>
     <div className="moisture-value"><Droplet size={22} aria-hidden="true"/><strong className={lastReading?.moisture?undefined:'empty'}>{lastReading?.moisture?`${lastReading.moisture.value}%`:'No reading yet'}</strong><span>Target ≤ {threshold} %WME</span></div>
     <form onSubmit={e=>{e.preventDefault();record('moisture_reading');}}><label className="sr-only" htmlFor={inputId}>Moisture reading</label><input id={inputId} aria-label="Moisture reading" type="number" min="0" max="100" step="0.1" required value={value} placeholder="%WME" onChange={e=>setValue(e.target.value)}/><select aria-label="Moisture unit" value="%WME" onChange={()=>{}}><option>%WME</option></select><button className="outline-btn" disabled={state.safety.status!=='ok'||r.repair!=='done'||value===''}>Add reading</button></form>
-    <small>Threshold set by contractor configuration; prototype review pending.</small>
+    <small>{state.building.moistureThresholdWme===undefined?'Prototype default; contractor review pending.':'Building threshold; confirm with your contractor.'} <Link href="/settings">Configure moisture threshold</Link></small>
    </div>
   </div>
   <div className="recovery-actions">{r.repair!=='done'&&<button className="outline-btn" disabled={state.safety.status!=='ok'} onClick={()=>record('repair_done')}>Record repair completed</button>}<span className="recapture-note"><strong>Day-14 recapture</strong> {r.day14DueAt?`due ${new Date(r.day14DueAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})}`:'· record the repair to schedule it'}</span><button className="ghost-btn" onClick={()=>void send()} disabled={busy||!check||state.safety.status!=='ok'}>{busy?'Creating link…':'Send recapture link'}</button></div>

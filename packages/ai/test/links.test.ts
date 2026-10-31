@@ -99,3 +99,17 @@ it("C final: a ceiling photo after a recorded repair is a Day-14 recapture that 
  const after=applyObservations(base,[{...obs,at:"2026-11-14T16:30:00.000Z"}],{photoLabels:result.photoLabels});
  expect(after.recovery.reopened).toBe(true);expect(after.recovery.paint).toBe("not_ready");
 });
+
+it('still opens a valid resident check when the optional previous-photo service fails',async()=>{
+ const repository=memoryRepository();repository.ghost=async()=>{throw Error('storage unavailable');};
+ const handlers=createLinkHandlers({repository,secret});
+ const data=await(await handlers.link(request({caseId:state.caseId,checkId:'meter_check@502',flatId:'502',lang:'en',state}))).json();
+ const response=await handlers.verify(new Request(`https://demo.example.invalid/api/link/verify?token=${encodeURIComponent(data.token)}`));
+ expect(response.status).toBe(200);expect((await response.json()).ghostPhotoUrl).toBeNull();
+});
+it('reports a temporary repository outage as retryable rather than declaring a valid link expired',async()=>{
+ const repository=memoryRepository();const handlers=createLinkHandlers({repository,secret});
+ const data=await(await handlers.link(request({caseId:state.caseId,checkId:'meter_check@502',flatId:'502',lang:'en',state}))).json();
+ repository.getLink=async()=>{throw Error('temporary outage');};
+ expect((await handlers.verify(new Request(`https://demo.example.invalid/api/link/verify?token=${encodeURIComponent(data.token)}`))).status).toBe(503);
+});

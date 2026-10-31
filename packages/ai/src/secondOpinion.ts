@@ -1,4 +1,5 @@
 import { SecondOpinionRequest, SecondOpinion } from "@stacksense/contracts";
+import {applySecondOpinion} from "@stacksense/engine";
 import { serverAdapter } from "./llm/server";
 import type { LlmAdapter } from "./llm/adapter";
 import { jsonBody, jsonResponse, rateLimiter } from "./http/common";
@@ -14,7 +15,7 @@ export function createSecondOpinionHandler(opts:{adapter?:LlmAdapter}={}) {
       const ranked=[...state.hypotheses].sort((a,b)=>(state.posterior[b.id] ?? 0)-(state.posterior[a.id] ?? 0)),top=ranked[0];
       if(!top) return jsonResponse(null);
       const result=await (opts.adapter ?? serverAdapter()).secondOpinion({topHypothesisLabel:top.label,topProbabilityPct:String(Math.round((state.posterior[top.id] ?? 0)*100)),otherHypotheses:JSON.stringify(ranked.slice(1)),observationsJson:JSON.stringify(state.observations),checksJson:JSON.stringify(state.nextChecks)});
-      if(!result.data) return jsonResponse(null);
+      if(!result.data){const fallback=applySecondOpinion(state,null).secondOpinion!;return jsonResponse({...fallback,unknown:[...fallback.unknown,...result.warnings]});}
       const opinion=SecondOpinion.safeParse({...result.data,source:"llm"});
       return jsonResponse(opinion.success?opinion.data:null);
     } catch { return jsonResponse(null); }

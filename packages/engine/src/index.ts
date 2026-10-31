@@ -22,3 +22,8 @@ export { simulateBuilding } from "./sim";
 
 export { buildJobSheet } from "./jobSheet";
 export { recoveryOf, moistureThresholds } from "./recovery";
+
+export { textHazards } from "./hazards";
+export { sourceEstimates, permittedSourceLabel } from "./sourceEstimates";
+export { buildingFromSetup } from "./building/setup";
+export {answerSafetyQuestions} from './safetyAnswers';

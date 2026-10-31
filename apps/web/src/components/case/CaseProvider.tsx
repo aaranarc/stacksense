@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { z } from 'zod';
-import { ChatMessage, EngineState, ReadResult } from '@stacksense/contracts';
+import { ChatMessage, EngineState, ReadResult, type Building } from '@stacksense/contracts';
 import { engine, demo, buildings } from '../../lib/adapters';
 import { answerDelta, applyResidentAnswers, mergeAnswerRead } from '../../lib/answers';
 import { ukDemo } from '../../lib/regionDemo';
@@ -10,7 +10,7 @@ import { CheckLinkProvider } from '../phone/PhoneSimulator';
 import { PlayerContext, useScenarioPlayer } from '../judge/ScenarioPicker';
 
 export const STORAGE_KEY = 'stacksense:workspace';
-const Saved = z.object({ state: EngineState, read: ReadResult.nullable(), messages: z.array(ChatMessage), fixture: z.boolean(), flat: z.string().nullable() });
+const Saved = z.object({ state: EngineState, read: ReadResult.nullable(), messages: z.array(ChatMessage), fixture: z.boolean(), flat: z.string().nullable(), draftText: z.string().default('') });
 type Saved = z.infer<typeof Saved>;
 type Region = 'IN' | 'UK';
 
@@ -28,6 +28,7 @@ function writeSaved(value: Saved | null) {
 
 function useCaseStore() {
   const [state, setState] = useState(() => engine.createCase(demo.states[0]!.building));
+  const [draftText,setDraftText]=useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [read, setRead] = useState<ReadResult | null>(null);
   const [fixture, setFixture] = useState(false);
@@ -43,10 +44,10 @@ function useCaseStore() {
 
   useEffect(() => {
     const saved = readSaved();
-    if (saved) { setState(saved.state); setRead(saved.read); setMessages(saved.messages); setFixture(saved.fixture); setFlat(saved.flat); }
+    if (saved) { setState(saved.state); setRead(saved.read); setMessages(saved.messages); setFixture(saved.fixture); setFlat(saved.flat); setDraftText(saved.draftText); }
     setHydrated(true);
   }, []);
-  useEffect(() => { if (hydrated) writeSaved({ state, read, messages, fixture, flat }); }, [hydrated, state, read, messages, fixture, flat]);
+  useEffect(() => { if (hydrated) writeSaved({ state, read, messages, fixture, flat, draftText }); }, [hydrated, state, read, messages, fixture, flat, draftText]);
 
   const changeRegion = (region: Region) => {
     if (region === state.building.region) return;
@@ -59,7 +60,10 @@ function useCaseStore() {
   };
   const reset = () => {
     player.clear(); regionCases.current = {}; writeSaved(null);
-    setState(engine.createCase(buildings.IN)); setFlat(null); setPhoto(null); setRead(null); setMessages([]); setResetKey(k => k + 1); setFixture(false);
+    setState(engine.createCase(buildings.IN)); setFlat(null); setPhoto(null); setRead(null); setMessages([]); setResetKey(k => k + 1); setFixture(false); setDraftText('');
+  };
+  const startBuilding=(building:Building)=>{
+    player.clear();regionCases.current={};setState(engine.createCase(building));setMessages([]);setRead(null);setFixture(false);setFlat(null);setPhoto(null);setDraftText('');setResetKey(k=>k+1);
   };
   const acceptAnswers = (result: ReadResult) => {
     const delta = answerDelta(state, result);
@@ -78,9 +82,9 @@ function useCaseStore() {
   };
   const isDemo = demo.enabled || fixture || state.observations.some(o => o.provenance === 'simulated');
   return {
-    state, setState, messages, read, flat, setFlat, photo, setPhoto, view, setView, resetKey, hydrated, player,
+    state, setState, draftText, setDraftText, messages, read, flat, setFlat, photo, setPhoto, view, setView, resetKey, hydrated, player,
     isDemo, mode: read?.mode ?? (isDemo ? 'cached' as const : undefined), region: state.building.region,
-    changeRegion, reset, acceptAnswers, acceptRead, assignSender, fromJudge,
+    changeRegion, reset, startBuilding, acceptAnswers, acceptRead, assignSender, fromJudge,
     advance: () => setState(engine.applyObservations(state, [])),
   };
 }

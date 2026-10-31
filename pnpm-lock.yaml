@@ -11,6 +11,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
 
   apps/web:
     dependencies:
@@ -87,6 +90,9 @@ importers:
       '@stacksense/contracts':
         specifier: workspace:*
         version: link:../contracts
+      '@stacksense/engine':
+        specifier: workspace:*
+        version: link:../engine
       sharp:
         specifier: ^0.34.5
         version: 0.34.5

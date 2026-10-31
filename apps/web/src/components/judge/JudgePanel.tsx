@@ -28,7 +28,7 @@ function useRightTrade(src = '/eval/latest.json') {
   useEffect(() => {
     let live = true;
     try {
-      fetch(src).then(r => (r.ok ? r.json() : null)).then(json => { const v = json?.rowsBySet?.hard?.[0]?.rightTrade; if (live && typeof v === 'number') setPct(Math.round(v * 100)); }).catch(() => {});
+      fetch(src).then(r => (r.ok ? r.json() : null)).then(json => { const v = json?.rowsBySet?.hard?.find((row:{method:string})=>row.method==='StackSense')?.rightTrade; if (live && typeof v === 'number') setPct(Math.round(v * 100)); }).catch(() => {});
     } catch { /* no network in this environment */ }
     return () => { live = false; };
   }, [src]);
@@ -59,10 +59,10 @@ export function JudgePanel({ state, onState, sheet = true }: { state: EngineStat
           <p className={s.kicker}>Decision check</p>
           <div className={s.decisionTile}><CircleCheck size={22} aria-hidden="true" /><div><small>Current decision</small><strong>{state.observations.length ? outcomeOf(state) : 'No evidence yet'}</strong></div></div>
           {checks.length > 0 && <ul className={s.checklist}>{checks.map(c => <li key={c}><CircleCheck size={14} aria-hidden="true" />{c}</li>)}</ul>}
-          {rightTrade !== null && <p className={s.foot}>Right trade {rightTrade}% · team-built test, not field accuracy</p>}
+          {rightTrade !== null && <p className={s.foot}>Hard-case right trade {rightTrade}% · prepared 30-case subset · team-built test, not field accuracy</p>}
         </section>
       </div>
-      <details><summary>Evaluation</summary><EvalCard region={state.building.region} /></details>
+      <details><summary>Evaluation</summary><EvalCard region={state.building.region} state={state} /></details>
       <details><summary>How it decided</summary><HowItDecided state={state} /></details>
       <details><summary>Break it</summary><BreakIt onState={onState} /></details>
     </div>

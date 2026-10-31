@@ -101,3 +101,22 @@ it("reads photo-only inputs without an empty-chat model call and reports reused 
  const next=await service({buildingId:"block-a",messages:[],photos:[{id:"photo-two",dataUrl:"data:image/jpeg;base64,YQ=="}]});
  expect(next.mode).toBe("cached");expect(next.photoLabels[0]?.photoId).toBe("photo-two");expect(provider).toHaveBeenCalledTimes(1);
 });
+
+it('does not revive explicitly denied hazards from model labels or cached reads',async()=>{
+ const message={...messages[0]!,text:'402 bathroom ceiling stain; no ceiling sagging and no sewage smell'};
+ const draft={flatId:'402',room:'bathroom',zone:'ceiling',surface:'damp_stain',kind:'complaint',hazards:['sagging_ceiling','sewage'],hazardQuestionsAnswered:false,rawText:message.text,sourceMessageIds:[message.id]};
+ const cache=createCache({bundled:{}}),provider=vi.fn(async()=>({observations:[draft]}));
+ const service=createReadService({adapter:createAdapter({provider}),cache});
+ for(let n=0;n<2;n++){
+  const result=await service({...input,messages:[message]});
+  expect(result.observations[0]?.hazards).toEqual([]);
+  expect(result.observations[0]?.hazardQuestionsAnswered).toBe(false);
+ }
+});
+it('does not call partial safety answers complete even when the model does',async()=>{
+ const draft={flatId:'402',room:'bathroom',zone:'ceiling',surface:'damp_stain',kind:'complaint',hazards:[],hazardQuestionsAnswered:true,rawText:'',sourceMessageIds:['m1']};
+ const service=createReadService({adapter:createAdapter({provider:async()=>({observations:[draft]})}),cache:createCache({bundled:{}})});
+ const text='402 bathroom ceiling stain; no water near electrics; ceiling is not sagging';
+ expect((await service({...input,messages:[{...messages[0]!,text}]})).observations[0]?.hazardQuestionsAnswered).toBe(false);
+ expect((await service({...input,messages:[{...messages[0]!,text:text+'; no fast water ingress; no sewage smell'}]})).observations[0]?.hazardQuestionsAnswered).toBe(true);
+});

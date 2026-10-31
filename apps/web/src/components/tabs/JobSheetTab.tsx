@@ -1,6 +1,7 @@
 'use client';
 import { useEffect,useState } from 'react';
 import type { EngineState } from '@stacksense/contracts';
+import {reportLink} from '../../lib/shareReport';
 import { saveCase } from '../../lib/caseStore';
 import {regionalText,trailTime} from '../../lib/labels';
 import {FileDown,MessageCircle} from 'lucide-react';
@@ -19,9 +20,10 @@ export function JobSheetActions({state,demoData=state.observations.some(o=>o.pro
  const [error,setError]=useState(''),[origin,setOrigin]=useState('');
  useEffect(()=>setOrigin(window.location.origin),[]);
  const job=state.jobSheet,available=!!job&&state.safety.status!=='emergency';
- const summary=job?`${demoData?'StackSense demo data':'StackSense'} — probable source: ${regionalText(job.probableSource.replace(/^Probable /,''),job.region)}. Send: ${job.send.map(t=>t.trade.replaceAll('_',' ')).join(', ')}. Don't send: ${job.dontSend.map(t=>t.trade.replaceAll('_',' ')).join(', ')}. Verify on site.`:'';
+ const summary=job?[demoData?'StackSense demo data':'StackSense',`Probable source: ${regionalText(job.probableSource.replace(/^Probable /,''),job.region)}`,job.send.length?`Send: ${job.send.map(t=>t.trade.replaceAll('_',' ')).join(', ')}`:'',job.dontSend.length?`Don't send: ${job.dontSend.map(t=>t.trade.replaceAll('_',' ')).join(', ')}`:'','Verify on site.'].filter(Boolean).join('. '):'';
+ const url=origin?reportLink(origin,state,demoData):'';
  function print(){try{saveCase(state,demoData);const popup=window.open('about:blank','_blank');if(!popup)throw new Error('Popup blocked');saveCase(state,demoData,popup.sessionStorage);popup.opener=null;popup.location.href=`/print/${encodeURIComponent(state.caseId)}`;}catch{setError('Could not prepare the print view. Please allow a new tab and storage in this browser.');}}
- return <>{available&&<div className="tab-actions"><button className="outline-btn" onClick={print}><FileDown size={16} aria-hidden="true"/>Download PDF</button><a className="button-link whatsapp" href={`https://wa.me/?text=${encodeURIComponent(`${summary} ${origin}/`)}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true"/>Share on WhatsApp</a></div>}{error&&<p role="alert">{error}</p>}</>;
+ return <>{available&&<div className="tab-actions"><button className="outline-btn" onClick={print}><FileDown size={16} aria-hidden="true"/>Print / Save PDF</button><a className="button-link whatsapp" href={`https://wa.me/?text=${encodeURIComponent(`${summary} ${url}`)}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true"/>Share on WhatsApp</a><small>Shares a case snapshot with flat identifiers. Anyone with the link can read it; chat and private photos are excluded.</small></div>}{error&&<p role="alert">{error}</p>}</>;
 }
 export function JobSheetTab({state,demoData=state.observations.some(o=>o.provenance==='simulated')}:{state:EngineState;demoData?:boolean}) {
  return <><JobSheetContent state={state} demoData={demoData}/><JobSheetActions state={state} demoData={demoData}/></>;

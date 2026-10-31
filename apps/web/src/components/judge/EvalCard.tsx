@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { EvalResults } from '@stacksense/contracts';
 import type { z } from 'zod';
 import { visualStatus } from '../../lib/visual';
+import {runEvaluation} from '../../lib/adapters';
+import type {EngineState} from '@stacksense/contracts';
 import { caseTime } from '../../lib/labels';
 import s from './judge.module.css';
 
@@ -60,13 +62,16 @@ export function EvalTable({ rows, pending = [] }: { rows: Row[]; pending?: Pendi
   </div>;
 }
 
-export function EvalCard({ src = '/eval/latest.json', region = 'IN' }: { src?: string; region?: 'IN' | 'UK' }) {
+export function EvalCard({ src = '/eval/latest.json', region = 'IN',state }: { src?: string; region?: 'IN' | 'UK';state?:EngineState }) {
   const [data, setData] = useState<Latest | null | 'missing'>(null);
+  const [snapshot,setSnapshot]=useState<Latest|null>(null);
   const [set, setSet] = useState<'all' | 'hard' | 'sim'>('all');
+  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[liveRun,setLiveRun]=useState(false),[current,setCurrent]=useState<Record<string,string|number>|null>(null);
+  async function run(currentCase=false){setBusy(true);setError('');try{const json=await runEvaluation(currentCase?state:undefined) as Latest&{current?:Record<string,string|number>};if(json.current)setCurrent(json.current);else{const parsed=EvalResults.parse(json);setData({...parsed,rowsBySet:json.rowsBySet,pending:json.pending});setLiveRun(true);}}catch{setError('Evaluation could not be completed. Please retry.');}finally{setBusy(false);}}
   useEffect(() => {
     let live = true;
     fetch(src).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((json) => { const parsed = EvalResults.safeParse(json); if (live) setData(parsed.success ? { ...parsed.data, pending: json.pending, rowsBySet: json.rowsBySet, aiMessages: json.aiMessages ?? null } : 'missing'); })
+      .then((json) => { const parsed = EvalResults.safeParse(json); if (live){const next=parsed.success?{ ...parsed.data, pending: json.pending, rowsBySet: json.rowsBySet, aiMessages: json.aiMessages ?? null }:null;setData(next??'missing');setSnapshot(next);} })
       .catch(() => { if (live) setData('missing'); });
     return () => { live = false; };
   }, [src]);
@@ -77,19 +82,23 @@ export function EvalCard({ src = '/eval/latest.json', region = 'IN' }: { src?: s
   const { sets, ai, robustness } = data;
   return <div className={s.stack}>
     <p className={s.label}><strong>{LABEL}</strong></p>
+    <p className={s.small}>{liveRun?'Just rerun using the current deterministic engine. AI inference and baselines were not rerun.':'Prepared evaluation snapshot. Rerun to test the current engine on the same frozen cases and simulator seeds.'}</p>
+    <div className={s.row}><button disabled={busy} onClick={()=>void run()}>{busy?'Evaluating…':'Rerun engine evaluation · 90 cases'}</button>{liveRun&&snapshot&&<button disabled={busy} onClick={()=>{setData(snapshot);setLiveRun(false);}}>Show prepared snapshot and baselines</button>}{state&&<button disabled={busy||!state.observations.length} onClick={()=>void run(true)}>Evaluate current case</button>}</div>
+    {error&&<p role="alert">{error}</p>}{current&&<section aria-label="Current case evaluation"><h4>Current case · unscored replay</h4><dl>{Object.entries(current).map(([key,value])=><div key={key}><dt>{key.replaceAll(/([A-Z])/g,' $1')}</dt><dd>{value}</dd></div>)}</dl></section>}
     <p className={s.small}>{sets.hardCases} hard cases · {sets.simBuildings} simulated buildings · {sets.photos} photos · {sets.messages} messages · generated {caseTime(data.generatedAt, region)}</p>
     {data.rowsBySet && <label className={s.field}>Show
       <select value={set} onChange={(e) => setSet(e.target.value as typeof set)}>
         <option value="all">All cases</option><option value="hard">Hard cases only</option><option value="sim">Simulated only</option>
       </select></label>}
     <EvalTable rows={rows} pending={data.pending} />
-    <p className={s.small}>Chips mark where StackSense <strong>ties</strong> or <strong>loses</strong> to a baseline — shown, never hidden.</p>
+    {rows.length>1&&<p className={s.small}>Chips mark where StackSense <strong>ties</strong> or <strong>loses</strong> to a baseline — shown, never hidden.</p>}
     <h4 className={s.h}>Robustness — priors shifted</h4>
     {robustness.length ? <div className={s.scroll} tabIndex={0} aria-label="Robustness table"><table className={s.table}>
       <thead><tr><th scope="col">Prior shift</th>{robustness.map((r) => <th scope="col" key={r.priorShiftPct}>{r.priorShiftPct > 0 ? '+' : ''}{r.priorShiftPct}%</th>)}</tr></thead>
       <tbody><tr><th scope="row">Top-1</th>{robustness.map((r) => <td key={r.priorShiftPct}>{pct(r.top1)}</td>)}</tr></tbody>
     </table></div> : <p className={s.small}>Robustness pending.</p>}
     <h4 className={s.h}>AI reading</h4>
+    {sets.photos===0&&<p className={s.small}>Photo accuracy is not measured: there are no evaluation photos. Demo images and local quality checks do not establish diagnostic accuracy.</p>}
     {ai ? <ul className={s.small}>
       <li>Photo accuracy {pct(ai.photoAccuracy)} · clean-wall false positives {pct(ai.cleanWallFalsePositive)} · cost per case ${ai.costPerCaseUsd.toFixed(4)}</li>
       <li>F1 by field: {Object.entries(ai.f1ByField).map(([k, v]) => `${k} ${pct(v)}`).join(' · ') || 'n/a'}</li>
