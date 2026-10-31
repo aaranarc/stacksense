@@ -1,0 +1,282 @@
+{
+ "id": "hc-h01",
+ "title": "Water dripping from 402 light fitting",
+ "building": {
+  "id": "block-a",
+  "name": "Block A",
+  "region": "IN",
+  "archetype": "MUMBAI_RCC_1990S",
+  "lat": 19.07,
+  "lon": 72.88,
+  "floors": 6,
+  "hasTerrace": true,
+  "flats": [
+   {
+    "id": "101",
+    "floor": 1,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "102",
+    "floor": 1,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "201",
+    "floor": 2,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "202",
+    "floor": 2,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "301",
+    "floor": 3,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "302",
+    "floor": 3,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "401",
+    "floor": 4,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "402",
+    "floor": 4,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "501",
+    "floor": 5,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "502",
+    "floor": 5,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": true,
+    "access": "open"
+   },
+   {
+    "id": "601",
+    "floor": 6,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "602",
+    "floor": 6,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   }
+  ],
+  "stacks": [
+   {
+    "id": "S-x01",
+    "kind": "duct",
+    "flatIds": [
+     "101",
+     "201",
+     "301",
+     "401",
+     "501",
+     "601"
+    ]
+   },
+   {
+    "id": "S-x02",
+    "kind": "duct",
+    "flatIds": [
+     "102",
+     "202",
+     "302",
+     "402",
+     "502",
+     "602"
+    ]
+   }
+  ]
+ },
+ "steps": [
+  [
+   {
+    "id": "hc-h01-o1",
+    "flatId": "402",
+    "eventKey": "hc-h01-o1",
+    "at": "2026-10-30T10:00:00.000Z",
+    "kind": "complaint",
+    "zone": "ceiling",
+    "surface": "active_blistering",
+    "room": "bathroom",
+    "hazards": [
+     "water_near_electrics"
+    ],
+    "hazardQuestionsAnswered": true,
+    "checkId": null,
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "Water dripping out of the bathroom light fitting"
+   }
+  ],
+  [
+   {
+    "id": "hc-h01-o2",
+    "flatId": "502",
+    "eventKey": "hc-h01-o2",
+    "at": "2026-10-31T10:00:00.000Z",
+    "kind": "meter_reading",
+    "zone": "meter",
+    "surface": "unclear",
+    "room": null,
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": "meter_check@502",
+    "meter": {
+     "start": 1532.4,
+     "end": 1532.95,
+     "minutes": 10
+    },
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "Meter moved in 10 minutes with every tap closed"
+   }
+  ]
+ ],
+ "truth": {
+  "component": null,
+  "emergency": true,
+  "family": "upper_supply",
+  "flatId": "502",
+  "trade": "electrician"
+ },
+ "notes": "Water at a light fitting: emergency first (isolate, electrician). Diagnosis must stop."
+}

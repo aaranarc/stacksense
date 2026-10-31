@@ -1,0 +1,268 @@
+{
+  "generatedAt": "2026-10-31T04:35:35.748Z",
+  "label": "team-built test, not field accuracy",
+  "sets": {
+    "simBuildings": 60,
+    "hardCases": 30,
+    "photos": 0,
+    "messages": 0
+  },
+  "rows": [
+    {
+      "method": "StackSense",
+      "rightTrade": 0.456,
+      "top1": [
+        0.788,
+        0.825,
+        0.825
+      ],
+      "overclaim": 0.011,
+      "harmfulFlips": 2,
+      "checksToDecision": 0.671,
+      "hazardPass": 1,
+      "msPerCase": 0.238
+    },
+    {
+      "method": "Blame the flat above",
+      "rightTrade": 0.311,
+      "top1": [
+        0.363,
+        0.363,
+        0.363
+      ],
+      "overclaim": 0.633,
+      "harmfulFlips": 0,
+      "checksToDecision": 0,
+      "hazardPass": 0,
+      "msPerCase": 0.001
+    },
+    {
+      "method": "Send a trade straight away",
+      "rightTrade": 0.178,
+      "top1": [
+        0.213,
+        0.213,
+        0.213
+      ],
+      "overclaim": 0.067,
+      "harmfulFlips": 0,
+      "checksToDecision": 0,
+      "hazardPass": 0,
+      "msPerCase": 0.002
+    },
+    {
+      "method": "Fixed checklist",
+      "rightTrade": 0.467,
+      "top1": [
+        0.675,
+        0.738,
+        0.8
+      ],
+      "overclaim": 0,
+      "harmfulFlips": 5,
+      "checksToDecision": 1.153,
+      "hazardPass": 1,
+      "msPerCase": 0.315
+    },
+    {
+      "method": "StackSense without Second Opinion",
+      "rightTrade": 0.456,
+      "top1": [
+        0.788,
+        0.825,
+        0.825
+      ],
+      "overclaim": 0.011,
+      "harmfulFlips": 2,
+      "checksToDecision": 0.671,
+      "hazardPass": 1,
+      "msPerCase": 0.141
+    }
+  ],
+  "robustness": [
+    {
+      "priorShiftPct": -40,
+      "top1": 0.375
+    },
+    {
+      "priorShiftPct": -20,
+      "top1": 0.625
+    },
+    {
+      "priorShiftPct": 0,
+      "top1": 0.825
+    },
+    {
+      "priorShiftPct": 20,
+      "top1": 0.9
+    },
+    {
+      "priorShiftPct": 40,
+      "top1": 0.95
+    }
+  ],
+  "ai": null,
+  "robustnessArchetype": [
+    {
+      "trueFamilyPriorAt": "min",
+      "top1": 0.375
+    },
+    {
+      "trueFamilyPriorAt": "max",
+      "top1": 0.963
+    }
+  ],
+  "rowsBySet": {
+    "hard": [
+      {
+        "method": "StackSense",
+        "rightTrade": 0.667,
+        "top1": [
+          0.81,
+          0.857,
+          0.857
+        ],
+        "overclaim": 0,
+        "harmfulFlips": 0,
+        "checksToDecision": 0.84,
+        "hazardPass": 1,
+        "msPerCase": 0.328
+      },
+      {
+        "method": "Blame the flat above",
+        "rightTrade": 0.233,
+        "top1": [
+          0.381,
+          0.381,
+          0.381
+        ],
+        "overclaim": 0.6,
+        "harmfulFlips": 0,
+        "checksToDecision": 0,
+        "hazardPass": 0,
+        "msPerCase": 0.002
+      },
+      {
+        "method": "Send a trade straight away",
+        "rightTrade": 0.2,
+        "top1": [
+          0.333,
+          0.333,
+          0.333
+        ],
+        "overclaim": 0.167,
+        "harmfulFlips": 0,
+        "checksToDecision": 0,
+        "hazardPass": 0,
+        "msPerCase": 0.002
+      },
+      {
+        "method": "Fixed checklist",
+        "rightTrade": 0.633,
+        "top1": [
+          0.762,
+          0.81,
+          0.857
+        ],
+        "overclaim": 0,
+        "harmfulFlips": 0,
+        "checksToDecision": 1.12,
+        "hazardPass": 1,
+        "msPerCase": 0.396
+      },
+      {
+        "method": "StackSense without Second Opinion",
+        "rightTrade": 0.667,
+        "top1": [
+          0.81,
+          0.857,
+          0.857
+        ],
+        "overclaim": 0,
+        "harmfulFlips": 0,
+        "checksToDecision": 0.84,
+        "hazardPass": 1,
+        "msPerCase": 0.216
+      }
+    ],
+    "sim": [
+      {
+        "method": "StackSense",
+        "rightTrade": 0.35,
+        "top1": [
+          0.78,
+          0.814,
+          0.814
+        ],
+        "overclaim": 0.017,
+        "harmfulFlips": 2,
+        "checksToDecision": 0.6,
+        "hazardPass": null,
+        "msPerCase": 0.194
+      },
+      {
+        "method": "Blame the flat above",
+        "rightTrade": 0.35,
+        "top1": [
+          0.356,
+          0.356,
+          0.356
+        ],
+        "overclaim": 0.65,
+        "harmfulFlips": 0,
+        "checksToDecision": 0,
+        "hazardPass": null,
+        "msPerCase": 0
+      },
+      {
+        "method": "Send a trade straight away",
+        "rightTrade": 0.167,
+        "top1": [
+          0.169,
+          0.169,
+          0.169
+        ],
+        "overclaim": 0.017,
+        "harmfulFlips": 0,
+        "checksToDecision": 0,
+        "hazardPass": null,
+        "msPerCase": 0.002
+      },
+      {
+        "method": "Fixed checklist",
+        "rightTrade": 0.383,
+        "top1": [
+          0.644,
+          0.712,
+          0.78
+        ],
+        "overclaim": 0,
+        "harmfulFlips": 5,
+        "checksToDecision": 1.167,
+        "hazardPass": null,
+        "msPerCase": 0.274
+      },
+      {
+        "method": "StackSense without Second Opinion",
+        "rightTrade": 0.35,
+        "top1": [
+          0.78,
+          0.814,
+          0.814
+        ],
+        "overclaim": 0.017,
+        "harmfulFlips": 2,
+        "checksToDecision": 0.6,
+        "hazardPass": null,
+        "msPerCase": 0.103
+      }
+    ]
+  },
+  "pending": [
+    {
+      "method": "Single LLM, same evidence",
+      "reason": "pending — singleLlmBaseline is not exported by @stacksense/ai yet (requested from A in C_REQUESTS.md)"
+    }
+  ],
+  "engineTree": "42a624d3e20d5b3962c8cab55f456b2219d0e5f2"
+}
