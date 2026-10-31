@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T04:35:44.511Z",
+  "generatedAt": "2026-10-31T05:20:25.855Z",
   "label": "team-built test, not field accuracy",
   "sets": {
     "simBuildings": 60,
@@ -20,7 +20,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.238
+      "msPerCase": 0.229
     },
     {
       "method": "Blame the flat above",
@@ -48,7 +48,7 @@
       "harmfulFlips": 0,
       "checksToDecision": 0,
       "hazardPass": 0,
-      "msPerCase": 0.002
+      "msPerCase": 0.001
     },
     {
       "method": "Fixed checklist",
@@ -62,7 +62,7 @@
       "harmfulFlips": 5,
       "checksToDecision": 1.153,
       "hazardPass": 1,
-      "msPerCase": 0.315
+      "msPerCase": 0.317
     },
     {
       "method": "StackSense without Second Opinion",
@@ -76,7 +76,7 @@
       "harmfulFlips": 2,
       "checksToDecision": 0.671,
       "hazardPass": 1,
-      "msPerCase": 0.141
+      "msPerCase": 0.131
     }
   ],
   "robustness": [
@@ -126,7 +126,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.328
+        "msPerCase": 0.292
       },
       {
         "method": "Blame the flat above",
@@ -168,7 +168,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 1.12,
         "hazardPass": 1,
-        "msPerCase": 0.396
+        "msPerCase": 0.347
       },
       {
         "method": "StackSense without Second Opinion",
@@ -182,7 +182,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0.84,
         "hazardPass": 1,
-        "msPerCase": 0.216
+        "msPerCase": 0.186
       }
     ],
     "sim": [
@@ -198,7 +198,7 @@
         "harmfulFlips": 2,
         "checksToDecision": 0.6,
         "hazardPass": null,
-        "msPerCase": 0.194
+        "msPerCase": 0.198
       },
       {
         "method": "Blame the flat above",
@@ -212,7 +212,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": null,
-        "msPerCase": 0
+        "msPerCase": 0.001
       },
       {
         "method": "Send a trade straight away",
@@ -226,7 +226,7 @@
         "harmfulFlips": 0,
         "checksToDecision": 0,
         "hazardPass": null,
-        "msPerCase": 0.002
+        "msPerCase": 0.001
       },
       {
         "method": "Fixed checklist",
@@ -240,7 +240,7 @@
         "harmfulFlips": 5,
         "checksToDecision": 1.167,
         "hazardPass": null,
-        "msPerCase": 0.274
+        "msPerCase": 0.302
       },
       {
         "method": "StackSense without Second Opinion",
@@ -261,9 +261,9 @@
   "pending": [
     {
       "method": "Single LLM, same evidence",
-      "reason": "pending — singleLlmBaseline is not exported by @stacksense/ai yet (requested from A in C_REQUESTS.md)"
+      "reason": "pending — 0/90 cases cached; run eval/runner/llm-baseline.ts (live LLM calls) to fill eval/runner/baseline-cache/"
     }
   ],
-  "engineTree": "42a624d3e20d5b3962c8cab55f456b2219d0e5f2",
+  "engineTree": "594647c64d1caaa308e7580a61682df54f9d3669",
   "aiRaw": null
 }

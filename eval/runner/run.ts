@@ -1,7 +1,7 @@
 // C-T02 engine evaluation: StackSense vs 5 baselines on 30 frozen hard cases + 60 simulated buildings.
 // Run: pnpm --filter @stacksense/engine exec tsx ../../eval/runner/run.ts
 // Uses the same engine code the UI uses; never re-implements or tunes engine logic.
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { performance } from "node:perf_hooks";
@@ -86,7 +86,7 @@ const fixedChoice: Chooser = (s, asked) => s.nextChecks
   .filter((c) => (c.excluded === null || c.excluded === "can't change the action") && FIXED_ORDER.includes(c.type) && !asked.has(c.id))
   .sort((a, b) => FIXED_ORDER.indexOf(a.type) - FIXED_ORDER.indexOf(b.type));
 
-export type Trail = { unscripted: string[]; asked: string[] };
+export type Trail = { unscripted: string[]; asked: string[]; evidence?: Observation[] };
 
 /** Answer loop shared by the engine-driven methods. */
 function engineRun(c: EvalCase, choose: Chooser, review: boolean, trail: Trail): Outcome {
@@ -109,6 +109,7 @@ function engineRun(c: EvalCase, choose: Chooser, review: boolean, trail: Trail):
     }
     if (!answered) break;
   }
+  trail.evidence = collected;
   const checks = leaders.length - 1, ms = performance.now() - t0;
   const base = { caseId: c.id, set: c.set, truth: c.truth, leaders, checks, ms,
     componentEvidence: componentEvidence(collected, c.photoLabels ?? []) };
@@ -133,6 +134,22 @@ function tradeStraightAway(c: EvalCase): Outcome {
   const claim: Source = { family, flatId: null };
   return { caseId: c.id, set: c.set, truth: c.truth, leaders: [claim], trade: FAMILY_TRADE[family]!, level: "mechanism",
     claim, componentEvidence: false, checks: 0, decided: true, ms: performance.now() - t0 };
+}
+
+export const LLM_METHOD = "Single LLM, same evidence";
+export const CACHE_DIR = fileURLToPath(new URL("./baseline-cache/", import.meta.url));
+export type CachedBaseline = { caseId: string; promptVersion: string; model: string; evidenceHash: string;
+  result: { family: string; flatId: string | null; trade: string; emergency: boolean; level: "mechanism" | "area" } | null };
+const cached = (id: string): CachedBaseline | null => existsSync(CACHE_DIR + id + ".json") ? JSON.parse(readFileSync(CACHE_DIR + id + ".json", "utf8")) : null;
+
+/** Baseline 4 from the cache written by llm-baseline.ts (same evidence StackSense collected). null result = model unavailable → no trade. */
+function singleLlm(c: EvalCase, t: Trail): Outcome {
+  const s = engineRun(c, voiChoice, true, { unscripted: [], asked: [] }); // only for the evidence count
+  const r = cached(c.id)!.result;
+  const claim = r ? { family: r.family, flatId: r.flatId } : null;
+  t.asked = [];
+  return { caseId: c.id, set: c.set, truth: c.truth, leaders: [claim], checks: s.checks, ms: 0, componentEvidence: false,
+    trade: !r ? "general_inspector" : r.emergency ? "emergency" : r.trade, level: r?.level ?? "mechanism", claim, decided: !!r };
 }
 
 export const METHODS: { name: string; run: (c: EvalCase, t: Trail) => Outcome }[] = [
@@ -170,10 +187,6 @@ function robustnessRun(factories: (() => EvalCase)[], shift: Shift): number {
   return aggregate("StackSense", outs).top1[2]!;
 }
 
-export const PENDING = [{
-  method: "Single LLM, same evidence",
-  reason: "pending — singleLlmBaseline is not exported by @stacksense/ai yet (requested from A in C_REQUESTS.md)",
-}];
 
 /** Git tree hash of packages/engine (working copy included) — tells v1 and v2 runs apart. */
 function engineTree(): string {
@@ -183,10 +196,14 @@ function engineTree(): string {
 
 export function evaluate(opts: { sims?: number } = {}) {
   const factories = [...hardCases(), ...simCases(opts.sims ?? 60)];
+  const ids = factories.map((f) => f().id), have = ids.filter((id) => cached(id)).length;
+  const methods = have === ids.length ? [...METHODS.slice(0, 4), { name: LLM_METHOD, run: singleLlm }, METHODS[4]!] : METHODS;
+  const pending = have === ids.length ? [] : [{ method: LLM_METHOD,
+    reason: `pending — ${have}/${ids.length} cases cached; run eval/runner/llm-baseline.ts (live LLM calls) to fill eval/runner/baseline-cache/` }];
   const robustness = SHIFTS.map((p) => ({ priorShiftPct: p, top1: robustnessRun(factories, p) }));
   const robustnessArchetype = (["min", "max"] as const).map((at) => ({ trueFamilyPriorAt: at, top1: robustnessRun(factories, at) }));
   const outcomes: Record<string, Outcome[]> = {}, trails: Record<string, Record<string, Trail>> = {};
-  for (const m of METHODS) {
+  for (const m of methods) {
     outcomes[m.name] = []; trails[m.name] = {};
     for (const make of factories) {
       const c = make(), trail: Trail = { unscripted: [], asked: [] };
@@ -194,14 +211,14 @@ export function evaluate(opts: { sims?: number } = {}) {
       trails[m.name]![c.id] = trail;
     }
   }
-  const rowsFor = (set?: "hard" | "sim") => METHODS.map((m) => aggregate(m.name, outcomes[m.name]!.filter((o) => !set || o.set === set)));
+  const rowsFor = (set?: "hard" | "sim") => methods.map((m) => aggregate(m.name, outcomes[m.name]!.filter((o) => !set || o.set === set)));
   const results = {
     generatedAt: new Date().toISOString(), label: LABEL,
     sets: { simBuildings: opts.sims ?? 60, hardCases: factories.length - (opts.sims ?? 60), photos: 0, messages: 0 },
     rows: rowsFor(), robustness, ai: null,
     robustnessArchetype,
     rowsBySet: { hard: rowsFor("hard"), sim: rowsFor("sim") },
-    pending: PENDING,
+    pending,
     engineTree: engineTree(),
   };
   EvalResults.parse(results); // contract check (extra keys are additive)
@@ -223,7 +240,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     console.log(`\n${name} — ${LABEL}`);
     console.table(rows.map((r) => ({ ...r, top1: r.top1.join(" / ") })));
   }
-  console.log("pending:", PENDING.map((p) => `${p.method}: ${p.reason}`).join("; "));
+  console.log("pending:", results.pending.map((p) => `${p.method}: ${p.reason}`).join("; "));
   const failing = outcomes["StackSense"]!.filter((o) => o.truth.emergency && o.trade !== "emergency").map((o) => o.caseId);
   console.log(failing.length ? `HAZARD FAIL: ${failing.join(", ")}` : "hazard pass: all hazard cases ended in emergency");
   console.log("robustness:", results.robustness.map((r) => `${r.priorShiftPct}%→${r.top1}`).join("  "), results.robustnessArchetype.map((r) => `${r.trueFamilyPriorAt}→${r.top1}`).join("  "));

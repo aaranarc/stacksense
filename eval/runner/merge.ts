@@ -9,7 +9,7 @@ import { prepare } from "./ai";
 const at = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 type Engine = EvalResults & { rowsBySet: { hard: EvalRow[]; sim: EvalRow[] }; pending: { method: string; reason: string }[];
   robustnessArchetype: { trueFamilyPriorAt: string; top1: number }[]; engineTree?: string };
-export const V2_NOTE = "after fix — bug found by the frozen test, fixed against the spec without opening the hard cases";
+export const V2_NOTE = "after A's stop-rule fix, made against the spec without opening the hard cases — no outcome changed on this test";
 
 const METRICS: { key: string; label: string; get: (r: EvalRow) => number | null; higher: boolean; pct: boolean }[] = [
   { key: "rightTrade", label: "Right trade", get: (r) => r.rightTrade, higher: true, pct: true },
@@ -143,8 +143,11 @@ function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown }, data: 
   const v1Section = v1 ? `
 ## v1 (before stop-rule fix) — kept for honesty
 Engine tree \`${v1.engineTree}\`, generated ${v1.generatedAt}; the full file is \`eval/results/engine-v1.json\`.
-The frozen hard cases flagged that the engine stopped with "inspect" while its leading source was already right; A fixed
-the stop rule against the spec. Both runs use the same frozen cases and simulator seeds.
+The frozen-test run flagged early "inspect" stops while the leading source was already right. A traced a related stop-rule
+bug — area and its localized component mass were not summed against the 0.80 threshold — and fixed it against the spec
+without reading or running the hard cases (packages/engine/DECISIONS.md). On this test the fix changes **no outcome**: the
+flagged misses take the separate, specified low-value path ("best check score < 0.05 → inspect"), which A kept unchanged.
+Both runs use the same frozen cases and simulator seeds; only timing differs.
 
 ### v1 — all ${v1.sets.hardCases + v1.sets.simBuildings} cases
 ${table(v1.rows)}
