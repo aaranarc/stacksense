@@ -21,6 +21,24 @@ describe("A-T10 stop and trace", () => {
     expect(stopRule({ ...low, safety: { status: "emergency", reasons: [], actions: [] } })).toEqual({ stopped: true, reason: "emergency" });
     expect(stopRule(createCase(blockA)).stopped).toBe(false);
   });
+  it("keeps the 80% source threshold invariant when mass is localized to a component", () => {
+    const state=applyObservations(createCase(blockA),[observation()]);
+    const area=state.hypotheses.find(h=>h.family==="upper_wet_area"&&!h.parentId)!;
+    const child=state.hypotheses.find(h=>h.parentId===area.id)!;
+    const other=state.hypotheses.find(h=>h.family==="upper_supply")!;
+    const localized={...state,posterior:{[area.id]:.08,[child.id]:.72,[other.id]:.2},nextChecks:[]};
+    expect(stopRule(localized).reason).toContain("80%");
+    const objection={verdict:"objection" as const,allowedLevel:"area" as const,claim:"Contradiction",supports:[],challenges:[],unknown:[],wouldChange:[],source:"fallback" as const};
+    expect(stopRule({...localized,secondOpinion:objection,nextChecks:[{...state.nextChecks[0]!,excluded:null,score:.05}]}).stopped).toBe(false);
+    expect(stopRule({...localized,secondOpinion:objection}).reason).toContain("inspect 502");
+  });
+  it("continues at exactly .05 and inspects below .05 without inventing confidence",()=>{
+    const state=applyObservations(createCase(blockA),[observation()]);
+    const checks=[{...state.nextChecks[0]!,excluded:null,score:.05}];
+    expect(stopRule({...state,nextChecks:checks}).stopped).toBe(false);
+    expect(stopRule({...state,nextChecks:[{...checks[0]!,score:.049}]}).reason).toContain("inspect");
+    expect(stopRule({...state,nextChecks:[{...checks[0]!,excluded:"flat locked",score:1}]}).reason).toContain("inspect");
+  });
   it("records only changes over one percentage point with evidence reasons", () => {
     const s = applyObservations(createCase(blockA), [observation()]);
     expect(s.trace.length).toBeGreaterThan(0);
