@@ -41,3 +41,18 @@ Owner: **A**. Found while warming the remaining demo inputs: requests containing
 B-001 is the only remaining requested production-check failure and was reproduced again after the demo-mode rebuild. Direct production /api/read was cached; Judge hero reached the correct trade; /c/demo completed at 390×844. No C-owned failure was found. A-001 is fixed live; A-002 is fixed/tested on a/core for CP2.
 
 A-T27: all 14 canonical manifest requests are cached, including eight scenario inputs, meter pair, trap and Day-14; duct, meter and trap upload contexts cover EN/HI/MR. The supplied real duct photo is used where applicable; unavailable real scenes use eleven visibly labelled schematic DEMO illustrations with simulated-input cache warnings. These are not field photographs, real meter readings or human-labelled evaluation data. `fixtures-ai/cache/demo-status.json` has complete=true. 183 tests, recursive typecheck and web build pass. New code/cache assets are pushed to a/core for CP2, not silently merged into production.
+
+## Rotated Gemini key — 31 October 2026
+
+The user set a new GEMINI_API_KEY locally and in Vercel. No key value was printed, copied into this report or committed.
+
+| Environment | Verification | Result |
+| --- | --- | --- |
+| Local production server | One POST /api/read at 12:06:43 IST with a new UUID message ID and timestamp, one short synthetic ceiling-stain report, no photos | HTTP 200; mode **live**; one validated observation; no warnings; 7,134 ms |
+| Production after next main deployment | **PENDING** — use a different fresh UUID/timestamp payload after the next successful deployment | Must return mode **live**; a cached response does not prove the rotated key works |
+
+The local server was restarted with the updated ignored .env.local and stopped after this check. Local and production use a shared optional Supabase cache, so do not reuse the local payload verbatim for the production key test. The next CP2 checks must include exactly one fresh production /api/read request on https://stacksense-omega.vercel.app after the new main deployment is ready; record HTTP status, mode, observation count and warnings here without recording any key. This is additional to the five CP1/CP2 integration checks above. Do not initiate CP2 until the user says **CP2 merge**.
+
+### Real-photo replacement audit
+
+At this check, eval/data/photos/ contains only duct_302_raw.jpg. Re-encoding it again at JPEG quality 85 and maximum edge 1600 produced the existing clean 1200×1600 fixture byte-for-byte. EXIF/GPS, XMP, IPTC and ICC are absent. The real duct and happy-scenario slots already use this photograph, and their cache bytes still match. No additional matching real team shot exists for the remaining illustration slots, so no illustration was relabelled as a photograph and no unchanged input was needlessly re-cached. Raw files remain ignored and untracked. When matching shots are supplied, replace only those slots, update assetSource to team-photo, strip metadata and warm the changed canonical read/upload contexts.
