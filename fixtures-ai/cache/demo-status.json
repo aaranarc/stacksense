@@ -1,0 +1,82 @@
+{
+  "label": "Demo cache coverage — not evaluation or field accuracy",
+  "generatedAt": "2026-10-31T05:22:23.165Z",
+  "liveOptIn": true,
+  "inputs": [
+    {
+      "id": "hero-chat",
+      "path": "fixtures-ai/chats/hero_blockA.txt",
+      "key": "03d6c8f3ea2d4c639b6675a762f4a1178b2cb4aa88ef296dfa02a93d1f570381",
+      "status": "cached",
+      "uploadContexts": 0
+    },
+    {
+      "id": "scenario-happy",
+      "path": "fixtures-ai/photos/scenarios/happy.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-electrical_hazard",
+      "path": "fixtures-ai/photos/scenarios/electrical_hazard.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-locked_502",
+      "path": "fixtures-ai/photos/scenarios/locked_502.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-dark_photo",
+      "path": "fixtures-ai/photos/scenarios/dark_photo.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-beam_travel",
+      "path": "fixtures-ai/photos/scenarios/beam_travel.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-wrong_trade_rain",
+      "path": "fixtures-ai/photos/scenarios/wrong_trade_rain.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-honest_uncertainty",
+      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "scenario-break_it",
+      "path": "fixtures-ai/photos/scenarios/break_it.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "duct-302",
+      "path": "fixtures-ai/photos/demo/duct_302.jpg",
+      "key": "79e56e0af80913b1a0f4d711a506063c25de25bd32248355aed53c6eeaf43fe0",
+      "status": "cached",
+      "uploadContexts": 3
+    },
+    {
+      "id": "meter-start-502",
+      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "meter-end-502",
+      "path": "fixtures-ai/photos/demo/meter_end_502.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "trap-502",
+      "path": "fixtures-ai/photos/demo/trap_502.jpg",
+      "status": "missing"
+    },
+    {
+      "id": "day14-402",
+      "path": "fixtures-ai/photos/demo/day14_402.jpg",
+      "status": "missing"
+    }
+  ],
+  "complete": false
+}

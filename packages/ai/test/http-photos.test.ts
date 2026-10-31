@@ -12,7 +12,7 @@ describe("server input boundaries",()=>{
    const bytes=await sharp({create:{width:2000,height:10,channels:3,background:"white"}}).jpeg().withMetadata().toBuffer();
    const clean=await preparePhoto(`data:image/jpeg;base64,${bytes.toString("base64")}`);
    const metadata=await sharp(Buffer.from(clean.split(",")[1]!,"base64")).metadata();
-   expect(metadata.width).toBe(1600);expect(metadata.exif).toBeUndefined();
+   expect(metadata.width).toBe(1600);expect(metadata.exif).toBeUndefined();expect(metadata.xmp).toBeUndefined();expect(metadata.iptc).toBeUndefined();expect(metadata.icc).toBeUndefined();
    await expect(preparePhoto("data:image/jpeg;base64,YQ==")).rejects.toThrow();
  });
  it("limits actual streamed bytes and expires rate windows",async()=>{
