@@ -71,3 +71,9 @@ export const residentApi={
  },
 };
 
+
+export async function edgeContrastPhoto(url:string):Promise<string>{
+ const response=await fetch(url);if(!response.ok)throw new Error('Photo preview could not be loaded.');
+ const bitmap=await createImageBitmap(await response.blob());
+ try{const canvas=document.createElement('canvas'),scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Edge contrast is unavailable in this browser.');ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);ctx.putImageData(realBrowser.edgeContrast(ctx.getImageData(0,0,canvas.width,canvas.height)).imageData,0,0);return canvas.toDataURL('image/png');}finally{bitmap.close();}
+}

@@ -31,3 +31,5 @@
 - B-T02: `statusOf` maps documented observations and engine outputs to presentation only. It does not change the engine's safety, probabilities, check selection or trade.
 
 - B-T24: The UK fixture uses the actual flat IDs in A's UK building (1–8), rather than inventing Flat 12. Switching regions retains each local case. The initial UK example is labelled Demo data and replayed by the engine; real UK imports use that building ID. Responsibility links and timestamp trail come from its Job Sheet.
+
+- B-T26: Only EXIF-stripped upload previews are retained in a bounded in-memory browser map. Missing real photos show an unavailable state; the four hero IDs use explicitly labelled illustrations. The cached day-14 demo reuses its illustration and says no visual change was measured. The comparison reveals a 35% previous-image overlay; neither comparison nor edge contrast changes moisture or readiness. Same-origin phone previews are accepted only from the active frame/token and matching result photo IDs.
