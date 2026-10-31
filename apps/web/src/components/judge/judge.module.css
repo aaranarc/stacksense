@@ -13,3 +13,5 @@
 .label { font-size: 12px; margin: 0; }
 .h { font-size: 13px; margin: 8px 0 0; }
 .trace { font-size: 12px; padding-left: 20px; margin: 0 0 16px; display: grid; gap: 4px; }
+.alert { border: 2px solid var(--color-leading, #DC2626); border-radius: 12px; padding: 8px 12px; font-size: 12px; }
+.alert ul { margin: 4px 0 0; padding-left: 20px; }
