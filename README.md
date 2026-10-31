@@ -2,8 +2,7 @@
 
 **Find where the water is really coming from — ask the one neighbour check that matters, refuse to over-claim, and send the right trade the first time.**
 
-![StackSense demo — GIF coming from B](docs/demo.gif)
-<!-- B: replace docs/demo.gif with the demo GIF and add the video link here. -->
+<!-- B: add the demo GIF here (e.g. ![StackSense demo](docs/demo.gif)) and the 3-minute video link at submission. -->
 
 ## Try it
 - **Live app:** https://stacksense-omega.vercel.app/
@@ -42,7 +41,7 @@ flowchart LR
 ## What is AI and what isn't
 The AI only **reads** (chat text and photos → schema labels) and **drafts** the Second Opinion.
 Odds, check choice, safety, trade and statuses are **deterministic engine code** (`packages/engine`) — the same module the UI and the evaluation use.
-If the AI is down you get a labelled fallback, never a fake result. Details: [docs/ai.md](docs/ai.md).
+If the AI is down you get a labelled fallback, never a fake result. Details: [docs/ai.md](docs/ai.md) · engine: [docs/engine.md](docs/engine.md).
 
 ## Evaluation
 <!-- eval:start -->
@@ -94,7 +93,7 @@ Data: Supabase (Postgres + private Storage). Weather: Open-Meteo (CC-BY 4.0). De
 pnpm i && pnpm --filter web dev
 ```
 Server keys go in `apps/web/.env.local` (never committed). Without them the app runs in labelled fallback / demo mode.
-Evaluation: `pnpm eval` (see [docs/RESULTS.md](docs/RESULTS.md#reproduce)).
+Evaluation: `pnpm eval` (see [docs/RESULTS.md](docs/RESULTS.md#reproduce)). Environment variable names, merge procedure and the production checklist: [docs/HANDOFF_A.md](docs/HANDOFF_A.md).
 
 ## Limitations
 - The evaluation is a **team-built test, not field accuracy**: 30 hard cases written by the team plus a simulator.

@@ -288,3 +288,33 @@ passed; both Vercel deployments for fdbbea0 succeeded. Production (fresh isolate
 "Preview unavailable", Judge hero → waterproofer tiler, evaluation card shows the partial AI block ("message extraction
 measured on 15 of 109 human-reviewed messages (free-tier quota)", photos "not measured — too few photos, free-tier quota",
 cost "$0 (free tier)") and the single-LLM row pending 16/30. No open integration failures.
+
+## C final merge — main 413cfea (31 Oct, 17:10 IST)
+Merged origin/a/core (927094b) → origin/b/app (3b9172f) → origin/c/help (413cfea); no conflicts; `git grep -nE
+'^(<<<<<<<|=======|>>>>>>>)'` empty. Install, typecheck, tests (3 contracts / 67 AI / 89 engine / 94 web) and build passed.
+Both Vercel deployments for 413cfea succeeded before checking. C fixes in this merge (authorized, noted in
+docs/HANDOFF_A.md): **Day-14 recapture** — (1) `packages/ai/src/links/http.ts` resident ceiling photo after a recorded repair
+is emitted as `kind: "recapture"`; (2) `packages/engine/src/voi.ts` re-offers the victim ceiling photo as a score-0 recovery
+link target after a repair (it was excluded as "can't change the action"). Regression tests added; evaluation numbers
+identical to v1.
+
+| Production check, fresh isolated browser session, after 413cfea | Result |
+| --- | --- |
+| No login | PASS |
+| Load demo chat lights building; thumbnails | PASS — 202/402 victim, 502 probable source; 2/2 chat thumbnails load |
+| /api/read | PASS — 200, cached |
+| Judge hero | PASS — 6/6, Job Sheet sends waterproofer tiler |
+| What-if 502 meter → moved | PASS — sends plumber; flip back restores waterproofer tiler |
+| Job Sheet + PDF | PASS — populated (send / don't send / verify on site), Print / Save PDF enabled |
+| Judge photo previews | PASS — 4/4 |
+| Day-14 flow | PASS — Record repair → "Due 14/11/2026", Ready to paint not ready; **Send link (recapture) now enabled** → POST /api/link 200, owner refresh 200, phone preview opens (no photo uploaded, to keep the AI reserve; recapture classification covered by regression test); moisture 12 %WME ≤ 16 → Dry · dry, Ready to paint · ready |
+| Next Leak, pills, ledger | PASS — 302/602 same-stack inspection links; Rain/Memory pills respond; ledger opens (8 observations, earliest first) |
+| IN → UK → IN | PASS — UK Block 4 floors + 4 gov.uk/Shelter links; IN restores Block A |
+| Judge bottom sheet at 390×844 | PASS — fixed, 591 px, toggle visible, no horizontal overflow |
+| /c/demo at 390×844 | PASS — consent → 4× No → camera step, Demo label, no overflow |
+| Colours | PASS — 502 probable source red; victims/inspect amber; no green without a passed check; every colour has a text label |
+| Eval card | PASS — label; single-LLM "partial — 16 of 30 (free-tier quota)"; "Message extraction: partial — 15 of 109, English only"; photos "not measured — too few photos, free-tier quota"; "$0 (free tier)"; 19 tie/loses chips |
+| Console / hydration errors | PASS — none (errors and warnings, across navigations) |
+
+Open (not failures): README demo GIF + video link (B, at submission); single-LLM baseline 14/30 hard cases unanswered and
+message eval 94/109 unmeasured (free-tier quota).
