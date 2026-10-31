@@ -187,3 +187,6 @@ Engine evaluation rerun on this tree: numbers unchanged vs v1 (eval/results/engi
 
 Still open: B-003 (B), B owner-dashboard refresh wiring (B), CrossSection `<title>` hydration warning in dev (B, see
 C_REQUESTS.md). No live LLM call, key disclosure or hard-case edit occurred in this check.
+
+## B final run — B-003 fixed on b/app
+The media resolver now binds all approved hero IDs, meter references and scenario preview IDs to public copies of A's clean cached assets. Hero ID bindings remain unchanged. Tests compare served hero bytes with the approved originals and verify own-photo-reference versus Day-14 illustration labels. Scenario evidence/timing remains labelled simulated. No judge or engine file was edited. C should retest hero thumbnails and the photo drawer after merging.

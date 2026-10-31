@@ -14,11 +14,11 @@ export function PhotoViewer({photoId,label,onClose,onCorrect}:{photoId:string;la
  }
  const url=edge&&edgeUrl?edgeUrl:media?.url;
  return <Drawer title={`Photo ${photoId}`} onClose={onClose}>
-  {media?.demo?<p className="chip">Cached · Demo data · Illustration, not a real photo</p>:media?<p>Prepared photo · local preview</p>:null}
+  {media?.demo?<><p className="chip">Cached · Demo data</p><p>{media.illustration?'Illustration, not a real photo.':'Own-photo reference; case evidence and timing remain simulated.'}</p><p className="diagram-key">{media.label}</p></>:media?<p>{media.label}</p>:null}
   {!media?<p>Photo preview unavailable in this browser session. The evidence label remains recorded.</p>:<>
    <label className="edge-control"><input type="checkbox" checked={edge} disabled={edgeBusy} onChange={e=>void contrast(e.target.checked)}/>Edge contrast, not moisture.</label>
    {edgeBusy&&<p role="status">Preparing edge contrast…</p>}{edgeError&&<p role="alert">{edgeError}</p>}
-   <figure className="photo-whole"><img src={url} alt={`${media.demo?'Demo illustration':'Whole photo'} ${photoId}${edge?' — edge contrast':''}`}/>{label?.boxes.map((box,i)=><span key={i} className="photo-box" style={{left:`${box.x*100}%`,top:`${box.y*100}%`,width:`${box.w*100}%`,height:`${box.h*100}%`}} title={box.label}><span>{box.label}</span></span>)}</figure>
+   <figure className="photo-whole"><img src={url} alt={`${media.illustration?'Demo illustration':media.demo?'Own-photo demo reference':'Whole photo'} ${photoId}${edge?' — edge contrast':''}`}/>{label?.boxes.map((box,i)=><span key={i} className="photo-box" style={{left:`${box.x*100}%`,top:`${box.y*100}%`,width:`${box.w*100}%`,height:`${box.h*100}%`}} title={box.label}><span>{box.label}</span></span>)}</figure>
   </>}
   <h3>{label?`AI says: ${label.surface.replaceAll('_',' ')} · ${label.zone.replaceAll('_',' ')}`:'No photo label yet.'}</h3>
   {label&&<>

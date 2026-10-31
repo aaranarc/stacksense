@@ -1,0 +1,99 @@
+{
+  "label": "Visual demo references only. Engine evidence and timings remain simulated; photographs do not validate scripted findings.",
+  "hero": {
+    "hero-ceiling-402": {
+      "id": "ceiling-402",
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
+    },
+    "hero-window-202": {
+      "id": "window-202",
+      "path": "fixtures-ai/photos/demo/window_202_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
+    },
+    "hero-duct-302": {
+      "id": "duct-302",
+      "path": "fixtures-ai/photos/demo/duct_302.jpg",
+      "assetSource": "team-photo",
+      "label": "Authorized clean team duct photograph"
+    },
+    "hero-trap-502": {
+      "id": "trap-502",
+      "path": "fixtures-ai/photos/demo/trap_502_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
+    },
+    "hero-day14-402": {
+      "id": "day14-402",
+      "path": "fixtures-ai/photos/demo/day14_402.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    }
+  },
+  "meters": [
+    {
+      "id": "meter-start-502",
+      "path": "fixtures-ai/photos/demo/meter_502_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated. Meter overview only; no readable timed start/end pair is claimed."
+    },
+    {
+      "id": "meter-end-502",
+      "path": "fixtures-ai/photos/demo/meter_end_502.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    }
+  ],
+  "scenarios": {
+    "happy": {
+      "id": "scenario-happy",
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
+    },
+    "electrical_hazard": {
+      "id": "scenario-electrical_hazard",
+      "path": "fixtures-ai/photos/scenarios/electrical_hazard.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    "locked_502": {
+      "id": "scenario-locked_502",
+      "path": "fixtures-ai/photos/scenarios/locked_502.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    "dark_photo": {
+      "id": "scenario-dark_photo",
+      "path": "fixtures-ai/photos/scenarios/dark_photo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    "beam_travel": {
+      "id": "scenario-beam_travel",
+      "path": "fixtures-ai/photos/scenarios/beam_travel.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    },
+    "wrong_trade_rain": {
+      "id": "scenario-wrong_trade_rain",
+      "path": "fixtures-ai/photos/demo/window_202_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
+    },
+    "honest_uncertainty": {
+      "id": "scenario-honest_uncertainty",
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
+    },
+    "break_it": {
+      "id": "scenario-break_it",
+      "path": "fixtures-ai/photos/scenarios/break_it.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+    }
+  }
+}
