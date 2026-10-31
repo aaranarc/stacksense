@@ -45,7 +45,9 @@ The explicitly authorized team demo fixture is prepared from ignored `eval/data/
 | GET/POST /api/memory | Professional-finding counts, persistent with Supabase; explicit localStorage fallback otherwise |
 | GET /api/weather and /api/forecast | Attributed weather data or labelled cached weather/error; not model output |
 
-A missing provider key deliberately bypasses read/photo caches for a labelled fallback check. Chat fallback uses conservative deterministic extraction. Photo fallback remains unclear, never invents meter digits, and upload returns a `Labelled fallback` warning. A configured provider may reuse valid cached outputs during a provider outage. B's UI must render returned mode/warnings and engine review-failed flags; an HTTP 200 alone is not evidence of live AI.
+Successful read/photo caches are checked first, including when provider credentials are absent. Uncached unavailable requests return labelled fallback; exhausted quota produces `Fallback (AI quota reached)` in ReadResult warnings. A Gemini 429 can use one distinct configured fallback model, then an explicitly configured compatible provider only if both Gemini models hit quota. Rejected models are not retried during schema repair. See [quota setup and exact environment variables](QUOTA_SETUP.md).
+
+Chat fallback uses conservative deterministic extraction. Photo fallback remains unclear, never invents meter digits, and upload retains a labelled fallback warning. ReadResult warnings distinguish Live, Cached and Fallback honestly. B's UI must render mode/warnings and review-failed flags; HTTP 200 alone does not establish live AI.
 
 Meter checks require two images and a positive time interval. Both digit strings must be readable numeric values with a nondecreasing reading; otherwise the result is unclear with a retake request. Photographs cannot prove moisture or paint readiness.
 
@@ -67,12 +69,14 @@ Server environment variables:
 LLM_PROVIDER=gemini
 GEMINI_API_KEY=...
 GEMINI_MODEL=gemini-3.1-flash-lite
+GEMINI_FALLBACK_MODEL=gemini-3.5-flash-lite
+LIVE_LLM_TESTS=0
 SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=...
 MAGIC_LINK_SECRET=... # at least 32 bytes; retain the same secret across deployments
 APP_ORIGIN=https://YOUR_CANONICAL_DEPLOYMENT
 ```
 
-For OpenAI, use `LLM_PROVIDER=openai`, `OPENAI_API_KEY` and optional `OPENAI_MODEL`. Never prefix a service-role key, model key or signing secret with `NEXT_PUBLIC_`. Set server variables in the deployment as well as ignored local `.env.local`, then restart/redeploy. Migration SQL is in `packages/ai/supabase/migrations/001_init.sql`.
+For an active compatible provider, configure OPENAI_BASE_URL, OPENAI_MODEL and OPENAI_API_KEY; select it directly with LLM_PROVIDER=openai or use LLM_FALLBACK_PROVIDER=openai after Gemini quotas. GitHub Models has retired; see QUOTA_SETUP.md. Never prefix a service-role key, model key or signing secret with `NEXT_PUBLIC_`. Set server variables in the deployment as well as ignored local `.env.local`, then restart/redeploy. Migration SQL is in `packages/ai/supabase/migrations/001_init.sql`.
 
 Read/link routes apply process-local rate limits; these are not a distributed quota or abuse-prevention system. Model output can still be wrong despite schema validation, and a single photo cannot reveal hidden building defects. The human-labelled AI evaluation remains pending: the runner's placeholder dataset/results are explicitly synthetic smoke data, not measured accuracy. Current upload/mobile-preview acceptance is recorded in [upload verification](UPLOAD_VERIFICATION.md).

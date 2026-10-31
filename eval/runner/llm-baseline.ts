@@ -1,5 +1,6 @@
 // Baseline 4 prefetch: single LLM (prompt E.4) on exactly the evidence StackSense collected per case. Live calls; cached.
 // Run (from repo root): pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts
+import { assertLiveLlmOptIn } from "../../packages/ai/src/llm/guard";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -7,6 +8,7 @@ import { singleLlmBaseline, PROMPT_VERSION } from "../../packages/ai/src/baselin
 import { CACHE_DIR, METHODS, hardCases, simCases, type CachedBaseline, type Trail } from "./run";
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  assertLiveLlmOptIn();
   const provider = process.env.LLM_PROVIDER ?? "gemini";
   const key = provider === "openai" ? process.env.OPENAI_API_KEY : provider === "gemini" ? process.env.GEMINI_API_KEY : undefined;
   // Without a real provider key every answer would be a fallback null; refuse rather than cache 90 non-answers.

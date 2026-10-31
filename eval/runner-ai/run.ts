@@ -2,13 +2,14 @@ import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 import {resolve} from "node:path";
 import {fileURLToPath} from "node:url";
 import {ChatMessage,Observation,PhotoLabel,type ReadRequest} from "../../packages/contracts/src/index";
+import {assertLiveLlmOptIn} from "../../packages/ai/src/llm/guard";
 import {createAdapter} from "../../packages/ai/src/llm/adapter";
-import {geminiProvider} from "../../packages/ai/src/llm/gemini";
-import {openaiProvider} from "../../packages/ai/src/llm/openai";
+import {serverAdapter} from "../../packages/ai/src/llm/server";
 import {createReadService} from "../../packages/ai/src/read/pipeline";
 import {createCache} from "../../packages/ai/src/read/cache";
 import {computeAiMetrics,parseCsv,type Fields,type ScoredCase} from "./metrics";
 const args=process.argv.slice(2),live=args.includes("--live"),dataIndex=args.indexOf("--data");
+if(live)assertLiveLlmOptIn();
 const directory=dataIndex>=0?resolve(args[dataIndex+1]??""):fileURLToPath(new URL("../data/placeholder/",import.meta.url));
 if(directory.includes("/eval/hard-cases"))throw new Error("This runner never reads hard cases");
 const manifest=JSON.parse(readFileSync(resolve(directory,"manifest.json"),"utf8")) as {placeholder:boolean;humanReviewed:boolean;label:string};
@@ -26,7 +27,8 @@ const measuredFetch:typeof fetch=async(input,init)=>{
 const providerName=process.env.LLM_PROVIDER??"gemini";
 const apiKey=providerName==="openai"?process.env.OPENAI_API_KEY:process.env.GEMINI_API_KEY;
 if(live&&!apiKey)throw new Error("Selected provider key is missing; load the server env file");
-const adapter=createAdapter({provider:live?(providerName==="openai"?openaiProvider({apiKey:apiKey!,model:process.env.OPENAI_MODEL??"gpt-4.1-mini",fetch:measuredFetch}):geminiProvider({apiKey:apiKey!,model:process.env.GEMINI_MODEL??"gemini-3.8-flash",fetch:measuredFetch})):undefined});
+const adapter=live?serverAdapter({fetch:measuredFetch}):createAdapter();
+if(live&&!adapter.configured)throw new Error("Selected provider configuration is incomplete");
 const read=createReadService({adapter,cache:createCache()}),scored:ScoredCase[]=[],modes:Record<string,number>={};
 const labels=Observation.pick({flatId:true,room:true,zone:true,surface:true,hazards:true,kind:true});
 async function score(request:ReadRequest,reference:{kind:"message";language:string;expected:Record<string,Fields>}|{kind:"photo";expected:{photoId:string;surface:PhotoLabel["surface"];zone:PhotoLabel["zone"];isClean:boolean}[]}) {

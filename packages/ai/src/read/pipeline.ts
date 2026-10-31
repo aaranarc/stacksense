@@ -8,6 +8,8 @@ import { hazardsIn } from "./hazards";
 import { cacheKey, createCache, type ReadCache } from "./cache";
 import { preparePhoto } from "./photos";
 import { createPhotoReader } from "./photoCache";
+import {modeWarnings} from "./status";
+import {QUOTA_WARNING} from "../llm/errors";
 let defaultCache:ReadCache|undefined;
 const damage=/water|damp|leak|stain|crack|mould|mold|peel|meter|repair|dry|paani|pani|सीलन|डाग|ओल|पाणी|छत|गील|नमी/i;
 function fallbackObservation(m:ChatMessage,flatId:string|null):Observation {
@@ -24,13 +26,16 @@ export function createReadService(opts:{adapter?:LlmAdapter;cache?:ReadCache;pre
     const messages=pseudonymise(request.messages).messages;
     const cleanRequest={...request,messages};
     const cache=opts.cache ?? (defaultCache ??= createCache({supabaseUrl:process.env.SUPABASE_URL,serviceRoleKey:process.env.SUPABASE_SERVICE_ROLE_KEY}));
+    const key=await cacheKey(cleanRequest),cached=await cache.get(key);
+    if(cached?.mode==="live")return {...cached,mode:"cached",warnings:modeWarnings("cached",cached.warnings)};
     const adapter=opts.adapter ?? serverAdapter();
-    const key=await cacheKey(cleanRequest), cached=adapter.configured?await cache.get(key):null;
-    if(cached?.mode==="live") return {...cached,mode:"cached"};
     const senderMap=resolveSenders(messages);
     const readPhoto=createPhotoReader({adapter,cache});
     const photoOnly=messages.length===0&&request.photos.length>0;
     const result=photoOnly?{data:{observations:[]},source:"llm" as const,warnings:[]}:await adapter.readChat({buildingSummary:request.buildingId,messagesJson:JSON.stringify(messages)});
+    if(result.source==="fallback"&&result.warnings.includes(QUOTA_WARNING)){
+      const late=await cache.get(key);if(late?.mode==="live")return {...late,mode:"cached",warnings:modeWarnings("cached",[...late.warnings,QUOTA_WARNING])};
+    }
     const warnings=[...result.warnings]; let fallback=result.source==="fallback",usedLive=!photoOnly&&result.source==="llm";
     let observations:Observation[]=[];
     if(result.data) for(const draft of result.data.observations) {
@@ -49,7 +54,8 @@ export function createReadService(opts:{adapter?:LlmAdapter;cache?:ReadCache;pre
       photoLabels.push({photoId:photo.id,surface:"unclear",zone:"unclear",quality:"ok",boxes:[],meterDigits:null,humanCorrected:false,...read.data});
     }
     if(fallback) warnings.push("Labelled fallback: deterministic chat extraction; unavailable photo labels remain unclear");
-    const output=ReadResult.parse({observations:assignIncidents(observations),photoLabels,senderMap,warnings,mode:fallback?"fallback":usedLive?"live":"cached"});
+    const mode=fallback?"fallback":usedLive?"live":"cached";
+    const output=ReadResult.parse({observations:assignIncidents(observations),photoLabels,senderMap,warnings:modeWarnings(mode,warnings),mode});
     if(!fallback) await cache.set(key,{...output,mode:"live"});
     return output;
   };
