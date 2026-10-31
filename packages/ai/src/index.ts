@@ -1,2 +1,7 @@
-// Server-side AI entry point. Implemented in A-T13 and A-T14.
-export {};
+// Server-only entry point. Browser consumers must use @stacksense/ai/browser.
+export { handleRead, createReadHandler } from "./read/http";
+export { createReadService } from "./read/pipeline";
+export { handleSecondOpinion, createSecondOpinionHandler } from "./secondOpinion";
+export { handleWeather, handleForecast } from "./weather/openMeteo";
+export {handleMemory} from "./memory";
+export {handleLink,handleLinkVerify,handleUpload} from "./links/http";

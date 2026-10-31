@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-10-30T18:06:29.845Z",
+  "label": "PLACEHOLDER SMOKE ONLY — NOT FIELD ACCURACY",
+  "placeholder": true,
+  "humanReviewed": false,
+  "execution": "fallback-smoke-no-network",
+  "caseCount": 5,
+  "apiCalls": 0,
+  "modes": {
+    "fallback": 5
+  },
+  "f1ByField": {
+    "flatId": 1,
+    "room": 1,
+    "zone": 1,
+    "surface": 1,
+    "hazards": null,
+    "kind": 1
+  },
+  "f1ByLanguage": {
+    "en": 1,
+    "mr": 1,
+    "hinglish": 1
+  },
+  "photoAccuracy": 0,
+  "cleanWallFalsePositive": 0,
+  "photoAbstentions": 2,
+  "photoCount": 2,
+  "cleanPhotoCount": 1,
+  "meanCostPerCaseUsd": 0,
+  "meanLatencyMs": 1.7015250000000037,
+  "unpricedCases": 0,
+  "countsByField": {
+    "flatId": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "room": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "zone": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "surface": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "hazards": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    "kind": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "costBasis": "Zero provider calls; no API cost"
+}

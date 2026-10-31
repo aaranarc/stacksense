@@ -1,0 +1,492 @@
+{
+  "title": "Break it: seeded simulated building 23",
+  "building": {
+    "id": "sim-23",
+    "name": "Simulated building 23",
+    "region": "IN",
+    "archetype": "GENERIC",
+    "lat": 19.07,
+    "lon": 72.88,
+    "floors": 4,
+    "hasTerrace": true,
+    "flats": [
+      {
+        "id": "101",
+        "floor": 1,
+        "position": "01",
+        "wetAreas": [
+          "bathroom",
+          "kitchen",
+          "wc"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": true,
+        "access": "open"
+      },
+      {
+        "id": "201",
+        "floor": 2,
+        "position": "01",
+        "wetAreas": [
+          "bathroom",
+          "kitchen",
+          "wc"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": true,
+        "access": "open"
+      },
+      {
+        "id": "301",
+        "floor": 3,
+        "position": "01",
+        "wetAreas": [
+          "bathroom",
+          "kitchen",
+          "wc"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "locked"
+      },
+      {
+        "id": "401",
+        "floor": 4,
+        "position": "01",
+        "wetAreas": [
+          "bathroom",
+          "kitchen",
+          "wc"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      }
+    ],
+    "stacks": [
+      {
+        "id": "stack-1",
+        "kind": "duct",
+        "flatIds": [
+          "101",
+          "201",
+          "301",
+          "401"
+        ]
+      }
+    ]
+  },
+  "steps": [
+    [
+      {
+        "id": "sim-23-0",
+        "eventKey": "sim-23-0",
+        "flatId": "401",
+        "at": "2026-10-30T16:00:00.000Z",
+        "kind": "complaint",
+        "zone": "ceiling",
+        "surface": "damp_stain",
+        "room": "bathroom",
+        "hazards": [],
+        "hazardQuestionsAnswered": true,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [],
+        "sourceMessageIds": [],
+        "provenance": "simulated",
+        "rawText": "top floor ceiling stain"
+      }
+    ]
+  ],
+  "state": {
+    "memoryPrior": {
+      "upper_wet_area": 0,
+      "upper_supply": 0,
+      "shared_shaft": 0,
+      "facade_window": 0,
+      "roof_terrace": 0,
+      "condensation": 0,
+      "other": 0
+    },
+    "caseId": "sim-23:401",
+    "now": "2026-10-30T16:00:00.000Z",
+    "building": {
+      "id": "sim-23",
+      "name": "Simulated building 23",
+      "region": "IN",
+      "archetype": "GENERIC",
+      "lat": 19.07,
+      "lon": 72.88,
+      "floors": 4,
+      "hasTerrace": true,
+      "flats": [
+        {
+          "id": "101",
+          "floor": 1,
+          "position": "01",
+          "wetAreas": [
+            "bathroom",
+            "kitchen",
+            "wc"
+          ],
+          "externalWalls": [
+            "W"
+          ],
+          "hasWaterMeter": true,
+          "access": "open"
+        },
+        {
+          "id": "201",
+          "floor": 2,
+          "position": "01",
+          "wetAreas": [
+            "bathroom",
+            "kitchen",
+            "wc"
+          ],
+          "externalWalls": [
+            "W"
+          ],
+          "hasWaterMeter": true,
+          "access": "open"
+        },
+        {
+          "id": "301",
+          "floor": 3,
+          "position": "01",
+          "wetAreas": [
+            "bathroom",
+            "kitchen",
+            "wc"
+          ],
+          "externalWalls": [
+            "W"
+          ],
+          "hasWaterMeter": false,
+          "access": "locked"
+        },
+        {
+          "id": "401",
+          "floor": 4,
+          "position": "01",
+          "wetAreas": [
+            "bathroom",
+            "kitchen",
+            "wc"
+          ],
+          "externalWalls": [
+            "W"
+          ],
+          "hasWaterMeter": false,
+          "access": "open"
+        }
+      ],
+      "stacks": [
+        {
+          "id": "stack-1",
+          "kind": "duct",
+          "flatIds": [
+            "101",
+            "201",
+            "301",
+            "401"
+          ]
+        }
+      ]
+    },
+    "observations": [
+      {
+        "id": "sim-23-0",
+        "flatId": "401",
+        "eventKey": "sim-23-0",
+        "at": "2026-10-30T16:00:00.000Z",
+        "kind": "complaint",
+        "zone": "ceiling",
+        "surface": "damp_stain",
+        "room": "bathroom",
+        "hazards": [],
+        "hazardQuestionsAnswered": true,
+        "checkId": null,
+        "meter": null,
+        "moisture": null,
+        "finding": null,
+        "photoIds": [],
+        "sourceMessageIds": [],
+        "provenance": "simulated",
+        "rawText": "top floor ceiling stain"
+      }
+    ],
+    "photoLabels": [],
+    "hypotheses": [
+      {
+        "id": "401:shared_shaft@stack-1",
+        "family": "shared_shaft",
+        "level": "mechanism",
+        "label": "Probable shared shaft stack-1",
+        "flatId": null,
+        "stackId": "stack-1",
+        "orientation": null,
+        "parentId": null
+      },
+      {
+        "id": "401:facade_window@401:W",
+        "family": "facade_window",
+        "level": "area",
+        "label": "Probable 401 W facade/window",
+        "flatId": "401",
+        "stackId": null,
+        "orientation": "W",
+        "parentId": null
+      },
+      {
+        "id": "401:roof_terrace",
+        "family": "roof_terrace",
+        "level": "mechanism",
+        "label": "Probable roof/terrace ingress",
+        "flatId": null,
+        "stackId": null,
+        "orientation": null,
+        "parentId": null
+      },
+      {
+        "id": "401:condensation@401",
+        "family": "condensation",
+        "level": "mechanism",
+        "label": "Probable 401 condensation",
+        "flatId": "401",
+        "stackId": null,
+        "orientation": null,
+        "parentId": null
+      },
+      {
+        "id": "401:other",
+        "family": "other",
+        "level": "mechanism",
+        "label": "Other unresolved source",
+        "flatId": null,
+        "stackId": null,
+        "orientation": null,
+        "parentId": null
+      }
+    ],
+    "posterior": {
+      "401:shared_shaft@stack-1": 0.09473684210526312,
+      "401:facade_window@401:W": 0.2526315789473683,
+      "401:roof_terrace": 0.4000000000000001,
+      "401:condensation@401": 0.12631578947368421,
+      "401:other": 0.12631578947368421
+    },
+    "safety": {
+      "status": "ok",
+      "reasons": [],
+      "actions": []
+    },
+    "nextChecks": [
+      {
+        "id": "inspect@401",
+        "type": "inspect",
+        "targetFlatId": "401",
+        "effortMin": 60,
+        "accessPenalty": 1,
+        "expectedBits": 1.586999426291234,
+        "score": 0.026449990438187233,
+        "why": "inspect at 401 tests the remaining explanations",
+        "excluded": null,
+        "instructions": {
+          "en": "Arrange a professional inspection only if safe; keep away from hazardous areas.",
+          "hi": "सुरक्षित हो तभी विशेषज्ञ से निरीक्षण करवाएँ; खतरनाक जगहों से दूर रहें।",
+          "mr": "सुरक्षित असेल तरच तज्ज्ञांकडून तपासणी करून घ्या; धोकादायक जागांपासून दूर राहा।"
+        }
+      },
+      {
+        "id": "ceiling_photo@401",
+        "type": "ceiling_photo",
+        "targetFlatId": "401",
+        "effortMin": 0.5,
+        "accessPenalty": 1,
+        "expectedBits": 0,
+        "score": 0,
+        "why": "ceiling photo at 401 tests the remaining explanations",
+        "excluded": "can't change the action",
+        "instructions": {
+          "en": "Photograph the ceiling from a safe distance only if safe; do not stand under bulges.",
+          "hi": "सुरक्षित हो तभी दूर से छत की फोटो लें; फूली छत के नीचे न खड़े हों।",
+          "mr": "सुरक्षित असेल तरच दूरून छताचा फोटो घ्या; फुगलेल्या छताखाली उभे राहू नका।"
+        }
+      },
+      {
+        "id": "duct_photo@301",
+        "type": "duct_photo",
+        "targetFlatId": "301",
+        "effortMin": 0.5,
+        "accessPenalty": 1.7976931348623157e+308,
+        "expectedBits": 0.1603573386048991,
+        "score": 0,
+        "why": "301 shares the duct; a dry duct would rule against a shaft leak",
+        "excluded": "flat locked",
+        "instructions": {
+          "en": "Photograph the duct wall only if safe; keep clear of electrical fittings.",
+          "hi": "सुरक्षित हो तभी डक्ट की दीवार की फोटो लें; बिजली के उपकरणों से दूर रहें।",
+          "mr": "सुरक्षित असेल तरच डक्टच्या भिंतीचा फोटो घ्या; विद्युत उपकरणांपासून दूर राहा।"
+        }
+      },
+      {
+        "id": "moisture_reading@401",
+        "type": "moisture_reading",
+        "targetFlatId": "401",
+        "effortMin": 30,
+        "accessPenalty": 1,
+        "expectedBits": 0,
+        "score": 0,
+        "why": "moisture reading at 401 tests the remaining explanations",
+        "excluded": "can't change the action",
+        "instructions": {
+          "en": "Ask a professional for a moisture reading only if safe; a photo cannot measure moisture.",
+          "hi": "सुरक्षित हो तभी विशेषज्ञ से नमी की रीडिंग लें; फोटो से नमी नहीं मापी जा सकती।",
+          "mr": "सुरक्षित असेल तरच तज्ज्ञांकडून ओलाव्याची नोंद घ्या; फोटोने ओलावा मोजता येत नाही।"
+        }
+      },
+      {
+        "id": "rain_recheck@401",
+        "type": "rain_recheck",
+        "targetFlatId": "401",
+        "effortMin": 0,
+        "accessPenalty": 2880,
+        "expectedBits": 0.28258178988344707,
+        "score": 0,
+        "why": "rain recheck at 401 tests the remaining explanations",
+        "excluded": "can't change the action",
+        "instructions": {
+          "en": "Recheck from indoors after rain only if safe; do not lean outside the window.",
+          "hi": "सुरक्षित हो तभी बारिश के बाद अंदर से दोबारा देखें; खिड़की से बाहर न झुकें।",
+          "mr": "सुरक्षित असेल तरच पावसानंतर आतून पुन्हा पाहा; खिडकीबाहेर वाकू नका।"
+        }
+      }
+    ],
+    "stop": {
+      "stopped": true,
+      "reason": "Remote evidence can't decide — inspect sim-23:401"
+    },
+    "secondOpinion": null,
+    "jobSheet": {
+      "caseId": "sim-23:401",
+      "region": "IN",
+      "probableSource": "Remote evidence insufficient; professional inspection required",
+      "level": "mechanism",
+      "send": [],
+      "dontSend": [],
+      "access": "Coordinate access to source area with society/landlord",
+      "verifyOnSite": [
+        "Professional inspection of source area; verify the probable mechanism before repairs"
+      ],
+      "notJustifiedYet": [
+        "breaking 401 ceiling",
+        "riser replacement",
+        "painting before a recorded moisture reading"
+      ],
+      "safetyFlags": [
+        "Second Opinion unavailable — unreviewed"
+      ],
+      "evidencePhotoIds": [],
+      "responsibilityLinks": [
+        {
+          "label": "Housing society repair responsibility reference",
+          "url": "https://www.mlfoundation.in/chs-problems-solutions/who-pays-for-repairs-and-how-to-handle-common-area-disputes/535.html"
+        },
+        {
+          "label": "Maharashtra leakage repair responsibility reference",
+          "url": "https://www.mypunepulse.com/neighbours-bathroom-leakage-damages-your-flat-who-pays-for-the-repairs-maharashtra-court-clarifies/"
+        }
+      ],
+      "timestampTrail": [
+        {
+          "label": "report received",
+          "at": "2026-10-30T16:00:00.000Z"
+        },
+        {
+          "label": "first check requested — request time not recorded",
+          "at": "unknown"
+        },
+        {
+          "label": "source probable — evidence as of",
+          "at": "2026-10-30T16:00:00.000Z"
+        },
+        {
+          "label": "job sheet issued — case time",
+          "at": "2026-10-30T16:00:00.000Z"
+        }
+      ]
+    },
+    "recovery": {
+      "repair": "not_started",
+      "dry": "unknown",
+      "paint": "not_ready",
+      "day14DueAt": null,
+      "reopened": false,
+      "flags": []
+    },
+    "prediction": {
+      "sameStack": [],
+      "forecastRechecks": [],
+      "seasonal": [],
+      "memory": {
+        "upper_wet_area": 0,
+        "upper_supply": 0,
+        "shared_shaft": 0,
+        "facade_window": 0,
+        "roof_terrace": 0,
+        "condensation": 0,
+        "other": 0
+      }
+    },
+    "trace": [
+      {
+        "step": 1,
+        "observationId": "sim-23-0",
+        "changes": [
+          {
+            "hypothesisId": "401:shared_shaft@stack-1",
+            "before": 0.31034482758620685,
+            "after": 0.09473684210526312,
+            "why": "sim-23-0: top floor changes shared shaft"
+          },
+          {
+            "hypothesisId": "401:facade_window@401:W",
+            "before": 0.2758620689655173,
+            "after": 0.2526315789473683,
+            "why": "sim-23-0: top floor changes facade window"
+          },
+          {
+            "hypothesisId": "401:roof_terrace",
+            "before": 0.13793103448275865,
+            "after": 0.4000000000000001,
+            "why": "sim-23-0: top floor changes roof terrace"
+          },
+          {
+            "hypothesisId": "401:condensation@401",
+            "before": 0.13793103448275865,
+            "after": 0.12631578947368421,
+            "why": "sim-23-0: top floor changes condensation"
+          },
+          {
+            "hypothesisId": "401:other",
+            "before": 0.13793103448275865,
+            "after": 0.12631578947368421,
+            "why": "sim-23-0: top floor changes other"
+          }
+        ]
+      }
+    ],
+    "weather": {}
+  }
+}
