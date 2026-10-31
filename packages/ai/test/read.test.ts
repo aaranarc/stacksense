@@ -77,11 +77,11 @@ it("serves twenty sequential HTTP reads from cache without another model call",a
  for(let i=0;i<20;i++) {const r=await call();expect(r.status).toBe(200);expect(ReadResult.parse(await r.json()).mode).toBe("cached");}
  expect(provider).toHaveBeenCalledTimes(1);
 });
-it("labels a missing-key read fallback even when the cache was previously warmed",async()=>{
+it("serves a warm cache before considering missing credentials",async()=>{
  const cache=createCache({bundled:{}});
  await createReadService({cache,adapter:createAdapter({provider:async()=>({observations:[]})})})(input);
  const result=await createReadService({cache,adapter:createAdapter()})(input);
- expect(result.mode).toBe("fallback");expect(result.warnings.join(" ")).toContain("Labelled fallback");
+ expect(result.mode).toBe("cached");expect(result.warnings).toContain("Cached");
 });
 
 it("serves the actual bundled hero without contacting an unavailable configured provider",async()=>{

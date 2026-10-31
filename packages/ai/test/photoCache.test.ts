@@ -10,11 +10,11 @@ it("reuses validated photo labels for identical image bytes/context and separate
  const cached=await read(input);expect(cached.cached).toBe(true);expect(cached.data?.surface).toBe("dry");expect(provider).toHaveBeenCalledTimes(1);
  expect((await read({...input,flatId:"402"})).cached).toBe(false);expect(provider).toHaveBeenCalledTimes(2);
 });
-it("never caches unavailable labels or reuses live cache with a missing key",async()=>{
+it("uses existing validated labels with missing credentials and leaves uncached labels unavailable",async()=>{
  const cache=createCache({bundled:{}});
  const live=createPhotoReader({cache,adapter:createAdapter({provider:async()=>({surface:"dry",zone:"duct_wall",boxes:[],meterDigits:null})})});await live(input);
  const offline=createPhotoReader({cache,adapter:createAdapter()});
- expect((await offline(input)).source).toBe("fallback");expect((await offline(input)).cached).toBe(false);
+ expect((await offline(input)).cached).toBe(true);expect((await offline({...input,flatId:"999"})).source).toBe("fallback");
 });
 
 it("serves the real clean duct photo from bundled upload caches in all three languages",async()=>{
