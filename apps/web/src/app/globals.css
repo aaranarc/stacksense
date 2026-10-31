@@ -442,3 +442,14 @@ summary { padding:12px 0; cursor:pointer; font-weight:600; } details { border-bo
 .drawer .chip { margin-bottom:6px; }
 .dont-send > section, .job-trades > section { border-bottom:0 !important; }
 .dont-send > section { padding:0 !important; }
+
+/* Audit fixes: accessible settings and task controls at phone widths. */
+.settings-form { display:grid; gap:12px; margin:16px 0; max-width:540px; }
+.settings-form label,.inspection-task label { display:grid; gap:5px; font-size:14px; }
+.settings-form input:not([type=checkbox]),.settings-form select,.inspection-task input:not([type=checkbox]) { width:100%; min-width:0; padding:10px; border:1px solid var(--color-border); border-radius:8px; background:var(--color-surface); color:var(--color-ink); }
+.predict-row:has(.inspection-task) { flex-wrap:wrap; }
+.inspection-task { flex:1 1 100%; display:grid; grid-template-columns:1fr 1fr; gap:10px; border:1px solid var(--color-border); border-radius:10px; padding:12px; margin-top:8px; min-width:0; }
+.inspection-task small,.inspection-task [role=alert] { grid-column:1/-1; }
+.phone-preview { max-width:420px; margin:0 auto; }
+.phone-preview .neighbour-page { min-height:0; margin:0; padding:16px; width:100%; }
+@media(max-width:480px){ .inspection-task { grid-template-columns:1fr; } }

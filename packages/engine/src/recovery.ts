@@ -1,9 +1,10 @@
 import type { EngineState, Observation } from "@stacksense/contracts";
-// Set by contractor configuration; prototype defaults require contractor review.
+// Regional prototype defaults; an explicit building setting takes precedence.
 export const moistureThresholds={IN:16,UK:16} as const;
 const severity:Record<Observation["surface"],number|null>={dry:0,damp_stain:2,efflorescence:3,peeling:4,mould:5,crack:4,active_blistering:6,unclear:null};
 const generated=/^looks better ≠ dry$|^recapture worsened|^recurrence at repaired spot|^moisture threshold /;
 export function recoveryOf(state:EngineState):EngineState["recovery"] {
+  const threshold=state.building.moistureThresholdWme??moistureThresholds[state.building.region];
   const victim=state.hypotheses[0]?.id.split(":")[0];
   const complaint=state.observations.find(o=>o.kind==="complaint"&&o.flatId===victim);
   const source=[...state.hypotheses].filter(h=>!h.parentId).sort((a,b)=>(state.posterior[b.id]??0)-(state.posterior[a.id]??0))[0]?.flatId;
@@ -28,9 +29,9 @@ export function recoveryOf(state:EngineState):EngineState["recovery"] {
       }
       if(o.kind==="complaint") {result.reopened=true;result.paint="not_ready";result.dry="unknown";result.flags.push("recurrence at repaired spot — review earlier repair");}
       if(o.kind==="moisture_reading"&&o.moisture?.unit==="%WME"&&Number.isFinite(o.moisture.value)&&o.moisture.value>=0) {
-        result.dry=o.moisture.value<=moistureThresholds[state.building.region]?"dry":"not_dry";
+        result.dry=o.moisture.value<=threshold?"dry":"not_dry";
         result.paint=result.dry==="dry"&&!result.reopened?"ready":"not_ready";
-        result.flags.push(`moisture threshold ${moistureThresholds[state.building.region]} %WME — set by contractor configuration; prototype review pending`);
+        result.flags.push(`moisture threshold ${threshold} %WME — building setting or prototype default; contractor review pending`);
       }
     }
     if(severity[o.surface]!==null) lastSurface=severity[o.surface];

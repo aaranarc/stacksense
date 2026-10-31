@@ -8,6 +8,7 @@ import { Card } from './ui/Card';
 import { InfoTip } from './ui/InfoTip';
 import { DataBadge } from './states/DataBadge';
 import { PanelState } from './states/PanelState';
+import {BuildingSettings} from './building/BuildingSettings';
 import { BuildingHero } from './building/BuildingHero';
 import { CrossSection } from './building/CrossSection';
 import { Pills } from './building/Pills';
@@ -25,6 +26,7 @@ import { SenderChips } from './import/SenderChips';
 import { CaseFeed } from './feed/CaseFeed';
 import { AnswerRefresh } from './phone/AnswerRefresh';
 import { PhotoViewer } from './photo/PhotoViewer';
+import {EmergencyCard} from './safety/EmergencyCard';
 import { SafetyBoundary } from './safety/SafetyBoundary';
 import { JudgePanel } from './judge/JudgePanel';
 
@@ -55,18 +57,18 @@ export function ActivityCard() {
 }
 
 export function ReadCard({ autoDemo = false }: { autoDemo?: boolean }) {
-  const c = useCase(); const pane = usePane();
+  const c = useCase();
   const { state, read, messages, mode, isDemo, flat, setFlat, setPhoto } = c;
-  return <Card id="read" step={1} title="Read & See" subtitle="Paste a WhatsApp/agent chat with photos. We’ll structure it.">{pane('Read & See', <ReadSeeCard state={state} read={read} messages={messages} mode={mode} demoData={isDemo} onPhoto={setPhoto}
-    input={<PasteChat key={`${state.building.id}-${c.resetKey}`} mode={mode} buildingId={state.building.id} autoDemo={autoDemo} onRead={c.acceptRead} />}
+  return <Card id="read" step={1} title="Read & See" subtitle="Paste a WhatsApp/agent chat with photos. We’ll structure it.">{<PanelState key={`read-${state.building.id}-${c.resetKey}`} name="Read & See"><ReadSeeCard state={state} read={read} messages={messages} mode={mode} demoData={isDemo} onPhoto={setPhoto}
+    input={<PasteChat key={`${state.building.id}-${c.resetKey}`} mode={mode} buildingId={state.building.id} autoDemo={autoDemo} draftText={c.draftText} onDraftChange={c.setDraftText} onRead={c.acceptRead} />}
     feed={<>{read && <SenderChips senderMap={read.senderMap} building={state.building} onAssign={c.assignSender} />}
       <CaseFeed state={state} messages={messages} selectedFlat={flat} onClearFlat={() => setFlat(null)} onPhoto={setPhoto} />
-      <AnswerRefresh key={state.caseId} caseId={state.caseId} enabled={state.observations.length > 0 && state.safety.status !== 'emergency'} onAnswers={c.acceptAnswers} demoData={isDemo} /></>} />)}</Card>;
+      <AnswerRefresh key={state.caseId} caseId={state.caseId} enabled={state.observations.length > 0 && state.safety.status !== 'emergency'} onAnswers={c.acceptAnswers} demoData={isDemo} /></>} /></PanelState>}</Card>;
 }
 
 export function SafetyCard() {
-  const { state } = useCase(); const pane = usePane();
-  return <Card id="safety" step={2} tone="amber" title="Safety Gate" subtitle="Checks for hazards first. Never asks anyone to approach a risk.">{pane('Safety Gate', <SafetyGateCard state={state} />)}</Card>;
+  const { state,setState } = useCase(); const pane = usePane();
+  return <Card id="safety" step={2} tone="amber" title="Safety Gate" subtitle="Checks for hazards first. Never asks anyone to approach a risk.">{pane('Safety Gate', <SafetyGateCard state={state} onState={setState} />)}</Card>;
 }
 
 export function CheckCard() {
@@ -120,8 +122,10 @@ export function SettingsPanel() {
   const { state, region, changeRegion, reset } = useCase();
   return <Card id="settings" title="Settings" subtitle="Region, building facts and data labels."><div className="settings">
     <section><h3>Region</h3><div className="segmented" role="group" aria-label="Region setting"><button aria-pressed={region === 'IN'} onClick={() => changeRegion('IN')}><span aria-hidden="true">🇮🇳</span> India</button><button aria-pressed={region === 'UK'} onClick={() => changeRegion('UK')}><span aria-hidden="true">🇬🇧</span> United Kingdom</button></div><p className="note">UK mode uses UK flat labels, landlord/agent wording, Awaab’s Law links and a timestamp trail.</p></section>
-    <section><h3>Building</h3><dl className="facts"><div><dt>Name</dt><dd>{state.building.name}</dd></div><div><dt>Type</dt><dd>{state.building.archetype.replaceAll('_', ' ')}</dd></div><div><dt>Floors</dt><dd>{state.building.floors}</dd></div><div><dt>Flats</dt><dd>{state.building.flats.length}</dd></div></dl></section>
+    <BuildingSettings key={state.building.id}/>
     <section><h3>Data labels</h3><p className="note">Every AI output carries Live, Cached or Fallback. Demo data marks simulated evidence and timing.</p></section>
     <section><h3>Case</h3><p className="note">Clears the case on every page, including the saved session copy.</p><button className="outline-btn" onClick={reset}>Reset case</button></section>
   </div></Card>;
 }
+
+export function IncidentsSafetyNotice(){const {state}=useCase();return state.safety.status==='emergency'?<EmergencyCard state={state}/>:null;}

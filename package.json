@@ -15,6 +15,7 @@
     "test:eval": "pnpm --filter @stacksense/engine exec vitest run --root ../../eval/runner"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^3.25.76"
   }
 }

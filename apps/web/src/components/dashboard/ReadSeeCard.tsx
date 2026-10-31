@@ -1,5 +1,5 @@
 'use client';
-import { useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import type { ChatMessage, EngineState, ReadResult } from '@stacksense/contracts';
 import { MapPin, Sparkles, Layers, Images, ScanSearch, Paintbrush, ShieldCheck, MessageCircle } from 'lucide-react';
 import { DataBadge } from '../states/DataBadge';
@@ -14,7 +14,6 @@ export const bubbleText = (text: string) => text.replace(/\s*\S+\s*\(file attach
 /** Read & See: the first report as a chat bubble, what the AI read (with its Live/Cached/Fallback badge), then the input and the incidents. */
 export function ReadSeeCard({ state, read, messages, mode, demoData, onPhoto, input, feed }:
   { state: EngineState; read: ReadResult | null; messages: ChatMessage[]; mode?: ReadResult['mode']; demoData: boolean; onPhoto: (id: string) => void; input: ReactNode; feed: ReactNode }) {
-  const [paste, setPaste] = useState(false);
   const obs = [...state.observations].sort((a, b) => a.at.localeCompare(b.at));
   const first = obs.find(o => o.kind === 'complaint' && o.photoIds.length) ?? obs.find(o => o.kind === 'complaint') ?? obs[0];
   const message = first ? messages.find(m => first.sourceMessageIds.includes(m.id)) ?? messages.find(m => m.attachmentIds.length) : undefined;
@@ -44,8 +43,8 @@ export function ReadSeeCard({ state, read, messages, mode, demoData, onPhoto, in
           {surfaces.length > 0 && <li><Paintbrush size={14} aria-hidden="true" />Surfaces: {surfaces.map(words).join(', ')}</li>}
         </ul>
       </div>
-      {read && <p className="privacy-chip"><ShieldCheck size={14} aria-hidden="true" />Pseudonymised · EXIF removed</p>}
-      {paste ? input : <button className="link-btn" onClick={() => setPaste(true)}>Paste another chat ▸</button>}
+      {read && <><p className="privacy-chip"><ShieldCheck size={14} aria-hidden="true" />Pseudonymised · EXIF removed</p>{read.warnings.length>0&&<ul aria-label="Extraction status">{read.warnings.map(w=><li key={w}>{w}</li>)}</ul>}</>}
+      {input}
     </> : input}
     <div id="incidents" className="incidents"><div className="incidents-scroll" tabIndex={0} aria-label="Incidents">{feed}</div></div>
   </div>;

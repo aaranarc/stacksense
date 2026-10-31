@@ -9,7 +9,16 @@ import { buildJobSheet } from "./jobSheet";
 export function applySecondOpinion(state:EngineState,draft:SecondOpinion|null):EngineState {
   const evidence=claimEvidence(state),parsed=SecondOpinion.safeParse(draft);
   let opinion:SecondOpinion;
-  if(!parsed.success) opinion={verdict:"review_failed",source:"fallback",allowedLevel:evidence.level,claim:"Second Opinion unavailable — unreviewed",supports:[],challenges:[],unknown:[],wouldChange:[]};
+  if(!parsed.success||parsed.data.verdict==="review_failed") {
+    opinion={
+      verdict:"review_failed",source:"fallback",allowedLevel:evidence.level,
+      claim:"Second Opinion unavailable — unreviewed",
+      supports:state.observations.slice(-5).map(o=>`${o.id}: recorded ${o.zone.replaceAll("_"," ")} / ${o.surface.replaceAll("_"," ")} — not independently reviewed`),
+      challenges:["Contradictions have not been independently reviewed."],
+      unknown:[...new Set(["AI review unavailable; this case remains unreviewed.","The probable source and exact component require verification on site.",...(parsed.success?parsed.data.unknown:[])])],
+      wouldChange:state.nextChecks.filter(c=>!c.excluded).slice(0,2).map(c=>`${c.id}: ${c.why}`).concat(["A professional finding recorded with its observation ID."]),
+    };
+  }
   else {
     const requested=parsed.data.allowedLevel;
     const allowedLevel=levels[requested]>levels[evidence.level]?evidence.level:requested;

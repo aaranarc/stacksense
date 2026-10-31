@@ -32,3 +32,12 @@ it("does not reuse a primary case's review for a separate facade case",async()=>
  const primary=applySecondOpinion(heroSnapshots()[6]!,draft);
  expect(splitCases(primary)[1]?.secondOpinion).toBeNull();
 });
+
+it('keeps failed reviews explicitly unreviewed while showing useful evidence and next steps',()=>{
+ const opinion=applySecondOpinion(heroSnapshots()[6]!,null).secondOpinion!;
+ expect(opinion.verdict).toBe('review_failed');
+ expect(opinion.supports.length).toBeGreaterThan(0);
+ expect(opinion.challenges.join(' ')).toMatch(/not been independently reviewed/i);
+ expect(opinion.unknown.join(' ')).toMatch(/unavailable|unreviewed/i);
+ expect(opinion.wouldChange.length).toBeGreaterThan(0);
+});

@@ -21,3 +21,25 @@ it('renders the real cached demo-chat attachment filenames as approved thumbnail
  const cases=[['IMG-20261030-WA0402.jpg','402','/demo/photos/ceiling_402_own.jpg'],['IMG-20261030-WA0202.jpg','202','/demo/photos/window_202_own.jpg']] as const;
  for(const [id,flat,path] of cases){const buttons=await screen.findAllByRole('button',{name:`Open photo ${id} from flat ${flat}`});expect(within(buttons[0]!).getByRole('img').getAttribute('src')).toBe(path);fireEvent.click(buttons[0]!);expect(screen.getByAltText(`Own-photo demo reference ${id}`).getAttribute('src')).toBe(path);expect(screen.getByText('Own-photo reference; case evidence and timing remain simulated.')).toBeTruthy();fireEvent.click(screen.getByRole('button',{name:`Close Photo ${id}`}));}
 });
+
+it('preserves a custom draft and the prior case when a read returns no incidents',async()=>{
+ const network=vi.spyOn(globalThis,'fetch').mockImplementation(async()=>Response.json(cached));
+ render(<TestApp/>);const field=screen.getByRole('textbox',{name:'WhatsApp or agent chat'});
+ fireEvent.change(field,{target:{value:'Flat 402 ceiling stain. No ceiling sagging or sewage smell.'}});
+ fireEvent.click(screen.getByRole('button',{name:'Read chat'}));await screen.findByText('AI extracted');
+ expect((screen.getByRole('textbox',{name:'WhatsApp or agent chat'}) as HTMLTextAreaElement).value).toContain('No ceiling sagging');
+ network.mockImplementation(async()=>Response.json({observations:[],photoLabels:[],senderMap:{},warnings:[],mode:'cached'}));
+ fireEvent.change(screen.getByRole('textbox',{name:'WhatsApp or agent chat'}),{target:{value:'My revised report'}});
+ fireEvent.click(screen.getByRole('button',{name:'Read chat'}));expect((await screen.findByRole('alert')).textContent).toContain('No incidents were extracted');
+ expect((screen.getByRole('textbox',{name:'WhatsApp or agent chat'}) as HTMLTextAreaElement).value).toBe('My revised report');
+ expect(screen.getByText('AI extracted')).toBeTruthy();
+});
+it('keeps the editor accessible when a custom report triggers an emergency',async()=>{
+ const result=ReadResult.parse(cached);result.observations=[{...result.observations[0]!,hazards:['water_near_electrics'],rawText:'402 water sparking at socket'}];
+ vi.spyOn(globalThis,'fetch').mockImplementation(async()=>Response.json(result));
+ render(<TestApp/>);fireEvent.change(screen.getByRole('textbox',{name:'WhatsApp or agent chat'}),{target:{value:'Flat 402 water sparking at socket'}});
+ fireEvent.click(screen.getByRole('button',{name:'Read chat'}));await screen.findByText('AI extracted');
+ const editor=screen.getByRole('textbox',{name:'WhatsApp or agent chat'});
+ expect(editor.closest('[inert]')).toBeNull();expect((editor as HTMLTextAreaElement).disabled).toBe(false);
+ expect(screen.getByText('Diagnosis stopped for safety')).toBeTruthy();
+});

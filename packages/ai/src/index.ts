@@ -6,3 +6,4 @@ export { handleWeather, handleForecast } from "./weather/openMeteo";
 export {handleMemory} from "./memory";
 export {handleLink,handleLinkVerify,handleLinkUpdates,handleUpload} from "./links/http";
 export { singleLlmBaseline } from "./baseline";
+export {handleEvaluation} from './evaluation';

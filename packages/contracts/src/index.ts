@@ -44,6 +44,7 @@ export const Building = z.object({
   archetype: z.enum(["MUMBAI_RCC_1990S", "UK_1960S_BLOCK", "GENERIC"]),
   lat: z.number(), lon: z.number(), floors: z.number().int(), hasTerrace: z.boolean(),
   flats: z.array(Flat), stacks: z.array(Stack),
+  moistureThresholdWme: z.number().min(0).max(100).optional(),
 });
 
 // ---------- input from chat / phone ----------

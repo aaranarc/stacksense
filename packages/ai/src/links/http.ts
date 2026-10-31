@@ -13,11 +13,13 @@ import {supabaseRepository,type LinkRepository,type LinkRow,type PhotoRow} from 
 const Input=LinkRequest.extend({state:EngineState.optional()});
 const SafetyAnswers=z.object({water_near_electrics:z.boolean(),sagging_ceiling:z.boolean(),fast_ingress:z.boolean(),sewage:z.boolean()}).strict();
 const zoneFor=(kind:string):PhotoLabel["zone"]=>kind==="meter_check"?"meter":kind==="duct_photo"?"duct_wall":kind==="trap_grout_photo"?"trap_grout":kind==="ceiling_photo"?"ceiling":"unclear";
+class InvalidLink extends Error {}
+async function deadline<T>(work:Promise<T>,ms:number):Promise<T>{let timer:ReturnType<typeof setTimeout>|undefined;try{return await Promise.race([work,new Promise<never>((_,reject)=>{timer=setTimeout(()=>reject(new Error("Check service timed out")),ms);})]);}finally{clearTimeout(timer);}}
 export function createLinkHandlers(opts:{repository:LinkRepository;secret:string;adapter?:LlmAdapter;now?:()=>number;origin?:string}) {
  const now=opts.now??Date.now,codec=createTokenCodec(opts.secret,now),allowed=rateLimiter(),repo=opts.repository;
  const injectedCache=opts.adapter?createCache({bundled:{}}):undefined;
  const checkRate=(r:Request)=>allowed(r.headers.get("x-forwarded-for")??"unknown");
- async function resolve(token:string){const claims=codec.verify(token),row=await repo.getLink(codec.hash(token));if(!row||row.used_at||Date.parse(row.expires_at)<=now()||row.case_id!==claims.caseId||row.check_id!==claims.checkId||row.flat_id!==claims.flatId||row.lang!==claims.lang)throw new Error("Invalid or used token");return row;}
+ async function resolve(token:string){let claims:ReturnType<typeof codec.verify>;try{claims=codec.verify(token);}catch{throw new InvalidLink();}const row=await repo.getLink(codec.hash(token));if(!row||row.used_at||Date.parse(row.expires_at)<=now()||row.case_id!==claims.caseId||row.check_id!==claims.checkId||row.flat_id!==claims.flatId||row.lang!==claims.lang)throw new InvalidLink();return row;}
  return {
   async link(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
@@ -55,7 +57,14 @@ export function createLinkHandlers(opts:{repository:LinkRepository;secret:string
   },
   async verify(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
-   try{const row=await resolve(new URL(request.url).searchParams.get("token")??""),state=await repo.getCase(row.case_id);if(!state||state.safety.status!=="ok")return jsonResponse({error:"Resident checks unavailable"},403);const check=state.nextChecks.find(c=>c.id===row.check_id);if(!check||check.excluded!==null)throw new Error();const path=await repo.ghost(row.case_id,row.flat_id,zoneFor(row.check_type));return jsonResponse({caseId:row.case_id,checkId:row.check_id,flatId:row.flat_id,lang:row.lang,checkType:row.check_type,instructions:check.instructions,ghostPhotoUrl:path?await repo.signedUrl(path):null});}catch{return jsonResponse({error:"Invalid, expired or used link"},410);}
+   try{return await deadline((async()=>{
+    const row=await resolve(new URL(request.url).searchParams.get("token")??""),state=await repo.getCase(row.case_id);
+    if(!state||state.safety.status!=="ok")return jsonResponse({error:"Resident checks unavailable"},403);
+    const check=state.nextChecks.find(c=>c.id===row.check_id);if(!check||check.excluded!==null)throw new InvalidLink();
+    // Optional alignment images must never prevent the resident from opening the check.
+    const ghostPhotoUrl=await deadline((async()=>{const path=await repo.ghost(row.case_id,row.flat_id,zoneFor(row.check_type));return path?repo.signedUrl(path):null;})(),1200).catch(()=>null);
+    return jsonResponse({caseId:row.case_id,checkId:row.check_id,flatId:row.flat_id,lang:row.lang,checkType:row.check_type,instructions:check.instructions,ghostPhotoUrl});
+   })(),12000);}catch(error){return error instanceof InvalidLink?jsonResponse({error:"Invalid, expired or used link"},410):jsonResponse({error:"Check service temporarily unavailable. Please retry."},503,{"Retry-After":"3"});}
   },
   async upload(request:Request):Promise<Response>{
    if(!checkRate(request))return jsonResponse({error:"Rate limit exceeded"},429);
