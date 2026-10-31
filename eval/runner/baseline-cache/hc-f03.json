@@ -1,0 +1,13 @@
+{
+ "caseId": "hc-f03",
+ "promptVersion": "base-v1",
+ "model": "gemini:gemini-3.1-flash-lite",
+ "evidenceHash": "49fdf7f85711c8c286f8efe5ccb5146084648deadd7aa11f93b242a3e7cb321b",
+ "result": {
+  "family": "roof_terrace",
+  "flatId": "602",
+  "trade": "roofer",
+  "emergency": false,
+  "level": "area"
+ }
+}

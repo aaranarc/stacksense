@@ -1,0 +1,13 @@
+{
+ "caseId": "hc-a02",
+ "promptVersion": "base-v1",
+ "model": "gemini:gemini-3.1-flash-lite",
+ "evidenceHash": "3e317e41011b2e35ec48faede504d1a9d96e39f1610742c5a6dda733404e1746",
+ "result": {
+  "family": "upper_wet_area",
+  "flatId": "301",
+  "trade": "plasterer_decorator",
+  "emergency": false,
+  "level": "area"
+ }
+}

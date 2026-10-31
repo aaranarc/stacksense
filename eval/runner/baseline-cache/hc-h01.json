@@ -1,0 +1,13 @@
+{
+ "caseId": "hc-h01",
+ "promptVersion": "base-v1",
+ "model": "gemini:gemini-3.1-flash-lite",
+ "evidenceHash": "57a5995ac2eb7b9e9701d97906778a9381a98b76b0cbb0c32f12885ee7fabd3d",
+ "result": {
+  "family": "upper_wet_area",
+  "flatId": "502",
+  "trade": "plumber",
+  "emergency": true,
+  "level": "area"
+ }
+}

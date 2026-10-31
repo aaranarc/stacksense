@@ -1,0 +1,13 @@
+{
+ "caseId": "hc-c04",
+ "promptVersion": "base-v1",
+ "model": "gemini:gemini-3.1-flash-lite",
+ "evidenceHash": "28da3950c63a164fb02d9986c44b835703b6b9f2bae429b1b11d745df01c7431",
+ "result": {
+  "family": "condensation",
+  "flatId": "5",
+  "trade": "ventilation",
+  "emergency": false,
+  "level": "area"
+ }
+}
