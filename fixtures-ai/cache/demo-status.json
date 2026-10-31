@@ -1,7 +1,7 @@
 {
   "label": "Demo cache coverage — not evaluation or field accuracy",
-  "generatedAt": "2026-10-31T07:45:33.955Z",
-  "liveOptIn": true,
+  "generatedAt": "2026-10-31T08:44:22.312Z",
+  "liveOptIn": false,
   "inputs": [
     {
       "id": "hero-chat",
