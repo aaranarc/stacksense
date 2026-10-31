@@ -165,3 +165,25 @@ Final remaining integration list: B-002 print decode; B-003 hero media resolver;
 
 ## B final run — B-002 fixed on b/app
 The print-route boundary now safely decodes its case ID exactly once before storage lookup. The original storage key and export URL encoding remain intact. Regression coverage renders the actual encoded-colon route with a validated stored Job Sheet and confirms populated content plus enabled Print / Save PDF; malformed and double-encoded segments are handled without guessing. This is a branch fix pending C's main merge and production retest.
+
+## C merge 1 — main 467a1f5 (31 Oct, 14:44 IST) — CP2 production verification by C
+C (sole main merger after A's handoff) merged origin/a/core (927094b, already in main) → origin/b/app (5cd02dc, includes
+B-002 fix) → origin/c/help into main; fast-forward, no conflicts. Install, recursive typecheck, all tests (3 contracts,
+66 AI, 87 engine, 70 web) and web build passed before the push. Vercel status for the exact SHA 467a1f5: success.
+Engine evaluation rerun on this tree: numbers unchanged vs v1 (eval/results/engine.json).
+
+| CP2 check on https://stacksense-omega.vercel.app (after 467a1f5 deploy) | Result | Owner if failing |
+| --- | --- | --- |
+| No login | PASS | — |
+| Load demo chat lights building | PASS — 402/202 victims, 502 check passed | — |
+| /api/read Live or Cached | PASS — POST 200, "Cached · Demo data" | — |
+| Judge hero | PASS — 6/6, "Job Sheet: send waterproofer tiler" | — |
+| What-if 502 meter → moved | PASS — Job Sheet sends plumber; flipped back restores waterproofer tiler | — |
+| Job Sheet + PDF | PASS — **B-002 CLOSED**: /print/<encoded id> populated (send/don't send/verify/not justified), Print / Save PDF enabled | — |
+| Judge photo previews | **FAIL — B-003 OPEN**: 4× "Preview unavailable" in the case feed while playing the hero; no images | **B** (lib/media.ts) |
+| /c/demo at 390×844 (emulated) | PASS — consent → 4× No → own clean duct_302.jpg → Upload → "Done", Cached/Demo labels, no horizontal overflow | — |
+| IN → UK → IN | PASS — UK Block 4 floors, gov.uk/Shelter links; back to IN restores Block A case and Indian links | — |
+| Colours follow visual rules | PASS — every flat status has a text label next to its colour (victim / check passed / inspect / not assessed) | — |
+
+Still open: B-003 (B), B owner-dashboard refresh wiring (B), CrossSection `<title>` hydration warning in dev (B, see
+C_REQUESTS.md). No live LLM call, key disclosure or hard-case edit occurred in this check.
