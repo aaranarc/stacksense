@@ -83,3 +83,12 @@ it("labels a missing-key read fallback even when the cache was previously warmed
  const result=await createReadService({cache,adapter:createAdapter()})(input);
  expect(result.mode).toBe("fallback");expect(result.warnings.join(" ")).toContain("Labelled fallback");
 });
+
+it("serves the actual bundled hero without contacting an unavailable configured provider",async()=>{
+ const {readFileSync}=await import("node:fs");
+ const {parseWhatsAppExport,pseudonymise}=await import("../src/browser/chat");
+ const messages=pseudonymise(parseWhatsAppExport(readFileSync(new URL("../../../fixtures-ai/chats/hero_blockA.txt",import.meta.url),"utf8"))).messages;
+ const provider=vi.fn(async()=>{throw Error("provider offline")});
+ const result=await createReadService({adapter:createAdapter({provider}),cache:createCache()})({buildingId:"block-a",messages,photos:[]});
+ expect(result.mode).toBe("cached");expect(result.observations.length).toBeGreaterThan(0);expect(provider).not.toHaveBeenCalled();
+});

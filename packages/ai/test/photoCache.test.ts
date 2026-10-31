@@ -16,3 +16,15 @@ it("never caches unavailable labels or reuses live cache with a missing key",asy
  const offline=createPhotoReader({cache,adapter:createAdapter()});
  expect((await offline(input)).source).toBe("fallback");expect((await offline(input)).cached).toBe(false);
 });
+
+it("serves the real clean duct photo from bundled upload caches in all three languages",async()=>{
+ const {readFileSync}=await import("node:fs");const {preparePhoto}=await import("../src/read/photos");
+ const state=JSON.parse(readFileSync(new URL("../../../fixtures/hero/state-02.json",import.meta.url),"utf8"));
+ const check=state.nextChecks.find((c:{id:string})=>c.id==="duct_photo@302");
+ const bytes=readFileSync(new URL("../../../fixtures-ai/photos/demo/duct_302.jpg",import.meta.url));
+ const clean=await preparePhoto(`data:image/jpeg;base64,${bytes.toString("base64")}`);
+ const provider=vi.fn(async()=>{throw Error("provider offline")});
+ const read=createPhotoReader({adapter:createAdapter({provider}),cache:createCache()});
+ for(const lang of ["en","hi","mr"]){const result=await read({checkType:check.type,flatId:"302",instruction:check.instructions[lang],images:[clean]});expect(result.cached).toBe(true);expect(result.data).not.toBeNull();}
+ expect(provider).not.toHaveBeenCalled();
+});
