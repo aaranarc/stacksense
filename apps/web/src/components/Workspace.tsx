@@ -16,6 +16,7 @@ import { SenderChips } from './import/SenderChips';
 import { CaseFeed } from './feed/CaseFeed';
 import { PhotoViewer } from './photo/PhotoViewer';
 import { JudgePanel } from './judge/JudgePanel';
+import { SecondOpinionBanner } from './opinion/SecondOpinionBanner';
 export function Workspace() {
  const [state,setState]=useState(()=>engine.createCase(demo.states[0]!.building));
  const [messages,setMessages]=useState<ChatMessage[]>([]);
@@ -42,7 +43,7 @@ export function Workspace() {
     <CrossSection state={state} selected={flat} onSelect={setFlat}/>
    </>} analysis={<>
     <SourceBars state={state}/><NextCheck state={state} onDemoStep={advance}/>
-    <section className="panel opinion-line">{state.secondOpinion?.verdict==='review_failed'?'Second Opinion unavailable — treat this result as unreviewed.':`Second Opinion: ${state.secondOpinion?.source==='fallback'?'Fallback · ':''}${state.secondOpinion?.claim??'Not reviewed yet.'}`}</section>
+    <SecondOpinionBanner state={state} onState={setState}/>
     <RightTabs/>
    </>}/>
    {photo&&<PhotoViewer key={photo} photoId={photo} label={state.photoLabels.find(p=>p.photoId===photo)} onClose={()=>setPhoto(null)} onCorrect={(label,changed)=>setState(correctPhoto(state,label,changed))}/>}
