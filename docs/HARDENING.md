@@ -8,9 +8,11 @@
 - Missing-key cloud `/api/upload`: HTTP 200, fallback warning, checkId bound to `duct_photo@302`; reused token 410. This used a synthetic test photo, and the test case/storage object were removed.
 - Regression tests cover twenty cache hits with one provider call, missing-key cache bypass, exact-context photo caching and no unavailable-label caching. Cached photo results are schema validated and rebound to the new upload's photo ID; meter readings still require two readable images.
 
-## Coverage still pending
+## Canonical demo coverage
 
-`fixtures-ai/cache/demo-status.json` is the authoritative inventory. The real hero chat and clean team duct photo are bundled; duct upload contexts are warmed in EN/HI/MR. Missing real scenario, meter, trap and Day-14 images remain marked missing. Synthetic evaluation placeholder images are not substituted. A-T27's requirement to cache every demo input is not complete until these assets are present and warmed.
+The CP1 follow-up fills all 14 manifest requests: hero chat, all eight scenario image inputs, duct, meter start/end, trap and Day-14 appearance. The real team duct photo is also reused for the happy scenario. Where team photos are unavailable, eleven deterministic schematic illustrations are visibly stamped **DEMO ILLUSTRATION**, and their cached results include **DEMO illustration — simulated input, not field evidence** warnings. These are not natural photographs, real meter observations, actual repair recaptures or evaluation data. No field accuracy is inferred.
+
+`fixtures-ai/cache/demo-status.json` records exact per-input cache status and source type; its `complete` value is authoritative. Model-fallback entries never count as warmed. Upload contexts for duct, meter pair and trap are warmed in all three languages. Canonical payload IDs/bytes/context must match; this inventory does not claim that every arbitrary UI upload or renamed image hits cache. B's demo-import adapter issue is tracked independently in `INTEGRATION_BUGS.md`.
 
 ## Prepare and warm assets
 
@@ -23,6 +25,6 @@ pnpm --filter @stacksense/engine exec tsx /Users/aaranachaurasia/dev/stacksense/
 pnpm --filter @stacksense/engine exec tsx --env-file=/Users/aaranachaurasia/dev/stacksense/apps/web/.env.local /Users/aaranachaurasia/dev/stacksense/packages/ai/scripts/cache-demo.ts --live
 ```
 
-The manifest declares exact IDs and paths. Update its scenario-photo paths to the actual team demo inputs before warming. `--live` is explicit provider opt-in. Missing assets/fallbacks fail coverage; `--allow-missing` permits an explicitly partial run. Valid model outputs are persisted in the bundled cache and optional server-side Supabase cache. Upload-oriented photos are additionally warmed for EN/HI/MR instructions. Cache keys include prompt versions, exact image bytes and context; changing IDs, encoding, instructions or message times can require a fresh warm. Never hand-author model labels and present them as live cache entries.
+The manifest declares exact IDs, paths and asset source. `generate-demo-illustrations.ts` prefers matching raw team files where present; otherwise it writes visibly labelled schematics and their SVG sources. Update its scenario-photo paths to the actual team demo inputs before warming. `--live` is explicit provider opt-in. Missing assets/fallbacks fail coverage; `--allow-missing` permits an explicitly partial run. Valid model outputs are persisted in the bundled cache and optional server-side Supabase cache. Upload-oriented photos are additionally warmed for EN/HI/MR instructions. Cache keys include prompt versions, exact image bytes and context; changing IDs, encoding, instructions or message times can require a fresh warm. Never hand-author model labels and present them as live cache entries.
 
 Missing keys deliberately select labelled fallback even for a warm request. A configured provider can use valid cached results during provider outages. Fallback outputs are never stored as successful model results. Full mobile-preview acceptance is tracked separately in `docs/UPLOAD_VERIFICATION.md`.

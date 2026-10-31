@@ -6,4 +6,8 @@
 - Sharp inspection: no EXIF (including GPS), XMP, IPTC or ICC.
 - No raw image is tracked. Never commit `eval/data/photos/*_raw.jpg`.
 
-The photograph's demo identifier is not a verified property address. Its visual labels are model outputs, not a moisture measurement or proof of a hidden source. Add a trap photo only after the user supplies it, using the same cleaning/metadata checks.
+The photograph's demo identifier is not a verified property address. Its visual labels are model outputs, not a moisture measurement or proof of a hidden source. Add a real trap photograph only after the user supplies it, using the same cleaning/metadata checks.
+
+## Other demo inputs
+
+Meter start/end, trap detail and Day-14 appearance are schematic illustrations when no corresponding raw team photo is supplied. Each generated JPEG has a visible DEMO ILLUSTRATION banner and matching `.demo.svg` source; cache warnings repeat the simulated provenance. The meter registers are invented demo values, not observed readings; the Day-14 drawing is not a real follow-up or evidence of dryness. Scenario schematics are in `../scenarios/` with the same labels. `demo-manifest.json` identifies the real-photo slots separately. These assets never enter the human-labelled evaluation dataset.

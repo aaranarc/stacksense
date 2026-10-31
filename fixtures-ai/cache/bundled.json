@@ -202,5 +202,498 @@
         "humanCorrected": false
       }
     ]
+  },
+  "4ba5a0686225be3d1773766c70a3f883aebdaa9ef49de54bdebd2fc9ebfd31c5": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-happy",
+        "surface": "dry",
+        "zone": "duct_wall",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [],
+    "mode": "live"
+  },
+  "8e436abc7e942dcf579fe18cdacc4c323684717ce34e2243e399aecb4a86135c": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-electrical_hazard",
+        "surface": "unclear",
+        "zone": "other",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "77a1774641c7f8efcb290b92578a5c2af31725d614199d2040d67233446c7918": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-locked_502",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "4cdf5f3b261533153eedd374dc258931dde9913583137084635235551618ee0a": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-dark_photo",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "f195f2fd5cf748574a1427e0bb381e2565271f177fea997a710ed4f91e382bdd": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-beam_travel",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "a2ce3b1f5a661a334e5af7c2be30ae48e0a98a5e36962346fd303c2d267d55bc": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-wrong_trade_rain",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "a9cc2e439b39911fbe719f30c38fc543103a632fe9a29dabd35e38bb57327c43": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-break_it",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "af46d69ab3e184046327492f50044f73598294f405b1aa599a6f13a6315a58ec": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "meter-start-502",
+        "surface": "dry",
+        "zone": "meter",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.3,
+            "y": 0.41,
+            "w": 0.4,
+            "h": 0.18,
+            "label": "meter reading"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "ce2426dc58c5ef9d367fcccd94bc8cff32778115ce3cb445443953fcd09e71ce": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.301,
+            "y": 0.4104,
+            "w": 0.3996,
+            "h": 0.1868,
+            "label": "meter reading"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "ae4552afc7ce3e15732e071db3d2f28cd79f989e7ca96d98269b948d89a4e6c5": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.298,
+            "y": 0.4091,
+            "w": 0.403,
+            "h": 0.218,
+            "label": "meter"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "284fb08e9f2a22fc7775c12f99692802ed033a53977a57e15addceaccdf552f5": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "meter-end-502",
+        "surface": "dry",
+        "zone": "meter",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.298,
+            "y": 0.4108,
+            "w": 0.404,
+            "h": 0.176,
+            "label": "meter register"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "8e0b6729ffdde4eb38059d7468a93d68c5846d50557a1623e583323e47ebb084": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.297,
+            "y": 0.414,
+            "w": 0.406,
+            "h": 0.176,
+            "label": "meter reading"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "90d8167bc792dda9d189d4df8e19bbd4569392da6a20c5b0d49f0eff19668eb2": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.301,
+            "y": 0.4095,
+            "w": 0.398,
+            "h": 0.218,
+            "label": "meter reading"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "3d09a9a260a786bd3305fb841b9c4dc292c533a682adced11dd6958a864d4917": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.301,
+            "y": 0.4108,
+            "w": 0.398,
+            "h": 0.179,
+            "label": "meter reading"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "ff296db609af86568fe46eca04f424cfd54d0582b53514b21ce86f022b367e74": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "trap-502",
+        "surface": "crack",
+        "zone": "trap_grout",
+        "quality": "ok",
+        "boxes": [
+          {
+            "x": 0.31,
+            "y": 0.575,
+            "w": 0.08,
+            "h": 0.16,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "a51b25e86da68c07824ddf9b704bd089cd7aa66bb66d025c0474968adf4ccf29": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "crack",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.31,
+            "y": 0.567,
+            "w": 0.08,
+            "h": 0.16,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "5cafa6e854dc3625922b69a2e76e68bb1d81259e1aad79d6baef6d10aca931b6": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "crack",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.31,
+            "y": 0.5485,
+            "w": 0.08,
+            "h": 0.18,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "0b2a2c16f73d335c492e2099b95ef5735115006bbcc1ec4657283bc9268fa7f5": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "crack",
+        "zone": "trap_grout",
+        "boxes": [
+          {
+            "x": 0.312,
+            "y": 0.5759,
+            "w": 0.1,
+            "h": 0.165,
+            "label": "crack"
+          }
+        ],
+        "meterDigits": null,
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
+  },
+  "67799e2c4bd2390ffe41adc8660a5cdc0735ab941e6178c4158db40a0ab62a73": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "day14-402",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "592a48237bac872c579df50d80cabf0d96a4a47ef7ecacbc4556f2f9b8c824f1": {
+    "observations": [],
+    "photoLabels": [
+      {
+        "photoId": "scenario-honest_uncertainty",
+        "surface": "unclear",
+        "zone": "unclear",
+        "quality": "ok",
+        "boxes": [],
+        "meterDigits": null,
+        "humanCorrected": false
+      }
+    ],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live"
+  },
+  "9ba7c6245000d6385e5a798cfa288707b111781cf85a26f026cf184db4a5153f": {
+    "observations": [],
+    "senderMap": {},
+    "warnings": [
+      "DEMO illustration — simulated input, not field evidence"
+    ],
+    "mode": "live",
+    "photoLabels": [
+      {
+        "surface": "dry",
+        "zone": "meter",
+        "boxes": [
+          {
+            "x": 0.297,
+            "y": 0.4104,
+            "w": 0.407,
+            "h": 0.179,
+            "label": "meter digits"
+          }
+        ],
+        "meterDigits": "00100.0",
+        "photoId": "cached-photo",
+        "quality": "ok",
+        "humanCorrected": false
+      }
+    ]
   }
 }

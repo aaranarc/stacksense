@@ -92,3 +92,12 @@ it("serves the actual bundled hero without contacting an unavailable configured 
  const result=await createReadService({adapter:createAdapter({provider}),cache:createCache()})({buildingId:"block-a",messages,photos:[]});
  expect(result.mode).toBe("cached");expect(result.observations.length).toBeGreaterThan(0);expect(provider).not.toHaveBeenCalled();
 });
+
+it("reads photo-only inputs without an empty-chat model call and reports reused labels as cached",async()=>{
+ const provider=vi.fn(async(r:{images:string[]})=>{if(!r.images.length)throw Error("Empty chat must not be sent");return {surface:"dry",zone:"duct_wall",boxes:[],meterDigits:null};});
+ const service=createReadService({adapter:createAdapter({provider}),cache:createCache({bundled:{}}),preparePhoto:async p=>p});
+ const first=await service({buildingId:"block-a",messages:[],photos:[{id:"photo-one",dataUrl:"data:image/jpeg;base64,YQ=="}]});
+ expect(first.mode).toBe("live");expect(provider).toHaveBeenCalledTimes(1);
+ const next=await service({buildingId:"block-a",messages:[],photos:[{id:"photo-two",dataUrl:"data:image/jpeg;base64,YQ=="}]});
+ expect(next.mode).toBe("cached");expect(next.photoLabels[0]?.photoId).toBe("photo-two");expect(provider).toHaveBeenCalledTimes(1);
+});
