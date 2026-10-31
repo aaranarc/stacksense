@@ -19,6 +19,14 @@ const liveEngine={...realEngine,createCase(building:Building,opts?:Parameters<ty
 export const engine = USE_MOCK_ENGINE ? mockEngine : liveEngine;
 export const buildings={IN:realEngine.blockA,UK:realEngine.ukBlock};
 export const api = USE_MOCK_API ? mockApi : realApi;
+export const CHECK_LINK_CREATED='stacksense-check-link-created';
+export class AnswerRefreshError extends Error {constructor(message:string,readonly status:number){super(message);this.name='AnswerRefreshError';}}
+export async function getAnswerUpdates(caseId:string,signal?:AbortSignal):Promise<ReadResult>{
+ if(USE_MOCK_API)return {observations:[],photoLabels:[],senderMap:{},warnings:['Demo data — real neighbour answers are not fetched.'],mode:'cached'};
+ const response=await fetch(`/api/link/updates?caseId=${encodeURIComponent(caseId)}`,{credentials:'same-origin',cache:'no-store',signal});
+ if(!response.ok)throw new AnswerRefreshError(response.status===403?'This browser is not authorised to refresh this case. Create its neighbour check link here first.':'Neighbour answers could not be refreshed. Please try again.',response.status);
+ return ReadResult.parse(await response.json());
+}
 export const demo = { states:heroStates, emergency:emergencyState, enabled:USE_MOCK_ENGINE || USE_MOCK_API };
 async function fileDataUrl(file:Blob):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not read the prepared photo.'));reader.readAsDataURL(file);});}
 const liveBrowser={
@@ -46,8 +54,9 @@ export async function createCheckLink(state:EngineState,checkId:string,flatId:st
  const request={caseId:state.caseId,checkId,flatId,lang:state.building.region==='UK'?'en' as const:lang};
  const result=USE_MOCK_API?await mockApi.createLink(request):LinkResult.parse(await post('/api/link',{...request,state}));
  const share=new URL(result.waUrl);if(share.protocol!=='https:'||share.hostname!=='wa.me')throw new Error('Sharing link is unavailable.');
- if(state.building.region!=='UK')return result;
- const url=new URL(result.url);url.searchParams.set('region','UK');share.searchParams.set('text',(share.searchParams.get('text')??'').replace(result.url,url.href));return {...result,url:url.href,waUrl:share.href};
+ if(!USE_MOCK_API&&typeof window!=='undefined')window.dispatchEvent(new CustomEvent(CHECK_LINK_CREATED,{detail:{caseId:state.caseId}}));
+ if(state.building.region!=='UK')return {...result,checkId};
+ const url=new URL(result.url);url.searchParams.set('region','UK');share.searchParams.set('text',(share.searchParams.get('text')??'').replace(result.url,url.href));return {...result,url:url.href,waUrl:share.href,checkId};
 }
 const demoLink=(token:string)=>token==='demo'&&(process.env.NEXT_PUBLIC_DEMO_MODE==='true'||USE_MOCK_API);
 export async function prepareResidentPhoto(file:File,isDemo=false) {

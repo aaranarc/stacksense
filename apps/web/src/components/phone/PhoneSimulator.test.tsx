@@ -1,6 +1,9 @@
 import {render,screen,fireEvent,cleanup} from '@testing-library/react';
 import {afterEach,expect,it,vi} from 'vitest';
-import {PhoneSimulator} from './PhoneSimulator';
+import {useState} from 'react';
+import {demo} from '../../lib/adapters';
+import {PhoneSimulator,CheckLinkProvider,useCheckLink} from './PhoneSimulator';
 import read from '../../mocks/read-hero.json';
 afterEach(cleanup);
 it('accepts only an answer from its own same-origin frame and matching token',()=>{const answer=vi.fn(),close=vi.fn();render(<PhoneSimulator token="demo" onAnswer={answer} onClose={close}/>);const frame=screen.getByTitle('Neighbour check') as HTMLIFrameElement;const data={type:'stacksense-check-complete',token:'demo',result:read};fireEvent(window,new MessageEvent('message',{origin:'https://example.invalid',source:frame.contentWindow,data}));expect(answer).not.toHaveBeenCalled();fireEvent(window,new MessageEvent('message',{origin:window.location.origin,source:frame.contentWindow,data}));expect(answer).toHaveBeenCalledOnce();expect(close).toHaveBeenCalledOnce();});
+it('closes the phone frame when a matching physical-phone answer updates the case',()=>{function Open(){const open=useCheckLink();return <button onClick={()=>open({token:'signed-test',url:'/c/signed-test',waUrl:'https://wa.me/',checkId:'inspect@602'})}>Open check</button>;}function Harness(){const [state,setState]=useState(structuredClone(demo.states[5]!));return <CheckLinkProvider state={state} onRead={()=>{}}><Open/><button onClick={()=>setState({...state,observations:[...state.observations,{...state.observations[0]!,id:'external-answer',checkId:'inspect@602',flatId:'602',kind:'check_result',surface:'dry'}]})}>Receive external answer</button></CheckLinkProvider>;}render(<Harness/>);fireEvent.click(screen.getByRole('button',{name:'Open check'}));expect(screen.getByTitle('Neighbour check')).toBeTruthy();fireEvent.click(screen.getByRole('button',{name:'Receive external answer'}));expect(screen.queryByTitle('Neighbour check')).toBeNull();});
