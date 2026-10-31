@@ -1,0 +1,294 @@
+{
+  "caseId": "hero-00",
+  "now": "2026-10-31T04:30:00.000Z",
+  "building": {
+    "id": "block-a",
+    "name": "Block A",
+    "region": "IN",
+    "archetype": "MUMBAI_RCC_1990S",
+    "lat": 19.076,
+    "lon": 72.8777,
+    "floors": 6,
+    "hasTerrace": true,
+    "flats": [
+      {
+        "id": "101",
+        "floor": 1,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "102",
+        "floor": 1,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "201",
+        "floor": 2,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "202",
+        "floor": 2,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "301",
+        "floor": 3,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "302",
+        "floor": 3,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "401",
+        "floor": 4,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "402",
+        "floor": 4,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "501",
+        "floor": 5,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "502",
+        "floor": 5,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": true,
+        "access": "open"
+      },
+      {
+        "id": "601",
+        "floor": 6,
+        "position": "01",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [],
+        "hasWaterMeter": false,
+        "access": "open"
+      },
+      {
+        "id": "602",
+        "floor": 6,
+        "position": "02",
+        "wetAreas": [
+          "bathroom"
+        ],
+        "externalWalls": [
+          "W"
+        ],
+        "hasWaterMeter": false,
+        "access": "open"
+      }
+    ],
+    "stacks": [
+      {
+        "id": "S-x02",
+        "kind": "duct",
+        "flatIds": [
+          "102",
+          "202",
+          "302",
+          "402",
+          "502",
+          "602"
+        ]
+      }
+    ]
+  },
+  "observations": [],
+  "photoLabels": [],
+  "hypotheses": [
+    {
+      "id": "upper_wet_area",
+      "family": "upper_wet_area",
+      "level": "area",
+      "label": "502 bathroom area",
+      "flatId": "502",
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "upper_supply",
+      "family": "upper_supply",
+      "level": "area",
+      "label": "502 supply pipe",
+      "flatId": "502",
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "shared_shaft",
+      "family": "shared_shaft",
+      "level": "area",
+      "label": "Shared shaft",
+      "flatId": null,
+      "stackId": "S-x02",
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "facade_window",
+      "family": "facade_window",
+      "level": "area",
+      "label": "202 west window area",
+      "flatId": "202",
+      "stackId": null,
+      "orientation": "W",
+      "parentId": null
+    },
+    {
+      "id": "roof_terrace",
+      "family": "roof_terrace",
+      "level": "area",
+      "label": "Roof / terrace",
+      "flatId": null,
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "condensation",
+      "family": "condensation",
+      "level": "area",
+      "label": "Condensation",
+      "flatId": null,
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    },
+    {
+      "id": "other",
+      "family": "other",
+      "level": "area",
+      "label": "Other",
+      "flatId": null,
+      "stackId": null,
+      "orientation": null,
+      "parentId": null
+    }
+  ],
+  "posterior": {
+    "upper_wet_area": 0.14285714285714285,
+    "upper_supply": 0.14285714285714285,
+    "shared_shaft": 0.14285714285714285,
+    "facade_window": 0.14285714285714285,
+    "roof_terrace": 0.14285714285714285,
+    "condensation": 0.14285714285714285,
+    "other": 0.14285714285714285
+  },
+  "safety": {
+    "status": "incomplete",
+    "reasons": [
+      "Safety questions unanswered"
+    ],
+    "actions": []
+  },
+  "nextChecks": [],
+  "stop": {
+    "stopped": false,
+    "reason": null
+  },
+  "secondOpinion": null,
+  "jobSheet": null,
+  "recovery": {
+    "repair": "not_started",
+    "dry": "unknown",
+    "paint": "not_ready",
+    "day14DueAt": null,
+    "reopened": false,
+    "flags": []
+  },
+  "prediction": {
+    "sameStack": [],
+    "forecastRechecks": [],
+    "seasonal": [],
+    "memory": {
+      "upper_wet_area": 0,
+      "upper_supply": 0,
+      "shared_shaft": 0,
+      "facade_window": 0,
+      "roof_terrace": 0,
+      "condensation": 0,
+      "other": 0
+    }
+  },
+  "trace": []
+}
