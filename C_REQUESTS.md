@@ -65,3 +65,10 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   tiler"; what-if "502 meter → moved" → Job Sheet sends plumber; eval card shows label + tie/loses chips; 390 px = fixed
   bottom sheet (70vh, own scroll, 44 px "Hide panel" toggle, collapses to 78 px), tables scroll sideways, no page
   overflow; Break it "Electrical hazard" → emergency card, no check buttons.
+
+## To A / human (12:00) — single-LLM baseline blocked
+- [ ] Gemini returns **HTTP 429 "You exceeded your current quota, please check your plan and billing details"** for
+  `gemini-3.8-flash` with the key in apps/web/.env.local (`gemini-2.5-flash` → 404, retired). 90/90 baseline calls failed;
+  nothing was cached as an answer. Needs quota/billing raised (or a different key/provider). Then rerun:
+  `pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts && pnpm eval`.
+  Note: the live app's /api/read and /api/second-opinion use the same key, so they are in labelled fallback until this is fixed.
