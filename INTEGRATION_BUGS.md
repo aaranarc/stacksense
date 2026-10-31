@@ -190,3 +190,16 @@ C_REQUESTS.md). No live LLM call, key disclosure or hard-case edit occurred in t
 
 ## B final run — B-003 fixed on b/app
 The media resolver now binds all approved hero IDs, meter references and scenario preview IDs to public copies of A's clean cached assets. Hero ID bindings remain unchanged. Tests compare served hero bytes with the approved originals and verify own-photo-reference versus Day-14 illustration labels. Scenario evidence/timing remains labelled simulated. No judge or engine file was edited. C should retest hero thumbnails and the photo drawer after merging.
+
+## C merge 2 — main bc852f3 (31 Oct, 15:02 IST)
+Merged origin/a/core (927094b, no change) → origin/b/app (84d0b07, B-003 media) → origin/c/help (a9c51a2). One conflict in
+this log only (C merge 1 vs B "B-003 fixed" section, same insertion point): kept both, chronological. Install, typecheck,
+tests (3 / 66 AI / 87 engine / 72 web) and build passed; Vercel status for bc852f3: success.
+
+| Production re-check after bc852f3 | Result | Owner |
+| --- | --- | --- |
+| Load demo chat → building, /api/read | PASS — Cached · Demo data, 402/202 victims, 502 check passed | — |
+| Judge hero → waterproofer tiler | PASS — 6/6 | — |
+| Judge photo previews | **PASS — B-003 judge path CLOSED**: ceiling_402_own, window_202_own, duct_302, trap_502_own all HTTP 200 and rendered | — |
+| Demo-chat attachment previews | **FAIL — B-003b OPEN**: after "Load demo chat" the two chat attachments (IMG-20261030-WA0402.jpg, IMG-20261030-WA0202.jpg) still show "Preview unavailable" | **B** (lib/media.ts mapping for chat attachment IDs) |
+| Evaluation card | PASS — label shown; single-LLM row "pending — free-tier AI quota (16/30 hard cases answered)" | — |
