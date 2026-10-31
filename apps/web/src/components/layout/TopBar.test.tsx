@@ -1,5 +1,5 @@
-import { render,fireEvent,screen,cleanup } from '@testing-library/react';
-import { afterEach,expect,it,vi } from 'vitest';
-import { TopBar } from './TopBar';
+import {render,screen,fireEvent,cleanup} from '@testing-library/react';
+import {afterEach,expect,it,vi} from 'vitest';
+import {TopBar} from './TopBar';
 afterEach(cleanup);
-it('offers reset and an accessible Judge Mode toggle',()=>{const reset=vi.fn(),judge=vi.fn();render(<TopBar judge={false} onJudge={judge} onReset={reset} onScenario={()=>{}}/>);fireEvent.click(screen.getByRole('button',{name:'Reset'}));fireEvent.click(screen.getByRole('button',{name:'Judge Mode'}));expect(reset).toHaveBeenCalledOnce();expect(judge).toHaveBeenCalledOnce();expect(screen.getByRole('button',{name:'Judge Mode'}).getAttribute('aria-pressed')).toBe('false');});
+it('offers case reset, an IN | UK region toggle and a demo-data chip',()=>{const reset=vi.fn(),region=vi.fn();render(<TopBar onReset={reset} onRegion={region} region="IN" demoData/>);fireEvent.click(screen.getByRole('button',{name:'Reset case'}));expect(reset).toHaveBeenCalledOnce();const uk=screen.getByRole('button',{name:/UK/});expect(screen.getByRole('button',{name:/IN/}).getAttribute('aria-pressed')).toBe('true');fireEvent.click(uk);expect(region).toHaveBeenCalledWith('UK');expect(screen.getByText('Demo data')).toBeTruthy();});

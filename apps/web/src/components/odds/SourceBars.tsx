@@ -12,12 +12,19 @@ export function permittedLabel(h:Hypothesis,state:EngineState):string {
  if(allowed==='mechanism') return h.family.replaceAll('_',' ');
  return h.family==='upper_wet_area'?`${h.flatId??'Upper'} bathroom area`:`${h.flatId??''} ${h.family.replaceAll('_',' ')} area`.trim();
 }
-export function SourceBars({state}:{state:EngineState}) {
+export function SourceBars({state,selected=null}:{state:EngineState;selected?:string|null}) {
  const reduced=useReducedMotion();
  const ranked=[...state.hypotheses].sort((a,b)=>(state.posterior[b.id]??0)-(state.posterior[a.id]??0));
- const top=ranked.slice(0,5);
- const others=ranked.slice(5).reduce((sum,h)=>sum+(state.posterior[h.id]??0),0);
- const rows=top.map(h=>({id:h.id,label:permittedLabel(h,state),value:state.posterior[h.id]??0,status:sourceBarStatus(h.id===ranked[0]?.id)}));
- rows.push({id:'others',label:'Others',value:others,status:sourceBarStatus(false)});
- return <section className="panel"><h2>Where is it from?</h2>{!state.observations.length?<p>Source estimates appear with the case evidence.</p>:<>{rows.map(row=><div key={row.id} className="source-row"><div className="source-label"><span>{regionalText(row.label,state.building.region)}{row.id===ranked[0]?.id&&<small className="bar-status"> · {row.status.label}</small>}</span><strong>{Math.round(row.value*100)}%</strong></div><div className="source-track" role="meter" aria-label={row.label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(row.value*100)} aria-valuetext={`${Math.round(row.value*100)}% · ${row.status.label}`}><motion.div initial={false} animate={{width:`${row.value*100}%`}} transition={{duration:reduced?0:.3}} style={{background:row.status.colour,height:6,borderRadius:12}}/></div></div>)}<p className="diagram-key">Probable source · verify on site</p></>}</section>;
+ const top=ranked.slice(0,3);
+ const shown=top.map(h=>Math.round((state.posterior[h.id]??0)*100));
+ // "Other" carries the remainder so the displayed percentages always add up to 100.
+ const rows=top.map((h,i)=>({id:h.id,flatId:h.flatId,label:permittedLabel(h,state),pct:shown[i]!,status:sourceBarStatus(h.id===ranked[0]?.id)}));
+ rows.push({id:'others',flatId:null,label:'Other',pct:Math.max(0,100-shown.reduce((a,b)=>a+b,0)),status:sourceBarStatus(false)});
+ if(!state.observations.length)return <div className="empty-state"><p>Source estimates appear with the case evidence.</p><small>Load the demo chat or open Judge Mode → Play.</small></div>;
+ return <div className="odds">{rows.map(row=><div key={row.id} className={`odds-row${selected&&row.flatId===selected?' selected':''}${row.id===ranked[0]?.id?' leading':''}`}>
+  <span className="odds-dot" style={{background:row.status.colour}} aria-hidden="true"/>
+  <span className="odds-label">{regionalText(row.label,state.building.region)}{row.id===ranked[0]?.id&&<small className="bar-status"> · {row.status.label}</small>}</span>
+  <div className="odds-track" role="meter" aria-label={row.label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={row.pct} aria-valuetext={`${row.pct}% · ${row.status.label}`}><motion.div className="odds-fill" initial={false} animate={{width:`${row.pct}%`}} transition={reduced?{duration:0}:{type:'spring',stiffness:140,damping:22}} style={{background:row.status.colour}}/></div>
+  <strong className="odds-pct">{row.pct}%</strong>
+ </div>)}<p className="card-foot">Probable source · verify on site</p></div>;
 }

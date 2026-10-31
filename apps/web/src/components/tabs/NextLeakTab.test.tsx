@@ -1,10 +1,10 @@
-import {render,screen,cleanup} from '@testing-library/react';
+import {render,screen,cleanup,fireEvent} from '@testing-library/react';
 import {afterEach,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
 import {EngineState} from '@stacksense/contracts';
 import {NextLeakTab} from './NextLeakTab';
 import {demo} from '../../lib/adapters';
 afterEach(cleanup);
-it('renders the inspection forecast and confirmed memory from the state',()=>{render(<NextLeakTab state={demo.states[11]!}/>);expect(screen.getByText('302 · Inspect')).toBeTruthy();expect(screen.getByText('602 · Inspect')).toBeTruthy();expect(screen.getByText(/Re-check 202 after/)).toBeTruthy();expect(screen.getByRole('heading',{name:'Memory · confirmed cases'})).toBeTruthy();});
-it('does not create a link for an unranked inspection',()=>{render(<NextLeakTab state={demo.states[11]!}/>);expect((screen.getByRole('button',{name:'Send inspection link to flat 602'}) as HTMLButtonElement).disabled).toBe(true);});
-it('enables the deployed engine inspection targets for 302 and 602',()=>{const state=EngineState.parse(JSON.parse(readFileSync('../../fixtures/hero/state-11.json','utf8')));render(<NextLeakTab state={state}/>);for(const flat of ['302','602']){expect(state.nextChecks.some(c=>c.id===`inspect@${flat}`&&c.excluded===null)).toBe(true);expect((screen.getByRole('button',{name:`Send inspection link to flat ${flat}`}) as HTMLButtonElement).disabled).toBe(false);}});
+it('renders the inspection forecast and confirmed memory from the state',()=>{render(<NextLeakTab state={demo.states[11]!}/>);expect(screen.getByText('302 · Inspect')).toBeTruthy();expect(screen.getByText('602 · Inspect')).toBeTruthy();expect(screen.getByText(/Re-check 202 after/)).toBeTruthy();fireEvent.click(screen.getByRole('tab',{name:/Building memory/}));expect(screen.getByRole('heading',{name:'Memory · confirmed cases'})).toBeTruthy();});
+it('does not create a link for an unranked inspection',()=>{render(<NextLeakTab state={demo.states[11]!}/>);fireEvent.click(screen.getByRole('tab',{name:/Same-stack/}));expect((screen.getByRole('button',{name:'Send inspection link to flat 602'}) as HTMLButtonElement).disabled).toBe(true);});
+it('enables the deployed engine inspection targets for 302 and 602',()=>{const state=EngineState.parse(JSON.parse(readFileSync('../../fixtures/hero/state-11.json','utf8')));render(<NextLeakTab state={state}/>);fireEvent.click(screen.getByRole('tab',{name:/Same-stack/}));for(const flat of ['302','602']){expect(state.nextChecks.some(c=>c.id===`inspect@${flat}`&&c.excluded===null)).toBe(true);expect((screen.getByRole('button',{name:`Send inspection link to flat ${flat}`}) as HTMLButtonElement).disabled).toBe(false);}});
