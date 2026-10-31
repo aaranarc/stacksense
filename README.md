@@ -2,10 +2,9 @@
 
 **Find where the water is really coming from — ask the one neighbour check that matters, refuse to over-claim, and send the right trade the first time.**
 
-<!-- B: add the demo GIF here (e.g. ![StackSense demo](docs/demo.gif)) and the 3-minute video link at submission. -->
-
 ## Try it
 - **Live app:** https://stacksense-omega.vercel.app/
+- **Start with Judge Mode → Play.** (Load demo chat alone stops at the safety gate: a chat cannot answer the hazard questions.)
 - **Judge Mode:** press **Judge Mode** in the top bar. Inside:
   - **What-if** sliders — flip "302 duct dry ↔ wet", "502 meter still ↔ moved"… and watch the odds, Second Opinion and Job Sheet change live.
   - **Scenarios** — 8 stories with **Next step ▸ / Play / Reset**: Happy path · Electrical hazard · Locked 502 · Dark photo · Horizontal beam travel · Wrong-trade save (rain) · Honest uncertainty · Break it.

@@ -36,7 +36,7 @@ export function Workspace() {
  const [resetKey,setResetKey]=useState(0);
  const regionCases=useRef<Partial<Record<'IN'|'UK',{state:typeof state;read:ReadResult|null;messages:ChatMessage[];fixture:boolean}>>>({});
  const changeRegion=(region:'IN'|'UK')=>{if(region===state.building.region)return;regionCases.current[state.building.region]={state,read,messages,fixture};const saved=regionCases.current[region];setState(saved?.state??(region==='UK'?ukDemo():engine.createCase(buildings.IN)));setRead(saved?.read??null);setMessages(saved?.messages??[]);setFixture(saved?.fixture??region==='UK');setFlat(null);setPhoto(null);setResetKey(key=>key+1);};
- const reset=()=>{setState(engine.createCase(state.building));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);setFixture(false);};
+ const reset=()=>{regionCases.current={};setState(engine.createCase(buildings.IN));setFlat(null);setPhoto(null);setRead(null);setMessages([]);setResetKey(key=>key+1);setFixture(false);};
  const advance=()=>setState(engine.applyObservations(state,[]));
  const isDemo=demo.enabled||fixture||state.observations.some(o=>o.provenance==='simulated');
  const mode=read?.mode??(isDemo?'cached':undefined);
@@ -55,7 +55,7 @@ export function Workspace() {
     <div className="section-heading"><h2>Cross-Section</h2><span>{state.building.name} · {state.building.floors} floors</span><small>{labels[state.building.region].group} · {labels[state.building.region].manager} · {labels[state.building.region].trap}</small></div>
     <CrossSection state={state} selected={flat} onSelect={setFlat}/>{!state.observations.length&&<p className="diagram-key">No evidence assessed yet.</p>}<Pills state={state} selectedFlat={flat}/>
    </PanelState>} analysis={<>
-    <PanelState key={`odds-${state.caseId}`} name="Source estimates"><SourceBars state={state}/></PanelState><PanelState key={`check-${state.caseId}`} name="Next check"><NextCheck state={state} onDemoStep={advance}/></PanelState>
+    <PanelState key={`odds-${state.caseId}`} name="Source estimates"><SourceBars state={state}/></PanelState><PanelState key={`check-${state.caseId}`} name="Next check"><NextCheck state={state} onDemoStep={advance} onOpenJudge={()=>setJudge(true)}/></PanelState>
     <PanelState key={`opinion-${state.caseId}`} name="Second Opinion"><SecondOpinionBanner state={state} demoData={isDemo} onState={setState}/></PanelState>
     <RightTabs state={state} onState={setState} demoData={isDemo}/>
    </>}/>
