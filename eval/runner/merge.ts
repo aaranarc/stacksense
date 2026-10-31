@@ -128,7 +128,9 @@ export function readmeEval(md: string, r: Engine): string {
     `| Method | Right trade (hard cases) | ${cols.map(([l]) => l).join(" | ")} |`,
     `|---|---|${cols.map(() => "---").join("|")}|`,
     ...lines,
-    ...r.pending.map((p) => `| ${p.method} | ${p.reason} |${cols.map(() => " |").join("")}`),
+    ...r.pending.map((p) => { const h = hard.get(p.method);
+      return h ? `| ${p.method} | ${fmt(h.rightTrade, true)}${mark(oursHard.rightTrade, h.rightTrade, true)} | ${cols.map(() => "hard cases only").join(" | ")} |`
+        : `| ${p.method} | ${p.reason} |${cols.map(() => " |").join("")}`; }),
     "",
     "(tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks " +
       r.robustness.map((x) => `${x.priorShiftPct > 0 ? "+" : ""}${x.priorShiftPct}% → ${fmt(x.top1, true)}`).join(", ") + " (true family's prior shifted).",

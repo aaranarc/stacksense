@@ -196,10 +196,13 @@ function engineTree(): string {
 
 export function evaluate(opts: { sims?: number } = {}) {
   const factories = [...hardCases(), ...simCases(opts.sims ?? 60)];
-  const ids = factories.map((f) => f().id), have = ids.filter((id) => cached(id)).length;
-  const methods = have === ids.length ? [...METHODS.slice(0, 4), { name: LLM_METHOD, run: singleLlm }, METHODS[4]!] : METHODS;
-  const pending = have === ids.length ? [] : [{ method: LLM_METHOD,
-    reason: `pending — ${have}/${ids.length} cases answered by the model so far (last attempt: provider quota exceeded, HTTP 429); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts` }];
+  // Baseline 4 runs on the 30 hard cases only (free-tier quota); its row appears in the hard-case table when complete.
+  const hardIds = factories.map((f) => f()).filter((c) => c.set === "hard").map((c) => c.id);
+  const have = hardIds.filter((id) => cached(id)).length, llmReady = hardIds.length > 0 && have === hardIds.length;
+  const methods = METHODS;
+  const pending = [{ method: LLM_METHOD, reason: llmReady
+    ? "hard cases only (free-tier AI quota) — see the hard-case table; not run on simulated buildings"
+    : `pending — free-tier AI quota (${have}/${hardIds.length} hard cases answered); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts` }];
   const robustness = SHIFTS.map((p) => ({ priorShiftPct: p, top1: robustnessRun(factories, p) }));
   const robustnessArchetype = (["min", "max"] as const).map((at) => ({ trueFamilyPriorAt: at, top1: robustnessRun(factories, at) }));
   const outcomes: Record<string, Outcome[]> = {}, trails: Record<string, Record<string, Trail>> = {};
@@ -212,12 +215,18 @@ export function evaluate(opts: { sims?: number } = {}) {
     }
   }
   const rowsFor = (set?: "hard" | "sim") => methods.map((m) => aggregate(m.name, outcomes[m.name]!.filter((o) => !set || o.set === set)));
+  const hardRows = () => {
+    const rows = rowsFor("hard");
+    if (!llmReady) return rows;
+    const llm = factories.map((f) => f()).filter((c) => c.set === "hard").map((c) => singleLlm(c, { unscripted: [], asked: [] }));
+    return [...rows.slice(0, 4), aggregate(LLM_METHOD, llm), ...rows.slice(4)];
+  };
   const results = {
     generatedAt: new Date().toISOString(), label: LABEL,
     sets: { simBuildings: opts.sims ?? 60, hardCases: factories.length - (opts.sims ?? 60), photos: 0, messages: 0 },
     rows: rowsFor(), robustness, ai: null,
     robustnessArchetype,
-    rowsBySet: { hard: rowsFor("hard"), sim: rowsFor("sim") },
+    rowsBySet: { hard: hardRows(), sim: rowsFor("sim") },
     pending,
     engineTree: engineTree(),
   };

@@ -1,0 +1,13 @@
+{
+ "caseId": "hc-a01",
+ "promptVersion": "base-v1",
+ "model": "gemini:gemini-3.1-flash-lite",
+ "evidenceHash": "ad5eb2920d1b060defc8c15de31719cce5710b94c7aec6df712b7319fd017bb6",
+ "result": {
+  "family": "shared_shaft",
+  "flatId": "402",
+  "trade": "plumber",
+  "emergency": false,
+  "level": "area"
+ }
+}

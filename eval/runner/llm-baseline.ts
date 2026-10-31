@@ -15,8 +15,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   if (!key) { console.error(`No usable LLM key: LLM_PROVIDER must be "gemini" or "openai" with GEMINI_API_KEY / OPENAI_API_KEY set. Nothing called, nothing cached.`); process.exit(1); }
   mkdirSync(CACHE_DIR, { recursive: true });
   const model = `${process.env.LLM_PROVIDER ?? "gemini"}:${process.env.GEMINI_MODEL ?? process.env.OPENAI_MODEL ?? "default"}`;
-  let calls = 0, nulls = 0, reused = 0, streak = 0;
-  for (const make of [...hardCases(), ...simCases(60)]) {
+  let calls = 0, nulls = 0, reused = 0;
+  // Free-tier quota (~20/day): the 30 hard cases only; sims stay unevaluated for this baseline.
+  const hardOnly = !process.argv.includes("--with-sims");
+  for (const make of hardOnly ? hardCases() : [...hardCases(), ...simCases(60)]) {
     const c = make(), trail: Trail = { unscripted: [], asked: [] };
     METHODS[0]!.run(c, trail); // StackSense run → trail.evidence = what it saw
     const evidence = { building: c.building, observations: trail.evidence ?? [] };
@@ -28,10 +30,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     // null = provider failure (quota, outage, invalid twice): never cached as an answer; retried on the next run.
     if (!result) {
       nulls++; process.stdout.write(`${c.id}:unavailable `);
-      if (++streak >= 3) { console.error("\n3 unavailable in a row (quota or outage) — stopping; nothing cached for them."); break; }
+      // Stop at the first failure: never loop on a 429 or burn the shared free-tier quota.
+      console.error("\nModel unavailable (quota/outage) — stopping at the first failure; nothing cached for it."); break;
       continue;
     }
-    streak = 0;
     const row: CachedBaseline = { caseId: c.id, promptVersion: PROMPT_VERSION, model, evidenceHash, result };
     writeFileSync(file, JSON.stringify(row, null, 1) + "\n");
     process.stdout.write(`${c.id}:${result.trade} `);

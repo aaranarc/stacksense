@@ -1,0 +1,13 @@
+{
+ "caseId": "hc-f05",
+ "promptVersion": "base-v1",
+ "model": "gemini:gemini-3.1-flash-lite",
+ "evidenceHash": "eea1add40533d53e30eb44e2b0dd44a89ef9b361ba5d0b5b1496c57aaa9ca6b8",
+ "result": {
+  "family": "facade_window",
+  "flatId": "502",
+  "trade": "facade_sealant",
+  "emergency": false,
+  "level": "area"
+ }
+}
