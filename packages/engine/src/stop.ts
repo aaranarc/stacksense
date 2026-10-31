@@ -8,7 +8,11 @@ export function stopRule(state: EngineState): EngineState["stop"] {
   const { top, mass } = claimEvidence(state);
   if (!top) return { stopped: false, reason: null };
   if (mass >= .80 - Number.EPSILON && state.secondOpinion?.verdict !== "objection") {
-    return { stopped: true, reason: "Probable source reached 80% with no Second Opinion objection" };
+    // The text must match the review actually on record: only "no_objection" may be called "no objection".
+    const verdict = state.secondOpinion?.verdict;
+    return { stopped: true, reason: verdict === "no_objection" ? "Probable source reached 80% with no Second Opinion objection"
+      : verdict === "needs_evidence" ? "Probable source reached 80%; Second Opinion asks for more evidence"
+      : "Probable source reached 80%; Second Opinion unavailable — unreviewed" };
   }
   const best = Math.max(0, ...state.nextChecks.filter(c => c.excluded === null).map(c => c.score));
   if (best < .05) {

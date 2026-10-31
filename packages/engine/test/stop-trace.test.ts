@@ -12,6 +12,10 @@ describe("A-T10 stop and trace", () => {
     expect(stopRule(high).stopped).toBe(true);
     const objection = { verdict: "objection" as const, allowedLevel: "area" as const, claim: "Probable area", supports: [], challenges: [], unknown: [], wouldChange: [], source: "fallback" as const };
     expect(stopRule({ ...high, secondOpinion: objection }).stopped).toBe(false);
+    expect(stopRule({ ...high, secondOpinion: { ...objection, verdict: "no_objection" } }).reason).toBe("Probable source reached 80% with no Second Opinion objection");
+    expect(stopRule({ ...high, secondOpinion: { ...objection, verdict: "review_failed" } }).reason).toBe("Probable source reached 80%; Second Opinion unavailable — unreviewed");
+    expect(stopRule({ ...high, secondOpinion: null }).reason).toBe("Probable source reached 80%; Second Opinion unavailable — unreviewed");
+    expect(applyObservations(createCase(blockA), [observation()]).hypotheses.every(h => !h.label.startsWith("Probable"))).toBe(true);
   });
   it("requests inspection for low-value checks, without declaring a source", () => {
     const s = applyObservations(createCase(blockA), [observation()]);
