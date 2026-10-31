@@ -12,7 +12,7 @@ Merged A `9fe98e0`, B `30823b2`, C `997e9ce`, in that order, into main `813d535`
 | Judge Mode → hero completion | PASS: step 6/6, Job Sheet sends waterproofer_tiler (displayed as “waterproofer tiler”) |
 | /c/demo at actual viewport 390×844 | FAIL: A-001 |
 
-## B-001 — FIXED on b/app — preview verification pending
+## B-001 — FIXED on b/app — verified locally and on branch preview
 
 Owner: **B**. Priority: P0 for the hero import flow.
 
@@ -21,6 +21,12 @@ Reproduce: open production, click **Load demo chat**. The textarea fills, then d
 Cause confirmed in `apps/web/src/lib/adapters.ts` and `importChat.ts`: `browser` still spreads mock preprocessing and sets `available: USE_MOCK_API`; `readChat` rejects when real APIs are selected. Wire the actual `@stacksense/ai/browser` functions, adapting their return shapes, and retain browser-local keyMap privacy. Do not enable mock APIs to hide this defect: direct deployed /api/read already succeeds. A has not edited B's files.
 
 B resolution: real parsing and pseudonymisation are connected; keyMap is never transmitted. Text-only imports skip both photo helpers. Metadata failures omit the unsafe photo with a labelled warning; quality failures retain only the stripped photo with a warning. Bundled demo text and its sanitised fallback match the canonical request. Both local mock flags are false. Local UI regression passes (Load demo chat → 402 victim); local `/api/read` returns 200 with five observations and a labelled fallback because this checkout has no provider key. Web typecheck, tests and production build pass. Branch-preview verification follows the push.
+
+Preview verification for `d2a3787`: GitHub Vercel status success; https://stacksense-git-b-app-byte-me21.vercel.app/ returns 200, canonical demo text matches, `/api/read` returns cached with five observations, and the deployed page bundle contains the new preparation warnings and no old blocking gate. Automated browser control could not initialise (missing runtime asset path), so remote UI clicks were not verified; the local UI click regression passes.
+
+## A-002 — OPEN — prevention inspection links have no matching ranked check
+
+Owner: A. Next Leak renders engine `prediction.sameStack` entries, but the current check catalogue targets the victim/above/below flats only. `/api/link` requires a matching eligible `nextChecks` entry. This leaves new same-stack targets such as 602 without a creatable inspection link. B disables that unavailable action and labels it; B does not invent checks or bypass endpoint validation. Please expose an eligible inspection check or a supported prediction-link request.
 
 ## A-001 — OPEN — deployed demo token disabled
 
