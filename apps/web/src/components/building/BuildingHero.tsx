@@ -72,7 +72,8 @@ export function BuildingHero({ state, selected, onSelect }: { state: EngineState
   const stackX = (flatIds: string[]) => { const f = b.flats.find(x => flatIds.includes(x.id)); return f ? cellX(f.position) + cw - 34 : null; };
   const ducts = b.stacks.filter(s => s.kind === 'duct' || s.kind === 'wet_stack');
   const walls = b.flats.flatMap(f => f.externalWalls);
-  const exposed = state.prediction.forecastRechecks[0]?.orientation ?? (walls.length ? [...walls].sort((a, c) => walls.filter(w => w === c).length - walls.filter(w => w === a).length)[0]! : null);
+  const facadeFlat = b.flats.find(f => state.observations.some(o => o.flatId === f.id && (o.zone === 'window_perimeter' || o.zone === 'external_wall')));
+  const exposed = state.prediction.forecastRechecks[0]?.orientation ?? facadeFlat?.externalWalls[0] ?? (walls.length ? [...walls].sort((a, c) => walls.filter(w => w === c).length - walls.filter(w => w === a).length)[0]! : null);
   const recheck = state.prediction.forecastRechecks[0];
   const rainy = !!recheck;
 

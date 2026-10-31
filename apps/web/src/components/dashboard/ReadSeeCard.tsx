@@ -7,6 +7,8 @@ import { incidents } from '../feed/CaseFeed';
 import { photoMedia } from '../../lib/media';
 
 const words = (s: string) => s.replaceAll('_', ' ');
+/** Attachment placeholders ("IMG-… (file attached)") are shown as thumbnails, not as text. */
+export const bubbleText = (text: string) => text.replace(/\s*\S+\s*\(file attached\)/gi, '').trim();
 const time = (at: string) => new Date(at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
 
 /** Read & See: the first report as a chat bubble, what the AI read (with its Live/Cached/Fallback badge), then the input and the incidents. */
@@ -28,7 +30,7 @@ export function ReadSeeCard({ state, read, messages, mode, demoData, onPhoto, in
         <span className="bubble-avatar" aria-hidden="true"><MessageCircle size={18} /></span>
         <div className="bubble-body">
           <header><strong>{message ? `Resident ${message.senderKey}` : 'Report'}{(sender ?? first.flatId) ? ` (${sender ?? first.flatId})` : ''}</strong><time dateTime={message?.at ?? first.at}>{time(message?.at ?? first.at)} UTC</time></header>
-          <p>{message?.text ?? first.rawText}</p>
+          <p>{bubbleText(message?.text ?? first.rawText)}</p>
           {photos.length > 0 && <div className="bubble-photos">{photos.map(id => { const m = photoMedia(id), o = obs.find(x => x.photoIds.includes(id)); return <button key={id} onClick={() => onPhoto(id)} aria-label={`Open photo ${id} from flat ${o?.flatId ?? 'unassigned'}`}>{m ? <img src={m.url} alt={`${m.illustration ? 'Demo illustration' : m.demo ? 'Own-photo demo reference' : 'Prepared photo'} for ${id}`} /> : <span>Preview unavailable</span>}</button>; })}</div>}
         </div>
       </article>
