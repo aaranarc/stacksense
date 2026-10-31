@@ -2,6 +2,9 @@
 Scope: apps/web/** EXCEPT src/app/api/** and public/eval/** (person A). Also eval/hard-cases/**.
 Never edit packages/** or root config.
 
+31 Oct ownership update: C owns src/components/judge/**. Copy that folder from origin/c/help only as an unchanged integration dependency; never edit it. B owns src/components/whatif/** and the Judge Mode toggle. C also owns eval/hard-cases/**, README text and video editing.
+Keep A's merged sharp/build configuration unchanged; do not change next.config or build tooling.
+
 - Import engine and API ONLY through src/lib/adapters.ts. Types from @stacksense/contracts.
 - The UI never computes odds, checks, trades or statuses. It renders EngineState.
 - Colours only via src/lib/visual.ts: grey not assessed · amber suspected/inspect · red leading source ·

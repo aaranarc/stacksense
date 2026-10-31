@@ -1,5 +1,7 @@
 # App decisions
 
+- B-T16: The WhatIfSliders export lives in components/whatif. C's judge folder is copied byte-for-byte for integration and remains read-only. JudgePanel still owns its placeholder replacement; B only wires the panel in Workspace. A's sharp dependency/configuration fix is merged unchanged.
+
 - B-T11 review: a new same-stack inspection request takes visual precedence over an old passed check, so both 302 and 602 are amber at A9 step 11. The fixture simulator also exposes the remaining A6 signature for later work; its answers are labelled simulated, not physical model results.
 
 - B-T11: Fixture images are monochrome SVG illustrations, clearly labelled as demo illustrations rather than real photos. They support the whole-view, crop and annotation interactions without making claims about private photos. Confirming a label records the human marker without changing odds; changing its surface or zone reruns the adapter. Mock corrections choose a predefined weaker-evidence state, never calculate probabilities in the UI.

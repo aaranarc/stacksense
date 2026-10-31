@@ -15,6 +15,7 @@ import { PasteChat } from './import/PasteChat';
 import { SenderChips } from './import/SenderChips';
 import { CaseFeed } from './feed/CaseFeed';
 import { PhotoViewer } from './photo/PhotoViewer';
+import { JudgePanel } from './judge/JudgePanel';
 export function Workspace() {
  const [state,setState]=useState(()=>engine.createCase(demo.states[0]!.building));
  const [messages,setMessages]=useState<ChatMessage[]>([]);
@@ -30,7 +31,7 @@ export function Workspace() {
   <TopBar judge={judge} onJudge={()=>setJudge(!judge)} onReset={reset} onScenario={id=>{reset();if(id==='electrical_hazard')setState(structuredClone(demo.emergency));}}/>
   <div className="case-heading"><div><span className="eyebrow">BUILDING DIAGNOSTICS</span><h1>One building. A clearer next step.</h1></div><p className="chip">{mode==='cached'?'Cached':mode==='live'?'Live':'Fallback'}{demo.enabled?' · Demo data':''}</p></div>
   <SafetyBoundary state={state}>
-   {judge&&<aside className="judge-panel panel" aria-label="Judge Mode"><strong>Hero story · {state.caseId}</strong><button className="primary" onClick={advance}>Next step ▸</button><button onClick={reset}>Reset story</button></aside>}
+   {judge && <JudgePanel state={state} onState={setState} />}
    <Shell feed={<>
     <PasteChat key={`${state.building.id}-${resetKey}`} mode={mode} onRead={(result,chatMessages)=>{setMessages(chatMessages);setRead(result);setState(engine.applyObservations(engine.createCase(state.building),result.observations,{photoLabels:result.photoLabels}));}}/>
     {read&&<SenderChips senderMap={read.senderMap} building={state.building} onAssign={(sender,flatId)=>{const observations=remapSender(state.observations,sender,flatId,messages);setState(engine.applyObservations(state,observations,{photoLabels:state.photoLabels}));setRead({...read,senderMap:{...read.senderMap,[sender]:flatId},observations:remapSender(read.observations,sender,flatId,messages)});}}/>}
