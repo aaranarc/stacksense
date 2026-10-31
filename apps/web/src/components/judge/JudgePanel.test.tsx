@@ -35,3 +35,11 @@ it('plays the hero scenario to its end', () => {
   expect(last.secondOpinion).not.toBeNull();
   expect(screen.getByRole('button', { name: 'Next step ▸' }).hasAttribute('disabled')).toBe(true);
 });
+
+it('bottom-sheet toggle collapses and expands the panel body', () => {
+  render(<JudgePanel state={start()} onState={() => {}} />);
+  const toggle = screen.getByRole('button', { name: 'Hide panel ▾' });
+  expect(toggle.getAttribute('aria-expanded')).toBe('true');
+  fireEvent.click(toggle);
+  expect(screen.getByRole('button', { name: 'Show panel ▴' }).getAttribute('aria-expanded')).toBe('false');
+});
