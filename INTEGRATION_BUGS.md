@@ -39,3 +39,11 @@ Vercel's project variable list has no `NEXT_PUBLIC_DEMO_MODE`. B's `residentApi.
 ## Ownership and next checkpoint
 
 No C-owned failure was observed in the requested checks. Raw team photographs remain ignored. Screenshots are local in `work/cp1-hero.png` and `work/cp1-mobile-failure.png`. After the user says **CP2 merge**, repeat fetch; merge origin/a/core, then origin/b/app, then origin/c/help into main; use B's version on conflicts in B-owned web files, C's in components/judge, preserve sharp; install/typecheck/test/build; push only green; wait for the exact main deployment; repeat all five production checks and update this log.
+
+## A-003 — OPEN — physical-phone answers need a dashboard refresh channel
+
+Owner: A for an owner-authorised read/subscription API; B for consuming it once available. The upload handler stores the resident observation, but the current API routes provide no case refresh endpoint or subscription for the secretary's open dashboard. B-T23 accepts same-origin answers from its active phone iframe, with token/source validation. A separate physical phone cannot use that iframe channel. Please expose a supported refresh/subscription contract; do not bypass owner authorisation. The phone simulator can be recorded meanwhile. This does not prevent completing the resident upload itself.
+
+## B handoff for CP2
+
+B-001 and B-T21 through B-T27 are implemented on b/app. The mock engine/API flags are off locally; cached illustrations and scenarios remain explicitly labelled Demo data. C-owned judge files, A-owned packages/API routes and build tooling are unchanged. B's final web validation has 67 passing tests; the production build and full-workspace checks are recorded in the chat. Remote browser control could not initialise, so a visual preview click-through remains a human check. A-001, A-002 and A-003 require A-owned configuration/API work.

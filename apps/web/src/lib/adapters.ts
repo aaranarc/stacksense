@@ -43,8 +43,11 @@ export function applyRecoveryObservation(state:EngineState,observation:Observati
  return {...state,now:observation.at,observations,recovery:replay.recovery};
 }
 export async function createCheckLink(state:EngineState,checkId:string,flatId:string,lang:'en'|'hi'|'mr'='en') {
- const request={caseId:state.caseId,checkId,flatId,lang};
- return USE_MOCK_API?mockApi.createLink(request):LinkResult.parse(await post('/api/link',{...request,state}));
+ const request={caseId:state.caseId,checkId,flatId,lang:state.building.region==='UK'?'en' as const:lang};
+ const result=USE_MOCK_API?await mockApi.createLink(request):LinkResult.parse(await post('/api/link',{...request,state}));
+ const share=new URL(result.waUrl);if(share.protocol!=='https:'||share.hostname!=='wa.me')throw new Error('Sharing link is unavailable.');
+ if(state.building.region!=='UK')return result;
+ const url=new URL(result.url);url.searchParams.set('region','UK');share.searchParams.set('text',(share.searchParams.get('text')??'').replace(result.url,url.href));return {...result,url:url.href,waUrl:share.href};
 }
 const demoLink=(token:string)=>token==='demo'&&(process.env.NEXT_PUBLIC_DEMO_MODE==='true'||USE_MOCK_API);
 export async function prepareResidentPhoto(file:File,isDemo=false) {
