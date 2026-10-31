@@ -55,7 +55,7 @@ Meter checks require two images and a positive time interval. Both digit strings
 
 Full read cache keys include building ID, pseudonymized messages, photo IDs/bytes and prompt versions. Photo-label cache keys additionally bind the exact cleaned image bytes to check type, flat and instruction, allowing upload retries/demo inputs to reuse validated labels without reusing observation IDs. Only successful model results are persisted as model cache entries. Cached responses remain labelled cached.
 
-Caches use bounded process memory, optional server-side Supabase `ai_cache`, and checked-in `fixtures-ai/cache/bundled.json`. Keys hash evidence; cache values contain pseudonymized observations/labels and must still be treated as resident data. The demo manifest/status records coverage explicitly. All demo inputs other than the team duct photograph now use visibly labelled schematic DEMO illustrations with simulated-input cache warnings; these are never presented as field evidence or evaluation data. See [hardening evidence and commands](HARDENING.md).
+Caches use bounded process memory, optional server-side Supabase `ai_cache`, and checked-in `fixtures-ai/cache/bundled.json`. Keys hash evidence; cache values contain pseudonymized observations/labels and must still be treated as resident data. The demo manifest/status records coverage explicitly. User-confirmed own photos cover matching ceiling/window/trap/meter-overview/duct inputs; unmatched scenes use visibly labelled schematic DEMO illustrations with simulated-input cache warnings; these are never presented as field evidence or evaluation data. See [hardening evidence and commands](HARDENING.md).
 
 ## Links, storage and configuration
 

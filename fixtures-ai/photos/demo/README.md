@@ -1,19 +1,17 @@
-# Authored demo imagery
+# Own photos and authored demo imagery
 
-The only real photograph is `duct_302.jpg`, supplied by the team. Its demo flat identifier is not a verified address. All other images are original vector schematics rendered to JPEG at quality 85, visibly headed **DEMO ILLUSTRATION**, with matching SVG source. No stock/unverified photographic reference is used.
+The user explicitly confirmed the newly attached images are their own photos. Matching ceiling, window, trap and meter-overview photos replace the illustrations; the previously supplied team duct photograph is retained. No earlier stock/unverified photo has been restored.
 
-| Image | Uses |
+| Real image | Uses |
 | --- | --- |
 | duct_302.jpg | Hero duct reference and duct upload cache |
-| ceiling_402.demo.jpg | Hero ceiling; happy scenario preview |
-| window_202.demo.jpg | Hero window; rain scenario preview |
-| trap_502.demo.jpg | Hero trap/grout; trap upload cache |
-| meter_start_502.jpg | Hero meter reference and start-image cache |
-| meter_end_502.jpg | Hero meter reference and end-image cache |
-| day14_402.jpg | Hero Day-14 appearance reference |
+| ceiling_402_own.jpg | Hero ceiling; happy and uncertainty scenario previews |
+| window_202_own.jpg | Hero window; rain scenario preview |
+| trap_502_own.jpg | Hero trap reference and trap upload cache |
+| meter_502_own.jpg | Hero meter visual reference and meter-start image cache |
 
-Every illustration is simulated, not field evidence. Meter values are invented demo values; the drawing cannot establish a real timed reading. Day-14 appearance does not establish dryness. `assets.json` maps IDs to paths; regenerated hero/scenario JSON includes `demoAssets` display metadata without changing the scripted observations or probabilities. The uncertainty/electrical/locked/dark/lateral/Break-it previews under ../scenarios/ are also authored illustrations.
+Meter overview digits may be unreadable and it is not a timed pair. `meter_end_502.jpg` remains an authored DEMO ILLUSTRATION; no real start/end measurement or scripted 42→42 value is claimed. `day14_402.jpg` also remains illustrated: the attached images do not establish a post-repair Day-14 recapture or dryness. Electrical, locked, dark, lateral and Break-it previews remain authored labelled illustrations in ../scenarios/.
 
-All JPEGs have maximum edge ≤1600 and no EXIF/GPS, XMP, IPTC or ICC. Raw inputs remain ignored and untracked. Removed stock files are deleted from the current tracked tree; normal git rm does not erase blobs in historical commits. No history rewrite or force push was performed.
+All clean JPEGs are quality 85, maximum edge ≤1600, with EXIF/GPS, XMP, IPTC and ICC absent. Only clean copies are committed. Original attachments remain in ignored eval/data/photos/ as *_own_raw.png. The remaining supplied pictures were not needed to replace a matching slot; no before/after timeline or hazard was inferred from them.
 
-`generate-demo-illustrations.ts` never auto-imports raw/reference photos: only duct is retained as team-photo. Cache regeneration prunes bundled entries to current manifest/read/upload keys, and removed cache keys are purged from Supabase. Do not put historical reference photos back into active fixtures or caches.
+assets.json and generated fixture demoAssets metadata bind the display references. Case observations, probabilities, timings and findings remain simulated; a real reference photograph does not verify the scripted cause or label. No image becomes human-labelled evaluation data automatically. The illustration generator preserves explicitly approved clean team-photo entries but never imports arbitrary raw files automatically.

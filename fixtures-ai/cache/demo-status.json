@@ -1,6 +1,6 @@
 {
   "label": "Demo cache coverage — not evaluation or field accuracy",
-  "generatedAt": "2026-10-31T07:40:12.332Z",
+  "generatedAt": "2026-10-31T07:45:33.955Z",
   "liveOptIn": true,
   "inputs": [
     {
@@ -12,10 +12,10 @@
     },
     {
       "id": "scenario-happy",
-      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
-      "key": "81330b37961a187f8ee036d94e2c2f68ff9166a4253b574f8f146fe839cdaa8f",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "key": "19adbd925a5bfc7ba339d30314f5cce22de248b47472161894adc396dbe62760",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     },
@@ -57,19 +57,19 @@
     },
     {
       "id": "scenario-wrong_trade_rain",
-      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
-      "key": "270ff31f8aece2f62b67de3917b366b9d7421f3daff47a0730de998561b2d18d",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/window_202_own.jpg",
+      "key": "be87323623b91a8aa05173704f24f02fd53e8a3791a5f8aaae5f569ed55ec7e0",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     },
     {
       "id": "scenario-honest_uncertainty",
-      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
-      "key": "592a48237bac872c579df50d80cabf0d96a4a47ef7ecacbc4556f2f9b8c824f1",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "key": "8abfad26a537e9ddbcac3761ce7c2dea158c54a3b9ae71a1056f24388381c0f6",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     },
@@ -93,10 +93,10 @@
     },
     {
       "id": "meter-start-502",
-      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
-      "key": "af46d69ab3e184046327492f50044f73598294f405b1aa599a6f13a6315a58ec",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/meter_502_own.jpg",
+      "key": "fb5154a5660d720d9ce5b7deb5449d6672b11bcf62cde6dd6b3754878c469abe",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated. Meter overview only; no readable timed start/end pair is claimed.",
       "status": "cached",
       "uploadContexts": 3
     },
@@ -111,10 +111,10 @@
     },
     {
       "id": "trap-502",
-      "path": "fixtures-ai/photos/demo/trap_502.demo.jpg",
-      "key": "ff296db609af86568fe46eca04f424cfd54d0582b53514b21ce86f022b367e74",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/trap_502_own.jpg",
+      "key": "1d6b61910be9d5ed1d11882e5cec1a66c134feb323e1667357e0d0c858db4419",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated.",
       "status": "cached",
       "uploadContexts": 3
     },
@@ -129,19 +129,19 @@
     },
     {
       "id": "ceiling-402",
-      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
-      "key": "6c993e9d6d9acb22e4f7b2dc98760ff5ae960aee02067572f98a81e20212f1b3",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "key": "1d1478668b9fe3b21be4688daf020214e3df6512ea2572d62438d3c053e07483",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     },
     {
       "id": "window-202",
-      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
-      "key": "78a4fed9006f5880fab1744879a0756869864cd1d6cdad38eec5ec1b8e10580b",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence",
+      "path": "fixtures-ai/photos/demo/window_202_own.jpg",
+      "key": "ea8d73c2883d97e11b0ba2b4a200cec92639656d80edb9d3a9311552d9a38cc5",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated.",
       "status": "cached",
       "uploadContexts": 0
     }

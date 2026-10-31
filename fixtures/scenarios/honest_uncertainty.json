@@ -1038,17 +1038,17 @@
     "images": {
       "hero-ceiling-402": {
         "id": "ceiling-402",
-        "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
-        "assetSource": "demo-illustration",
-        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+        "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+        "assetSource": "team-photo",
+        "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
       }
     },
     "meterReferences": [
       {
         "id": "meter-start-502",
-        "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
-        "assetSource": "demo-illustration",
-        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+        "path": "fixtures-ai/photos/demo/meter_502_own.jpg",
+        "assetSource": "team-photo",
+        "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated. Meter overview only; no readable timed start/end pair is claimed."
       },
       {
         "id": "meter-end-502",
@@ -1059,9 +1059,9 @@
     ],
     "preview": {
       "id": "scenario-honest_uncertainty",
-      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
-      "assetSource": "demo-illustration",
-      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
+      "path": "fixtures-ai/photos/demo/ceiling_402_own.jpg",
+      "assetSource": "team-photo",
+      "label": "User-confirmed own photo; visual demo reference only. Scripted case findings, flat ID and timing remain simulated."
     }
   }
 }
