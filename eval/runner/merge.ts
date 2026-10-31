@@ -5,6 +5,21 @@ import { fileURLToPath } from "node:url";
 import { EvalResults } from "../../packages/contracts/src/index";
 import type { EvalRow } from "./metrics";
 import { prepare } from "./ai";
+import { resolveSenders } from "../../packages/ai/src/read/senderMap";
+
+/** flatId outcome on the first n reviewed rows. The read pipeline sets flatId only from deterministic sender resolution
+ *  (resolveSenders on the request's messages), so this is reproduced offline exactly, with no model call. */
+export function flatBreakdown(n: number) {
+  const rows = readFileSync(at("../data/messages.jsonl"), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l))
+    .filter((r) => r.humanReviewed === true).slice(0, n) as { message: { senderKey: string } & Record<string, unknown>; labels: { flatId: string | null } }[];
+  const b = { labelled: 0, blank: 0, wrong: 0, correct: 0, unlabelledBlank: 0, unlabelledGiven: 0 };
+  for (const r of rows) {
+    const pred = resolveSenders([r.message as never])[r.message.senderKey] ?? null, exp = r.labels.flatId;
+    if (exp === null) { pred === null ? b.unlabelledBlank++ : b.unlabelledGiven++; continue; }
+    b.labelled++; pred === null ? b.blank++ : pred === exp ? b.correct++ : b.wrong++;
+  }
+  return b;
+}
 
 const at = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 type Engine = EvalResults & { rowsBySet: { hard: EvalRow[]; sim: EvalRow[] }; pending: { method: string; reason: string }[];
@@ -99,7 +114,8 @@ export function merge() {
   const aiMessages = raw?.execution === "live-provider, messages only" ? {
     measured: raw.measuredMessages ?? 0, reviewed: raw.reviewedMessages ?? 0, stopped: raw.stopped ?? "",
     f1ByField: raw.f1ByField ?? {}, f1ByLanguage: raw.f1ByLanguage ?? {},
-    photo: raw.photoNote ?? "not measured", cost: raw.costNote ?? "unknown" } : null;
+    photo: raw.photoNote ?? "not measured", cost: raw.costNote ?? "unknown",
+    summary: `partial — ${raw.measuredMessages ?? 0} of ${raw.reviewedMessages ?? 0}${Object.keys(raw.f1ByLanguage ?? {}).length === 1 ? `, ${({ en: "English", hi: "Hinglish", mr: "Marathi" } as Record<string, string>)[Object.keys(raw.f1ByLanguage!)[0]!] ?? Object.keys(raw.f1ByLanguage!)[0]} only` : ""}` } : null;
   const latest = { ...engine, generatedAt: new Date().toISOString(), ai, aiRaw, aiMessages,
     sets: { ...engine.sets, photos: ai ? data.photos.length : 0, messages: ai ? data.messages.length : aiMessages?.measured ?? 0 } };
   EvalResults.parse(latest);
@@ -140,7 +156,7 @@ export function readmeEval(md: string, r: Engine & { aiMessages?: AiMessages }):
       return h ? `| ${p.method} | ${fmt(h.rightTrade, true)}${mark(oursHard.rightTrade, h.rightTrade, true)} | ${cols.map(() => "hard cases only").join(" | ")} |`
         : `| ${p.method} | ${p.reason} |${cols.map(() => " |").join("")}`; }),
     "",
-    ...(r.aiMessages ? [`AI reading (partial): message extraction measured on ${r.aiMessages.measured} of ${r.aiMessages.reviewed} human-reviewed messages (free-tier quota); photo accuracy ${r.aiMessages.photo}; cost ${r.aiMessages.cost}.`, ""] : []),
+    ...(r.aiMessages ? [`AI reading — message extraction: ${r.aiMessages.summary} (free-tier quota); photo accuracy and clean-wall false positives: ${r.aiMessages.photo}; cost ${r.aiMessages.cost}.`, ""] : []),
     "(tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks " +
       r.robustness.map((x) => `${x.priorShiftPct > 0 ? "+" : ""}${x.priorShiftPct}% → ${fmt(x.top1, true)}`).join(", ") + " (true family's prior shifted).",
     "<!-- eval:end -->",
@@ -148,8 +164,9 @@ export function readmeEval(md: string, r: Engine & { aiMessages?: AiMessages }):
   return md.replace(/<!-- eval:start -->[\s\S]*?<!-- eval:end -->/, block);
 }
 
-type AiMessages = { measured: number; reviewed: number; stopped: string; f1ByField: Record<string, number | null>; f1ByLanguage: Record<string, number | null>; photo: string; cost: string } | null;
+type AiMessages = { measured: number; reviewed: number; stopped: string; f1ByField: Record<string, number | null>; f1ByLanguage: Record<string, number | null>; photo: string; cost: string; summary: string } | null;
 function resultsMd(r: Engine & { ai: EvalResults["ai"]; aiRaw: unknown; aiMessages: AiMessages }, data: ReturnType<typeof prepare>, v1: Engine | null): string {
+  const fb = r.aiMessages ? flatBreakdown(r.aiMessages.measured) : null;
   const sets = r.sets, all = tiesAndLosses(r.rows), hard = tiesAndLosses(r.rowsBySet.hard), sim = tiesAndLosses(r.rowsBySet.sim);
   const runName = v1 ? ` — v2 (${V2_NOTE})` : "";
   const v1Section = v1 ? `
@@ -239,9 +256,10 @@ StackSense top-1 after 3 checks when the true family's prior is shifted (others 
 ${r.ai ? `- Photo surface accuracy ${fmt(r.ai.photoAccuracy, true)} · clean-wall false-positive rate ${fmt(r.ai.cleanWallFalsePositive, true)} · mean cost per case $${r.ai.costPerCaseUsd.toFixed(4)}
 - F1 by field: ${Object.entries(r.ai.f1ByField).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")}
 - F1 by language: ${Object.entries(r.ai.f1ByLanguage).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")}`
-  : r.aiMessages ? `**Partial, messages only.** ${r.aiMessages.measured} of ${r.aiMessages.reviewed} human-reviewed messages measured live (${r.aiMessages.stopped}); the measured lines are the first rows of the file, so the sample is small and not language-balanced.
+  : r.aiMessages ? `**Message extraction: ${r.aiMessages.summary}.** ${r.aiMessages.measured} of ${r.aiMessages.reviewed} human-reviewed messages measured live (${r.aiMessages.stopped}); the measured lines are the first rows of the file, so the sample is small and not language-balanced.
 - F1 by field: ${Object.entries(r.aiMessages.f1ByField).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")}
 - F1 by language: ${Object.entries(r.aiMessages.f1ByLanguage).map(([k, v]) => `${k} ${fmt(v, true)}`).join(" · ")} (other languages not yet measured)
+- flatId on the ${r.aiMessages.measured} measured rows (flat comes from deterministic sender resolution, reproduced offline; matches the measured F1): of ${fb!.labelled} rows with a labelled flat, **(a) ${fb!.blank} left blank, (b) ${fb!.wrong} wrong flat, (c) ${fb!.correct} correct**; ${fb!.unlabelledBlank} rows without a flat in the text were correctly left blank${fb!.unlabelledGiven ? `, ${fb!.unlabelledGiven} were given a flat anyway` : ""}. In the product, flats are resolved mainly by sender mapping across the whole chat plus the one-tap assign chip, while this eval scores single messages in isolation.
 - Photo accuracy and clean-wall false positives: ${r.aiMessages.photo}.
 - Cost per case: ${r.aiMessages.cost}.`
   : `Pending — ${data.messages.length} of ${data.total} messages and ${data.photos.length} of ${data.photoTotal} photos are human-labelled so far. Unlabelled lines are skipped, never guessed. Run \`pnpm --filter @stacksense/engine exec tsx ../../eval/runner/ai.ts\` after labelling, then \`pnpm eval\`.`}
@@ -251,7 +269,7 @@ ${r.ai ? `- Photo surface accuracy ${fmt(r.ai.photoAccuracy, true)} · clean-wal
 - Prototype priors, contractor review pending.
 - The Second Opinion needs a live LLM; offline it is the labelled fallback, so its ablation ties.
 - Hard cases script answers only for the checks their author anticipated; unscripted checks are skipped and logged.
-- Prior sensitivity: StackSense top-1 after 3 checks is ${fmt(r.robustness.find((x) => x.priorShiftPct === 0)?.top1 ?? null, true)} at the prototype priors but ${fmt(r.robustness.find((x) => x.priorShiftPct === -40)?.top1 ?? null, true)} when the true family's prior is cut by 40% — the priors matter, which is why contractor review is pending.
+${fb && fb.wrong > 0 ? `- Message eval: ${fb.wrong} of ${fb.labelled} labelled rows got a **wrong** flat from single-message sender resolution.\n` : ""}- Prior sensitivity: StackSense top-1 after 3 checks is ${fmt(r.robustness.find((x) => x.priorShiftPct === 0)?.top1 ?? null, true)} at the prototype priors but ${fmt(r.robustness.find((x) => x.priorShiftPct === -40)?.top1 ?? null, true)} when the true family's prior is cut by 40% — the priors matter, which is why contractor review is pending.
 - Most StackSense right-trade misses are the engine's own stop rule (\"best check scores < 0.05 → inspect\") firing after 0–1 checks while the leading source is already right. Reported to A; the engine was **not** tuned for this evaluation.
 
 ## Reproduce

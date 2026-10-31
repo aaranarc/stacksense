@@ -1,6 +1,6 @@
 # StackSense — evaluation results
 
-> **Team-built test, not field accuracy.** Generated 2026-10-31T11:06:40.802Z by `pnpm eval` from `eval/results/*.json`.
+> **Team-built test, not field accuracy.** Generated 2026-10-31T11:34:37.724Z by `pnpm eval` from `eval/results/*.json`.
 > Every number on the evaluation card comes from `apps/web/public/eval/latest.json`, written by this same run.
 
 ## Sets
@@ -13,7 +13,7 @@
 2. **Blame the flat above** — source = wet area of the flat directly above the victim, trade = waterproofer/tiler (terrace/roofer for a top-floor victim).
 3. **Send a trade straight away** — the archetype's most likely family (prototype priors), its trade, no checks.
 4. **Fixed checklist** — ceiling photo → duct photo → meter → trap photo, same engine posterior and stop rule, no information-gain choice.
-5. **Single LLM, same evidence** — pending — free-tier AI quota (16/30 hard cases answered); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts.
+5. **Single LLM, same evidence** — partial — 16 of 30 (free-tier quota); not scored until all 30 hard cases are answered.
 6. **StackSense without Second Opinion** — ablation.
 
 Answer loop: the method picks a check; the answer comes from the hard case's scripted steps or the simulator; stop when the engine stops or after 5 checks.
@@ -44,7 +44,7 @@ A method that ends without a decision sends no trade, which is scored as "genera
 | StackSense | 67% | 81% | 86% | 86% | 0% | 0 | 0.84 | 100% | 0.3 |
 | Blame the flat above | 23% | 38% | 38% | 38% | 60% | 0 **(tie)** | 0 **(loses)** | 0% | 0 **(loses)** |
 | Send a trade straight away | 20% | 33% | 33% | 33% | 17% | 0 **(tie)** | 0 **(loses)** | 0% | 0 **(loses)** |
-| Fixed checklist | 63% | 76% | 81% | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 1.12 | 100% **(tie)** | 0.36 |
+| Fixed checklist | 63% | 76% | 81% | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 1.12 | 100% **(tie)** | 0.35 |
 | StackSense without Second Opinion | 67% **(tie)** | 81% **(tie)** | 86% **(tie)** | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 0.84 **(tie)** | 100% **(tie)** | 0.19 **(loses)** |
 
 ### Simulated buildings only (60)
@@ -162,9 +162,10 @@ StackSense top-1 after 3 checks when the true family's prior is shifted (others 
 | Top-1 | 38% | 63% | 83% | 90% | 95% | 38% | 96% |
 
 ## AI reading
-**Partial, messages only.** 15 of 109 human-reviewed messages measured live (call cap 15 reached (reserve kept)); the measured lines are the first rows of the file, so the sample is small and not language-balanced.
+**Message extraction: partial — 15 of 109, English only.** 15 of 109 human-reviewed messages measured live (call cap 15 reached (reserve kept)); the measured lines are the first rows of the file, so the sample is small and not language-balanced.
 - F1 by field: flatId 31% · room 77% · zone 100% · surface 80% · hazards 100% · kind 93%
 - F1 by language: en 83% (other languages not yet measured)
+- flatId on the 15 measured rows (flat comes from deterministic sender resolution, reproduced offline; matches the measured F1): of 11 rows with a labelled flat, **(a) 9 left blank, (b) 0 wrong flat, (c) 2 correct**; 4 rows without a flat in the text were correctly left blank. In the product, flats are resolved mainly by sender mapping across the whole chat plus the one-tap assign chip, while this eval scores single messages in isolation.
 - Photo accuracy and clean-wall false positives: not measured — too few photos, free-tier quota.
 - Cost per case: $0 (free tier).
 

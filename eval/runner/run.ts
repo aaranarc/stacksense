@@ -202,7 +202,8 @@ export function evaluate(opts: { sims?: number } = {}) {
   const methods = METHODS;
   const pending = [{ method: LLM_METHOD, reason: llmReady
     ? "hard cases only (free-tier AI quota) — see the hard-case table; not run on simulated buildings"
-    : `pending — free-tier AI quota (${have}/${hardIds.length} hard cases answered); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts` }];
+    : have > 0 ? `partial — ${have} of ${hardIds.length} (free-tier quota); not scored until all ${hardIds.length} hard cases are answered`
+      : `pending — free-tier quota; rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts` }];
   const robustness = SHIFTS.map((p) => ({ priorShiftPct: p, top1: robustnessRun(factories, p) }));
   const robustnessArchetype = (["min", "max"] as const).map((at) => ({ trueFamilyPriorAt: at, top1: robustnessRun(factories, at) }));
   const outcomes: Record<string, Outcome[]> = {}, trails: Record<string, Record<string, Trail>> = {};

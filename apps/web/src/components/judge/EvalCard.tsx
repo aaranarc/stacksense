@@ -8,7 +8,7 @@ import s from './judge.module.css';
 type Results = z.infer<typeof EvalResults>;
 type Row = Results['rows'][number];
 type Pending = { method: string; reason: string };
-type AiMessages = { measured: number; reviewed: number; stopped: string; f1ByField: Record<string, number | null>; f1ByLanguage: Record<string, number | null>; photo: string; cost: string };
+type AiMessages = { measured: number; reviewed: number; stopped: string; f1ByField: Record<string, number | null>; f1ByLanguage: Record<string, number | null>; photo: string; cost: string; summary?: string };
 type Latest = Results & { pending?: Pending[]; rowsBySet?: { hard: Row[]; sim: Row[] }; aiMessages?: AiMessages | null };
 
 export const LABEL = 'Team-built test, not field accuracy.';
@@ -94,7 +94,7 @@ export function EvalCard({ src = '/eval/latest.json' }: { src?: string }) {
       <li>F1 by field: {Object.entries(ai.f1ByField).map(([k, v]) => `${k} ${pct(v)}`).join(' · ') || 'n/a'}</li>
       <li>F1 by language: {Object.entries(ai.f1ByLanguage).map(([k, v]) => `${k} ${pct(v)}`).join(' · ') || 'n/a'}</li>
     </ul> : data.aiMessages ? <ul className={s.small}>
-      <li><strong>Partial:</strong> message extraction measured on {data.aiMessages.measured} of {data.aiMessages.reviewed} human-reviewed messages (free-tier quota)</li>
+      <li><strong>Message extraction: {data.aiMessages.summary ?? `partial — ${data.aiMessages.measured} of ${data.aiMessages.reviewed}`}</strong> (free-tier quota) — measured on {data.aiMessages.measured} of {data.aiMessages.reviewed} human-reviewed messages</li>
       <li>F1 by field: {Object.entries(data.aiMessages.f1ByField).map(([k, v]) => `${k} ${pct(v)}`).join(' · ')}</li>
       <li>F1 by language: {Object.entries(data.aiMessages.f1ByLanguage).map(([k, v]) => `${k} ${pct(v)}`).join(' · ')}</li>
       <li>Photo accuracy and clean-wall false positives: {data.aiMessages.photo} · cost {data.aiMessages.cost}</li>

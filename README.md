@@ -55,9 +55,9 @@ If the AI is down you get a labelled fallback, never a fake result. Details: [do
 | Send a trade straight away | 20% | 18% | 21% | 7% | 0% |
 | Fixed checklist | 63% | 47% (loses) | 80% | 0% (loses) | 100% (tie) |
 | StackSense without Second Opinion | 67% (tie) | 46% (tie) | 83% (tie) | 1% (tie) | 100% (tie) |
-| Single LLM, same evidence | pending — free-tier AI quota (16/30 hard cases answered); rerun LIVE_LLM_TESTS=1 eval/runner/llm-baseline.ts | | | | |
+| Single LLM, same evidence | partial — 16 of 30 (free-tier quota); not scored until all 30 hard cases are answered | | | | |
 
-AI reading (partial): message extraction measured on 15 of 109 human-reviewed messages (free-tier quota); photo accuracy not measured — too few photos, free-tier quota; cost $0 (free tier).
+AI reading — message extraction: partial — 15 of 109, English only (free-tier quota); photo accuracy and clean-wall false positives: not measured — too few photos, free-tier quota; cost $0 (free tier).
 
 (tie) / (loses) = StackSense ties or loses to that method on that metric. Robustness: top-1 after 3 checks -40% → 38%, -20% → 63%, 0% → 83%, +20% → 90%, +40% → 95% (true family's prior shifted).
 <!-- eval:end -->
