@@ -72,3 +72,8 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   nothing was cached as an answer. Needs quota/billing raised (or a different key/provider). Then rerun:
   `pnpm --filter @stacksense/engine exec tsx --env-file="$PWD/apps/web/.env.local" ../../eval/runner/llm-baseline.ts && pnpm eval`.
   Note: the live app's /api/read and /api/second-opinion use the same key, so they are in labelled fallback until this is fixed.
+
+## To A (12:45) — CP2 merge heads-up
+- [ ] `origin/a/core` (384ca00) and `origin/b/app` (4da0ca1) **conflict in `INTEGRATION_BUGS.md`**: B edited it in
+  d2a3787 "fix B-001 demo chat" and e3e4bb5 (B-T21) while A added key-rotation sections. C did not resolve it (A's file)
+  and has not merged b/app since 30823b2; c/help has a/core 384ca00. No conflict touches C files.
