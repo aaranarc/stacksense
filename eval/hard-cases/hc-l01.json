@@ -1,0 +1,340 @@
+{
+ "id": "hc-l01",
+ "title": "502 locked: best checks unavailable",
+ "building": {
+  "id": "block-a-502-locked",
+  "name": "Block A (502 locked)",
+  "region": "IN",
+  "archetype": "MUMBAI_RCC_1990S",
+  "lat": 19.07,
+  "lon": 72.88,
+  "floors": 6,
+  "hasTerrace": true,
+  "flats": [
+   {
+    "id": "101",
+    "floor": 1,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "102",
+    "floor": 1,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "201",
+    "floor": 2,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "202",
+    "floor": 2,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "301",
+    "floor": 3,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "302",
+    "floor": 3,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "401",
+    "floor": 4,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "402",
+    "floor": 4,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "501",
+    "floor": 5,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "502",
+    "floor": 5,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": true,
+    "access": "locked"
+   },
+   {
+    "id": "601",
+    "floor": 6,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "602",
+    "floor": 6,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   }
+  ],
+  "stacks": [
+   {
+    "id": "S-x01",
+    "kind": "duct",
+    "flatIds": [
+     "101",
+     "201",
+     "301",
+     "401",
+     "501",
+     "601"
+    ]
+   },
+   {
+    "id": "S-x02",
+    "kind": "duct",
+    "flatIds": [
+     "102",
+     "202",
+     "302",
+     "402",
+     "502",
+     "602"
+    ]
+   }
+  ]
+ },
+ "steps": [
+  [
+   {
+    "id": "hc-l01-o1",
+    "flatId": "402",
+    "eventKey": "hc-l01-o1",
+    "at": "2026-10-30T10:00:00.000Z",
+    "kind": "complaint",
+    "zone": "ceiling",
+    "surface": "damp_stain",
+    "room": "bathroom",
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": null,
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "Bathroom ceiling stain near the duct corner"
+   },
+   {
+    "id": "hc-l01-o2",
+    "flatId": "502",
+    "eventKey": "hc-l01-o2",
+    "at": "2026-10-30T10:00:00.000Z",
+    "kind": "denial",
+    "zone": "floor",
+    "surface": "dry",
+    "room": "bathroom",
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": null,
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "(owner abroad, flat locked)"
+   }
+  ],
+  [
+   {
+    "id": "hc-l01-o3",
+    "flatId": "302",
+    "eventKey": "hc-l01-o3",
+    "at": "2026-10-31T10:00:00.000Z",
+    "kind": "check_result",
+    "zone": "duct_wall",
+    "surface": "dry",
+    "room": "bathroom",
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": "duct_photo@302",
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "302 duct dry"
+   }
+  ],
+  [
+   {
+    "id": "hc-l01-o4",
+    "flatId": "602",
+    "eventKey": "hc-l01-o4",
+    "at": "2026-10-31T10:00:00.000Z",
+    "kind": "check_result",
+    "zone": "duct_wall",
+    "surface": "dry",
+    "room": "bathroom",
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": "duct_photo@602",
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "602 duct dry"
+   }
+  ],
+  [
+   {
+    "id": "hc-l01-o5",
+    "flatId": "402",
+    "eventKey": "hc-l01-o5",
+    "at": "2026-10-31T10:00:00.000Z",
+    "kind": "check_result",
+    "zone": "ceiling",
+    "surface": "damp_stain",
+    "room": "bathroom",
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": "ceiling_photo@402",
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "Stain unchanged"
+   }
+  ]
+ ],
+ "truth": {
+  "component": null,
+  "emergency": false,
+  "family": "upper_wet_area",
+  "flatId": "502",
+  "trade": "waterproofer_tiler"
+ },
+ "notes": "Physics truth is the 502 wet area (stain under it, duct dry above and below). 502 is locked, so meter and trap checks must be excluded, never requested."
+}

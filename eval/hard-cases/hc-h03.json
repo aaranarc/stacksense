@@ -1,0 +1,214 @@
+{
+ "id": "hc-h03",
+ "title": "UK flat 2: ceiling bulging with water",
+ "building": {
+  "id": "uk-block",
+  "name": "UK Block",
+  "region": "UK",
+  "archetype": "UK_1960S_BLOCK",
+  "lat": 53.62,
+  "lon": -2.16,
+  "floors": 4,
+  "hasTerrace": true,
+  "flats": [
+   {
+    "id": "1",
+    "floor": 1,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "2",
+    "floor": 1,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "3",
+    "floor": 2,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "4",
+    "floor": 2,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "5",
+    "floor": 3,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "6",
+    "floor": 3,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "7",
+    "floor": 4,
+    "position": "01",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "E"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   },
+   {
+    "id": "8",
+    "floor": 4,
+    "position": "02",
+    "wetAreas": [
+     "bathroom",
+     "kitchen",
+     "wc"
+    ],
+    "externalWalls": [
+     "W"
+    ],
+    "hasWaterMeter": false,
+    "access": "open"
+   }
+  ],
+  "stacks": [
+   {
+    "id": "UK-x01",
+    "kind": "duct",
+    "flatIds": [
+     "1",
+     "3",
+     "5",
+     "7"
+    ]
+   },
+   {
+    "id": "UK-x02",
+    "kind": "duct",
+    "flatIds": [
+     "2",
+     "4",
+     "6",
+     "8"
+    ]
+   }
+  ]
+ },
+ "steps": [
+  [
+   {
+    "id": "hc-h03-o1",
+    "flatId": "2",
+    "eventKey": "hc-h03-o1",
+    "at": "2026-10-30T10:00:00.000Z",
+    "kind": "complaint",
+    "zone": "ceiling",
+    "surface": "active_blistering",
+    "room": "bathroom",
+    "hazards": [
+     "sagging_ceiling"
+    ],
+    "hazardQuestionsAnswered": true,
+    "checkId": null,
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "Bathroom ceiling is bulging down and dripping in the middle"
+   }
+  ],
+  [
+   {
+    "id": "hc-h03-o2",
+    "flatId": "4",
+    "eventKey": "hc-h03-o2",
+    "at": "2026-10-31T10:00:00.000Z",
+    "kind": "check_result",
+    "zone": "trap_grout",
+    "surface": "crack",
+    "room": "bathroom",
+    "hazards": [],
+    "hazardQuestionsAnswered": true,
+    "checkId": "trap_grout_photo@4",
+    "meter": null,
+    "moisture": null,
+    "finding": null,
+    "photoIds": [],
+    "sourceMessageIds": [],
+    "provenance": "simulated",
+    "rawText": "Flat 4 shower grout cracked"
+   }
+  ]
+ ],
+ "truth": {
+  "component": "tile_grout",
+  "emergency": true,
+  "family": "upper_wet_area",
+  "flatId": "4",
+  "trade": "plumber"
+ },
+ "notes": "Sagging ceiling can collapse: keep away, isolate water, emergency call. No checks until safe."
+}
