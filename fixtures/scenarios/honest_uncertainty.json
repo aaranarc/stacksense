@@ -1038,17 +1038,17 @@
     "images": {
       "hero-ceiling-402": {
         "id": "ceiling-402",
-        "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-        "assetSource": "reference-photo",
-        "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+        "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
+        "assetSource": "demo-illustration",
+        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
       }
     },
     "meterReferences": [
       {
         "id": "meter-start-502",
-        "path": "fixtures-ai/photos/demo/meter_502_a.jpg",
-        "assetSource": "reference-photo",
-        "label": "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+        "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
+        "assetSource": "demo-illustration",
+        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
       },
       {
         "id": "meter-end-502",
@@ -1059,9 +1059,9 @@
     ],
     "preview": {
       "id": "scenario-honest_uncertainty",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     }
   }
 }

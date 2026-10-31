@@ -1,19 +1,19 @@
-# Photographic demo references
+# Authored demo imagery
 
-All active JPEGs are re-encoded at quality 85, maximum edge 1600, with EXIF/GPS, XMP, IPTC and ICC absent. Raw files remain ignored under eval/data/photos/ and are never committed. Visible source watermarks are preserved.
+The only real photograph is `duct_302.jpg`, supplied by the team. Its demo flat identifier is not a verified address. All other images are original vector schematics rendered to JPEG at quality 85, visibly headed **DEMO ILLUSTRATION**, with matching SVG source. No stock/unverified photographic reference is used.
 
-| Asset | Source / limitation |
+| Image | Uses |
 | --- | --- |
-| duct_302.jpg | Previously supplied team duct photograph; demo flat ID is not a verified address |
-| ceiling_402.jpg | User-supplied photographic ceiling reference; capture/location unverified |
-| window_202.jpg | User-supplied stock window/mould reference; Shutterstock watermark retained |
-| trap_502.jpg | User-supplied drain/trap reference; does not establish cracked tile grout |
-| meter_502_a.jpg | User-supplied meter reference; only one register image, not a timed pair |
-| meter_end_502.jpg | DEMO ILLUSTRATION; no matching second meter photograph exists |
-| day14_402.jpg | DEMO ILLUSTRATION; no actual post-repair Day-14 recapture supplied |
+| duct_302.jpg | Hero duct reference and duct upload cache |
+| ceiling_402.demo.jpg | Hero ceiling; happy scenario preview |
+| window_202.demo.jpg | Hero window; rain scenario preview |
+| trap_502.demo.jpg | Hero trap/grout; trap upload cache |
+| meter_start_502.jpg | Hero meter reference and start-image cache |
+| meter_end_502.jpg | Hero meter reference and end-image cache |
+| day14_402.jpg | Hero Day-14 appearance reference |
 
-The three clean-room WhatsApp images do not establish a post-repair recapture, so they are not substituted for Day-14 evidence. The photograph content need not match every scripted hero label: for example the window reference shows mould, while the simulated hero includes efflorescence. Neither the reference nor its model label validates the scenario's scripted cause, date, reading or finding.
+Every illustration is simulated, not field evidence. Meter values are invented demo values; the drawing cannot establish a real timed reading. Day-14 appearance does not establish dryness. `assets.json` maps IDs to paths; regenerated hero/scenario JSON includes `demoAssets` display metadata without changing the scripted observations or probabilities. The uncertainty/electrical/locked/dark/lateral/Break-it previews under ../scenarios/ are also authored illustrations.
 
-`assets.json` maps hero photo IDs and scenario previews to these clean assets, with provenance labels. Generated hero/scenario JSON includes a `demoAssets` extension for display metadata; shared EngineState schemas, observations and posterior calculations remain unchanged. Consumers may resolve metadata through assets.json without treating it as observed evidence. B's UI files are not edited by this asset task.
+All JPEGs have maximum edge ≤1600 and no EXIF/GPS, XMP, IPTC or ICC. Raw inputs remain ignored and untracked. Removed stock files are deleted from the current tracked tree; normal git rm does not erase blobs in historical commits. No history rewrite or force push was performed.
 
-Happy/uncertainty previews use the ceiling photograph, and the rain preview uses the window reference. Electrical, locked-access, dark-photo, lateral-travel and Break-it previews remain visibly labelled schematics under ../scenarios/. Obsolete replaced schematic files were removed. Cached reference-photo outputs carry DEMO warnings; no image here becomes human-labelled evaluation data or a real measured reading automatically.
+`generate-demo-illustrations.ts` never auto-imports raw/reference photos: only duct is retained as team-photo. Cache regeneration prunes bundled entries to current manifest/read/upload keys, and removed cache keys are purged from Supabase. Do not put historical reference photos back into active fixtures or caches.

@@ -1,5 +1,5 @@
 {
-  "label": "Demo cache inventory: real team photographs where supplied; explicitly labelled schematic illustrations otherwise. Not field evidence or evaluation data.",
+  "label": "Demo inventory: only the team duct photograph is real; all other scenes are authored DEMO illustrations, not field evidence or evaluation data.",
   "buildingId": "block-a",
   "inputs": [
     {
@@ -10,9 +10,9 @@
     {
       "id": "scenario-happy",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "scenario-electrical_hazard",
@@ -45,16 +45,16 @@
     {
       "id": "scenario-wrong_trade_rain",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/window_202.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "scenario-honest_uncertainty",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "scenario-break_it",
@@ -75,11 +75,11 @@
     {
       "id": "meter-start-502",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/meter_502_a.jpg",
+      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
       "checkId": "meter_check@502",
       "flatId": "502",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "meter-end-502",
@@ -93,11 +93,11 @@
     {
       "id": "trap-502",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/trap_502.jpg",
+      "path": "fixtures-ai/photos/demo/trap_502.demo.jpg",
       "checkId": "trap_grout_photo@502",
       "flatId": "502",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause."
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "day14-402",
@@ -109,16 +109,16 @@
     {
       "id": "ceiling-402",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "window-202",
       "kind": "photo",
-      "path": "fixtures-ai/photos/demo/window_202.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     }
   ]
 }

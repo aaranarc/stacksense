@@ -3,15 +3,15 @@
   "hero": {
     "hero-ceiling-402": {
       "id": "ceiling-402",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     "hero-window-202": {
       "id": "window-202",
-      "path": "fixtures-ai/photos/demo/window_202.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     "hero-duct-302": {
       "id": "duct-302",
@@ -21,9 +21,9 @@
     },
     "hero-trap-502": {
       "id": "trap-502",
-      "path": "fixtures-ai/photos/demo/trap_502.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic trap/drain reference; does not establish the scripted cracked-grout finding or its cause."
+      "path": "fixtures-ai/photos/demo/trap_502.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     "hero-day14-402": {
       "id": "day14-402",
@@ -35,9 +35,9 @@
   "meters": [
     {
       "id": "meter-start-502",
-      "path": "fixtures-ai/photos/demo/meter_502_a.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic meter reference; not a timed start/end pair and not evidence for the scripted 42-to-42 reading."
+      "path": "fixtures-ai/photos/demo/meter_start_502.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     {
       "id": "meter-end-502",
@@ -49,9 +49,9 @@
   "scenarios": {
     "happy": {
       "id": "scenario-happy",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     "electrical_hazard": {
       "id": "scenario-electrical_hazard",
@@ -79,15 +79,15 @@
     },
     "wrong_trade_rain": {
       "id": "scenario-wrong_trade_rain",
-      "path": "fixtures-ai/photos/demo/window_202.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     "honest_uncertainty": {
       "id": "scenario-honest_uncertainty",
-      "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+      "path": "fixtures-ai/photos/scenarios/honest_uncertainty.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     },
     "break_it": {
       "id": "scenario-break_it",
