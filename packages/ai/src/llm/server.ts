@@ -10,7 +10,7 @@ export function serverAdapter(opts:{fetch?:typeof fetch}={}){
  const compatible=key&&openaiModel&&baseUrl?openaiProvider({apiKey:key,model:openaiModel,baseUrl,fetch:opts.fetch}):undefined;
  if(provider==='openai')return createAdapter({provider:compatible});
  if(provider==='gemini'&&process.env.GEMINI_API_KEY){
-  const apiKey=process.env.GEMINI_API_KEY,model=process.env.GEMINI_MODEL??'gemini-3.1-flash-lite',second=process.env.GEMINI_FALLBACK_MODEL;
+  const apiKey=process.env.GEMINI_API_KEY,model=process.env.GEMINI_MODEL??'gemini-3.1-flash-lite',second=process.env.GEMINI_FALLBACK_MODEL??'gemini-3.8-flash';
   return createAdapter({provider:quotaProvider({primary:geminiProvider({apiKey,model,fetch:opts.fetch}),secondary:second&&second!==model?geminiProvider({apiKey,model:second,fetch:opts.fetch}):undefined,openai:process.env.LLM_FALLBACK_PROVIDER==='openai'?compatible:undefined})});
  }
  return createAdapter();

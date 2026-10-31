@@ -19,6 +19,7 @@ if(live)assertLiveLlmOptIn();
 const bundlePath=file("fixtures-ai/cache/bundled.json"),bundle:Record<string,unknown>=JSON.parse(readFileSync(bundlePath,"utf8"));
 const adapter=serverAdapter();if(live&&!adapter.configured)throw Error("Configure the server provider before --live");
 const cache=createCache({bundled:bundle,...(live?{supabaseUrl:process.env.SUPABASE_URL,serviceRoleKey:process.env.SUPABASE_SERVICE_ROLE_KEY}:{})});
+const activeKeys=new Set<string>();
 const service=createReadService({adapter,cache}),readPhoto=createPhotoReader({adapter,cache});
 const status:{id:string;status:string;path:string;key?:string;uploadContexts?:number;assetSource?:string;label?:string}[]=[];
 for(const input of manifest.inputs){
@@ -26,7 +27,7 @@ for(const input of manifest.inputs){
  const request:ReadRequest={buildingId:manifest.buildingId,messages:[],photos:[]};
  if(input.kind==="chat")request.messages=pseudonymise(parseWhatsAppExport(readFileSync(path,"utf8"))).messages;
  else{const ext=path.split(".").at(-1)?.toLowerCase(),mime=ext==="png"?"png":ext==="webp"?"webp":"jpeg";request.photos=[{id:input.id,dataUrl:`data:image/${mime};base64,${readFileSync(path).toString("base64")}`}];}
- const key=await cacheKey({...request,messages:pseudonymise(request.messages).messages});
+ const key=await cacheKey({...request,messages:pseudonymise(request.messages).messages});activeKeys.add(key);
  if(live){const result=ReadResult.parse(await service(request));if(result.mode==="fallback"){status.push({id:input.id,path:input.path,status:"provider-fallback-not-cached"});continue;}bundle[key]={...result,warnings:[...new Set([...result.warnings,...(input.assetSource==="demo-illustration"?["DEMO illustration — simulated input, not field evidence"]:input.assetSource==="reference-photo"?[input.label??"DEMO photographic reference — not field evidence"]:[])])],mode:"live"};await cache.set(key,ReadResult.parse(bundle[key]));}
  const valid=ReadResult.safeParse(bundle[key]);
  const row={id:input.id,path:input.path,key,assetSource:input.assetSource,label:input.label,status:valid.success&&valid.data.mode==="live"?"cached":"not-cached",uploadContexts:0};
@@ -37,6 +38,7 @@ for(const input of manifest.inputs){
   for(const lang of ["en","hi","mr"] as const){const fields={checkType:check.type,flatId:input.flatId,instruction:check.instructions[lang],images:[cleaned]};
    const result=live?await readPhoto(fields):null;
    const {images,...context}=fields;const photoKey=await cacheKey({buildingId:`photo:${JSON.stringify(context)}`,messages:[],photos:images.map((dataUrl,i)=>({id:`image-${i}`,dataUrl}))});
+   activeKeys.add(photoKey);
    if(result?.data)bundle[photoKey]={observations:[],senderMap:{},warnings:[...new Set([...result.warnings,...(input.assetSource==="demo-illustration"?["DEMO illustration — simulated input, not field evidence"]:input.assetSource==="reference-photo"?[input.label??"DEMO photographic reference — not field evidence"]:[])])],mode:"live",photoLabels:[{...result.data,photoId:"cached-photo",quality:"ok",humanCorrected:false}]};
    if(live&&bundle[photoKey])await cache.set(photoKey,ReadResult.parse(bundle[photoKey]));
    const stored=ReadResult.safeParse(bundle[photoKey]);if(stored.success&&stored.data.mode==="live")row.uploadContexts++;
@@ -45,7 +47,7 @@ for(const input of manifest.inputs){
  status.push(row);
 }
 const report={label:"Demo cache coverage — not evaluation or field accuracy",generatedAt:new Date().toISOString(),liveOptIn:live,inputs:status,complete:status.every(s=>s.status==="cached"&&(!manifest.inputs.find(i=>i.id===s.id)?.checkId||s.uploadContexts===3))};
-if(live)writeFileSync(bundlePath,JSON.stringify(bundle,null,2)+"\n");
+if(live){const pruned=Object.fromEntries(Object.entries(bundle).filter(([key])=>activeKeys.has(key)));writeFileSync(bundlePath,JSON.stringify(pruned,null,2)+"\n");}
 writeFileSync(file("fixtures-ai/cache/demo-status.json"),JSON.stringify(report,null,2)+"\n");
 console.log(JSON.stringify(report,null,2));
 if(!report.complete&&!allowMissing)process.exitCode=2;

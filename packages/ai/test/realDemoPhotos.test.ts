@@ -1,23 +1,20 @@
 import {expect,it} from "vitest";
-import {readFileSync} from "node:fs";
+import {existsSync,readFileSync} from "node:fs";
 import {EngineState} from "@stacksense/contracts";
 import {fixtureDemoAssets} from "../../engine/scripts/demo-assets";
 const root=new URL("../../../",import.meta.url);
 const json=(path:string)=>JSON.parse(readFileSync(new URL(path,root),"utf8"));
-it("binds photographic references to hero and rain fixtures without converting simulated evidence to observed",()=>{
+it("binds authored illustrations in hero and scenario fixtures without changing simulated evidence",()=>{
  const hero=json("fixtures/hero/state-08.json"),rain=json("fixtures/scenarios/wrong_trade_rain.json");
  expect(fixtureDemoAssets(EngineState.parse(hero))).toEqual(hero.demoAssets);
- expect(hero.demoAssets.images["hero-ceiling-402"].path).toBe("fixtures-ai/photos/demo/ceiling_402.jpg");
- expect(hero.demoAssets.images["hero-window-202"].path).toBe("fixtures-ai/photos/demo/window_202.jpg");
- expect(hero.demoAssets.images["hero-trap-502"].path).toBe("fixtures-ai/photos/demo/trap_502.jpg");
- expect(hero.demoAssets.meterReferences[0].path).toBe("fixtures-ai/photos/demo/meter_502_a.jpg");
- expect(hero.demoAssets.meterReferences[1].assetSource).toBe("demo-illustration");
- expect(rain.demoAssets.preview.path).toBe("fixtures-ai/photos/demo/window_202.jpg");
+ for(const id of ["hero-ceiling-402","hero-window-202","hero-trap-502"])expect(hero.demoAssets.images[id].assetSource).toBe("demo-illustration");
+ expect(hero.demoAssets.meterReferences.every((a:{assetSource:string})=>a.assetSource==="demo-illustration")).toBe(true);
+ expect(rain.demoAssets.preview.assetSource).toBe("demo-illustration");
  expect(hero.observations.every((o:{provenance:string})=>o.provenance==="simulated")).toBe(true);expect(EngineState.safeParse(hero).success).toBe(true);
 });
-it("records stock/unverified photographs as demo references and leaves unmatched events illustrated",()=>{
+it("has no stock files or reference-photo mappings and retains only the team duct photograph",()=>{
+ for(const name of ["ceiling_402.jpg","window_202.jpg","trap_502.jpg","meter_502_a.jpg"])expect(existsSync(new URL(`fixtures-ai/photos/demo/${name}`,root))).toBe(false);
  const manifest=json("fixtures-ai/cache/demo-manifest.json");
- for(const id of ["ceiling-402","window-202","trap-502","meter-start-502"]){const input=manifest.inputs.find((r:{id:string})=>r.id===id);expect(input.assetSource).toBe("reference-photo");expect(input.label).toContain("DEMO");}
- expect(manifest.inputs.find((r:{id:string})=>r.id==="window-202").label).toContain("watermark");
- for(const id of ["meter-end-502","day14-402","scenario-electrical_hazard","scenario-dark_photo"]){expect(manifest.inputs.find((r:{id:string})=>r.id===id).assetSource).toBe("demo-illustration");}
+ for(const input of manifest.inputs.filter((i:{kind:string})=>i.kind==="photo")){expect(input.assetSource).toBe(input.id==="duct-302"?"team-photo":"demo-illustration");}
+ const cache=JSON.stringify(json("fixtures-ai/cache/bundled.json"));expect(cache).not.toContain("watermark");expect(cache).not.toContain("photographic reference");
 });

@@ -6990,9 +6990,9 @@
     "meterReferences": [],
     "preview": {
       "id": "scenario-wrong_trade_rain",
-      "path": "fixtures-ai/photos/demo/window_202.jpg",
-      "assetSource": "reference-photo",
-      "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+      "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
+      "assetSource": "demo-illustration",
+      "label": "DEMO ILLUSTRATION - simulated, not field evidence"
     }
   }
 }

@@ -644,15 +644,15 @@
     "images": {
       "hero-ceiling-402": {
         "id": "ceiling-402",
-        "path": "fixtures-ai/photos/demo/ceiling_402.jpg",
-        "assetSource": "reference-photo",
-        "label": "DEMO photographic reference supplied by user; team capture and property location unverified; scripted fixture findings remain simulated."
+        "path": "fixtures-ai/photos/demo/ceiling_402.demo.jpg",
+        "assetSource": "demo-illustration",
+        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
       },
       "hero-window-202": {
         "id": "window-202",
-        "path": "fixtures-ai/photos/demo/window_202.jpg",
-        "assetSource": "reference-photo",
-        "label": "DEMO stock photographic reference; visible Shutterstock watermark retained; does not establish rain timing or the scripted efflorescence label."
+        "path": "fixtures-ai/photos/demo/window_202.demo.jpg",
+        "assetSource": "demo-illustration",
+        "label": "DEMO ILLUSTRATION - simulated, not field evidence"
       }
     },
     "meterReferences": [],

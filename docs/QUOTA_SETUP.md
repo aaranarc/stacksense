@@ -17,11 +17,11 @@ Set these as server variables for Production and Preview; keep keys secret:
 LLM_PROVIDER=gemini
 GEMINI_API_KEY=<your existing free-tier key>
 GEMINI_MODEL=gemini-3.1-flash-lite
-GEMINI_FALLBACK_MODEL=gemini-3.5-flash-lite
+GEMINI_FALLBACK_MODEL=gemini-3.8-flash
 LIVE_LLM_TESTS=0
 ```
 
-Both model names have a free tier listed in [Google's pricing documentation](https://ai.google.dev/gemini-api/docs/pricing), checked 31 October 2026. Availability and quotas remain account/model dependent. The fallback must differ from the primary; an identical name is skipped.
+Absent environment variables default to GEMINI_MODEL=gemini-3.1-flash-lite and GEMINI_FALLBACK_MODEL=gemini-3.8-flash; explicit environment values override these defaults. Both model names have a free tier listed in [Google's pricing documentation](https://ai.google.dev/gemini-api/docs/pricing), checked 31 October 2026. Availability and quotas remain account/model dependent. The fallback must differ from the primary; an identical name is skipped.
 
 Optional compatible fallback—omit these to stay Gemini-only:
 
