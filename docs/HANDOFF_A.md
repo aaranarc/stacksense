@@ -86,3 +86,15 @@ The final deployed verification will be appended to INTEGRATION_BUGS.md. C owns 
 ## Final deployed result
 
 Final application main SHA: 927094b. Production deployment: https://vercel.com/byte-me21/stacksense/4PXkgpUjadpwgEHEWaCSStF2nFyu . Install/typecheck/223 tests/web build passed. Seven of eight CP2 checks pass; PDF remains B-002, and additional photo-preview failure B-003 remains. The prevention buttons for 302/602 are enabled in production; unauthorized owner-refresh requests correctly return 403/no-store. B still needs owner-dashboard refresh wiring. The final verification report is in INTEGRATION_BUGS.md. No live model calls were made for this handoff, and A will not merge again.
+
+## C fixes after handoff (authorized: C may fix packages/** and apps/web/src/app/api/**)
+
+- **Day-14 recapture classification (31 Oct, C).** Root cause: `packages/ai/src/links/http.ts` upload built every non-meter
+  resident observation as `kind: "check_result"`, but `packages/engine/src/recovery.ts` only treats `kind: "recapture"` as a
+  post-repair recovery event, so a phone Day-14 recapture (Dry & Paint card → `ceiling_photo` link) never moved
+  Repair/Dry/Paint or reopened a worsened case. Minimal fix in http.ts only: a `ceiling_photo` upload on a case that already
+  has a `repair_done` observation is emitted as `kind: "recapture"` (rawText "Resident Day-14 recapture photo received");
+  all other uploads unchanged. No contract, prompt, cache or engine change. Regression test:
+  `packages/ai/test/links.test.ts` "C final: a ceiling photo after a recorded repair is a Day-14 recapture…" (worse photo →
+  recapture → engine reopens, paint not ready). Note: in the hero fixtures `ceiling_photo@402` is excluded ("can't change
+  the action"), so the Dry & Paint card offers the link only when the engine marks that check available.

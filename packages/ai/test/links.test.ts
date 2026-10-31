@@ -82,3 +82,20 @@ it("returns stored resident answers only to the case owner through link updates"
  expect(getUpdates).toHaveBeenCalledWith(state.caseId);
  expect(first.headers.get('set-cookie')).toContain('Path=/api/link');
 });
+it("C final: a ceiling photo after a recorded repair is a Day-14 recapture that the engine recovery reads",async()=>{
+ const {applyObservations}=await import("../../engine/src/bayes");
+ const s10=JSON.parse(readFileSync(new URL("../../../fixtures/hero/state-10.json",import.meta.url),"utf8")) as EngineState;
+ // The demo fixture already holds a recapture; drop it and make the ceiling check available so a link can be issued.
+ const base={...s10,observations:s10.observations.filter(o=>o.kind!=="recapture"),nextChecks:s10.nextChecks.map(c=>c.id==="ceiling_photo@402"?{...c,excluded:null}:c)} as EngineState;
+ const worse=createAdapter({provider:async()=>({surface:"active_blistering",zone:"ceiling",boxes:[],meterDigits:null})});
+ const handlers=createLinkHandlers({repository:memoryRepository(),secret,adapter:worse});
+ const data=await(await handlers.link(request({caseId:base.caseId,checkId:"ceiling_photo@402",flatId:"402",lang:"en",state:base}))).json();
+ const bytes=await sharp({create:{width:20,height:20,channels:3,background:"white"}}).jpeg().toBuffer();
+ const form=new FormData();form.set("token",data.token);form.set("consent","true");form.set("safety",JSON.stringify({water_near_electrics:false,sagging_ceiling:false,fast_ingress:false,sewage:false}));
+ form.set("photo",new File([new Uint8Array(bytes)],"day14.jpg",{type:"image/jpeg"}));
+ const response=await handlers.upload(new Request("https://demo.example.invalid/api/upload",{method:"POST",body:form}));
+ expect(response.status).toBe(200);const result=ReadResult.parse(await response.json());
+ const obs=result.observations[0]!;expect(obs.kind).toBe("recapture");expect(obs.zone).toBe("ceiling");expect(obs.surface).toBe("active_blistering");
+ const after=applyObservations(base,[{...obs,at:"2026-11-14T16:30:00.000Z"}],{photoLabels:result.photoLabels});
+ expect(after.recovery.reopened).toBe(true);expect(after.recovery.paint).toBe("not_ready");
+});
