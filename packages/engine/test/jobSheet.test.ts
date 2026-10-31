@@ -25,6 +25,7 @@ describe("A-T16 Job Sheet",()=>{
  });
  it("covers all source trades and keeps responsibility as links only",()=>{
    for(const family of SourceFamily.options) expect(tradesFor(family)).not.toHaveLength(0);
+   expect(tradesFor("upper_wet_area","wc_connection")[0]?.trade).toBe("plumber");
    expect(tradesFor("upper_supply")[0]?.trade).toBe("plumber");
    expect(tradesFor("shared_shaft")[0]?.why).toContain("society/landlord");
    expect(tradesFor("other",null,["water_near_electrics"])[0]?.trade).toBe("electrician");
