@@ -141,3 +141,24 @@ No new A-owned or C-owned failure was found in these eight acceptance checks. Pr
 - **B-003 exact cause — B-owned media resolver.** `apps/web/src/lib/media.ts:3` recognizes only P402/P202/P302/P502; `:10` returns null for all engine hero-* photo IDs. `apps/web/src/components/feed/CaseFeed.tsx:15` renders Preview unavailable for that null. `packages/engine/src/scenarios/hero.ts:22` and `:35` correctly reference hero-ceiling-402 and hero-duct-302; prepared matching paths exist in `fixtures-ai/photos/demo/assets.json` and generated fixture demoAssets.images. Runtime engine state intentionally contains IDs rather than browser URLs, and Judge runtime generation does not register display assets. B should register/serve the approved own-photo mapping (or consume the fixture display metadata) for hero-ceiling-402, hero-window-202, hero-duct-302, hero-trap-502 and hero-day14-402; Day-14 must retain demo-illustration labeling. Changing valid fixture IDs would lose the established bindings. A did not edit B/C-owned UI files.
 
 Final no-key hardening: 16/16 canonical inputs and 12/12 upload-label contexts cached in offline audit; exact-input regression and 20 sequential handler requests pass without a configured adapter. Local production server with both provider keys and remote-cache credentials empty returned Cached for 20/20 actual hero HTTP requests. Fresh UI chat and uncached photo returned labelled Fallback; Second Opinion returned null and displayed review failed/unreviewed. No live LLM call was made. Known caches and explicit demo screens remain honestly Cached/Demo data rather than being mislabelled Fallback. Key removal did not fix or conceal B-002/B-003.
+
+## FINAL A handoff — deployed production acceptance
+
+A's final authorized merge was **only origin/a/core** into main, fast-forwarding to `927094b`. No newer b/app or c/help changes were merged. Install, recursive typecheck, all **223 tests** (3 contracts, 66 AI, 87 engine, 67 web) and web build passed before the push. The main production deployment completed at https://vercel.com/byte-me21/stacksense/4PXkgpUjadpwgEHEWaCSStF2nFyu . An earlier success for the same SHA belonged to a/core; production was reloaded and all checks repeated after the main deployment appeared. The served client bundle includes the new prevention inspection code, and the new owner-refresh endpoint is active.
+
+| CP2 check after final main deploy | Result |
+| --- | --- |
+| No login | PASS — fresh production dashboard loads directly |
+| Load demo chat lights building | PASS — 402/202 victim states, 502 check-passed state |
+| /api/read Live or Cached | PASS — the actual UI POST returned HTTP 200, mode cached, warnings [Cached], five observations |
+| Judge hero | PASS — all six steps, Job Sheet sends waterproofer_tiler |
+| What-if meter flip | PASS — moved meter sends plumber, probable 502 supply leak 95% |
+| Job Sheet PDF | FAIL — B-002 remains: print tab says Job Sheet unavailable and Print / Save PDF is disabled; encoded-ID root cause/file lines above |
+| /c/demo at 390 px | PASS — actual 390×844 and scrollWidth 390; consent, four explicit No answers, clean own duct JPEG selection, Upload photo, Done. Cached/Demo simulation warning is visible; not a signed-link cloud test |
+| IN/UK toggle | PASS — UK Block and managing-agent terminology, Shelter links, then IN restores the prior plumber case |
+
+Additional checks: **B-003 remains OPEN**: four hero photo buttons show Preview unavailable. **A-002 prevention backend CLOSED/DEPLOYED**: hero Next Leak now enables Send inspection link for 302 and 602; no link was sent externally during this check. **A-003 backend CLOSED/DEPLOYED**: GET /api/link/updates without the owner cookie returns 403 with no-store, as required; mocked repository/handler tests cover authorized answer/label retrieval and fallback provenance. **B integration remains OPEN** for consuming that endpoint to refresh the dashboard after a physical-phone upload. A-001 configuration and the separate photo-only-read A-002 bug remain closed. No new A/C failure was observed. No live LLM call, secret disclosure, hard-case read or evaluation run occurred.
+
+Final remaining integration list: B-002 print decode; B-003 hero media resolver; B owner-dashboard refresh wiring. Full final evaluation/AI labels, real phone footage, video/submission and final release are separate B/C/human items in docs/HANDOFF_A.md. This documentation-only result commit changes no deployed application behavior.
+
+**Authority transferred:** C is now the sole main merger and may fix packages/** and apps/web/src/app/api/** bugs. A performs no further merges after this handoff. Root AGENTS.md records the user override. No force-push or history rewrite was used.

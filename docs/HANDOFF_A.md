@@ -82,3 +82,7 @@ Tests, eval, warm-up and health diagnostics must not call a live model unless LI
 - Prototype inference/priors, correlated evidence, privacy-pattern coverage, local rate limiting, no retention UI and unavailable AI remain documented limitations in engine.md and ai.md. Always verify the probable source on site; a photograph is not a moisture measurement.
 
 The final deployed verification will be appended to INTEGRATION_BUGS.md. C owns subsequent merges and may repair packages/API bugs without waiting for A's return.
+
+## Final deployed result
+
+Final application main SHA: 927094b. Production deployment: https://vercel.com/byte-me21/stacksense/4PXkgpUjadpwgEHEWaCSStF2nFyu . Install/typecheck/223 tests/web build passed. Seven of eight CP2 checks pass; PDF remains B-002, and additional photo-preview failure B-003 remains. The prevention buttons for 302/602 are enabled in production; unauthorized owner-refresh requests correctly return 403/no-store. B still needs owner-dashboard refresh wiring. The final verification report is in INTEGRATION_BUGS.md. No live model calls were made for this handoff, and A will not merge again.
