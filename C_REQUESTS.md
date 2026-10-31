@@ -3,10 +3,10 @@
 Out-of-scope changes C needs. C never edits these files; owners please pick up.
 
 ## To A
-- [ ] **trades table (C-T01):** wc_connection component should map to plumber in tables/trades.ts — hard case p06 expects plumber.
-- [ ] **root `pnpm eval` (C-T02):** root `package.json` has `"eval": "pnpm --filter @stacksense/engine eval"`, but the engine has no `eval` script, so `pnpm eval` fails. Please change it to
+- [x] DONE by A (a/core, 31 Oct ~10:40) — **trades table (C-T01):** wc_connection component should map to plumber in tables/trades.ts — hard case p06 expects plumber.
+- [x] DONE by A (a/core, 31 Oct ~10:40) — **root `pnpm eval` (C-T02):** root `package.json` has `"eval": "pnpm --filter @stacksense/engine eval"`, but the engine has no `eval` script, so `pnpm eval` fails. Please change it to
   `"eval": "pnpm --filter @stacksense/engine exec tsx ../../eval/runner/run.ts"`.
-- [ ] **single-LLM baseline (C-T02):** `packages/ai/src/baseline/index.ts` is an empty stub. Please export
+- [x] DONE by A (a/core, 31 Oct ~10:40) — **single-LLM baseline (C-T02):** `packages/ai/src/baseline/index.ts` is an empty stub. Please export
   `singleLlmBaseline(evidence) → { family, flatId|null, trade, level }` (prompt E.4, PROMPT_VERSION base-v1). Until then
   eval row 4 is reported as **pending** in `eval/results/engine.json` (`pending[]`), never as numbers.
 - [ ] **FYI, not a request to tune (C-T02 finding):** most StackSense right-trade misses are the stop rule
@@ -31,7 +31,7 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   conflict take B's version.
 
 ## To A and B — BUILD BLOCKER FOR CP1 (found in C-T04)
-- [ ] `main` + `b/app` merged locally does **not** build: b/app switched to `next build --webpack`, and webpack then
+- [x] DONE by A (a/core, 31 Oct ~10:40) — `main` + `b/app` merged locally does **not** build: b/app switched to `next build --webpack`, and webpack then
   bundles `sharp` (imported by `packages/ai/src/read/photos.ts` via `@stacksense/ai` in `/api/link`, `/api/memory`) →
   `Module not found: '@img/sharp-libvips-dev/include'`. Adding `serverExternalPackages: ['sharp']` to
   `apps/web/next.config.mjs` (B) is not enough on its own: `sharp` is then not resolvable from `apps/web` (pnpm strict)
@@ -43,7 +43,7 @@ Out-of-scope changes C needs. C never edits these files; owners please pick up.
   unit-tested in eval/runner/metrics.test.ts). An explicit `priorShift` would make this less indirect — not blocking.
 - [ ] **FYI robustness (C-T07):** top-1 after 3 checks 83% at mode priors → 38% when the true family's prior is cut 40%
   (also at archetype min). Reported in RESULTS.md as a limitation.
-- [ ] **docs/ai.md (C-T09):** README links `docs/ai.md` ("what is AI and what isn't") — A owns it; it does not exist yet.
+- [x] DONE by A (a/core, 31 Oct ~10:40) — **docs/ai.md (C-T09):** README links `docs/ai.md` ("what is AI and what isn't") — A owns it; it does not exist yet.
 
 ## To B (C-T09)
 - [ ] **README GIF + video link:** README shows `docs/demo.gif` (placeholder) — please add the GIF and the video link.

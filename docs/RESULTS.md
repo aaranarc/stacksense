@@ -1,6 +1,6 @@
 # StackSense — evaluation results
 
-> **Team-built test, not field accuracy.** Generated 2026-10-31T05:20:25.855Z by `pnpm eval` from `eval/results/*.json`.
+> **Team-built test, not field accuracy.** Generated 2026-10-31T05:36:10.526Z by `pnpm eval` from `eval/results/*.json`.
 > Every number on the evaluation card comes from `apps/web/public/eval/latest.json`, written by this same run.
 
 ## Sets
@@ -35,7 +35,7 @@ A method that ends without a decision sends no trade, which is scored as "genera
 | StackSense | 46% | 79% | 83% | 83% | 1% | 2 | 0.67 | 100% | 0.23 |
 | Blame the flat above | 31% | 36% | 36% | 36% | 63% | 0 **(loses)** | 0 **(loses)** | 0% | 0 **(loses)** |
 | Send a trade straight away | 18% | 21% | 21% | 21% | 7% | 0 **(loses)** | 0 **(loses)** | 0% | 0 **(loses)** |
-| Fixed checklist | 47% **(loses)** | 68% | 74% | 80% | 0% **(loses)** | 5 | 1.15 | 100% **(tie)** | 0.32 |
+| Fixed checklist | 47% **(loses)** | 68% | 74% | 80% | 0% **(loses)** | 5 | 1.15 | 100% **(tie)** | 0.34 |
 | StackSense without Second Opinion | 46% **(tie)** | 79% **(tie)** | 83% **(tie)** | 83% **(tie)** | 1% **(tie)** | 2 **(tie)** | 0.67 **(tie)** | 100% **(tie)** | 0.13 **(loses)** |
 
 ### Hard cases only (30)
@@ -44,7 +44,7 @@ A method that ends without a decision sends no trade, which is scored as "genera
 | StackSense | 67% | 81% | 86% | 86% | 0% | 0 | 0.84 | 100% | 0.29 |
 | Blame the flat above | 23% | 38% | 38% | 38% | 60% | 0 **(tie)** | 0 **(loses)** | 0% | 0 **(loses)** |
 | Send a trade straight away | 20% | 33% | 33% | 33% | 17% | 0 **(tie)** | 0 **(loses)** | 0% | 0 **(loses)** |
-| Fixed checklist | 63% | 76% | 81% | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 1.12 | 100% **(tie)** | 0.35 |
+| Fixed checklist | 63% | 76% | 81% | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 1.12 | 100% **(tie)** | 0.36 |
 | StackSense without Second Opinion | 67% **(tie)** | 81% **(tie)** | 86% **(tie)** | 86% **(tie)** | 0% **(tie)** | 0 **(tie)** | 0.84 **(tie)** | 100% **(tie)** | 0.19 **(loses)** |
 
 ### Simulated buildings only (60)
@@ -53,7 +53,7 @@ A method that ends without a decision sends no trade, which is scored as "genera
 | StackSense | 35% | 78% | 81% | 81% | 2% | 2 | 0.6 | n/a | 0.2 |
 | Blame the flat above | 35% **(tie)** | 36% | 36% | 36% | 65% | 0 **(loses)** | 0 **(loses)** | n/a | 0 **(loses)** |
 | Send a trade straight away | 17% | 17% | 17% | 17% | 2% **(tie)** | 0 **(loses)** | 0 **(loses)** | n/a | 0 **(loses)** |
-| Fixed checklist | 38% **(loses)** | 64% | 71% | 78% | 0% **(loses)** | 5 | 1.17 | n/a | 0.3 |
+| Fixed checklist | 38% **(loses)** | 64% | 71% | 78% | 0% **(loses)** | 5 | 1.17 | n/a | 0.33 |
 | StackSense without Second Opinion | 35% **(tie)** | 78% **(tie)** | 81% **(tie)** | 81% **(tie)** | 2% **(tie)** | 2 **(tie)** | 0.6 **(tie)** | n/a | 0.1 **(loses)** |
 
 **(tie)** / **(loses)** mark metrics where StackSense ties or loses to that method.
