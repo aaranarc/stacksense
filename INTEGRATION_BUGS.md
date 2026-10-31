@@ -279,3 +279,12 @@ No open integration failures at 16:20 IST.
 ## B final deployed acceptance — app source 3ee1c37 (31 Oct, 16:19 IST)
 
 Vercel success confirmed for exact SHA 3ee1c376611184be563a21e83ca75c8b47fbb74a, deployment https://vercel.com/byte-me21/stacksense/862Ga2ejfGWpJgHrghPdytN7syB2 . The b/app preview then passed all 61 browser check groups, zero uncaught JavaScript errors and zero unexpected console errors. B-003b is verified on the deployed branch: both canonical chat attachments load as thumbnails and full photos. The complete desktop/390 px suite also passed, plus a guarded signed Cached duct upload from a separate browser context: owner updates 200/no-store, unauthorized context 403/no-store, dashboard updates automatically, frame closes and repeat refresh does not duplicate evidence. No WhatsApp message was sent and no uncached LLM probe was used. The acceptance-note follow-up changes documentation only. b/app ready for final; C should merge/retest main and handle the Day-14 API/engine finding above. B-owned implementation items B-T21 through B-T28 are complete; human recordings/submission remain pending.
+
+## C merge 6 — main fdbbea0 (31 Oct, 16:38 IST)
+Merged origin/a/core (no change) → origin/b/app (3b9172f, B-T28 deployed acceptance log) → origin/c/help (AI eval).
+Note: C's c/help commit c18431f briefly carried unresolved conflict markers in this file; fixed in fdbbea0 (both entries
+kept) before main was pushed — main never contained markers. Typecheck, tests (3 / 66 AI / 87 engine / 94 web) and build
+passed; both Vercel deployments for fdbbea0 succeeded. Production (fresh isolated context): Load demo chat Cached, 0×
+"Preview unavailable", Judge hero → waterproofer tiler, evaluation card shows the partial AI block ("message extraction
+measured on 15 of 109 human-reviewed messages (free-tier quota)", photos "not measured — too few photos, free-tier quota",
+cost "$0 (free tier)") and the single-LLM row pending 16/30. No open integration failures.
